@@ -2,6 +2,8 @@
 
 리눅스 커널 메인라인 변경사항을 릴리스별로 한국어로 요약·해설합니다. (현재 UFS 트랙)
 
+사이트: https://pangwon.github.io/kernel-changelog-ko/
+
 ## 구조
 
 ```
@@ -84,14 +86,13 @@ python -m kclog gen import commits --model claude-opus-5-5   # 결과 검증 후
 |---|---|---|
 | `site` | main push, PR, 수동 | Python 테스트, 사이트 빌드, `site` 아티팩트 업로드 (14일 보관) |
 | `new-release` | 매주 월요일, 수동 | 새 릴리스가 있으면 이슈 생성 |
-| `deploy-pages` | 수동만 | GitHub Pages 배포 |
+| `deploy-pages` | main push, 수동 | GitHub Pages 배포 |
 
 `site` 아티팩트를 내려받아 압축을 풀고 그 폴더에서 `python -m http.server`를 실행하면 로컬에서 볼 수 있습니다.
 절대 경로를 쓰므로 `index.html`을 파일로 바로 열면 링크가 동작하지 않습니다.
 
-GitHub Pages로 배포하려면 저장소를 public으로 바꾸거나(무료 플랜) Pro 이상을 쓰고,
-Settings > Pages의 Source를 "GitHub Actions"로 둔 뒤 `deploy-pages`를 실행합니다.
-push마다 자동 배포하려면 `deploy-pages.yml`의 `on:`에 `push: branches: [main]`을 추가합니다.
+GitHub Pages(Source: GitHub Actions)로 배포합니다. main에 push하면 `deploy-pages`가 자동으로 다시 배포합니다.
+GitHub 무료 플랜에서는 저장소가 public이어야 Pages를 쓸 수 있습니다.
 
 ## 수집 규칙
 

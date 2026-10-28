@@ -1,9 +1,10 @@
-# GitHub Pages 배포. 저장소가 public(또는 Pro 이상)이고 Settings > Pages의 Source가
-# "GitHub Actions"일 때만 동작한다. 지금은 수동 실행만 켜 두었다.
-# 자동 배포를 원하면 아래 on:에 push: branches: [main] 을 추가한다.
+# GitHub Pages 배포 (https://pangwon.github.io/kernel-changelog-ko/).
+# Settings > Pages의 Source가 "GitHub Actions"여야 한다. main에 push하면 자동 배포된다.
 name: deploy-pages
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
