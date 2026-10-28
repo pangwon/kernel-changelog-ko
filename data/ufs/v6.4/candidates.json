@@ -1,0 +1,60 @@
+[
+ {
+  "sha": "47820d3263a4a7ba258fe2efe26ae5afb5b83036",
+  "subject": "soc: qcom: Rename ice to qcom_ice to avoid module name conflict",
+  "files": [
+   "drivers/soc/qcom/Makefile"
+  ]
+ },
+ {
+  "sha": "e5796a9cdf73ed08f8d7fbca4749d7097ee2ca0b",
+  "subject": "dt-bindings: phy: qmp-ufs: describe the UFS PHY for sa8775p",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "b8630c48b43fcf77039c04a1d30153e283cf41b4",
+  "subject": "arm64: dts: qcom: sm8550: Add the Inline Crypto Engine node",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8550.dtsi"
+  ]
+ },
+ {
+  "sha": "b76c8ceabe871470cee17990289e8dd39b96054e",
+  "subject": "arm64: dts: qcom: sm6125: Initial support for xiaomi-laurel-sprout",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/sm6125-xiaomi-laurel-sprout.dts"
+  ]
+ },
+ {
+  "sha": "f8399e8a2f80adfac2e7f5dbe223eb428fdb6fe9",
+  "subject": "arm64: dts: qcom: sm6125: Add UFS nodes",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm6125.dtsi"
+  ]
+ },
+ {
+  "sha": "001c00efdb0441a6133674ea103ae7505400813d",
+  "subject": "dt-bindings: phy: Add QMP UFS PHY comptible for SM7150",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "58973046c1bf782cac01644a9dcd8e5bba9c2f16",
+  "subject": "regulator: qcom-rpmh: Use PROBE_FORCE_SYNCHRONOUS",
+  "files": [
+   "drivers/regulator/qcom-rpmh-regulator.c"
+  ]
+ },
+ {
+  "sha": "d228efe884692742e3a614c2386ee006aeb6551d",
+  "subject": "arm64: dts: qcom: sm8550-qrd: add QRD8550",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/sm8550-qrd.dts"
+  ]
+ }
+]

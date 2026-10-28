@@ -1,0 +1,3 @@
+* text=auto eol=lf
+# 커널 원본 diff는 바이트 그대로 보존 (CRLF가 섞인 소스 파일도 있음)
+*.diff -text

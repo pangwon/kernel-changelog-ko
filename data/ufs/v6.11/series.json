@@ -1,0 +1,292 @@
+[
+ {
+  "id": "20240530142510.734-avri.altman@wdc.com",
+  "title": "scsi: ufs: core: Allow RTT negotiation",
+  "commits": [
+   "9ec54934ce857065e38523a2010e20182e76f515",
+   "e75ff63300c5e8fac31649f438ebad6af88e0032",
+   "600edc6620a4380b9f6027f293dac09eb0f22048"
+  ],
+  "authors": [
+   "Avri Altman"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240519221457.772346-minwoo.im@samsung.com",
+  "title": "scsi: ufs: mcq: Fix missing argument 'hba' in MCQ_OPR_OFFSET_n",
+  "commits": [
+   "2fc39848952dfb91a9233563cc1444669b8e79c3",
+   "e8a1d87b7983b461d1d625e2973cdaadc0bd8ff5"
+  ],
+  "authors": [
+   "Minwoo Im"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240531212244.1593535-minwoo.im@samsung.com",
+  "title": "scsi: ufs: pci: Add support MCQ for QEMU-based UFS",
+  "commits": [
+   "175d1825ca4d2288fee734ada0955a1e36dd50e6",
+   "a420a8ed0a92488a04b34dfc262101c87940c800"
+  ],
+  "authors": [
+   "Minwoo Im"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240528-msm8996-fix-ufs-v5-b475c341126e@linaro.org",
+  "title": "dt-bindings: ufs: qcom,ufs: drop source clock entries",
+  "commits": [
+   "a9a34fc737aea5d5d7a47c885f5ed45dfb1df07f"
+  ],
+  "authors": [
+   "Dmitry Baryshkov"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240626142637.300624-hch@lst.de",
+  "title": "block: move dma_pad_mask into queue_limits",
+  "commits": [
+   "e94b45d08b5d1c230c0f59c3eed758d28658851e"
+  ],
+  "authors": [
+   "Christoph Hellwig"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240625-md-drivers-ufs-host-v2-59a56974b05a@quicinc.com",
+  "title": "scsi: ufs: qcom: Add missing MODULE_DESCRIPTION() macro",
+  "commits": [
+   "4d66ecc6e5a5df965b43edace2d41d19ed15a2ea"
+  ],
+  "authors": [
+   "Jeff Johnson"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240618073158.38504-adrian.hunter@intel.com",
+  "title": "scsi: ufs: ufs-pci: Add support for Intel Panther Lake",
+  "commits": [
+   "bdee2f1dcd84dcd76d9557cf55e8f3662c6506eb"
+  ],
+  "authors": [
+   "Adrian Hunter"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240627083756.25340-quic_rampraka@quicinc.com",
+  "title": "scsi: ufs: core: Suspend clk scaling on no request",
+  "commits": [
+   "50183ac2cfb54e027dd36fb22ea1bd1e91e3a08b",
+   "ed7dac86f1406d73aed21d0cd1563922031a2fd8"
+  ],
+  "authors": [
+   "Ram Prakash Gupta"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240627085104epcms2p5897a3870ea5c6416aa44f94df6c543d7@epcms2p5",
+  "title": "scsi: ufs: core: Remove SCSI host only if added",
+  "commits": [
+   "7cbff570dbe8907e23bba06f6414899a0fbb2fcc"
+  ],
+  "authors": [
+   "Kyoungrul Kim"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240708211716.2827751-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Declare functions once",
+  "commits": [
+   "d502dac69ac0a81231bb41f0e4e2845d7414191b",
+   "93ef12d92f65facf8e02ad6578a898a190aa6cf4",
+   "92c0b10fefe2cdae4e57ad5ff023345ea4a7134d",
+   "b53eb9a050d76fc695258e04384e71b3fbb1e7d5",
+   "f4750af7081d0466c187f5b72272d07148d75e67",
+   "0fca3318e550d48e9a6c844763bf9eab91c30f07",
+   "4a8c859b44da0040a02fb12aec3384f6279c17d7",
+   "7e2c268dc3069b3d51a6dcd035d9b2ed3e6b1676",
+   "5e2053a41984f6086460a6b377a53af46ebe2b0f",
+   "af568c7e8292bd96f5a4f3d81dcc099bcfe7cb73"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240708235330.103590-ebiggers@kernel.org",
+  "title": "scsi: ufs: core: Add UFSHCD_QUIRK_CUSTOM_CRYPTO_PROFILE",
+  "commits": [
+   "c2a90eee29f41630225c9a64d26c425e1d50b401",
+   "ec99818afb03b1ebeb0b6ed0d5fd42143be79586",
+   "e95881e0081a30e132b5ca087f1e07fc08608a7e",
+   "8ecea3da1567e0648b5d37a6faec73fc9c8571ba",
+   "4c45dba50a3750a0834353c4187e7896b158bc0c",
+   "c96499fcb403b18b0ae0bf2e19a39f24e62dd3ac"
+  ],
+  "authors": [
+   "Eric Biggers"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240709232520epcms2p8ebdb5c4fccc30a6221390566589bf122@epcms2p8",
+  "title": "scsi: ufs: core: Check LSDBS cap when !mcq",
+  "commits": [
+   "0c60eb0cc320fffbb8b10329d276af14f6f5e6bf"
+  ],
+  "authors": [
+   "Kyoungrul Kim"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240712094506.11284-peter.wang@mediatek.com",
+  "title": "scsi: ufs: core: Bypass quick recovery if force reset is needed",
+  "commits": [
+   "022587d8aec3da1d1698ddae9fb8cfe35f3ad49c"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240715063831.29792-peter.wang@mediatek.com",
+  "title": "scsi: ufs: core: Fix deadlock during RTC update",
+  "commits": [
+   "3911af778f208e5f49d43ce739332b91e26bc48e"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240718170659.201647-manivannan.sadhasivam@linaro.org",
+  "title": "scsi: ufs: core: Do not set link to OFF state while waking up from hibernation",
+  "commits": [
+   "ac6efb12ca64156f4a94e964acdb96ee7d59630d"
+  ],
+  "authors": [
+   "Manivannan Sadhasivam"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240721183840.209284-ebiggers@kernel.org",
+  "title": "scsi: ufs: exynos: Don't resume FMP when crypto support is disabled",
+  "commits": [
+   "47398f49dab8326bb652fa2d7a51ae5ec78775b5"
+  ],
+  "authors": [
+   "Eric Biggers"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240724135126.1786126-vamshigajjela@google.com",
+  "title": "scsi: ufs: core: Fix hba->last_dme_cmd_tstamp timestamp updating logic",
+  "commits": [
+   "ab9fd06cb8f0db0854291833fc40c789e43a361f"
+  ],
+  "authors": [
+   "Vamshi Gajjela"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240816-ufs-bug-fix-v3-e6fe0e18e2a3@linaro.org",
+  "title": "scsi: ufs: core: Add a quirk for handling broken LSDBS field in controller capabilities register",
+  "commits": [
+   "cd06b713a6880997ca5aecac8e33d5f9c541749e",
+   "ea593e028a9cc523557b4084a61d87ae69e2f270"
+  ],
+  "authors": [
+   "Manivannan Sadhasivam"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240818222442.44990-mary@mary.zone",
+  "title": "scsi: ufs: ufs-mediatek: Add UFSHCD_QUIRK_BROKEN_LSDBS_CAP",
+  "commits": [
+   "0f9592ae26ffe044cfb2b2d071ccf4427be57ed4"
+  ],
+  "authors": [
+   "Mary Guillemard"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ }
+]

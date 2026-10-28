@@ -1,0 +1,32 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 2b76f543d072..453a99ec6282 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -5066,7 +5066,8 @@ static int ufshcd_link_startup(struct ufs_hba *hba)
+ 	 * If UFS device isn't active then we will have to issue link startup
+ 	 * 2 times to make sure the device state move to active.
+ 	 */
+-	if (!ufshcd_is_ufs_dev_active(hba))
++	if (!(hba->quirks & UFSHCD_QUIRK_PERFORM_LINK_STARTUP_ONCE) &&
++	    !ufshcd_is_ufs_dev_active(hba))
+ 		link_startup_again = true;
+ 
+ link_startup:
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 9425cfd9d00e..0f95576bf1f6 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -688,6 +688,13 @@ enum ufshcd_quirks {
+ 	 * single doorbell mode.
+ 	 */
+ 	UFSHCD_QUIRK_BROKEN_LSDBS_CAP			= 1 << 25,
++
++	/*
++	 * This quirk indicates that DME_LINKSTARTUP should not be issued a 2nd
++	 * time (refer link_startup_again) after the 1st time was successful,
++	 * because it causes link startup to become unreliable.
++	 */
++	UFSHCD_QUIRK_PERFORM_LINK_STARTUP_ONCE		= 1 << 26,
+ };
+ 
+ enum ufshcd_caps {

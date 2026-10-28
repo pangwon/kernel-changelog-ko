@@ -1,0 +1,12 @@
+diff --git a/drivers/ufs/core/ufshcd-priv.h b/drivers/ufs/core/ufshcd-priv.h
+index 529f8507a5e4..d53b93c21a0c 100644
+--- a/drivers/ufs/core/ufshcd-priv.h
++++ b/drivers/ufs/core/ufshcd-priv.h
+@@ -364,6 +364,7 @@ static inline bool ufs_is_valid_unit_desc_lun(struct ufs_dev_info *dev_info, u8
+ }
+ 
+ static inline void ufshcd_inc_sq_tail(struct ufs_hw_queue *q)
++	__must_hold(&q->sq_lock)
+ {
+ 	u32 mask = q->max_entries - 1;
+ 	u32 val;

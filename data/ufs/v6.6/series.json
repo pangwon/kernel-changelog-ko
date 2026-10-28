@@ -1,0 +1,446 @@
+[
+ {
+  "id": "20230706215054.4113469-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Convert UPIU_HEADER_DWORD() into a function",
+  "commits": [
+   "aa2db9d44a8b9b3cb12df7c253b3d6f46618d37e"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230701124442.10489-powen.kao@mediatek.com",
+  "title": "scsi: ufs: core: Export symbols for MTK driver module",
+  "commits": [
+   "11afb65c100ac5b16dd8ea6c8fcd55a1c61c3886",
+   "e152a616c88653e67244595979fde24038d9653a"
+  ],
+  "authors": [
+   "Po-Wen Kao"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230711145153.4167820-dmitry.baryshkov@linaro.org",
+  "title": "phy: qcom-qmp-ufs: populate offsets configuration",
+  "commits": [
+   "20b5c6ae18ffdbac410f1711c932cf0fd80d2539"
+  ],
+  "authors": [
+   "Dmitry Baryshkov"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230714175142.4067795-robh@kernel.org",
+  "title": "soc: qcom: Explicitly include correct DT includes",
+  "commits": [
+   "6484be9dd109bded43953ae7883bd69b5d841a0b"
+  ],
+  "authors": [
+   "Rob Herring"
+  ],
+  "areas": [
+   "crypto"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230714174841.4061919-robh@kernel.org",
+  "title": "phy: Explicitly include correct DT includes",
+  "commits": [
+   "7559e7572c03e433efec7734af6a674fdd83dd68"
+  ],
+  "authors": [
+   "Rob Herring"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230710094801.183149-u-kumar1@ti.com",
+  "title": "scsi: ufs: ti-j721e: Expose device tree aliases",
+  "commits": [
+   "a9814b6c23e79ed58aeb432d7f1c556935aeaf8d"
+  ],
+  "authors": [
+   "Udit Kumar"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1689062349-77385-1-git-send-email-quic_ziqichen@quicinc.com",
+  "title": "scsi: ufs: qcom: Get queue ID from MSI index in ESI handler",
+  "commits": [
+   "8f2b78652d0552e157a0b9cd354f2e5c20ba98ca"
+  ],
+  "authors": [
+   "Ziqi Chen"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1689065327-45039-1-git-send-email-quic_ziqichen@quicinc.com",
+  "title": "scsi: ufs: qcom: Hold the mutex lock when configuring ESI",
+  "commits": [
+   "f52a805e19b169989ec6c61254529b273a18116d"
+  ],
+  "authors": [
+   "Ziqi Chen"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230712064832.44188-yang.lee@linux.alibaba.com",
+  "title": "scsi: ufs: ufs-mediatek: Remove redundant dev_err()",
+  "commits": [
+   "75aa298739fdff5dac98e5a6e8b9106c1297d6f0"
+  ],
+  "authors": [
+   "Yang Li"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230712075836.15375-yang.lee@linux.alibaba.com",
+  "title": "scsi: ufs: core: Fix some kernel-doc comments",
+  "commits": [
+   "317a38045ab763fb98570b67848ebc65c731b570"
+  ],
+  "authors": [
+   "Yang Li"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230714175018.4064957-robh@kernel.org",
+  "title": "scsi: ufs: Explicitly include correct DT includes",
+  "commits": [
+   "c2ab666072bcf5bf181b84f591e83713e772fa60"
+  ],
+  "authors": [
+   "Rob Herring"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230720093446.30697-quic_nitirawa@quicinc.com",
+  "title": "scsi: ufs: ufs-qcom: Change UFS devfreq timer to delayed",
+  "commits": [
+   "0645ab15ed0bf5b17ad510bd72ef589cda542795"
+  ],
+  "authors": [
+   "Nitin Rawat"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230719165758.2787573-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Remove HPB support",
+  "commits": [
+   "7e9609d2daea0ebe4add444b26b76479ecfda504"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "64c00cd4.630a0220.6ad79.0eac@mx.google.com",
+  "title": "scsi: ufs: qcom: Remove unused variable",
+  "commits": [
+   "65aca38b8ce728bf5a449b74f2a6a344167dfb02"
+  ],
+  "authors": [
+   "Arnd Bergmann"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230724200843.3376570-bvanassche@acm.org",
+  "title": "scsi: ufs: Fix residual handling",
+  "commits": [
+   "2903265e27bfc6dea915dd9e17a1b2587f621f73"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230731145020.41262-manivannan.sadhasivam@linaro.org",
+  "title": "scsi: ufs: core: Add enums for UFS lanes",
+  "commits": [
+   "e0d01da2cb0f1274a4efe9489d4200acd55e3e20",
+   "03ce80a1bb869f735de793f04c9c085b61884599"
+  ],
+  "authors": [
+   "Manivannan Sadhasivam"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230727194457.3152309-bvanassche@acm.org",
+  "title": "scsi: ufs: Follow the kernel-doc syntax for documenting return values",
+  "commits": [
+   "3a17fefe0f1960d3f120de986129682f36bc89db",
+   "fd4bffb54dc0f6d179c0c09c06de9f6071792a85",
+   "8d8af294ce03c9997fff36a20d0e697c6a73c41b",
+   "f08191520614764789aec42161b297c327d3660a",
+   "cce9fd602ca0c5b0a310dbe457aa61d1beaa2d38",
+   "f99533bd7e3dc033093f339784bebe0247e1831c",
+   "08108d31129a104b06628b3ac95af2af9f5e9e4c",
+   "e8b0234f8458fc26a39d5d2b75f9637d9839e6b6",
+   "f9c028e7415a5ba4c00c08b7951bca4239823597",
+   "e2566e0b7937f0a0b84f8b662fceebac6a1386c7",
+   "67a2a8973832cbeb23a5c04a1dda94da71490a0d",
+   "617bfaa8dd50d6a3ffc8694b4696bf2aa196bd44"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230726134140.7180-quic_nitirawa@quicinc.com",
+  "title": "scsi: ufs: core: Export ufshcd_is_hba_active()",
+  "commits": [
+   "548fdf771b8e85e6f14fcebcf3443ea475444445",
+   "21f04fb4e8ca4a6a88c76b1ddf9ea94e6c118005"
+  ],
+  "authors": [
+   "Nitin Rawat"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230801232204.1481902-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Fix the build for gcc 9 and before",
+  "commits": [
+   "c306f746fee55b07d92dc768f3167f5b27a677db"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230802040154.10652-manivannan.sadhasivam@linaro.org",
+  "title": "scsi: ufs: qcom: Make struct ufs_qcom_bw_table static const",
+  "commits": [
+   "01e747157b6143b62240cebcc4493f9eaad12a08"
+  ],
+  "authors": [
+   "Manivannan Sadhasivam"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230807013726epcms2p1c604cb8e98680aebebb7cc5ab2d580f5@epcms2p1",
+  "title": "scsi: ufs: ufs-pci: Add support for QEMU",
+  "commits": [
+   "a18e81d17a7e634420e589fa504e79e4893cde5e"
+  ],
+  "authors": [
+   "Jeuk Kim"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230731111009.3998089-dmitry.baryshkov@linaro.org",
+  "title": "phy: qcom: qmp-ufs: add missing offsets to sm8150 configuration",
+  "commits": [
+   "b102ce6d847a715732174cfe7119a350f69f3511"
+  ],
+  "authors": [
+   "Dmitry Baryshkov"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230814184352.200531-bmasney@redhat.com",
+  "title": "scsi: ufs: core: Convert to dev_err_probe() in ufshcd_variant_hba_init()",
+  "commits": [
+   "137523237172c78298bd5346c270aecded18630a",
+   "517f8eb3fa64c206985cf22899d1964626df4ddd"
+  ],
+  "authors": [
+   "Brian Masney"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230823183749.2609013-robh@kernel.org",
+  "title": "dt-bindings: Drop remaining unneeded quotes",
+  "commits": [
+   "4569820881c6eb0e273d7f584ee511b825b98601"
+  ],
+  "authors": [
+   "Rob Herring"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230814-dt-binding-ufs-v6-fd94845adeda@fairphone.com",
+  "title": "dt-bindings: ufs: qcom: Add reg-names property for ICE",
+  "commits": [
+   "7839d566c653bc5a6c858a70c66e2e123cad0b0b",
+   "a11eaed308efc7a80688c56533491376a1136f97",
+   "e95094d05d94728e350b2afe4574869cb309dd2f"
+  ],
+  "authors": [
+   "Iskren Chernev",
+   "Luca Weiss"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230829163547.1200183-bvanassche@acm.org",
+  "title": "scsi: ufs: Fix the build for the old ARM OABI",
+  "commits": [
+   "d0bac0ec89d66f656f77443c8000fa6c36139b66"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230809181847.102123-beanhuo@iokpp.de",
+  "title": "scsi: ufs: core: Add advanced RPMB support where UFSHCI 4.0 does not support EHS length in UTRD",
+  "commits": [
+   "c91e585cfb3dd7d076e9ba0967908fc504d32def",
+   "9f6fec65661381e301ae0f9ee8b4c12b0214a579"
+  ],
+  "authors": [
+   "Bean Huo"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "782ba5f26f0a96e58d85dff50751787d2d2a6b2b.1693790060.git.kwmad.kim@samsung.com",
+  "title": "scsi: ufs: core: Move __ufshcd_send_uic_cmd() outside host_lock",
+  "commits": [
+   "2d3f59cf868b4a2dd678a96cd49bdd91411bd59f"
+  ],
+  "authors": [
+   "Kiwoong Kim"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "550484ffb66300bdcec63d3e304dfd55cb432f1f.1693790060.git.kwmad.kim@samsung.com",
+  "title": "scsi: ufs: core: Poll HCS.UCRDY before issuing a UIC command",
+  "commits": [
+   "d32533d30e2119b0c0aa17596734f1f842f750df"
+  ],
+  "authors": [
+   "Kiwoong Kim"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20231003022002.25578-peter.wang@mediatek.com",
+  "title": "scsi: ufs: core: Correct clear TM error log",
+  "commits": [
+   "a20c4350c6a12405b7f732b3ee6801ffe2cc45ce"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ }
+]

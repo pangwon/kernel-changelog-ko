@@ -1,0 +1,20 @@
+diff --git a/Documentation/devicetree/bindings/ufs/qcom,sm8650-ufshc.yaml b/Documentation/devicetree/bindings/ufs/qcom,sm8650-ufshc.yaml
+index aaa0bbb5bfe1..cea84ab2204f 100644
+--- a/Documentation/devicetree/bindings/ufs/qcom,sm8650-ufshc.yaml
++++ b/Documentation/devicetree/bindings/ufs/qcom,sm8650-ufshc.yaml
+@@ -15,6 +15,7 @@ select:
+     compatible:
+       contains:
+         enum:
++          - qcom,kaanapali-ufshc
+           - qcom,sm8650-ufshc
+           - qcom,sm8750-ufshc
+   required:
+@@ -24,6 +25,7 @@ properties:
+   compatible:
+     items:
+       - enum:
++          - qcom,kaanapali-ufshc
+           - qcom,sm8650-ufshc
+           - qcom,sm8750-ufshc
+       - const: qcom,ufshc

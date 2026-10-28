@@ -1,0 +1,37 @@
+diff --git a/drivers/ufs/core/ufs-sysfs.c b/drivers/ufs/core/ufs-sysfs.c
+index 0086816b27cd..c040afc6668e 100644
+--- a/drivers/ufs/core/ufs-sysfs.c
++++ b/drivers/ufs/core/ufs-sysfs.c
+@@ -1949,7 +1949,7 @@ static umode_t ufs_sysfs_hid_is_visible(struct kobject *kobj,
+ 	return	hba->dev_info.hid_sup ? attr->mode : 0;
+ }
+ 
+-static const struct attribute_group ufs_sysfs_hid_group = {
++const struct attribute_group ufs_sysfs_hid_group = {
+ 	.name = "hid",
+ 	.attrs = ufs_sysfs_hid,
+ 	.is_visible = ufs_sysfs_hid_is_visible,
+diff --git a/drivers/ufs/core/ufs-sysfs.h b/drivers/ufs/core/ufs-sysfs.h
+index 8d94af3b8077..6efb82a082fd 100644
+--- a/drivers/ufs/core/ufs-sysfs.h
++++ b/drivers/ufs/core/ufs-sysfs.h
+@@ -14,5 +14,6 @@ void ufs_sysfs_remove_nodes(struct device *dev);
+ 
+ extern const struct attribute_group ufs_sysfs_unit_descriptor_group;
+ extern const struct attribute_group ufs_sysfs_lun_attributes_group;
++extern const struct attribute_group ufs_sysfs_hid_group;
+ 
+ #endif
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 319dd6f6229b..127b691402f9 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -8480,6 +8480,8 @@ static int ufs_get_device_desc(struct ufs_hba *hba)
+ 				DEVICE_DESC_PARAM_EXT_UFS_FEATURE_SUP) &
+ 				UFS_DEV_HID_SUPPORT;
+ 
++	sysfs_update_group(&hba->dev->kobj, &ufs_sysfs_hid_group);
++
+ 	model_index = desc_buf[DEVICE_DESC_PARAM_PRDCT_NAME];
+ 
+ 	err = ufshcd_read_string_desc(hba, model_index,

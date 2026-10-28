@@ -1,0 +1,368 @@
+[
+ {
+  "id": "20260521131229.11199-mani@kernel.org",
+  "title": "soc: qcom: ice: Support IP version beyond v3",
+  "commits": [
+   "c709c76f4cf1d8646362f5a00ce8da1bd8ed58d7"
+  ],
+  "authors": [
+   "Manivannan Sadhasivam"
+  ],
+  "areas": [
+   "crypto"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260616113348.1168248-can.guo@oss.qualcomm.com",
+  "title": "scsi: ufs: dt-bindings: Document static TX Equalization settings properties",
+  "commits": [
+   "ce36dbeb2951607304cc5451a33ddcf06880d726",
+   "ecb8d6da1356abc3168e530fc328b3d461107d0f"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "bindings",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260615055802.105479-ed.tsai@mediatek.com",
+  "title": "scsi: ufs: core: Add get_hba_nortt callback for vendor-specific RTT capability",
+  "commits": [
+   "e7896d02cb4d0e6b4e97c62af669109ab809c0ca",
+   "75f529a7bcd4aaac7cf73dc885041d7f66403570",
+   "7ebadbae3dd793663f313e4046c1c20e12351769"
+  ],
+  "authors": [
+   "Ed Tsai"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260616100121.548759-himanshubatra@google.com",
+  "title": "scsi: ufs: sysfs: Add HS_GEAR6 string in power_info/gear sysfs output",
+  "commits": [
+   "78f638ff3bc19d8faeac109b50dd0bab87871ff4"
+  ],
+  "authors": [
+   "Himanshu Batra"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260618140941.902000-can.guo@oss.qualcomm.com",
+  "title": "scsi: ufs: core: Avoid possible memory reclaim deadlock in TX EQTR context",
+  "commits": [
+   "760fc6f0e25a72832c2fcf37ecf5f1b770ec8374"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260625121306.1655467-can.guo@oss.qualcomm.com",
+  "title": "scsi: ufs: ufs-qcom: Restore TX Equalization settings on FOM failure",
+  "commits": [
+   "890b10e76e6cca5a3b4fa48a994eb3cdc566dec3",
+   "4bd0875b7e571eeeed45fdab52672b850c1845a5",
+   "f13faec1d4c16b3705d1eccffb8ba6723f1102ff"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260618-topic-ufs-wb-empty-warn-v1-ec744a153e0e@linaro.org",
+  "title": "scsi: ufs: Switch WriteBooster missing free space message as warn_once",
+  "commits": [
+   "c6cee609f614b790a72cb34d6d28b3635c874ddf"
+  ],
+  "authors": [
+   "Neil Armstrong"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260717153914.26321-liqiang01@kylinos.cn",
+  "title": "scsi: ufs: core: Validate string descriptors",
+  "commits": [
+   "d96e83d028d7d8762e424e49c671d49ac2ecf14f",
+   "331bda797e6afc143127ce72b1469d73316f49b4",
+   "9e6dd452f1affb5c412ca64bf5809ce9fde3174d",
+   "a947b8edbdcec8415a80ca55e9f38801322ffdd3",
+   "2f434f815ee2e051f9ccadfbe5db531e6fbe34ad",
+   "abd26e6b53c4169122d61fdd4cabe09bdd916aac"
+  ],
+  "authors": [
+   "Li Qiang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260717035013.563791-panchuang@vivo.com",
+  "title": "scsi: ufs: host: Remove redundant dev_err()",
+  "commits": [
+   "0cad7bd51301678ad5c9aad701be29eab2ab4e7a"
+  ],
+  "authors": [
+   "Pan Chuang"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260719195833.136543-nitin.rawat@oss.qualcomm.com",
+  "title": "scsi: ufs: dt-bindings: Document the Maili UFS Controller",
+  "commits": [
+   "e0329beb37abc50da5f1ef1d9f6f160fcda75c1f"
+  ],
+  "authors": [
+   "Nitin Rawat"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260720013759.2979593-rdunlap@infradead.org",
+  "title": "scsi: ufs: ufshcd: Fix all kernel-doc warnings",
+  "commits": [
+   "98575b9ffc3ac3b4de8b997eb1c4243a287b8e82"
+  ],
+  "authors": [
+   "Randy Dunlap"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260806161301.1010876-palash.kambar@oss.qualcomm.com",
+  "title": "phy: qcom-qmp-ufs: Add UFS PHY support on Hawi",
+  "commits": [
+   "2f7b4bc47b1e22c3e510ff6e25985edbe9cd9f97"
+  ],
+  "authors": [
+   "Palash Kambar"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260728092434epcms2p56b013ab7a2df90d3df9186322de54340@epcms2p5",
+  "title": "scsi: ufs: Use unsigned types for the BSG query",
+  "commits": [
+   "dca46c4ff2cd5be17039a99613b6b4bb0923fe9a"
+  ],
+  "authors": [
+   "Hyeoncheol Jeong"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260728092741epcms2p8c53432ef3c2f0d6a63dd980ad5ef9f00@epcms2p8",
+  "title": "scsi: ufs: Add support for the aggregated read query opcode",
+  "commits": [
+   "8f5bbff8749ab886557cc27dc09729c911c122fa"
+  ],
+  "authors": [
+   "Hyeoncheol Jeong"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "8fe4526ce272811b28e99048b42358dd8f7c48af.1786142946.git.bvanassche@acm.org",
+  "title": "scsi: ufs: core: Set task state before io_schedule_timeout()",
+  "commits": [
+   "720d8b2f2457f4962ca353dd90395e2660d9a10d"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "3c975386a5bcb939f8a2a0d47fd621f234321a9e.1786142946.git.bvanassche@acm.org",
+  "title": "scsi: ufs: core: Enable context analysis",
+  "commits": [
+   "ff5d552022b35f7475bdc538173b3ceb95d55d85"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260825145203.265579-nitin.rawat@oss.qualcomm.com",
+  "title": "scsi: ufs: ufs-qcom: Restore HS/LS link startup mode for Qualcomm UFS controller v6.2+",
+  "commits": [
+   "a3756f53baf1830c65149cfcb81cb96360976cf3",
+   "b2ededcb271b37510366cbf6853be193d681ba5c"
+  ],
+  "authors": [
+   "Nitin Rawat"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260818112830.453402-sangram.k.y@intel.com",
+  "title": "scsi: ufs: ufs-pci: Add support for Intel UFS 4.0 HS-Gear5",
+  "commits": [
+   "ef675ea168453a9b3e635b8ac543f92938bdd03b",
+   "c46cc9cee39bd6f395ab9ac98b1794705df13d7c"
+  ],
+  "authors": [
+   "sangram kumar yerra"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "202609021314.8A9C0B8@keescook",
+  "title": "treewide: refresh kmalloc_obj() conversions",
+  "commits": [
+   "3a2c4d55e32ad65efebdb6de44eef3bfa08bb49d"
+  ],
+  "authors": [
+   "Kees Cook"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "6f78c4bd-a70b-402d-abfd-599091b67674@acm.org",
+  "title": "scsi: ufs: core: Keep internal commands dispatchable during error handling",
+  "commits": [
+   "b52d695d062095327b944acf7daabbc816ab319b"
+  ],
+  "authors": [
+   "Stanley Jhu"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "ae0cc2bd764e6dfffce99db3d8b44a55887c508c.1789394185.git.geert+renesas@glider.be",
+  "title": "scsi: ufs: pltfrm: Add quirk for R-Car S4 lacking lanes-per-direction",
+  "commits": [
+   "c9ee6511332687ea714ad8ab86a53cb837d86eea"
+  ],
+  "authors": [
+   "Geert Uytterhoeven"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260909091045.1134956-naomi.chu@mediatek.com",
+  "title": "scsi: ufs: core: Hold a clock reference across the probe",
+  "commits": [
+   "02a3178319639f650428164d4d003de4dc03e326"
+  ],
+  "authors": [
+   "Naomi Chu"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260920034953.19535-hppiscas@163.com",
+  "title": "scsi: ufs: mediatek: Handle mPHY power-on failures",
+  "commits": [
+   "78e04810542da416d3bead707b60cec773f1524d"
+  ],
+  "authors": [
+   "Pengpeng Hou"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260928035816.1294326-stanleyjhu@google.com",
+  "title": "scsi: ufs: core: Avoid unsafe MMIO reads in ufshcd_mcq_compl_all_cqes_lock()",
+  "commits": [
+   "375f3a5691dd46b5d05b90a8968872ec8b2248c5",
+   "469fa055664bfd8717b087a80d59c03055789c17"
+  ],
+  "authors": [
+   "Stanley Jhu"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20261013132708.1669415-stanleyjhu@google.com",
+  "title": "scsi: bsg: Pass reply_len to bsg_setup_queue() to fit UFS ARPMB replies",
+  "commits": [
+   "ec6b083915e8146e147314a5f4f1285d07b57bfc"
+  ],
+  "authors": [
+   "Stanley Jhu"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ }
+]

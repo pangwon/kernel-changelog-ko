@@ -1,0 +1,12 @@
+diff --git a/Documentation/devicetree/bindings/ufs/samsung,exynos-ufs.yaml b/Documentation/devicetree/bindings/ufs/samsung,exynos-ufs.yaml
+index a7eb7ad85a94..710ce493f3b6 100644
+--- a/Documentation/devicetree/bindings/ufs/samsung,exynos-ufs.yaml
++++ b/Documentation/devicetree/bindings/ufs/samsung,exynos-ufs.yaml
+@@ -19,6 +19,7 @@ properties:
+       - samsung,exynos7-ufs
+       - samsung,exynosautov9-ufs
+       - samsung,exynosautov9-ufs-vh
++      - samsung,exynosautov920-ufs
+       - tesla,fsd-ufs
+ 
+   reg:

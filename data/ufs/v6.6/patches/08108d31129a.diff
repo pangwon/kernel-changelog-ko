@@ -1,0 +1,94 @@
+diff --git a/drivers/ufs/core/ufshcd-priv.h b/drivers/ufs/core/ufshcd-priv.h
+index 4feccd5c1ba2..f42d99ce5bf1 100644
+--- a/drivers/ufs/core/ufshcd-priv.h
++++ b/drivers/ufs/core/ufshcd-priv.h
+@@ -93,7 +93,7 @@ int ufshcd_send_uic_cmd(struct ufs_hba *hba, struct uic_command *uic_cmd);
+ int ufshcd_exec_raw_upiu_cmd(struct ufs_hba *hba,
+ 			     struct utp_upiu_req *req_upiu,
+ 			     struct utp_upiu_req *rsp_upiu,
+-			     int msgcode,
++			     enum upiu_request_transaction msgcode,
+ 			     u8 *desc_buff, int *buff_len,
+ 			     enum query_opcode desc_op);
+ 
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 5e248c60f887..19c210ef74f5 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -879,7 +879,7 @@ static inline u32 ufshcd_get_dme_attr_val(struct ufs_hba *hba)
+  *
+  * Return: UPIU type.
+  */
+-static inline int
++static inline enum upiu_response_transaction
+ ufshcd_get_req_rsp(struct utp_upiu_rsp *ucd_rsp_ptr)
+ {
+ 	return be32_to_cpu(ucd_rsp_ptr->header.dword_0) >> 24;
+@@ -3032,7 +3032,7 @@ ufshcd_check_query_response(struct ufs_hba *hba, struct ufshcd_lrb *lrbp)
+ static int
+ ufshcd_dev_cmd_completion(struct ufs_hba *hba, struct ufshcd_lrb *lrbp)
+ {
+-	int resp;
++	enum upiu_response_transaction resp;
+ 	int err = 0;
+ 
+ 	hba->ufs_stats.last_hibern8_exit_tstamp = ktime_set(0, 0);
+@@ -5271,9 +5271,8 @@ ufshcd_transfer_rsp_status(struct ufs_hba *hba, struct ufshcd_lrb *lrbp,
+ 
+ 	switch (ocs) {
+ 	case OCS_SUCCESS:
+-		result = ufshcd_get_req_rsp(lrbp->ucd_rsp_ptr);
+ 		hba->ufs_stats.last_hibern8_exit_tstamp = ktime_set(0, 0);
+-		switch (result) {
++		switch (ufshcd_get_req_rsp(lrbp->ucd_rsp_ptr)) {
+ 		case UPIU_TRANSACTION_RESPONSE:
+ 			/*
+ 			 * get the response UPIU result to extract
+@@ -7199,7 +7198,7 @@ static int ufshcd_issue_devman_upiu_cmd(struct ufs_hba *hba,
+ int ufshcd_exec_raw_upiu_cmd(struct ufs_hba *hba,
+ 			     struct utp_upiu_req *req_upiu,
+ 			     struct utp_upiu_req *rsp_upiu,
+-			     int msgcode,
++			     enum upiu_request_transaction msgcode,
+ 			     u8 *desc_buff, int *buff_len,
+ 			     enum query_opcode desc_op)
+ {
+diff --git a/include/ufs/ufs.h b/include/ufs/ufs.h
+index 0fb733683953..797bf033c19a 100644
+--- a/include/ufs/ufs.h
++++ b/include/ufs/ufs.h
+@@ -78,7 +78,7 @@ enum {
+ };
+ 
+ /* UTP UPIU Transaction Codes Initiator to Target */
+-enum {
++enum upiu_request_transaction {
+ 	UPIU_TRANSACTION_NOP_OUT	= 0x00,
+ 	UPIU_TRANSACTION_COMMAND	= 0x01,
+ 	UPIU_TRANSACTION_DATA_OUT	= 0x02,
+@@ -87,7 +87,7 @@ enum {
+ };
+ 
+ /* UTP UPIU Transaction Codes Target to Initiator */
+-enum {
++enum upiu_response_transaction {
+ 	UPIU_TRANSACTION_NOP_IN		= 0x20,
+ 	UPIU_TRANSACTION_RESPONSE	= 0x21,
+ 	UPIU_TRANSACTION_DATA_IN	= 0x22,
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 67bd089e70bc..2b1f4f2a4464 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -1357,12 +1357,6 @@ int ufshcd_get_vreg(struct device *dev, struct ufs_vreg *vreg);
+ 
+ int ufshcd_send_uic_cmd(struct ufs_hba *hba, struct uic_command *uic_cmd);
+ 
+-int ufshcd_exec_raw_upiu_cmd(struct ufs_hba *hba,
+-			     struct utp_upiu_req *req_upiu,
+-			     struct utp_upiu_req *rsp_upiu,
+-			     int msgcode,
+-			     u8 *desc_buff, int *buff_len,
+-			     enum query_opcode desc_op);
+ int ufshcd_advanced_rpmb_req_handler(struct ufs_hba *hba, struct utp_upiu_req *req_upiu,
+ 				     struct utp_upiu_req *rsp_upiu, struct ufs_ehs *ehs_req,
+ 				     struct ufs_ehs *ehs_rsp, int sg_cnt,

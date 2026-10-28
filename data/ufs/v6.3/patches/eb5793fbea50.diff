@@ -1,0 +1,15 @@
+diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c b/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c
+index 3cf8f6e66ca2..b37d218ae8d9 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c
++++ b/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c
+@@ -21,6 +21,10 @@
+ #include <linux/slab.h>
+ 
+ #include "phy-qcom-qmp.h"
++#include "phy-qcom-qmp-pcs-ufs-v2.h"
++#include "phy-qcom-qmp-pcs-ufs-v3.h"
++#include "phy-qcom-qmp-pcs-ufs-v4.h"
++#include "phy-qcom-qmp-pcs-ufs-v5.h"
+ 
+ /* QPHY_SW_RESET bit */
+ #define SW_RESET				BIT(0)

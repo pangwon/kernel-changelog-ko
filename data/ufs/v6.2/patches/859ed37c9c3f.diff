@@ -1,0 +1,58 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 768cb49d269c..747183052114 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -4480,7 +4480,7 @@ static int ufshcd_complete_dev_init(struct ufs_hba *hba)
+ 		QUERY_FLAG_IDN_FDEVICEINIT, 0, NULL);
+ 	if (err) {
+ 		dev_err(hba->dev,
+-			"%s setting fDeviceInit flag failed with error %d\n",
++			"%s: setting fDeviceInit flag failed with error %d\n",
+ 			__func__, err);
+ 		goto out;
+ 	}
+@@ -4497,11 +4497,11 @@ static int ufshcd_complete_dev_init(struct ufs_hba *hba)
+ 
+ 	if (err) {
+ 		dev_err(hba->dev,
+-				"%s reading fDeviceInit flag failed with error %d\n",
++				"%s: reading fDeviceInit flag failed with error %d\n",
+ 				__func__, err);
+ 	} else if (flag_res) {
+ 		dev_err(hba->dev,
+-				"%s fDeviceInit was not cleared by the device\n",
++				"%s: fDeviceInit was not cleared by the device\n",
+ 				__func__);
+ 		err = -EBUSY;
+ 	}
+diff --git a/drivers/ufs/core/ufshpb.c b/drivers/ufs/core/ufshpb.c
+index 3d69a81c5b17..fda3e7b494a6 100644
+--- a/drivers/ufs/core/ufshpb.c
++++ b/drivers/ufs/core/ufshpb.c
+@@ -2289,7 +2289,7 @@ static bool ufshpb_check_hpb_reset_query(struct ufs_hba *hba)
+ 	/* wait for the device to complete HPB reset query */
+ 	for (try = 0; try < HPB_RESET_REQ_RETRIES; try++) {
+ 		dev_dbg(hba->dev,
+-			"%s start flag reset polling %d times\n",
++			"%s: start flag reset polling %d times\n",
+ 			__func__, try);
+ 
+ 		/* Poll fHpbReset flag to be cleared */
+@@ -2298,7 +2298,7 @@ static bool ufshpb_check_hpb_reset_query(struct ufs_hba *hba)
+ 
+ 		if (err) {
+ 			dev_err(hba->dev,
+-				"%s reading fHpbReset flag failed with error %d\n",
++				"%s: reading fHpbReset flag failed with error %d\n",
+ 				__func__, err);
+ 			return flag_res;
+ 		}
+@@ -2310,7 +2310,7 @@ static bool ufshpb_check_hpb_reset_query(struct ufs_hba *hba)
+ 	}
+ 	if (flag_res) {
+ 		dev_err(hba->dev,
+-			"%s fHpbReset was not cleared by the device\n",
++			"%s: fHpbReset was not cleared by the device\n",
+ 			__func__);
+ 	}
+ out:

@@ -1,0 +1,59 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index d1bcb4c4e4e4..641fed6dae5d 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -4954,6 +4954,12 @@ static void ufshcd_lu_init(struct ufs_hba *hba, struct scsi_device *sdev)
+ 	    desc_buf[UNIT_DESC_PARAM_LU_WR_PROTECT] == UFS_LU_POWER_ON_WP)
+ 		hba->dev_info.is_lu_power_on_wp = true;
+ 
++	/* In case of RPMB LU, check if advanced RPMB mode is enabled */
++	if (desc_buf[UNIT_DESC_PARAM_UNIT_INDEX] == UFS_UPIU_RPMB_WLUN &&
++	    desc_buf[RPMB_UNIT_DESC_PARAM_REGION_EN] & BIT(4))
++		hba->dev_info.b_advanced_rpmb_en = true;
++
++
+ 	kfree(desc_buf);
+ set_qdepth:
+ 	/*
+diff --git a/include/ufs/ufs.h b/include/ufs/ufs.h
+index 1bba3fead2ce..17e401df674c 100644
+--- a/include/ufs/ufs.h
++++ b/include/ufs/ufs.h
+@@ -212,6 +212,28 @@ enum unit_desc_param {
+ 	UNIT_DESC_PARAM_WB_BUF_ALLOC_UNITS	= 0x29,
+ };
+ 
++/* RPMB Unit descriptor parameters offsets in bytes*/
++enum rpmb_unit_desc_param {
++	RPMB_UNIT_DESC_PARAM_LEN		= 0x0,
++	RPMB_UNIT_DESC_PARAM_TYPE		= 0x1,
++	RPMB_UNIT_DESC_PARAM_UNIT_INDEX		= 0x2,
++	RPMB_UNIT_DESC_PARAM_LU_ENABLE		= 0x3,
++	RPMB_UNIT_DESC_PARAM_BOOT_LUN_ID	= 0x4,
++	RPMB_UNIT_DESC_PARAM_LU_WR_PROTECT	= 0x5,
++	RPMB_UNIT_DESC_PARAM_LU_Q_DEPTH		= 0x6,
++	RPMB_UNIT_DESC_PARAM_PSA_SENSITIVE	= 0x7,
++	RPMB_UNIT_DESC_PARAM_MEM_TYPE		= 0x8,
++	RPMB_UNIT_DESC_PARAM_REGION_EN		= 0x9,
++	RPMB_UNIT_DESC_PARAM_LOGICAL_BLK_SIZE	= 0xA,
++	RPMB_UNIT_DESC_PARAM_LOGICAL_BLK_COUNT	= 0xB,
++	RPMB_UNIT_DESC_PARAM_REGION0_SIZE	= 0x13,
++	RPMB_UNIT_DESC_PARAM_REGION1_SIZE	= 0x14,
++	RPMB_UNIT_DESC_PARAM_REGION2_SIZE	= 0x15,
++	RPMB_UNIT_DESC_PARAM_REGION3_SIZE	= 0x16,
++	RPMB_UNIT_DESC_PARAM_PROVISIONING_TYPE	= 0x17,
++	RPMB_UNIT_DESC_PARAM_PHY_MEM_RSRC_CNT	= 0x18,
++};
++
+ /* Device descriptor parameters offsets in bytes*/
+ enum device_desc_param {
+ 	DEVICE_DESC_PARAM_LEN			= 0x0,
+@@ -601,6 +623,8 @@ struct ufs_dev_info {
+ 
+ 	bool	b_rpm_dev_flush_capable;
+ 	u8	b_presrv_uspc_en;
++
++	bool    b_advanced_rpmb_en;
+ };
+ 
+ /*

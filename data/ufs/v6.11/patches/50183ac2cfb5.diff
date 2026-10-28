@@ -1,0 +1,26 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 41bf2e249c83..7892c46c97ff 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -1563,7 +1563,8 @@ static int ufshcd_devfreq_target(struct device *dev,
+ 		ktime_to_us(ktime_sub(ktime_get(), start)), ret);
+ 
+ out:
+-	if (sched_clk_scaling_suspend_work && !scale_up)
++	if (sched_clk_scaling_suspend_work &&
++			(!scale_up || hba->clk_scaling.suspend_on_no_request))
+ 		queue_work(hba->clk_scaling.workq,
+ 			   &hba->clk_scaling.suspend_work);
+ 
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 9e0581115b34..049520bcc6c0 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -459,6 +459,7 @@ struct ufs_clk_scaling {
+ 	bool is_initialized;
+ 	bool is_busy_started;
+ 	bool is_suspended;
++	bool suspend_on_no_request;
+ };
+ 
+ #define UFS_EVENT_HIST_LENGTH 8

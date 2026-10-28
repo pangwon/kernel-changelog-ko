@@ -1,0 +1,33 @@
+diff --git a/drivers/ufs/core/ufs-sysfs.c b/drivers/ufs/core/ufs-sysfs.c
+index b33f8656edb5..02e5468ad49d 100644
+--- a/drivers/ufs/core/ufs-sysfs.c
++++ b/drivers/ufs/core/ufs-sysfs.c
+@@ -141,7 +141,7 @@ static inline ssize_t ufs_sysfs_pm_lvl_store(struct device *dev,
+ 	if (kstrtoul(buf, 0, &value))
+ 		return -EINVAL;
+ 
+-	if (value >= UFS_PM_LVL_MAX)
++	if (value >= UFS_PM_LVL_MAX || value < hba->pm_lvl_min)
+ 		return -EINVAL;
+ 
+ 	if (ufs_pm_lvl_states[value].dev_state == UFS_DEEPSLEEP_PWR_MODE &&
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 19154228780b..a64c19563b03 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -834,6 +834,7 @@ enum ufshcd_mcq_opr {
+  * @uic_link_state: active state of the link to the UFS device.
+  * @rpm_lvl: desired UFS power management level during runtime PM.
+  * @spm_lvl: desired UFS power management level during system PM.
++ * @pm_lvl_min: minimum supported power management level.
+  * @pm_op_in_progress: whether or not a PM operation is in progress.
+  * @ahit: value of Auto-Hibernate Idle Timer register.
+  * @outstanding_tasks: Bits representing outstanding task requests
+@@ -972,6 +973,7 @@ struct ufs_hba {
+ 	enum ufs_pm_level rpm_lvl;
+ 	/* Desired UFS power management level during system PM */
+ 	enum ufs_pm_level spm_lvl;
++	enum ufs_pm_level pm_lvl_min;
+ 	int pm_op_in_progress;
+ 
+ 	/* Auto-Hibernate Idle Timer register value */

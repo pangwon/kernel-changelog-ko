@@ -1,0 +1,71 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 96ad57c3144b..c5e427520b1b 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -6446,13 +6446,14 @@ void ufshcd_schedule_eh_work(struct ufs_hba *hba)
+ 	}
+ }
+ 
+-static void ufshcd_force_error_recovery(struct ufs_hba *hba)
++void ufshcd_force_error_recovery(struct ufs_hba *hba)
+ {
+ 	spin_lock_irq(hba->host->host_lock);
+ 	hba->force_reset = true;
+ 	ufshcd_schedule_eh_work(hba);
+ 	spin_unlock_irq(hba->host->host_lock);
+ }
++EXPORT_SYMBOL_GPL(ufshcd_force_error_recovery);
+ 
+ static void ufshcd_clk_scaling_allow(struct ufs_hba *hba, bool allow)
+ {
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index 61c8fe135100..e62f02b7ca76 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -1686,7 +1686,7 @@ static void ufs_mtk_dev_vreg_set_lpm(struct ufs_hba *hba, bool lpm)
+ 	}
+ }
+ 
+-static void ufs_mtk_auto_hibern8_disable(struct ufs_hba *hba)
++static int ufs_mtk_auto_hibern8_disable(struct ufs_hba *hba)
+ {
+ 	int ret;
+ 
+@@ -1697,8 +1697,16 @@ static void ufs_mtk_auto_hibern8_disable(struct ufs_hba *hba)
+ 	ufs_mtk_wait_idle_state(hba, 5);
+ 
+ 	ret = ufs_mtk_wait_link_state(hba, VS_LINK_UP, 100);
+-	if (ret)
++	if (ret) {
+ 		dev_warn(hba->dev, "exit h8 state fail, ret=%d\n", ret);
++
++		ufshcd_force_error_recovery(hba);
++
++		/* trigger error handler and break suspend */
++		ret = -EBUSY;
++	}
++
++	return ret;
+ }
+ 
+ static int ufs_mtk_suspend(struct ufs_hba *hba, enum ufs_pm_op pm_op,
+@@ -1709,7 +1717,7 @@ static int ufs_mtk_suspend(struct ufs_hba *hba, enum ufs_pm_op pm_op,
+ 
+ 	if (status == PRE_CHANGE) {
+ 		if (ufshcd_is_auto_hibern8_supported(hba))
+-			ufs_mtk_auto_hibern8_disable(hba);
++			return ufs_mtk_auto_hibern8_disable(hba);
+ 		return 0;
+ 	}
+ 
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 1d3943777584..219935b3a76f 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -1508,5 +1508,6 @@ int __ufshcd_write_ee_control(struct ufs_hba *hba, u32 ee_ctrl_mask);
+ int ufshcd_write_ee_control(struct ufs_hba *hba);
+ int ufshcd_update_ee_control(struct ufs_hba *hba, u16 *mask,
+ 			     const u16 *other_mask, u16 set, u16 clr);
++void ufshcd_force_error_recovery(struct ufs_hba *hba);
+ 
+ #endif /* End of Header */

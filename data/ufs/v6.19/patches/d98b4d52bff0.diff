@@ -1,0 +1,12 @@
+diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
+index 90226f72c158..f662e7ce71f1 100644
+--- a/drivers/ufs/Kconfig
++++ b/drivers/ufs/Kconfig
+@@ -6,6 +6,7 @@
+ menuconfig SCSI_UFSHCD
+ 	tristate "Universal Flash Storage Controller"
+ 	depends on SCSI && SCSI_DMA
++	depends on RPMB || !RPMB
+ 	select PM_DEVFREQ
+ 	select DEVFREQ_GOV_SIMPLE_ONDEMAND
+ 	select NLS

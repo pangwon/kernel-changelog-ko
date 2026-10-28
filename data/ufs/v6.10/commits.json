@@ -1,0 +1,3755 @@
+[
+ {
+  "sha": "ddfd7f051f4e14959b893ac8ba7c081a0691197c",
+  "release": "v6.10",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2024-03-09T10:10:59+02:00",
+  "commit_date": "2024-03-25T16:50:22-04:00",
+  "subject": "scsi: ufs: core: Reuse device management locking code",
+  "body": "Group those 3 calls that repeat for every device management command into\nlock and unlock handlers.\n\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20240309081104.5006-2-avri.altman@wdc.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240309081104.5006-2-avri.altman@wdc.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240309081104.5006-2-avri.altman@wdc.com",
+  "series_id": "20240309081104.5006-avri.altman@wdc.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 32,
+    "deleted": 37,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/ddfd7f051f4e.diff",
+  "patch_bytes": 5610
+ },
+ {
+  "sha": "71aabb747d5f90c1b10b55eabdadd97529bfe165",
+  "release": "v6.10",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2024-03-09T10:11:00+02:00",
+  "commit_date": "2024-03-25T16:50:22-04:00",
+  "subject": "scsi: ufs: core: Reuse exec_dev_cmd",
+  "body": "Move out the actual command issue from exec_dev_cmd it can be used\nelsewhere.  While at it, remove a redundant \"lrbp->cmd = NULL\" assignment.\n\nAlso, the device management commands that are originated from the\nufs-bsg code path, are being traced now, which wasn't the case before.\n\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20240309081104.5006-3-avri.altman@wdc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Bean Huo <beanhuo@micron.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240309081104.5006-3-avri.altman@wdc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Bean Huo <beanhuo@micron.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240309081104.5006-3-avri.altman@wdc.com",
+  "series_id": "20240309081104.5006-avri.altman@wdc.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 24,
+    "deleted": 29,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/71aabb747d5f.diff",
+  "patch_bytes": 3702
+ },
+ {
+  "sha": "5b59a68dac9ac72538fd742c7d20d2734cbc6cf2",
+  "release": "v6.10",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2024-03-09T10:11:01+02:00",
+  "commit_date": "2024-03-25T16:50:22-04:00",
+  "subject": "scsi: ufs: Reuse compose_dev_cmd",
+  "body": "Move out some of the dev_cmd initializations so they can be used elsewhere.\n\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Bean Huo <beanhuo@micron.com>\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20240309081104.5006-4-avri.altman@wdc.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Bean Huo <beanhuo@micron.com>"
+   ],
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240309081104.5006-4-avri.altman@wdc.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240309081104.5006-4-avri.altman@wdc.com",
+  "series_id": "20240309081104.5006-avri.altman@wdc.com",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 13,
+    "deleted": 20,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/5b59a68dac9a.diff",
+  "patch_bytes": 2573
+ },
+ {
+  "sha": "996a24b99d63df08caf89fc03f4783279424788f",
+  "release": "v6.10",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2024-03-09T10:11:02+02:00",
+  "commit_date": "2024-03-25T16:50:22-04:00",
+  "subject": "scsi: ufs: Reuse compose_devman_upiu",
+  "body": "Move some code fragments into ufshcd_prepare_req_desc_hdr() so it can be\nused throughout.\n\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20240309081104.5006-5-avri.altman@wdc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Bean Huo <beanhuo@micron.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240309081104.5006-5-avri.altman@wdc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Bean Huo <beanhuo@micron.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240309081104.5006-5-avri.altman@wdc.com",
+  "series_id": "20240309081104.5006-avri.altman@wdc.com",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 17,
+    "deleted": 32,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshci.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/996a24b99d63.diff",
+  "patch_bytes": 4859
+ },
+ {
+  "sha": "1c5e7221bb67d7702532ada40461b7824a6dab07",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2024-03-15T16:34:42+08:00",
+  "commit_date": "2024-03-25T21:01:11-04:00",
+  "subject": "scsi: ufs: mediatek: Fix vsx/vccqx control logic",
+  "body": "VSX (the upper layer of VCCQ/VCCQ2) should:\n\n 1. Always set to hpm mode if ufs device is active.\n\n 2. Enter lpm mode only if ufs device is not active.\n\nVCCQX should:\n\n 1. Keep hpm mode if vccq and vccq2 not set in dts.\n\n 2. Keep hpm mode if vcc not set in dts keep vcc always on.\n\n 3. Keep hpm if broken vcc keep vcc always on and not allow vccq lpm.\n\n 4. Except upper case, can enter lpm mode if ufs device is not active.\n\nAcked-by: Chun-Hung Wu <Chun-Hung.Wu@mediatek.com>\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://lore.kernel.org/r/20240315083448.7185-2-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "acked_by": [
+    "Chun-Hung Wu <Chun-Hung.Wu@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240315083448.7185-2-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240315083448.7185-2-peter.wang@mediatek.com",
+  "series_id": "20240315083448.7185-peter.wang@mediatek.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 29,
+    "deleted": 12,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.h",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/1c5e7221bb67.diff",
+  "patch_bytes": 2601
+ },
+ {
+  "sha": "e7b3c64a2a9485c134c1b23b8ebeda004b48de74",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2024-03-15T16:34:43+08:00",
+  "commit_date": "2024-03-25T21:01:11-04:00",
+  "subject": "scsi: ufs: mediatek: TX skew fix",
+  "body": "Fix Mediatek TX skew issue by checking dts setting and vendor/model. Then\nset PA_TACTIVATE to 8.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nAcked-by: Chun-Hung Wu <Chun-Hung.Wu@mediatek.com>\nReviewed-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20240315083448.7185-3-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "acked_by": [
+    "Chun-Hung Wu <Chun-Hung.Wu@mediatek.com>"
+   ],
+   "reviewed_by": [
+    "Avri Altman <avri.altman@wdc.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240315083448.7185-3-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240315083448.7185-3-peter.wang@mediatek.com",
+  "series_id": "20240315083448.7185-peter.wang@mediatek.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 21,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/e7b3c64a2a94.diff",
+  "patch_bytes": 2181
+ },
+ {
+  "sha": "46bd3e31d74b4c6ccd064e82cdfcdd24fa3114b6",
+  "release": "v6.10",
+  "author": {
+   "name": "Po-Wen Kao",
+   "email": "powen.kao@mediatek.com"
+  },
+  "author_date": "2024-03-15T16:34:44+08:00",
+  "commit_date": "2024-03-25T21:01:11-04:00",
+  "subject": "scsi: ufs: mediatek: Add UFS_MTK_CAP_DISABLE_MCQ",
+  "body": "Add new mediatek host cap UFS_MTK_CAP_DISABLE_MCQ to allow disabling MCQ\nfeature by assigning dts boolean property \"mediatek,ufs-disable-mcq\".\n\nSigned-off-by: Po-Wen Kao <powen.kao@mediatek.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nAcked-by: Chun-Hung Wu <Chun-Hung.Wu@mediatek.com>\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20240315083448.7185-4-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Po-Wen Kao <powen.kao@mediatek.com>",
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Avri Altman <avri.altman@wdc.com>"
+   ],
+   "acked_by": [
+    "Chun-Hung Wu <Chun-Hung.Wu@mediatek.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240315083448.7185-4-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240315083448.7185-4-peter.wang@mediatek.com",
+  "series_id": "20240315083448.7185-peter.wang@mediatek.com",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 12,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/46bd3e31d74b.diff",
+  "patch_bytes": 1737
+ },
+ {
+  "sha": "4bd07f0596be9c4c72300c8bdf04d0bbdbf804b0",
+  "release": "v6.10",
+  "author": {
+   "name": "Po-Wen Kao",
+   "email": "powen.kao@mediatek.com"
+  },
+  "author_date": "2024-03-15T16:34:45+08:00",
+  "commit_date": "2024-03-25T21:02:35-04:00",
+  "subject": "scsi: ufs: mediatek: UFS mtk sip command reconstruct",
+  "body": "Move sip command and associated define to a new sip header file.\n\nSigned-off-by: Po-Wen Kao <powen.kao@mediatek.com>\nAcked-by: Chun-Hung Wu <Chun-Hung.Wu@mediatek.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://lore.kernel.org/r/20240315083448.7185-5-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Po-Wen Kao <powen.kao@mediatek.com>",
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "acked_by": [
+    "Chun-Hung Wu <Chun-Hung.Wu@mediatek.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240315083448.7185-5-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240315083448.7185-5-peter.wang@mediatek.com",
+  "series_id": "20240315083448.7185-peter.wang@mediatek.com",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek-sip.h",
+    "status": "A",
+    "in_track": true,
+    "added": 90,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 79,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/4bd07f0596be.diff",
+  "patch_bytes": 5525
+ },
+ {
+  "sha": "3a887a382838384757c3487263619ec5162424f2",
+  "release": "v6.10",
+  "author": {
+   "name": "Po-Wen Kao",
+   "email": "powen.kao@mediatek.com"
+  },
+  "author_date": "2024-03-15T16:34:46+08:00",
+  "commit_date": "2024-03-25T21:02:36-04:00",
+  "subject": "scsi: ufs: mediatek: Rename host power control API",
+  "body": "Mediatek host power includes two parts:\n\n 1. ufshci power, which is the main power of ufs host controller.\n\n 2. ufshci crypto sram power, which is the power of ufs crypto engine.\n\nThe host power control is actually controlling crypto sram power. Rename\nit.\n\nSigned-off-by: Po-Wen Kao <powen.kao@mediatek.com>\nAcked-by: Chun-Hung Wu <Chun-Hung.Wu@mediatek.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20240315083448.7185-6-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Po-Wen Kao <powen.kao@mediatek.com>",
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "acked_by": [
+    "Chun-Hung Wu <Chun-Hung.Wu@mediatek.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Avri Altman <avri.altman@wdc.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240315083448.7185-6-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240315083448.7185-6-peter.wang@mediatek.com",
+  "series_id": "20240315083448.7185-peter.wang@mediatek.com",
+  "series_index": 6,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek-sip.h",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 10,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 2,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/3a887a382838.diff",
+  "patch_bytes": 2026
+ },
+ {
+  "sha": "b28820a82b7a70d8dbd04f8f4469bcf8497dd217",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2024-03-15T16:34:47+08:00",
+  "commit_date": "2024-03-25T21:03:00-04:00",
+  "subject": "scsi: ufs: mediatek: Support mphy reset",
+  "body": "Reset mphy when resetting host. Backup mphy setting after mphy reset\ncontrol get. Restore mphy setting after mphy reset.\n\nAcked-by: Chun-Hung Wu <Chun-Hung.Wu@mediatek.com>\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://lore.kernel.org/r/20240315083448.7185-7-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "acked_by": [
+    "Chun-Hung Wu <Chun-Hung.Wu@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240315083448.7185-7-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240315083448.7185-7-peter.wang@mediatek.com",
+  "series_id": "20240315083448.7185-peter.wang@mediatek.com",
+  "series_index": 7,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek-sip.h",
+    "status": "M",
+    "in_track": true,
+    "added": 8,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 14,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b28820a82b7a.diff",
+  "patch_bytes": 3255
+ },
+ {
+  "sha": "a6888d623eae6dcae0ab8a587d68fabeb18f854e",
+  "release": "v6.10",
+  "author": {
+   "name": "Alice Chao",
+   "email": "alice.chao@mediatek.com"
+  },
+  "author_date": "2024-03-15T16:34:48+08:00",
+  "commit_date": "2024-03-25T21:03:00-04:00",
+  "subject": "scsi: ufs: mediatek: Support rtff in PM flow",
+  "body": "Add mtcmos control function and config.\n\nSigned-off-by: Alice Chao <alice.chao@mediatek.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nAcked-by: Chun-Hung Wu <Chun-Hung.Wu@mediatek.com>\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://lore.kernel.org/r/20240315083448.7185-8-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Alice Chao <alice.chao@mediatek.com>",
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "acked_by": [
+    "Chun-Hung Wu <Chun-Hung.Wu@mediatek.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240315083448.7185-8-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240315083448.7185-8-peter.wang@mediatek.com",
+  "series_id": "20240315083448.7185-peter.wang@mediatek.com",
+  "series_index": 8,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek-sip.h",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 35,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/a6888d623eae.diff",
+  "patch_bytes": 4171
+ },
+ {
+  "sha": "ef2bd6c969830c7e42c23bcaf9d533db77420512",
+  "release": "v6.10",
+  "author": {
+   "name": "Danila Tikhonov",
+   "email": "danila@jiaxyga.com"
+  },
+  "author_date": "2024-03-27T21:06:42+03:00",
+  "commit_date": "2024-03-29T22:20:24+05:30",
+  "subject": "phy: qcom-qmp-ufs: Add SM8475 support",
+  "body": "Add the tables and constants for init sequences for UFS QMP phy found in\nSM8475 SoC.\n\nSigned-off-by: Danila Tikhonov <danila@jiaxyga.com>\nLink: https://lore.kernel.org/r/20240327180642.20146-3-danila@jiaxyga.com\nSigned-off-by: Vinod Koul <vkoul@kernel.org>",
+  "trailers": {
+   "signed_off_by": [
+    "Danila Tikhonov <danila@jiaxyga.com>",
+    "Vinod Koul <vkoul@kernel.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240327180642.20146-3-danila@jiaxyga.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240327180642.20146-3-danila@jiaxyga.com",
+  "series_id": "20240327180642.20146-danila@jiaxyga.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 71,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "phy",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/ef2bd6c96983.diff",
+  "patch_bytes": 3705
+ },
+ {
+  "sha": "9282899e1e7e245c464f5996119fb06d48b97d4a",
+  "release": "v6.10",
+  "author": {
+   "name": "Krzysztof Kozlowski",
+   "email": "krzysztof.kozlowski@linaro.org"
+  },
+  "author_date": "2024-03-28T21:45:50+01:00",
+  "commit_date": "2024-04-05T20:58:26-04:00",
+  "subject": "scsi: ufs: core: Drop driver owner initialization",
+  "body": "Core in scsi_register_driver() already sets the .owner, so driver does not\nneed to.\n\nSigned-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nLink: https://lore.kernel.org/r/20240328-b4-module-owner-scsi-v1-6-c86cb4f6e91c@linaro.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240328-b4-module-owner-scsi-v1-6-c86cb4f6e91c@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240328-b4-module-owner-scsi-v1-6-c86cb4f6e91c@linaro.org",
+  "series_id": "20240328-b4-module-owner-scsi-v1-c86cb4f6e91c@linaro.org",
+  "series_index": 6,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/9282899e1e7e.diff",
+  "patch_bytes": 449
+ },
+ {
+  "sha": "c4d28e06b0c94636f6e35d003fa9ebac0a94e1ae",
+  "release": "v6.10",
+  "author": {
+   "name": "Andrew Halaney",
+   "email": "ahalaney@redhat.com"
+  },
+  "author_date": "2024-03-29T15:46:43-05:00",
+  "commit_date": "2024-04-05T21:06:28-04:00",
+  "subject": "scsi: ufs: qcom: Perform read back after writing reset bit",
+  "body": "Currently, the reset bit for the UFS provided reset controller (used by its\nphy) is written to, and then a mb() happens to try and ensure that hit the\ndevice. Immediately afterwards a usleep_range() occurs.\n\nmb() ensures that the write completes, but completion doesn't mean that it\nisn't stored in a buffer somewhere. The recommendation for ensuring this\nbit has taken effect on the device is to perform a read back to force it to\nmake it all the way to the device. This is documented in device-io.rst and\na talk by Will Deacon on this can be seen over here:\n\n    https://youtu.be/i6DayghhA8Q?si=MiyxB5cKJXSaoc01&t=1678\n\nLet's do that to ensure the bit hits the device. By doing so and\nguaranteeing the ordering against the immediately following usleep_range(),\nthe mb() can safely be removed.\n\nFixes: 81c0fc51b7a7 (\"ufs-qcom: add support for Qualcomm Technologies Inc platforms\")\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Andrew Halaney <ahalaney@redhat.com>\nLink: https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-1-181252004586@redhat.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "81c0fc51b7a7 (\"ufs-qcom: add support for Qualcomm Technologies Inc platforms\")"
+   ],
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "signed_off_by": [
+    "Andrew Halaney <ahalaney@redhat.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-1-181252004586@redhat.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "81c0fc51b7a7",
+    "subject": "ufs-qcom: add support for Qualcomm Technologies Inc platforms",
+    "sha": "81c0fc51b7a790ebe05a35de2c9176bd2f5bfe46",
+    "introduced_in": "v4.0"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-1-181252004586@redhat.com",
+  "series_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-181252004586@redhat.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.h",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 6,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/c4d28e06b0c9.diff",
+  "patch_bytes": 1071
+ },
+ {
+  "sha": "a862fafa263aea0f427d51aca6ff7fd9eeaaa8bd",
+  "release": "v6.10",
+  "author": {
+   "name": "Andrew Halaney",
+   "email": "ahalaney@redhat.com"
+  },
+  "author_date": "2024-03-29T15:46:44-05:00",
+  "commit_date": "2024-04-05T21:06:28-04:00",
+  "subject": "scsi: ufs: qcom: Perform read back after writing REG_UFS_SYS1CLK_1US",
+  "body": "Currently after writing to REG_UFS_SYS1CLK_1US a mb() is used to ensure\nthat write has gone through to the device.\n\nmb() ensures that the write completes, but completion doesn't mean that it\nisn't stored in a buffer somewhere. The recommendation for ensuring this\nbit has taken effect on the device is to perform a read back to force it to\nmake it all the way to the device. This is documented in device-io.rst and\na talk by Will Deacon on this can be seen over here:\n\n    https://youtu.be/i6DayghhA8Q?si=MiyxB5cKJXSaoc01&t=1678\n\nLet's do that to ensure the bit hits the device. Because the mb()'s purpose\nwasn't to add extra ordering (on top of the ordering guaranteed by\nwritel()/readl()), it can safely be removed.\n\nFixes: f06fcc7155dc (\"scsi: ufs-qcom: add QUniPro hardware support and power optimizations\")\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Andrew Halaney <ahalaney@redhat.com>\nLink: https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-2-181252004586@redhat.com\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "f06fcc7155dc (\"scsi: ufs-qcom: add QUniPro hardware support and power optimizations\")"
+   ],
+   "reviewed_by": [
+    "Can Guo <quic_cang@quicinc.com>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ],
+   "signed_off_by": [
+    "Andrew Halaney <ahalaney@redhat.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-2-181252004586@redhat.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "f06fcc7155dc",
+    "subject": "scsi: ufs-qcom: add QUniPro hardware support and power optimizations",
+    "sha": "f06fcc7155dcbcd9b697d499595a2c1a3945bda2",
+    "introduced_in": "v4.4"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-2-181252004586@redhat.com",
+  "series_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-181252004586@redhat.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/a862fafa263a.diff",
+  "patch_bytes": 421
+ },
+ {
+  "sha": "95d26dda90df29ceb0dd23a3158cb7f0bd1a5efb",
+  "release": "v6.10",
+  "author": {
+   "name": "Andrew Halaney",
+   "email": "ahalaney@redhat.com"
+  },
+  "author_date": "2024-03-29T15:46:45-05:00",
+  "commit_date": "2024-04-05T21:06:29-04:00",
+  "subject": "scsi: ufs: qcom: Remove unnecessary mb() after writing testbus config",
+  "body": "Currently, the testbus configuration is written and completed with an mb().\n\nmb() ensures that the write completes, but completion doesn't mean that it\nisn't stored in a buffer somewhere. The recommendation for ensuring this\nbit has taken effect on the device is to perform a read back to force it to\nmake it all the way to the device. This is documented in device-io.rst and\na talk by Will Deacon on this can be seen over here:\n\n    https://youtu.be/i6DayghhA8Q?si=MiyxB5cKJXSaoc01&t=1678\n\nBut, there's really no reason to even ensure completion before\ncontinuing. The only requirement here is that this write is ordered to this\nendpoint (which readl()/writel() guarantees already). For that reason the\nmb() can be dropped altogether without anything forcing completion.\n\nFixes: 9c46b8676271 (\"scsi: ufs-qcom: dump additional testbus registers\")\nSigned-off-by: Andrew Halaney <ahalaney@redhat.com>\nLink: https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-3-181252004586@redhat.com\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "9c46b8676271 (\"scsi: ufs-qcom: dump additional testbus registers\")"
+   ],
+   "signed_off_by": [
+    "Andrew Halaney <ahalaney@redhat.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-3-181252004586@redhat.com"
+   ],
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "9c46b8676271",
+    "subject": "scsi: ufs-qcom: dump additional testbus registers",
+    "sha": "9c46b8676271857e7580f120cb6f8eefa7239ff4",
+    "introduced_in": "v4.11"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-3-181252004586@redhat.com",
+  "series_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-181252004586@redhat.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 5,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/95d26dda90df.diff",
+  "patch_bytes": 468
+ },
+ {
+  "sha": "823150ecf04f958213cf3bf162187cd1a91c885c",
+  "release": "v6.10",
+  "author": {
+   "name": "Andrew Halaney",
+   "email": "ahalaney@redhat.com"
+  },
+  "author_date": "2024-03-29T15:46:46-05:00",
+  "commit_date": "2024-04-05T21:06:29-04:00",
+  "subject": "scsi: ufs: qcom: Perform read back after writing unipro mode",
+  "body": "Currently, the QUNIPRO_SEL bit is written to and then an mb() is used to\nensure that completes before continuing.\n\nmb() ensures that the write completes, but completion doesn't mean that it\nisn't stored in a buffer somewhere. The recommendation for ensuring this\nbit has taken effect on the device is to perform a read back to force it to\nmake it all the way to the device. This is documented in device-io.rst and\na talk by Will Deacon on this can be seen over here:\n\n    https://youtu.be/i6DayghhA8Q?si=MiyxB5cKJXSaoc01&t=1678\n\nBut, there's really no reason to even ensure completion before\ncontinuing. The only requirement here is that this write is ordered to this\nendpoint (which readl()/writel() guarantees already). For that reason the\nmb() can be dropped altogether without anything forcing completion.\n\nFixes: f06fcc7155dc (\"scsi: ufs-qcom: add QUniPro hardware support and power optimizations\")\nSigned-off-by: Andrew Halaney <ahalaney@redhat.com>\nLink: https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-4-181252004586@redhat.com\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "f06fcc7155dc (\"scsi: ufs-qcom: add QUniPro hardware support and power optimizations\")"
+   ],
+   "signed_off_by": [
+    "Andrew Halaney <ahalaney@redhat.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-4-181252004586@redhat.com"
+   ],
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "f06fcc7155dc",
+    "subject": "scsi: ufs-qcom: add QUniPro hardware support and power optimizations",
+    "sha": "f06fcc7155dcbcd9b697d499595a2c1a3945bda2",
+    "introduced_in": "v4.4"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-4-181252004586@redhat.com",
+  "series_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-181252004586@redhat.com",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 3,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/823150ecf04f.diff",
+  "patch_bytes": 447
+ },
+ {
+  "sha": "d9488511b3ac7eb48a91bc5eded7027525525e03",
+  "release": "v6.10",
+  "author": {
+   "name": "Andrew Halaney",
+   "email": "ahalaney@redhat.com"
+  },
+  "author_date": "2024-03-29T15:46:47-05:00",
+  "commit_date": "2024-04-05T21:06:29-04:00",
+  "subject": "scsi: ufs: qcom: Perform read back after writing CGC enable",
+  "body": "Currently, the CGC enable bit is written and then an mb() is used to ensure\nthat completes before continuing.\n\nmb() ensures that the write completes, but completion doesn't mean that it\nisn't stored in a buffer somewhere. The recommendation for ensuring this\nbit has taken effect on the device is to perform a read back to force it to\nmake it all the way to the device. This is documented in device-io.rst and\na talk by Will Deacon on this can be seen over here:\n\n    https://youtu.be/i6DayghhA8Q?si=MiyxB5cKJXSaoc01&t=1678\n\nLet's do that to ensure the bit hits the device. Because the mb()'s purpose\nwasn't to add extra ordering (on top of the ordering guaranteed by\nwritel()/readl()), it can safely be removed.\n\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nFixes: 81c0fc51b7a7 (\"ufs-qcom: add support for Qualcomm Technologies Inc platforms\")\nSigned-off-by: Andrew Halaney <ahalaney@redhat.com>\nLink: https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-5-181252004586@redhat.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "fixes": [
+    "81c0fc51b7a7 (\"ufs-qcom: add support for Qualcomm Technologies Inc platforms\")"
+   ],
+   "signed_off_by": [
+    "Andrew Halaney <ahalaney@redhat.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-5-181252004586@redhat.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "81c0fc51b7a7",
+    "subject": "ufs-qcom: add support for Qualcomm Technologies Inc platforms",
+    "sha": "81c0fc51b7a790ebe05a35de2c9176bd2f5bfe46",
+    "introduced_in": "v4.0"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-5-181252004586@redhat.com",
+  "series_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-181252004586@redhat.com",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d9488511b3ac.diff",
+  "patch_bytes": 463
+ },
+ {
+  "sha": "b715c55daf598aac8fa339048e4ca8a0916b332e",
+  "release": "v6.10",
+  "author": {
+   "name": "Andrew Halaney",
+   "email": "ahalaney@redhat.com"
+  },
+  "author_date": "2024-03-29T15:46:48-05:00",
+  "commit_date": "2024-04-05T21:06:29-04:00",
+  "subject": "scsi: ufs: cdns-pltfrm: Perform read back after writing HCLKDIV",
+  "body": "Currently, HCLKDIV is written to and then completed with an mb().\n\nmb() ensures that the write completes, but completion doesn't mean that it\nisn't stored in a buffer somewhere. The recommendation for ensuring this\nbit has taken effect on the device is to perform a read back to force it to\nmake it all the way to the device. This is documented in device-io.rst and\na talk by Will Deacon on this can be seen over here:\n\n    https://youtu.be/i6DayghhA8Q?si=MiyxB5cKJXSaoc01&t=1678\n\nLet's do that to ensure the bit hits the device. Because the mb()'s purpose\nwasn't to add extra ordering (on top of the ordering guaranteed by\nwritel()/readl()), it can safely be removed.\n\nFixes: d90996dae8e4 (\"scsi: ufs: Add UFS platform driver for Cadence UFS\")\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Andrew Halaney <ahalaney@redhat.com>\nLink: https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-6-181252004586@redhat.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "d90996dae8e4 (\"scsi: ufs: Add UFS platform driver for Cadence UFS\")"
+   ],
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Andrew Halaney <ahalaney@redhat.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-6-181252004586@redhat.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "d90996dae8e4",
+    "subject": "scsi: ufs: Add UFS platform driver for Cadence UFS",
+    "sha": "d90996dae8e48e042bd9fbfc11c73504a19a6e68",
+    "introduced_in": "v5.0"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-6-181252004586@redhat.com",
+  "series_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-181252004586@redhat.com",
+  "series_index": 6,
+  "files": [
+   {
+    "path": "drivers/ufs/host/cdns-pltfrm.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "cdns"
+   }
+  ],
+  "area": "host",
+  "vendor": "cdns",
+  "vendors": [
+   "cdns"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b715c55daf59.diff",
+  "patch_bytes": 435
+ },
+ {
+  "sha": "408e28086f1c7a6423efc79926a43d7001902fae",
+  "release": "v6.10",
+  "author": {
+   "name": "Andrew Halaney",
+   "email": "ahalaney@redhat.com"
+  },
+  "author_date": "2024-03-29T15:46:49-05:00",
+  "commit_date": "2024-04-05T21:06:29-04:00",
+  "subject": "scsi: ufs: core: Perform read back after writing UTP_TASK_REQ_LIST_BASE_H",
+  "body": "Currently, the UTP_TASK_REQ_LIST_BASE_L/UTP_TASK_REQ_LIST_BASE_H regs are\nwritten to and then completed with an mb().\n\nmb() ensures that the write completes, but completion doesn't mean that it\nisn't stored in a buffer somewhere. The recommendation for ensuring these\nbits have taken effect on the device is to perform a read back to force it\nto make it all the way to the device. This is documented in device-io.rst\nand a talk by Will Deacon on this can be seen over here:\n\n    https://youtu.be/i6DayghhA8Q?si=MiyxB5cKJXSaoc01&t=1678\n\nLet's do that to ensure the bits hit the device. Because the mb()'s purpose\nwasn't to add extra ordering (on top of the ordering guaranteed by\nwritel()/readl()), it can safely be removed.\n\nFixes: 88441a8d355d (\"scsi: ufs: core: Add hibernation callbacks\")\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Andrew Halaney <ahalaney@redhat.com>\nLink: https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-7-181252004586@redhat.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "88441a8d355d (\"scsi: ufs: core: Add hibernation callbacks\")"
+   ],
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "signed_off_by": [
+    "Andrew Halaney <ahalaney@redhat.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-7-181252004586@redhat.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "88441a8d355d",
+    "subject": "scsi: ufs: core: Add hibernation callbacks",
+    "sha": "88441a8d355dcbb86aa69f82934ae1ff0fccfa83",
+    "introduced_in": "v6.3"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-7-181252004586@redhat.com",
+  "series_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-181252004586@redhat.com",
+  "series_index": 7,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/408e28086f1c.diff",
+  "patch_bytes": 516
+ },
+ {
+  "sha": "e4a628877119bd40164a651d20321247b6f94a8b",
+  "release": "v6.10",
+  "author": {
+   "name": "Andrew Halaney",
+   "email": "ahalaney@redhat.com"
+  },
+  "author_date": "2024-03-29T15:46:50-05:00",
+  "commit_date": "2024-04-05T21:06:29-04:00",
+  "subject": "scsi: ufs: core: Perform read back after disabling interrupts",
+  "body": "Currently, interrupts are cleared and disabled prior to registering the\ninterrupt. An mb() is used to complete the clear/disable writes before the\ninterrupt is registered.\n\nmb() ensures that the write completes, but completion doesn't mean that it\nisn't stored in a buffer somewhere. The recommendation for ensuring these\nbits have taken effect on the device is to perform a read back to force it\nto make it all the way to the device. This is documented in device-io.rst\nand a talk by Will Deacon on this can be seen over here:\n\n    https://youtu.be/i6DayghhA8Q?si=MiyxB5cKJXSaoc01&t=1678\n\nLet's do that to ensure these bits hit the device. Because the mb()'s\npurpose wasn't to add extra ordering (on top of the ordering guaranteed by\nwritel()/readl()), it can safely be removed.\n\nFixes: 199ef13cac7d (\"scsi: ufs: avoid spurious UFS host controller interrupts\")\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Andrew Halaney <ahalaney@redhat.com>\nLink: https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-8-181252004586@redhat.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "199ef13cac7d (\"scsi: ufs: avoid spurious UFS host controller interrupts\")"
+   ],
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "signed_off_by": [
+    "Andrew Halaney <ahalaney@redhat.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-8-181252004586@redhat.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "199ef13cac7d",
+    "subject": "scsi: ufs: avoid spurious UFS host controller interrupts",
+    "sha": "199ef13cac7d43f20d92ca077a25c3cbf91427ca",
+    "introduced_in": "v4.6"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-8-181252004586@redhat.com",
+  "series_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-181252004586@redhat.com",
+  "series_index": 8,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/e4a628877119.diff",
+  "patch_bytes": 572
+ },
+ {
+  "sha": "4bf3855497b60765ca03b983d064b25e99b97657",
+  "release": "v6.10",
+  "author": {
+   "name": "Andrew Halaney",
+   "email": "ahalaney@redhat.com"
+  },
+  "author_date": "2024-03-29T15:46:51-05:00",
+  "commit_date": "2024-04-05T21:06:29-04:00",
+  "subject": "scsi: ufs: core: Perform read back after disabling UIC_COMMAND_COMPL",
+  "body": "Currently, the UIC_COMMAND_COMPL interrupt is disabled and a wmb() is used\nto complete the register write before any following writes.\n\nwmb() ensures the writes complete in that order, but completion doesn't\nmean that it isn't stored in a buffer somewhere. The recommendation for\nensuring this bit has taken effect on the device is to perform a read back\nto force it to make it all the way to the device. This is documented in\ndevice-io.rst and a talk by Will Deacon on this can be seen over here:\n\n    https://youtu.be/i6DayghhA8Q?si=MiyxB5cKJXSaoc01&t=1678\n\nLet's do that to ensure the bit hits the device. Because the wmb()'s\npurpose wasn't to add extra ordering (on top of the ordering guaranteed by\nwritel()/readl()), it can safely be removed.\n\nFixes: d75f7fe495cf (\"scsi: ufs: reduce the interrupts for power mode change requests\")\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Andrew Halaney <ahalaney@redhat.com>\nLink: https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-9-181252004586@redhat.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "d75f7fe495cf (\"scsi: ufs: reduce the interrupts for power mode change requests\")"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Can Guo <quic_cang@quicinc.com>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ],
+   "signed_off_by": [
+    "Andrew Halaney <ahalaney@redhat.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-9-181252004586@redhat.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "d75f7fe495cf",
+    "subject": "scsi: ufs: reduce the interrupts for power mode change requests",
+    "sha": "d75f7fe495cf57501c83b8ea5d0d799d2c2ff841",
+    "introduced_in": "v4.6"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-9-181252004586@redhat.com",
+  "series_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-181252004586@redhat.com",
+  "series_index": 9,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/4bf3855497b6.diff",
+  "patch_bytes": 509
+ },
+ {
+  "sha": "d3fb9a24a6023c744d498f5b4d575517726a42b4",
+  "release": "v6.10",
+  "author": {
+   "name": "Andrew Halaney",
+   "email": "ahalaney@redhat.com"
+  },
+  "author_date": "2024-03-29T15:46:52-05:00",
+  "commit_date": "2024-04-05T21:06:29-04:00",
+  "subject": "scsi: ufs: core: Remove unnecessary wmb() after ringing doorbell",
+  "body": "Currently, the doorbell is written to and a wmb() is used to commit it\nimmediately.\n\nwmb() ensures that the write completes before following writes occur, but\ncompletion doesn't mean that it isn't stored in a buffer somewhere.  The\nrecommendation for ensuring this bit has taken effect on the device is to\nperform a read back to force it to make it all the way to the device. This\nis documented in device-io.rst and a talk by Will Deacon on this can be\nseen over here:\n\n    https://youtu.be/i6DayghhA8Q?si=MiyxB5cKJXSaoc01&t=1678\n\nBut, completion and taking effect aren't necessary to guarantee here.\n\nThere's already other examples of the doorbell being rung that don't do\nthis. The writel() of the doorbell guarantees prior writes by this thread\n(to the request being setup for example) complete prior to the ringing of\nthe doorbell, and the following wait_for_completion_io_timeout() doesn't\nrequire any special memory barriers either.\n\nWith that in mind, just remove the wmb() altogether here.\n\nFixes: ad1a1b9cd67a (\"scsi: ufs: commit descriptors before setting the doorbell\")\nSigned-off-by: Andrew Halaney <ahalaney@redhat.com>\nLink: https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-10-181252004586@redhat.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "ad1a1b9cd67a (\"scsi: ufs: commit descriptors before setting the doorbell\")"
+   ],
+   "signed_off_by": [
+    "Andrew Halaney <ahalaney@redhat.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-10-181252004586@redhat.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "ad1a1b9cd67a",
+    "subject": "scsi: ufs: commit descriptors before setting the doorbell",
+    "sha": "ad1a1b9cd67a4b5bee8a62454336d94f9e816c1f",
+    "introduced_in": "v4.10"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-10-181252004586@redhat.com",
+  "series_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-181252004586@redhat.com",
+  "series_index": 10,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d3fb9a24a602.diff",
+  "patch_bytes": 523
+ },
+ {
+  "sha": "356a8ce7cd5037fa0863c2ac83a35c8ebf6e0e02",
+  "release": "v6.10",
+  "author": {
+   "name": "Andrew Halaney",
+   "email": "ahalaney@redhat.com"
+  },
+  "author_date": "2024-03-29T15:46:53-05:00",
+  "commit_date": "2024-04-05T21:06:29-04:00",
+  "subject": "scsi: ufs: core: Remove unnecessary wmb() prior to writing run/stop regs",
+  "body": "Currently a wmb() is used to ensure that writes to the\nUTP_TASK_REQ_LIST_BASE* regs are completed prior to following writes to\nthe run/stop registers.\n\nwmb() ensures that the write completes, but completion doesn't mean that\nit isn't stored in a buffer somewhere. The recommendation for\nensuring the bits have taken effect on the device is to perform a read\nback to force it to make it all the way to the device. This is\ndocumented in device-io.rst and a talk by Will Deacon on this can\nbe seen over here:\n\n    https://youtu.be/i6DayghhA8Q?si=MiyxB5cKJXSaoc01&t=1678\n\nBut, none of that is necessary here. All of the writel()/readl()'s here\nare to the same endpoint, so they will be ordered. There's no subsequent\ndelay() etc that requires it to have taken effect already, so no\nreadback is necessary here.\n\nFor that reason just drop the wmb() altogether.\n\nFixes: 897efe628d7e (\"scsi: ufs: add missing memory barriers\")\nSigned-off-by: Andrew Halaney <ahalaney@redhat.com>\nLink: https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-11-181252004586@redhat.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "897efe628d7e (\"scsi: ufs: add missing memory barriers\")"
+   ],
+   "signed_off_by": [
+    "Andrew Halaney <ahalaney@redhat.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240329-ufs-reset-ensure-effect-before-delay-v5-11-181252004586@redhat.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "897efe628d7e",
+    "subject": "scsi: ufs: add missing memory barriers",
+    "sha": "897efe628d7e0da76c7b20833a7efbd6a4f082d6",
+    "introduced_in": "v4.6"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-11-181252004586@redhat.com",
+  "series_id": "20240329-ufs-reset-ensure-effect-before-delay-v5-181252004586@redhat.com",
+  "series_index": 11,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 6,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/356a8ce7cd50.diff",
+  "patch_bytes": 532
+ },
+ {
+  "sha": "f2c6d0fa197a1558f4ef50162bb87e6644af232d",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Griffin",
+   "email": "peter.griffin@linaro.org"
+  },
+  "author_date": "2024-04-04T13:25:51+01:00",
+  "commit_date": "2024-04-06T14:27:17+05:30",
+  "subject": "phy: samsung-ufs: use exynos_get_pmu_regmap_by_phandle() to obtain PMU regmap",
+  "body": "This allows us to obtain a PMU regmap that is created by the exynos-pmu\ndriver. Platforms such as gs101 require exynos-pmu created regmap to\nissue SMC calls for PMU register accesses. Existing platforms still get\na MMIO regmap as before.\n\nSigned-off-by: Peter Griffin <peter.griffin@linaro.org>\nReviewed-by: André Draszik <andre.draszik@linaro.org>\nLink: https://lore.kernel.org/r/20240404122559.898930-10-peter.griffin@linaro.org\nSigned-off-by: Vinod Koul <vkoul@kernel.org>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Griffin <peter.griffin@linaro.org>",
+    "Vinod Koul <vkoul@kernel.org>"
+   ],
+   "reviewed_by": [
+    "André Draszik <andre.draszik@linaro.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240404122559.898930-10-peter.griffin@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240404122559.898930-10-peter.griffin@linaro.org",
+  "series_id": "20240404122559.898930-peter.griffin@linaro.org",
+  "series_index": 10,
+  "files": [
+   {
+    "path": "drivers/phy/samsung/phy-samsung-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 2,
+    "area": "phy",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "phy",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/f2c6d0fa197a.diff",
+  "patch_bytes": 805
+ },
+ {
+  "sha": "a4de58a9096b471f9dc1c2bc6bfaa8aa48110c31",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Griffin",
+   "email": "peter.griffin@linaro.org"
+  },
+  "author_date": "2024-04-04T13:25:52+01:00",
+  "commit_date": "2024-04-06T14:27:17+05:30",
+  "subject": "phy: samsung-ufs: ufs: Add SoC callbacks for calibration and clk data recovery",
+  "body": "Some SoCs like gs101 don't fit in well with the existing pll lock and\nclock data recovery (CDR) callback used by existing exynos platforms.\n\nAllow SoCs to specifify and implement their own calibration and CDR\nfunctions that can be called by the generic samsung phy code.\n\nSigned-off-by: Peter Griffin <peter.griffin@linaro.org>\nAcked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nLink: https://lore.kernel.org/r/20240404122559.898930-11-peter.griffin@linaro.org\nSigned-off-by: Vinod Koul <vkoul@kernel.org>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Griffin <peter.griffin@linaro.org>",
+    "Vinod Koul <vkoul@kernel.org>"
+   ],
+   "acked_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240404122559.898930-11-peter.griffin@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240404122559.898930-11-peter.griffin@linaro.org",
+  "series_id": "20240404122559.898930-peter.griffin@linaro.org",
+  "series_index": 11,
+  "files": [
+   {
+    "path": "drivers/phy/samsung/phy-exynos7-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/phy/samsung/phy-exynosautov9-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/phy/samsung/phy-fsd-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/phy/samsung/phy-samsung-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 10,
+    "deleted": 3,
+    "area": "phy",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/phy/samsung/phy-samsung-ufs.h",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "phy",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/a4de58a9096b.diff",
+  "patch_bytes": 3534
+ },
+ {
+  "sha": "c1cf725db1065153459f0deb69bd4d497a5fd183",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Griffin",
+   "email": "peter.griffin@linaro.org"
+  },
+  "author_date": "2024-04-04T13:25:53+01:00",
+  "commit_date": "2024-04-06T14:27:17+05:30",
+  "subject": "phy: samsung-ufs: ufs: Add support for gs101 UFS phy tuning",
+  "body": "Add the m-phy tuning values for gs101 UFS phy and SoC callbacks\ngs101_phy_wait_for_calibration() and gs101_phy_wait_for_cdr_lock().\n\nSigned-off-by: Peter Griffin <peter.griffin@linaro.org>\nAcked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nLink: https://lore.kernel.org/r/20240404122559.898930-12-peter.griffin@linaro.org\nSigned-off-by: Vinod Koul <vkoul@kernel.org>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Griffin <peter.griffin@linaro.org>",
+    "Vinod Koul <vkoul@kernel.org>"
+   ],
+   "acked_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240404122559.898930-12-peter.griffin@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240404122559.898930-12-peter.griffin@linaro.org",
+  "series_id": "20240404122559.898930-peter.griffin@linaro.org",
+  "series_index": 12,
+  "files": [
+   {
+    "path": "drivers/phy/samsung/Makefile",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/phy/samsung/phy-gs101-ufs.c",
+    "status": "A",
+    "in_track": true,
+    "added": 182,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/phy/samsung/phy-samsung-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/phy/samsung/phy-samsung-ufs.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "phy",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/c1cf725db106.diff",
+  "patch_bytes": 8154
+ },
+ {
+  "sha": "33507b3964f136ea1592718cb81885c8f9354f65",
+  "release": "v6.10",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2024-04-03T18:50:04+05:30",
+  "commit_date": "2024-04-08T15:08:45-04:00",
+  "subject": "scsi: ufs: qcom: Add sanity checks for gear/lane values during ICC scaling",
+  "body": "Let's add the checks to warn the user if the ICC scaling is not supported\nfor the gear/lane values and also fallback to the max value if that's the\ncase.\n\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20240403-ufs-icc-fix-v2-2-958412a5eb45@linaro.org\nReviewed-by: Andrew Halaney <ahalaney@redhat.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240403-ufs-icc-fix-v2-2-958412a5eb45@linaro.org"
+   ],
+   "reviewed_by": [
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240403-ufs-icc-fix-v2-2-958412a5eb45@linaro.org",
+  "series_id": "20240403-ufs-icc-fix-v2-958412a5eb45@linaro.org",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 10,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/33507b3964f1.diff",
+  "patch_bytes": 885
+ },
+ {
+  "sha": "4373d2ecca7fa7ad04aa9c371c80049bafec2610",
+  "release": "v6.10",
+  "author": {
+   "name": "Christoph Hellwig",
+   "email": "hch@lst.de"
+  },
+  "author_date": "2024-04-09T16:37:27+02:00",
+  "commit_date": "2024-04-11T21:37:48-04:00",
+  "subject": "scsi: bsg: Pass queue_limits to bsg_setup_queue()",
+  "body": "This allows bsg_setup_queue() to pass them to blk_mq_alloc_queue() and thus\nset up the limits at queue allocation time.\n\nSigned-off-by: Christoph Hellwig <hch@lst.de>\nLink: https://lore.kernel.org/r/20240409143748.980206-3-hch@lst.de\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: John Garry <john.g.garry@oracle.com>\nReviewed-by: Damien Le Moal <dlemoal@kernel.org>\nReviewed-by: Hannes Reinecke <hare@suse.de>\nReviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Christoph Hellwig <hch@lst.de>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240409143748.980206-3-hch@lst.de"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "John Garry <john.g.garry@oracle.com>",
+    "Damien Le Moal <dlemoal@kernel.org>",
+    "Hannes Reinecke <hare@suse.de>",
+    "Johannes Thumshirn <johannes.thumshirn@wdc.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240409143748.980206-3-hch@lst.de",
+  "series_id": "20240409143748.980206-hch@lst.de",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "block/bsg-lib.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/mpi3mr/mpi3mr_app.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_transport_fc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_transport_iscsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_transport_sas.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ufs/core/ufs_bsg.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/linux/bsg-lib.h",
+    "status": "M",
+    "in_track": false
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/4373d2ecca7f.diff",
+  "patch_bytes": 476
+ },
+ {
+  "sha": "67144d3c58b4256cc15ebad2c90c0a283e707aa1",
+  "release": "v6.10",
+  "author": {
+   "name": "Christoph Hellwig",
+   "email": "hch@lst.de"
+  },
+  "author_date": "2024-04-09T16:37:33+02:00",
+  "commit_date": "2024-04-11T21:37:49-04:00",
+  "subject": "scsi: ufs: ufs-exynos: Move setting the the DMA alignment to the init method",
+  "body": "Use the SCSI host's dma_alignment field and set it in ->init and remove the\nnow unused config_scsi_dev method.\n\nSigned-off-by: Christoph Hellwig <hch@lst.de>\nLink: https://lore.kernel.org/r/20240409143748.980206-9-hch@lst.de\nReviewed-by: Alim Akhtar <alim.akhtar@samsung.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Damien Le Moal <dlemoal@kernel.org>\nReviewed-by: Hannes Reinecke <hare@suse.de>\nReviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Christoph Hellwig <hch@lst.de>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240409143748.980206-9-hch@lst.de"
+   ],
+   "reviewed_by": [
+    "Alim Akhtar <alim.akhtar@samsung.com>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Damien Le Moal <dlemoal@kernel.org>",
+    "Hannes Reinecke <hare@suse.de>",
+    "Johannes Thumshirn <johannes.thumshirn@wdc.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240409143748.980206-9-hch@lst.de",
+  "series_id": "20240409143748.980206-hch@lst.de",
+  "series_index": 9,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufs-exynos.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 6,
+    "area": "host",
+    "vendor": "exynos"
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/67144d3c58b4.diff",
+  "patch_bytes": 1860
+ },
+ {
+  "sha": "a33a502d50fddc85e8d5072cf39ff8fe19ba3025",
+  "release": "v6.10",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2024-04-10T21:37:19+03:00",
+  "commit_date": "2024-04-11T21:50:13-04:00",
+  "subject": "scsi: ufs: Remove support for old UFSHCI versions",
+  "body": "UFS spec version 2.1 was published more than 10 years ago. It is\nvanishingly unlikely that even there are out there platforms that uses\nearlier host controllers, let alone that those ancient platforms will ever\nrun a V6.10 kernel.  To be extra cautious, leave out removal of UFSHCI 2.0\nsupport from this patch, and just remove support of host controllers prior\nto UFS2.0.\n\nThis patch removes some legacy tuning calls that no longer apply.\n\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20240410183720.908-2-avri.altman@wdc.com\nAcked-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240410183720.908-2-avri.altman@wdc.com"
+   ],
+   "acked_by": [
+    "Bean Huo <beanhuo@micron.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240410183720.908-2-avri.altman@wdc.com",
+  "series_id": "20240410183720.908-avri.altman@wdc.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 13,
+    "deleted": 145,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 2,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshci.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 12,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/a33a502d50fd.diff",
+  "patch_bytes": 10593
+ },
+ {
+  "sha": "13c28be58c2bdb12e554e01b0e35621060068b11",
+  "release": "v6.10",
+  "author": {
+   "name": "SEO HOYOUNG",
+   "email": "hy50.seo@samsung.com"
+  },
+  "author_date": "2024-04-11T16:14:44+09:00",
+  "commit_date": "2024-04-11T21:54:22-04:00",
+  "subject": "scsi: ufs: core: Changing the status to check inflight",
+  "body": "ufshcd_cmd_inflight() is used to check whether or not a command is in\nprogress.  Make it skip commands that have already completed by changing\nthe !blk_mq_request_started(rq) check into blk_mq_rq_state(rq) !=\nMQ_RQ_IN_FLIGHT.  We cannot rely on lrbp->cmd since lrbp->cmd is not\ncleared when a command completes.\n\nLink: https://lore.kernel.org/linux-scsi/20230517223157.1068210-3-bvanassche@acm.org/\nSigned-off-by: SEO HOYOUNG <hy50.seo@samsung.com>\nLink: https://lore.kernel.org/r/20240411071444.51873-1-hy50.seo@samsung.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "link": [
+    "https://lore.kernel.org/linux-scsi/20230517223157.1068210-3-bvanassche@acm.org/",
+    "https://lore.kernel.org/r/20240411071444.51873-1-hy50.seo@samsung.com"
+   ],
+   "signed_off_by": [
+    "SEO HOYOUNG <hy50.seo@samsung.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230517223157.1068210-3-bvanassche@acm.org",
+  "series_id": "20230517223157.1068210-bvanassche@acm.org",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 10,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/13c28be58c2b.diff",
+  "patch_bytes": 539
+ },
+ {
+  "sha": "2810702f2cbc5135f97e381edbdff2553e257ca5",
+  "release": "v6.10",
+  "author": {
+   "name": "Will McVicker",
+   "email": "willmcvicker@google.com"
+  },
+  "author_date": "2024-04-09T13:22:02-07:00",
+  "commit_date": "2024-04-11T21:56:11-04:00",
+  "subject": "scsi: ufs: exynos: Support module autoloading",
+  "body": "Export the module alias information using the MODULE_DEVICE_TABLE() macro\nin order to support auto-loading this module for devices that support it.\n\n$ modinfo -F alias out/linux/drivers/ufs/host/ufs-exynos.ko\nof:N*T*Ctesla,fsd-ufsC*\nof:N*T*Ctesla,fsd-ufs\nof:N*T*Csamsung,exynosautov9-ufs-vhC*\nof:N*T*Csamsung,exynosautov9-ufs-vh\nof:N*T*Csamsung,exynosautov9-ufsC*\nof:N*T*Csamsung,exynosautov9-ufs\nof:N*T*Csamsung,exynos7-ufsC*\nof:N*T*Csamsung,exynos7-ufs\n\nSigned-off-by: Will McVicker <willmcvicker@google.com>\nLink: https://lore.kernel.org/r/20240409202203.1308163-1-willmcvicker@google.com\nReviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Will McVicker <willmcvicker@google.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240409202203.1308163-1-willmcvicker@google.com"
+   ],
+   "reviewed_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240409202203.1308163-1-willmcvicker@google.com",
+  "series_id": "20240409202203.1308163-willmcvicker@google.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-exynos.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "host",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/2810702f2cbc.diff",
+  "patch_bytes": 486
+ },
+ {
+  "sha": "a6584df2fd51bc0d1611dd0fc9c48cfca3fd68c7",
+  "release": "v6.10",
+  "author": {
+   "name": "Krzysztof Kozlowski",
+   "email": "krzysztof.kozlowski@linaro.org"
+  },
+  "author_date": "2024-04-09T22:39:54+02:00",
+  "commit_date": "2024-04-11T21:57:15-04:00",
+  "subject": "scsi: ufs: mediatek: Fix module autoloading",
+  "body": "Add MODULE_DEVICE_TABLE() so the module can be properly autoloaded based on\nthe alias from of_device_id table.\n\nCc: Will McVicker <willmcvicker@google.com>\nSigned-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nLink: https://lore.kernel.org/r/20240409203954.80484-1-krzysztof.kozlowski@linaro.org\nReviewed-by: Will McVicker <willmcvicker@google.com>\nReviewed-by: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "cc": [
+    "Will McVicker <willmcvicker@google.com>"
+   ],
+   "signed_off_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240409203954.80484-1-krzysztof.kozlowski@linaro.org"
+   ],
+   "reviewed_by": [
+    "Will McVicker <willmcvicker@google.com>",
+    "AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240409203954.80484-1-krzysztof.kozlowski@linaro.org",
+  "series_id": "20240409203954.80484-krzysztof.kozlowski@linaro.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/a6584df2fd51.diff",
+  "patch_bytes": 400
+ },
+ {
+  "sha": "b9251e64a96f87441694d41dbe98ee9349950fe7",
+  "release": "v6.10",
+  "author": {
+   "name": "Neil Armstrong",
+   "email": "neil.armstrong@linaro.org"
+  },
+  "author_date": "2024-04-10T17:39:40+02:00",
+  "commit_date": "2024-04-12T15:14:08+05:30",
+  "subject": "phy: qcom: qmp-ufs: update SM8650 tables for Gear 4 & 5",
+  "body": "Update the SM8650 UFS PHY init tables to support Gear 4 and Gear 5\nusing the overlays setup (only supported Gear 5 before), and sync\nback with the latest Qualcomm recommended values.\n\nThe new recommended values allow a solid 50% bump in sequential\nread/write benchmarks on the SM8650 QRD & HDK reference boards.\n\nSigned-off-by: Neil Armstrong <neil.armstrong@linaro.org>\nReviewed-by: Konrad Dybcio <konrad.dybcio@linaro.org>\nLink: https://lore.kernel.org/r/20240410-topic-sm8650-upstream-ufs-g5-v1-1-5527c44b37e6@linaro.org\nSigned-off-by: Vinod Koul <vkoul@kernel.org>",
+  "trailers": {
+   "signed_off_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org>",
+    "Vinod Koul <vkoul@kernel.org>"
+   ],
+   "reviewed_by": [
+    "Konrad Dybcio <konrad.dybcio@linaro.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240410-topic-sm8650-upstream-ufs-g5-v1-1-5527c44b37e6@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240410-topic-sm8650-upstream-ufs-g5-v1-1-5527c44b37e6@linaro.org",
+  "series_id": "20240410-topic-sm8650-upstream-ufs-g5-v1-5527c44b37e6@linaro.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-pcs-ufs-v6.h",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-qserdes-txrx-ufs-v6.h",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 58,
+    "deleted": 15,
+    "area": "phy",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "phy",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b9251e64a96f.diff",
+  "patch_bytes": 8815
+ },
+ {
+  "sha": "3c5d0dce8ce0a2781ac306b9ad1492b005ecbab5",
+  "release": "v6.10",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2024-04-09T17:07:45-07:00",
+  "commit_date": "2024-04-24T21:01:40-04:00",
+  "subject": "scsi: ufs: core: mcq: Fix ufshcd_mcq_sqe_search()",
+  "body": "Fix the calculation of the utrd pointer. This patch addresses the following\nCoverity complaint:\n\nCID 1538170: (#1 of 1): Extra sizeof expression (SIZEOF_MISMATCH)\nsuspicious_pointer_arithmetic: Adding sq_head_slot * 32UL /* sizeof (struct\nutp_transfer_req_desc) */ to pointer hwq->sqe_base_addr of type struct\nutp_transfer_req_desc * is suspicious because adding an integral value to\nthis pointer automatically scales that value by the size, 32 bytes, of the\npointed-to type, struct utp_transfer_req_desc. Most likely, the\nmultiplication by sizeof (struct utp_transfer_req_desc) in this expression\nis extraneous and should be eliminated.\n\nCc: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nCc: Stanley Chu <stanley.chu@mediatek.com>\nCc: Can Guo <quic_cang@quicinc.com>\nFixes: 8d7290348992 (\"scsi: ufs: mcq: Add supporting functions for MCQ abort\")\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20240410000751.1047758-1-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "cc": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "fixes": [
+    "8d7290348992 (\"scsi: ufs: mcq: Add supporting functions for MCQ abort\")"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240410000751.1047758-1-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "8d7290348992",
+    "subject": "scsi: ufs: mcq: Add supporting functions for MCQ abort",
+    "sha": "8d7290348992f27242dd6a696fa2eede709f0b14",
+    "introduced_in": "v6.5"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240410000751.1047758-1-bvanassche@acm.org",
+  "series_id": "20240410000751.1047758-bvanassche@acm.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/3c5d0dce8ce0.diff",
+  "patch_bytes": 611
+ },
+ {
+  "sha": "de37677ef17d2a90fe99ea8f492e5c221d5bb627",
+  "release": "v6.10",
+  "author": {
+   "name": "Randy Dunlap",
+   "email": "rdunlap@infradead.org"
+  },
+  "author_date": "2024-04-23T22:53:16-07:00",
+  "commit_date": "2024-04-24T21:30:16-04:00",
+  "subject": "scsi: ufs: bsg: Fix all kernel-doc warnings",
+  "body": "In struct utp_upiu_query_v4_0, add description for @osf3 and mark the\n@reserved field as private so that no description is needed for it.\n\nIn struct utp_upiu_cmd, use the correct struct member name to eliminate a\nkernel-doc warning.\n\nSigned-off-by: Randy Dunlap <rdunlap@infradead.org>\nLink: https://lore.kernel.org/r/20240424055316.1384-1-rdunlap@infradead.org\nCc: James E.J. Bottomley <James.Bottomley@HansenPartnership.com>\nCc: Martin K. Petersen <martin.petersen@oracle.com>\nCc: Alim Akhtar <alim.akhtar@samsung.com>\nCc: Avri Altman <avri.altman@wdc.com>\nCc: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Randy Dunlap <rdunlap@infradead.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240424055316.1384-1-rdunlap@infradead.org"
+   ],
+   "cc": [
+    "James E.J. Bottomley <James.Bottomley@HansenPartnership.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>",
+    "Alim Akhtar <alim.akhtar@samsung.com>",
+    "Avri Altman <avri.altman@wdc.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240424055316.1384-1-rdunlap@infradead.org",
+  "series_id": "20240424055316.1384-rdunlap@infradead.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "include/uapi/scsi/scsi_bsg_ufs.h",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/de37677ef17d.diff",
+  "patch_bytes": 889
+ },
+ {
+  "sha": "8b19c45ae4c0480ea07ab9f33c43d0fa6ea43aa1",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Griffin",
+   "email": "peter.griffin@linaro.org"
+  },
+  "author_date": "2024-04-26T11:41:28+01:00",
+  "commit_date": "2024-05-04T17:24:28+05:30",
+  "subject": "phy: samsung-ufs: ufs: remove superfluous mfd/syscon.h header",
+  "body": "mfd/syscon.h header is no longer required since the update to\nexynos_get_pmu_regmap_by_phandle() api.\n\nFixes: f2c6d0fa197a (\"phy: samsung-ufs: use exynos_get_pmu_regmap_by_phandle() to obtain PMU regmap\")\nSigned-off-by: Peter Griffin <peter.griffin@linaro.org>\nLink: https://lore.kernel.org/r/20240426104129.2211949-2-peter.griffin@linaro.org\nSigned-off-by: Vinod Koul <vkoul@kernel.org>",
+  "trailers": {
+   "fixes": [
+    "f2c6d0fa197a (\"phy: samsung-ufs: use exynos_get_pmu_regmap_by_phandle() to obtain PMU regmap\")"
+   ],
+   "signed_off_by": [
+    "Peter Griffin <peter.griffin@linaro.org>",
+    "Vinod Koul <vkoul@kernel.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240426104129.2211949-2-peter.griffin@linaro.org"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "f2c6d0fa197a",
+    "subject": "phy: samsung-ufs: use exynos_get_pmu_regmap_by_phandle() to obtain PMU regmap",
+    "sha": "f2c6d0fa197a1558f4ef50162bb87e6644af232d",
+    "introduced_in": "v6.10"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240426104129.2211949-2-peter.griffin@linaro.org",
+  "series_id": "20240426104129.2211949-peter.griffin@linaro.org",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/phy/samsung/phy-samsung-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "phy",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "phy",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/8b19c45ae4c0.diff",
+  "patch_bytes": 431
+ },
+ {
+  "sha": "2ff6365e2271282bea155541e5e3deb9d9ff1572",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Griffin",
+   "email": "peter.griffin@linaro.org"
+  },
+  "author_date": "2024-04-26T11:41:29+01:00",
+  "commit_date": "2024-05-04T17:24:28+05:30",
+  "subject": "phy: samsung-ufs: ufs: exit on first reported error",
+  "body": "To preserve the err value, exit the loop immediately if an error\nis returned.\n\nFixes: f2c6d0fa197a (\"phy: samsung-ufs: use exynos_get_pmu_regmap_by_phandle() to obtain PMU regmap\")\nSigned-off-by: Peter Griffin <peter.griffin@linaro.org>\nLink: https://lore.kernel.org/r/20240426104129.2211949-3-peter.griffin@linaro.org\nSigned-off-by: Vinod Koul <vkoul@kernel.org>",
+  "trailers": {
+   "fixes": [
+    "f2c6d0fa197a (\"phy: samsung-ufs: use exynos_get_pmu_regmap_by_phandle() to obtain PMU regmap\")"
+   ],
+   "signed_off_by": [
+    "Peter Griffin <peter.griffin@linaro.org>",
+    "Vinod Koul <vkoul@kernel.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240426104129.2211949-3-peter.griffin@linaro.org"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "f2c6d0fa197a",
+    "subject": "phy: samsung-ufs: use exynos_get_pmu_regmap_by_phandle() to obtain PMU regmap",
+    "sha": "f2c6d0fa197a1558f4ef50162bb87e6644af232d",
+    "introduced_in": "v6.10"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240426104129.2211949-3-peter.griffin@linaro.org",
+  "series_id": "20240426104129.2211949-peter.griffin@linaro.org",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/phy/samsung/phy-samsung-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 8,
+    "deleted": 2,
+    "area": "phy",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "phy",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/2ff6365e2271.diff",
+  "patch_bytes": 769
+ },
+ {
+  "sha": "438e23b61cd42c874053dd525e10781c507d71dd",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Griffin",
+   "email": "peter.griffin@linaro.org"
+  },
+  "author_date": "2024-04-26T13:19:59+01:00",
+  "commit_date": "2024-05-06T21:32:13-04:00",
+  "subject": "scsi: ufs: dt-bindings: exynos: Add gs101 compatible",
+  "body": "Add dedicated google,gs101-ufs compatible for Google Tensor gs101 SoC.\n\nSigned-off-by: Peter Griffin <peter.griffin@linaro.org>\nLink: https://lore.kernel.org/r/20240426122004.2249178-2-peter.griffin@linaro.org\nReviewed-by: Rob Herring (Arm) <robh@kernel.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Griffin <peter.griffin@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240426122004.2249178-2-peter.griffin@linaro.org"
+   ],
+   "reviewed_by": [
+    "Rob Herring (Arm) <robh@kernel.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240426122004.2249178-2-peter.griffin@linaro.org",
+  "series_id": "20240426122004.2249178-peter.griffin@linaro.org",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/samsung,exynos-ufs.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 35,
+    "deleted": 3,
+    "area": "bindings",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/438e23b61cd4.diff",
+  "patch_bytes": 1659
+ },
+ {
+  "sha": "449adb00d4f7870eb07adedd34e4a4b69036ec12",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Griffin",
+   "email": "peter.griffin@linaro.org"
+  },
+  "author_date": "2024-04-26T13:20:00+01:00",
+  "commit_date": "2024-05-06T21:34:37-04:00",
+  "subject": "scsi: ufs: exynos: Add EXYNOS_UFS_OPT_UFSPR_SECURE option",
+  "body": "This option is intended to be set on platforms whose ufspr registers are\nonly accessible via smc call (such as gs101).\n\nSigned-off-by: Peter Griffin <peter.griffin@linaro.org>\nLink: https://lore.kernel.org/r/20240426122004.2249178-3-peter.griffin@linaro.org\nAcked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nTested-by: Will McVicker <willmcvicker@google.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Griffin <peter.griffin@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240426122004.2249178-3-peter.griffin@linaro.org"
+   ],
+   "acked_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>"
+   ],
+   "tested_by": [
+    "Will McVicker <willmcvicker@google.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240426122004.2249178-3-peter.griffin@linaro.org",
+  "series_id": "20240426122004.2249178-peter.griffin@linaro.org",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-exynos.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-exynos.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "host",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/449adb00d4f7.diff",
+  "patch_bytes": 966
+ },
+ {
+  "sha": "9238cad67969e7001e296eaedcdffc63fc38ab30",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Griffin",
+   "email": "peter.griffin@linaro.org"
+  },
+  "author_date": "2024-04-26T13:20:01+01:00",
+  "commit_date": "2024-05-06T21:34:37-04:00",
+  "subject": "scsi: ufs: exynos: Add EXYNOS_UFS_OPT_TIMER_TICK_SELECT option",
+  "body": "This option is intended to be set for SoCs that have HCI_V2P1_CTRL register\nand can select their tick source via IA_TICK_SEL bit.\n\nSource clock selection for timer tick\n0x0 = Bus clock (aclk)\n0x1 = Function clock (mclk)\n\nSigned-off-by: Peter Griffin <peter.griffin@linaro.org>\nLink: https://lore.kernel.org/r/20240426122004.2249178-4-peter.griffin@linaro.org\nAcked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nTested-by: Will McVicker <willmcvicker@google.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Griffin <peter.griffin@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240426122004.2249178-4-peter.griffin@linaro.org"
+   ],
+   "acked_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>"
+   ],
+   "tested_by": [
+    "Will McVicker <willmcvicker@google.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240426122004.2249178-4-peter.griffin@linaro.org",
+  "series_id": "20240426122004.2249178-peter.griffin@linaro.org",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-exynos.c",
+    "status": "M",
+    "in_track": true,
+    "added": 9,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-exynos.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "host",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/9238cad67969.diff",
+  "patch_bytes": 1384
+ },
+ {
+  "sha": "c9deb9a4f574b49bfd00be88aba470659d2db671",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Griffin",
+   "email": "peter.griffin@linaro.org"
+  },
+  "author_date": "2024-04-26T13:20:02+01:00",
+  "commit_date": "2024-05-06T21:34:37-04:00",
+  "subject": "scsi: ufs: exynos: Allow max frequencies up to 267Mhz",
+  "body": "Platforms such as Tensor gs101 the pclk frequency is 267Mhz.  Increase\nPCLK_AVAIL_MAX so we don't fail the frequency check.\n\nSigned-off-by: Peter Griffin <peter.griffin@linaro.org>\nLink: https://lore.kernel.org/r/20240426122004.2249178-5-peter.griffin@linaro.org\nAcked-by: Krzysztof Kozlowski <krzk@kernel.org>\nTested-by: Will McVicker <willmcvicker@google.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Griffin <peter.griffin@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240426122004.2249178-5-peter.griffin@linaro.org"
+   ],
+   "acked_by": [
+    "Krzysztof Kozlowski <krzk@kernel.org>"
+   ],
+   "tested_by": [
+    "Will McVicker <willmcvicker@google.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240426122004.2249178-5-peter.griffin@linaro.org",
+  "series_id": "20240426122004.2249178-peter.griffin@linaro.org",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-exynos.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "host",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/c9deb9a4f574.diff",
+  "patch_bytes": 415
+ },
+ {
+  "sha": "6f9f0d564b0411f8d86d73c7cb6b2703839e8a96",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Griffin",
+   "email": "peter.griffin@linaro.org"
+  },
+  "author_date": "2024-04-26T13:20:03+01:00",
+  "commit_date": "2024-05-06T21:34:37-04:00",
+  "subject": "scsi: ufs: exynos: Add some pa_dbg_ register offsets into drvdata",
+  "body": "This allows these registers to be at different offsets or not exist at all\non some SoCs variants.\n\nSigned-off-by: Peter Griffin <peter.griffin@linaro.org>\nLink: https://lore.kernel.org/r/20240426122004.2249178-6-peter.griffin@linaro.org\nAcked-by: Krzysztof Kozlowski <krzk@kernel.org>\nTested-by: Will McVicker <willmcvicker@google.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Griffin <peter.griffin@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240426122004.2249178-6-peter.griffin@linaro.org"
+   ],
+   "acked_by": [
+    "Krzysztof Kozlowski <krzk@kernel.org>"
+   ],
+   "tested_by": [
+    "Will McVicker <willmcvicker@google.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240426122004.2249178-6-peter.griffin@linaro.org",
+  "series_id": "20240426122004.2249178-peter.griffin@linaro.org",
+  "series_index": 6,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-exynos.c",
+    "status": "M",
+    "in_track": true,
+    "added": 26,
+    "deleted": 12,
+    "area": "host",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-exynos.h",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "host",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/6f9f0d564b04.diff",
+  "patch_bytes": 4737
+ },
+ {
+  "sha": "d11e0a318df84f2542316ec8cc0fa4034240ee66",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Griffin",
+   "email": "peter.griffin@linaro.org"
+  },
+  "author_date": "2024-04-26T13:20:04+01:00",
+  "commit_date": "2024-05-06T21:34:37-04:00",
+  "subject": "scsi: ufs: exynos: Add support for Tensor gs101 SoC",
+  "body": "Add a dedicated compatible and drv_data with associated hooks for gs101 SoC\nfound on Pixel 6.\n\nNote we make use of the previously added EXYNOS_UFS_OPT_UFSPR_SECURE\noption, to skip initialisation of UFSPR registers as these are only\naccessible via SMC call.\n\nEXYNOS_UFS_OPT_TIMER_TICK_SELECT option is also set to select tick\nsource. This has been done so as not to effect any existing platforms.\n\nDBG_OPTION_SUITE on gs101 has different address offsets to other SoCs so\nthese register offsets now come from uic_attr struct.\n\nSigned-off-by: Peter Griffin <peter.griffin@linaro.org>\nLink: https://lore.kernel.org/r/20240426122004.2249178-7-peter.griffin@linaro.org\nAcked-by: Krzysztof Kozlowski <krzk@kernel.org>\nTested-by: Will McVicker <willmcvicker@google.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Griffin <peter.griffin@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240426122004.2249178-7-peter.griffin@linaro.org"
+   ],
+   "acked_by": [
+    "Krzysztof Kozlowski <krzk@kernel.org>"
+   ],
+   "tested_by": [
+    "Will McVicker <willmcvicker@google.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240426122004.2249178-7-peter.griffin@linaro.org",
+  "series_id": "20240426122004.2249178-peter.griffin@linaro.org",
+  "series_index": 7,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-exynos.c",
+    "status": "M",
+    "in_track": true,
+    "added": 146,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-exynos.h",
+    "status": "M",
+    "in_track": true,
+    "added": 14,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "host",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d11e0a318df8.diff",
+  "patch_bytes": 8254
+ },
+ {
+  "sha": "2c92ca849fcc6ee7d0c358e9959abc9f58661aea",
+  "release": "v6.10",
+  "author": {
+   "name": "Steven Rostedt (Google)",
+   "email": "rostedt@goodmis.org"
+  },
+  "author_date": "2024-05-16T13:34:54-04:00",
+  "commit_date": "2024-05-22T20:14:47-04:00",
+  "subject": "tracing/treewide: Remove second parameter of __assign_str()",
+  "body": "With the rework of how the __string() handles dynamic strings where it\nsaves off the source string in field in the helper structure[1], the\nassignment of that value to the trace event field is stored in the helper\nvalue and does not need to be passed in again.\n\nThis means that with:\n\n  __string(field, mystring)\n\nWhich use to be assigned with __assign_str(field, mystring), no longer\nneeds the second parameter and it is unused. With this, __assign_str()\nwill now only get a single parameter.\n\nThere's over 700 users of __assign_str() and because coccinelle does not\nhandle the TRACE_EVENT() macro I ended up using the following sed script:\n\n  git grep -l __assign_str | while read a ; do\n      sed -e 's/\\(__assign_str([^,]*[^ ,]\\) *,[^;]*/\\1)/' $a > /tmp/test-file;\n      mv /tmp/test-file $a;\n  done\n\nI then searched for __assign_str() that did not end with ';' as those\nwere multi line assignments that the sed script above would fail to catch.\n\nNote, the same updates will need to be done for:\n\n  __assign_str_len()\n  __assign_rel_str()\n  __assign_rel_str_len()\n\nI tested this with both an allmodconfig and an allyesconfig (build only for both).\n\n[1] https://lore.kernel.org/linux-trace-kernel/20240222211442.634192653@goodmis.org/\n\nLink: https://lore.kernel.org/linux-trace-kernel/20240516133454.681ba6a0@rorschach.local.home\n\nCc: Masami Hiramatsu <mhiramat@kernel.org>\nCc: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>\nCc: Linus Torvalds <torvalds@linux-foundation.org>\nCc: Julia Lawall <Julia.Lawall@inria.fr>\nSigned-off-by: Steven Rostedt (Google) <rostedt@goodmis.org>\nAcked-by: Jani Nikula <jani.nikula@intel.com>\nAcked-by: Christian König <christian.koenig@amd.com> for the amdgpu parts.\nAcked-by: Thomas Hellström <thomas.hellstrom@linux.intel.com> #for\nAcked-by: Rafael J. Wysocki <rafael@kernel.org> # for thermal\nAcked-by: Takashi Iwai <tiwai@suse.de>\nAcked-by: Darrick J. Wong <djwong@kernel.org>\t# xfs\nTested-by: Guenter Roeck <linux@roeck-us.net>",
+  "trailers": {
+   "cc": [
+    "Masami Hiramatsu <mhiramat@kernel.org>",
+    "Mathieu Desnoyers <mathieu.desnoyers@efficios.com>",
+    "Linus Torvalds <torvalds@linux-foundation.org>",
+    "Julia Lawall <Julia.Lawall@inria.fr>"
+   ],
+   "signed_off_by": [
+    "Steven Rostedt (Google) <rostedt@goodmis.org>"
+   ],
+   "acked_by": [
+    "Jani Nikula <jani.nikula@intel.com>",
+    "Christian König <christian.koenig@amd.com> for the amdgpu parts.",
+    "Thomas Hellström <thomas.hellstrom@linux.intel.com> #for",
+    "Rafael J. Wysocki <rafael@kernel.org> # for thermal",
+    "Takashi Iwai <tiwai@suse.de>",
+    "Darrick J. Wong <djwong@kernel.org>\t# xfs"
+   ],
+   "tested_by": [
+    "Guenter Roeck <linux@roeck-us.net>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": null,
+  "series_id": "2c92ca849fcc6ee7d0c358e9959abc9f58661aea",
+  "series_index": null,
+  "files": [
+   {
+    "path": "arch/arm64/kernel/trace-events-emulation.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/powerpc/include/asm/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/x86/kvm/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/base/regmap/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/base/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/block/rnbd/rnbd-srv-trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bus/mhi/host/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/cxl/core/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/dma-buf/sync_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/amd/amdgpu/amdgpu_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/i915/display/intel_display_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/lima/lima_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/msm/disp/dpu1/dpu_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/scheduler/gpu_scheduler_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/virtio/virtgpu_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/infiniband/core/cma_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/infiniband/hw/hfi1/hfi.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/infiniband/hw/hfi1/trace_dbg.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/infiniband/hw/hfi1/trace_rx.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/infiniband/hw/hfi1/trace_tid.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/infiniband/hw/hfi1/trace_tx.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/infiniband/sw/rdmavt/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/infiniband/sw/rdmavt/trace_rvt.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/interconnect/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iommu/intel/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/platform/nvidia/tegra-vde/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/misc/mei/mei-trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/dsa/mv88e6xxx/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/freescale/dpaa/dpaa_eth_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/freescale/dpaa2/dpaa2-eth-trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/fungible/funeth/funeth_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/hisilicon/hns3/hns3_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/hisilicon/hns3/hns3pf/hclge_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/hisilicon/hns3/hns3vf/hclgevf_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/intel/i40e/i40e_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/intel/iavf/iavf_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/intel/ice/ice_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/marvell/octeontx2/af/rvu_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/mellanox/mlx5/core/diag/cmd_tracepoint.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/mellanox/mlx5/core/diag/en_rep_tracepoint.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/mellanox/mlx5/core/diag/en_tc_tracepoint.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/mellanox/mlx5/core/diag/fw_tracer_tracepoint.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/mellanox/mlx5/core/esw/diag/qos_tracepoint.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/mellanox/mlx5/core/sf/dev/diag/dev_tracepoint.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/mellanox/mlx5/core/sf/diag/sf_tracepoint.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/mellanox/mlx5/core/sf/diag/vhca_tracepoint.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/fjes/fjes_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/hyperv/netvsc_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath10k/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath11k/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath12k/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath6kl/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/broadcom/brcm80211/brcmfmac/tracepoint.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/broadcom/brcm80211/brcmsmac/brcms_trace_brcmsmac.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/broadcom/brcm80211/brcmsmac/brcms_trace_brcmsmac_msg.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/broadcom/brcm80211/brcmsmac/brcms_trace_brcmsmac_tx.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/intel/iwlwifi/iwl-devtrace-msg.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/intel/iwlwifi/iwl-devtrace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/soc/qcom/pmic_pdcharger_ulog.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/soc/qcom/trace-aoss.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/soc/qcom/trace-rpmh.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/thermal/thermal_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/cdns3/cdns3-trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/cdns3/cdnsp-trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/chipidea/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/dwc3/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/cdns2/cdns2-trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/mtu3/mtu3_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/musb/musb_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/bcachefs/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/nfs/nfs4trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/nfs/nfstrace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/nfsd/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/ocfs2/ocfs2_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/smb/client/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/xfs/scrub/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/xfs/xfs_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/ras/ras_event.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/asoc.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/avc.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/bridge.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/btrfs.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/cgroup.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/clk.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/cma.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/devfreq.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/devlink.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/dma_fence.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/erofs.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/f2fs.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/habanalabs.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/huge_memory.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/hwmon.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/initcall.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/intel_ish.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/io_uring.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/iocost.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/iommu.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/irq.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/iscsi.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/kmem.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/lock.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/mmap_lock.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/mmc.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/module.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/napi.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/neigh.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/net.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/netlink.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/oom.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/osnoise.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/power.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/pwc.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/qdisc.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/qla.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/qrtr.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/regulator.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/rpcgss.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/rpcrdma.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/rpm.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/sched.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/sof.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/sof_intel.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/sunrpc.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/swiotlb.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/target.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/tegra_apb_dma.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/ufs.h",
+    "status": "M",
+    "in_track": true,
+    "added": 12,
+    "deleted": 12,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/trace/events/workqueue.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/events/xdp.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/trace/stages/stage6_event_callback.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "kernel/trace/bpf_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/batman-adv/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/dsa/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/ieee802154/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac80211/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/openvswitch/openvswitch_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/smc/smc_tracepoint.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/tipc/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/wireless/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "samples/trace_events/trace-events-sample.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/core/pcm_trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/hda/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/soc/intel/avs/trace.h",
+    "status": "M",
+    "in_track": false
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/2c92ca849fcc.diff",
+  "patch_bytes": 2132
+ },
+ {
+  "sha": "d53b681ce9ca7db5ef4ecb8d2cf465ae4a031264",
+  "release": "v6.10",
+  "author": {
+   "name": "Chanwoo Lee",
+   "email": "cw9316.lee@samsung.com"
+  },
+  "author_date": "2024-05-24T10:59:04+09:00",
+  "commit_date": "2024-05-30T20:40:48-04:00",
+  "subject": "scsi: ufs: mcq: Fix error output and clean up ufshcd_mcq_abort()",
+  "body": "An error unrelated to ufshcd_try_to_abort_task is being logged and can\ncause confusion. Modify ufshcd_mcq_abort() to print the result of the abort\nfailure. For readability, return immediately instead of 'goto'.\n\nFixes: f1304d442077 (\"scsi: ufs: mcq: Added ufshcd_mcq_abort()\")\nSigned-off-by: Chanwoo Lee <cw9316.lee@samsung.com>\nLink: https://lore.kernel.org/r/20240524015904.1116005-1-cw9316.lee@samsung.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "f1304d442077 (\"scsi: ufs: mcq: Added ufshcd_mcq_abort()\")"
+   ],
+   "signed_off_by": [
+    "Chanwoo Lee <cw9316.lee@samsung.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240524015904.1116005-1-cw9316.lee@samsung.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "f1304d442077",
+    "subject": "scsi: ufs: mcq: Added ufshcd_mcq_abort()",
+    "sha": "f1304d4420777f82a1d844c606db3d9eca841765",
+    "introduced_in": "v6.5"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240524015904.1116005-1-cw9316.lee@samsung.com",
+  "series_id": "20240524015904.1116005-cw9316.lee@samsung.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 8,
+    "deleted": 9,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d53b681ce9ca.diff",
+  "patch_bytes": 1685
+ },
+ {
+  "sha": "77691af484e28af7a692e511b9ed5ca63012ec6e",
+  "release": "v6.10",
+  "author": {
+   "name": "Ziqi Chen",
+   "email": "quic_ziqichen@quicinc.com"
+  },
+  "author_date": "2024-06-07T18:06:23+08:00",
+  "commit_date": "2024-06-11T21:22:33-04:00",
+  "subject": "scsi: ufs: core: Quiesce request queues before checking pending cmds",
+  "body": "In ufshcd_clock_scaling_prepare(), after SCSI layer is blocked,\nufshcd_pending_cmds() is called to check whether there are pending\ntransactions or not. And only if there are no pending transactions can we\nproceed to kickstart the clock scaling sequence.\n\nufshcd_pending_cmds() traverses over all SCSI devices and calls\nsbitmap_weight() on their budget_map. sbitmap_weight() can be broken down\nto three steps:\n\n 1. Calculate the nr outstanding bits set in the 'word' bitmap.\n\n 2. Calculate the nr outstanding bits set in the 'cleared' bitmap.\n\n 3. Subtract the result from step 1 by the result from step 2.\n\nThis can lead to a race condition as outlined below:\n\nAssume there is one pending transaction in the request queue of one SCSI\ndevice, say sda, and the budget token of this request is 0, the 'word' is\n0x1 and the 'cleared' is 0x0.\n\n 1. When step 1 executes, it gets the result as 1.\n\n 2. Before step 2 executes, block layer tries to dispatch a new request to\n    sda. Since the SCSI layer is blocked, the request cannot pass through\n    SCSI but the block layer would do budget_get() and budget_put() to\n    sda's budget map regardless, so the 'word' has become 0x3 and 'cleared'\n    has become 0x2 (assume the new request got budget token 1).\n\n 3. When step 2 executes, it gets the result as 1.\n\n 4. When step 3 executes, it gets the result as 0, meaning there is no\n    pending transactions, which is wrong.\n\n    Thread A                        Thread B\n    ufshcd_pending_cmds()           __blk_mq_sched_dispatch_requests()\n    |                               |\n    sbitmap_weight(word)            |\n    |                               scsi_mq_get_budget()\n    |                               |\n    |                               scsi_mq_put_budget()\n    |                               |\n    sbitmap_weight(cleared)\n    ...\n\nWhen this race condition happens, the clock scaling sequence is started\nwith transactions still in flight, leading to subsequent hibernate enter\nfailure, broken link, task abort and back to back error recovery.\n\nFix this race condition by quiescing the request queues before calling\nufshcd_pending_cmds() so that block layer won't touch the budget map when\nufshcd_pending_cmds() is working on it. In addition, remove the SCSI layer\nblocking/unblocking to reduce redundancies and latencies.\n\nFixes: 8d077ede48c1 (\"scsi: ufs: Optimize the command queueing code\")\nCo-developed-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Ziqi Chen <quic_ziqichen@quicinc.com>\nLink: https://lore.kernel.org/r/1717754818-39863-1-git-send-email-quic_ziqichen@quicinc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "8d077ede48c1 (\"scsi: ufs: Optimize the command queueing code\")"
+   ],
+   "co_developed_by": [
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <quic_cang@quicinc.com>",
+    "Ziqi Chen <quic_ziqichen@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/1717754818-39863-1-git-send-email-quic_ziqichen@quicinc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "8d077ede48c1",
+    "subject": "scsi: ufs: Optimize the command queueing code",
+    "sha": "8d077ede48c1532d791c027467d152ae137c54ab",
+    "introduced_in": "v5.17"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "1717754818-39863-1-git-send-email-quic_ziqichen@quicinc.com",
+  "series_id": "1717754818-39863-1-git-send-email-quic_ziqichen@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/77691af484e2.diff",
+  "patch_bytes": 1063
+ },
+ {
+  "sha": "135c6eb27a85c8b261a2cc1f5093abcda6ee9010",
+  "release": "v6.10",
+  "author": {
+   "name": "Joel Slebodnick",
+   "email": "jslebodn@redhat.com"
+  },
+  "author_date": "2024-06-13T14:27:28-04:00",
+  "commit_date": "2024-06-13T21:00:25-04:00",
+  "subject": "scsi: ufs: core: Free memory allocated for model before reinit",
+  "body": "Under the conditions that a device is to be reinitialized within\nufshcd_probe_hba(), the device must first be fully reset.\n\nResetting the device should include freeing U8 model (member of dev_info)\nbut does not, and this causes a memory leak.  ufs_put_device_desc() is\nresponsible for freeing model.\n\nunreferenced object 0xffff3f63008bee60 (size 32):\n  comm \"kworker/u33:1\", pid 60, jiffies 4294892642\n  hex dump (first 32 bytes):\n    54 48 47 4a 46 47 54 30 54 32 35 42 41 5a 5a 41  THGJFGT0T25BAZZA\n    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................\n  backtrace (crc ed7ff1a9):\n    [<ffffb86705f1243c>] kmemleak_alloc+0x34/0x40\n    [<ffffb8670511cee4>] __kmalloc_noprof+0x1e4/0x2fc\n    [<ffffb86705c247fc>] ufshcd_read_string_desc+0x94/0x190\n    [<ffffb86705c26854>] ufshcd_device_init+0x480/0xdf8\n    [<ffffb86705c27b68>] ufshcd_probe_hba+0x3c/0x404\n    [<ffffb86705c29264>] ufshcd_async_scan+0x40/0x370\n    [<ffffb86704f43e9c>] async_run_entry_fn+0x34/0xe0\n    [<ffffb86704f34638>] process_one_work+0x154/0x298\n    [<ffffb86704f34a74>] worker_thread+0x2f8/0x408\n    [<ffffb86704f3cfa4>] kthread+0x114/0x118\n    [<ffffb86704e955a0>] ret_from_fork+0x10/0x20\n\nFixes: 96a7141da332 (\"scsi: ufs: core: Add support for reinitializing the UFS device\")\nCc: <stable@vger.kernel.org>\nReviewed-by: Andrew Halaney <ahalaney@redhat.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Joel Slebodnick <jslebodn@redhat.com>\nLink: https://lore.kernel.org/r/20240613200202.2524194-1-jslebodn@redhat.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "96a7141da332 (\"scsi: ufs: core: Add support for reinitializing the UFS device\")"
+   ],
+   "cc": [
+    "<stable@vger.kernel.org>"
+   ],
+   "reviewed_by": [
+    "Andrew Halaney <ahalaney@redhat.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Joel Slebodnick <jslebodn@redhat.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240613200202.2524194-1-jslebodn@redhat.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "96a7141da332",
+    "subject": "scsi: ufs: core: Add support for reinitializing the UFS device",
+    "sha": "96a7141da33207672d7a354c885d65af4f0f9b6c",
+    "introduced_in": "v6.3"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "20240613200202.2524194-1-jslebodn@redhat.com",
+  "series_id": "20240613200202.2524194-jslebodn@redhat.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/135c6eb27a85.diff",
+  "patch_bytes": 542
+ },
+ {
+  "sha": "9307a998cb9846a2557fdca286997430bee36a2a",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2024-06-28T15:00:29+08:00",
+  "commit_date": "2024-07-04T23:04:14-04:00",
+  "subject": "scsi: ufs: core: Fix ufshcd_clear_cmd racing issue",
+  "body": "When ufshcd_clear_cmd is racing with the completion ISR, the completed tag\nof the request's mq_hctx pointer will be set to NULL by the ISR.  And\nufshcd_clear_cmd's call to ufshcd_mcq_req_to_hwq will get NULL pointer KE.\nReturn success when the request is completed by ISR because sq does not\nneed cleanup.\n\nThe racing flow is:\n\nThread A\nufshcd_err_handler\t\t\t\t\tstep 1\n\tufshcd_try_to_abort_task\n\t\tufshcd_cmd_inflight(true)\t\tstep 3\n\t\tufshcd_clear_cmd\n\t\t\t...\n\t\t\tufshcd_mcq_req_to_hwq\n\t\t\tblk_mq_unique_tag\n\t\t\t\trq->mq_hctx->queue_num\tstep 5\n\nThread B\nufs_mtk_mcq_intr(cq complete ISR)\t\t\tstep 2\n\tscsi_done\n\t\t...\n\t\t__blk_mq_free_request\n\t\t\trq->mq_hctx = NULL;\t\tstep 4\n\nBelow is KE back trace:\n\n  ufshcd_try_to_abort_task: cmd pending in the device. tag = 6\n  Unable to handle kernel NULL pointer dereference at virtual address 0000000000000194\n   pc : [0xffffffd589679bf8] blk_mq_unique_tag+0x8/0x14\n   lr : [0xffffffd5862f95b4] ufshcd_mcq_sq_cleanup+0x6c/0x1cc [ufs_mediatek_mod_ise]\n   Workqueue: ufs_eh_wq_0 ufshcd_err_handler [ufs_mediatek_mod_ise]\n   Call trace:\n    dump_backtrace+0xf8/0x148\n    show_stack+0x18/0x24\n    dump_stack_lvl+0x60/0x7c\n    dump_stack+0x18/0x3c\n    mrdump_common_die+0x24c/0x398 [mrdump]\n    ipanic_die+0x20/0x34 [mrdump]\n    notify_die+0x80/0xd8\n    die+0x94/0x2b8\n    __do_kernel_fault+0x264/0x298\n    do_page_fault+0xa4/0x4b8\n    do_translation_fault+0x38/0x54\n    do_mem_abort+0x58/0x118\n    el1_abort+0x3c/0x5c\n    el1h_64_sync_handler+0x54/0x90\n    el1h_64_sync+0x68/0x6c\n    blk_mq_unique_tag+0x8/0x14\n    ufshcd_clear_cmd+0x34/0x118 [ufs_mediatek_mod_ise]\n    ufshcd_try_to_abort_task+0x2c8/0x5b4 [ufs_mediatek_mod_ise]\n    ufshcd_err_handler+0xa7c/0xfa8 [ufs_mediatek_mod_ise]\n    process_one_work+0x208/0x4fc\n    worker_thread+0x228/0x438\n    kthread+0x104/0x1d4\n    ret_from_fork+0x10/0x20\n\nFixes: 8d7290348992 (\"scsi: ufs: mcq: Add supporting functions for MCQ abort\")\nSuggested-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://lore.kernel.org/r/20240628070030.30929-2-peter.wang@mediatek.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "8d7290348992 (\"scsi: ufs: mcq: Add supporting functions for MCQ abort\")"
+   ],
+   "suggested_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240628070030.30929-2-peter.wang@mediatek.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "8d7290348992",
+    "subject": "scsi: ufs: mcq: Add supporting functions for MCQ abort",
+    "sha": "8d7290348992f27242dd6a696fa2eede709f0b14",
+    "introduced_in": "v6.5"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240628070030.30929-2-peter.wang@mediatek.com",
+  "series_id": "20240628070030.30929-peter.wang@mediatek.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 5,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/9307a998cb98.diff",
+  "patch_bytes": 1108
+ },
+ {
+  "sha": "74736103fb4123c71bf11fb7a6abe7c884c5269e",
+  "release": "v6.10",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2024-06-28T15:00:30+08:00",
+  "commit_date": "2024-07-04T23:04:15-04:00",
+  "subject": "scsi: ufs: core: Fix ufshcd_abort_one racing issue",
+  "body": "When ufshcd_abort_one is racing with the completion ISR, the completed tag\nof the request's mq_hctx pointer will be set to NULL by ISR.  Return\nsuccess when request is completed by ISR because ufshcd_abort_one does not\nneed to do anything.\n\nThe racing flow is:\n\nThread A\nufshcd_err_handler\t\t\t\t\tstep 1\n\t...\n\tufshcd_abort_one\n\t\tufshcd_try_to_abort_task\n\t\t\tufshcd_cmd_inflight(true)\tstep 3\n\t\tufshcd_mcq_req_to_hwq\n\t\t\tblk_mq_unique_tag\n\t\t\t\trq->mq_hctx->queue_num\tstep 5\n\nThread B\nufs_mtk_mcq_intr(cq complete ISR)\t\t\tstep 2\n\tscsi_done\n\t\t...\n\t\t__blk_mq_free_request\n\t\t\trq->mq_hctx = NULL;\t\tstep 4\n\nBelow is KE back trace.\n  ufshcd_try_to_abort_task: cmd at tag 41 not pending in the device.\n  ufshcd_try_to_abort_task: cmd at tag=41 is cleared.\n  Aborting tag 41 / CDB 0x28 succeeded\n  Unable to handle kernel NULL pointer dereference at virtual address 0000000000000194\n  pc : [0xffffffddd7a79bf8] blk_mq_unique_tag+0x8/0x14\n  lr : [0xffffffddd6155b84] ufshcd_mcq_req_to_hwq+0x1c/0x40 [ufs_mediatek_mod_ise]\n   do_mem_abort+0x58/0x118\n   el1_abort+0x3c/0x5c\n   el1h_64_sync_handler+0x54/0x90\n   el1h_64_sync+0x68/0x6c\n   blk_mq_unique_tag+0x8/0x14\n   ufshcd_err_handler+0xae4/0xfa8 [ufs_mediatek_mod_ise]\n   process_one_work+0x208/0x4fc\n   worker_thread+0x228/0x438\n   kthread+0x104/0x1d4\n   ret_from_fork+0x10/0x20\n\nFixes: 93e6c0e19d5b (\"scsi: ufs: core: Clear cmd if abort succeeds in MCQ mode\")\nSuggested-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://lore.kernel.org/r/20240628070030.30929-3-peter.wang@mediatek.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "93e6c0e19d5b (\"scsi: ufs: core: Clear cmd if abort succeeds in MCQ mode\")"
+   ],
+   "suggested_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240628070030.30929-3-peter.wang@mediatek.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "93e6c0e19d5b",
+    "subject": "scsi: ufs: core: Clear cmd if abort succeeds in MCQ mode",
+    "sha": "93e6c0e19d5bb12b49534a411c85e21d333731fa",
+    "introduced_in": "v6.7"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20240628070030.30929-3-peter.wang@mediatek.com",
+  "series_id": "20240628070030.30929-peter.wang@mediatek.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/74736103fb41.diff",
+  "patch_bytes": 561
+ }
+]

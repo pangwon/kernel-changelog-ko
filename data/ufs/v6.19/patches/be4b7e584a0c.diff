@@ -1,0 +1,15 @@
+diff --git a/Documentation/devicetree/bindings/ufs/ufs-common.yaml b/Documentation/devicetree/bindings/ufs/ufs-common.yaml
+index 9f04f34d8c5a..ed97f5682509 100644
+--- a/Documentation/devicetree/bindings/ufs/ufs-common.yaml
++++ b/Documentation/devicetree/bindings/ufs/ufs-common.yaml
+@@ -48,8 +48,8 @@ properties:
+     enum: [1, 2]
+     default: 2
+     description:
+-      Number of lanes available per direction.  Note that it is assume same
+-      number of lanes is used both directions at once.
++      Number of lanes available per direction.  Note that it is assumed that
++      the same number of lanes are used in both directions at once.
+ 
+   vdd-hba-supply:
+     description:

@@ -1,0 +1,2712 @@
+[
+ {
+  "sha": "4f6dd2a4bf378bc4d169296739ea7d6972c0d858",
+  "release": "v6.8",
+  "author": {
+   "name": "Can Guo",
+   "email": "quic_cang@quicinc.com"
+  },
+  "author_date": "2023-11-01T18:58:36-07:00",
+  "commit_date": "2023-11-15T10:23:55-05:00",
+  "subject": "scsi: ufs: ufs-sysfs: Expose UFS power info",
+  "body": "Having UFS power info available in sysfs makes it easier to tell the state\nof the link during runtime considering we have a bunch of power saving\nfeatures and various combinations for backward compatibility.\n\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Can Guo <quic_cang@quicinc.com>\nLink: https://lore.kernel.org/r/1698890324-7374-1-git-send-email-quic_cang@quicinc.com\nReviewed-by: Avri Altman <avri.altman@wdc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Avri Altman <avri.altman@wdc.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <quic_cang@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/1698890324-7374-1-git-send-email-quic_cang@quicinc.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "1698890324-7374-1-git-send-email-quic_cang@quicinc.com",
+  "series_id": "1698890324-7374-1-git-send-email-quic_cang@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "Documentation/ABI/testing/sysfs-driver-ufs",
+    "status": "M",
+    "in_track": true,
+    "added": 49,
+    "deleted": 0,
+    "area": "docs",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufs-sysfs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 120,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/unipro.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/4f6dd2a4bf37.diff",
+  "patch_bytes": 6948
+ },
+ {
+  "sha": "7c4bf8cb9d40a7222bb5d641979952b196707985",
+  "release": "v6.8",
+  "author": {
+   "name": "Neil Armstrong",
+   "email": "neil.armstrong@linaro.org"
+  },
+  "author_date": "2023-10-30T10:48:21+01:00",
+  "commit_date": "2023-11-16T17:01:02+05:30",
+  "subject": "phy: qcom: qmp-ufs: add QMP UFS PHY tables for SM8650",
+  "body": "Add QMP UFS PHY support for the SM8650 platform.\n\nReviewed-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>\nSigned-off-by: Neil Armstrong <neil.armstrong@linaro.org>\nLink: https://lore.kernel.org/r/20231030-topic-sm8650-upstream-phy-v2-5-a543a4c4b491@linaro.org\nSigned-off-by: Vinod Koul <vkoul@kernel.org>",
+  "trailers": {
+   "reviewed_by": [
+    "Dmitry Baryshkov <dmitry.baryshkov@linaro.org>"
+   ],
+   "signed_off_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org>",
+    "Vinod Koul <vkoul@kernel.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231030-topic-sm8650-upstream-phy-v2-5-a543a4c4b491@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231030-topic-sm8650-upstream-phy-v2-5-a543a4c4b491@linaro.org",
+  "series_id": "20231030-topic-sm8650-upstream-phy-v2-a543a4c4b491@linaro.org",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-pcs-ufs-v6.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-qserdes-txrx-ufs-v6.h",
+    "status": "M",
+    "in_track": true,
+    "added": 7,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 86,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "phy",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/7c4bf8cb9d40.diff",
+  "patch_bytes": 6517
+ },
+ {
+  "sha": "045da3077bc57e587d0ab4cfc8945b76af03d72d",
+  "release": "v6.8",
+  "author": {
+   "name": "Akinobu Mita",
+   "email": "akinobu.mita@gmail.com"
+  },
+  "author_date": "2023-11-18T21:44:43+09:00",
+  "commit_date": "2023-11-24T19:23:35-05:00",
+  "subject": "scsi: ufs: core: Make fault injection dynamically configurable per HBA",
+  "body": "The UFS driver has two driver-specific fault injection mechanisms\n(trigger_eh and timeout). Each fault injection configuration can only be\nspecified by a module parameter and cannot be reconfigured without\nreloading the driver. Also, each configuration is common to all HBAs.\n\nThis change adds the following subdirectories for each UFS HBA when\ndebugfs is enabled:\n\n  /sys/kernel/debug/ufshcd/<HBA>/timeout_inject\n  /sys/kernel/debug/ufshcd/<HBA>/trigger_eh_inject\n\nEach fault injection attribute can be dynamically set per HBA by a\ncorresponding file in these directories.\n\nThis is tested with QEMU UFS devices.\n\nSigned-off-by: Akinobu Mita <akinobu.mita@gmail.com>\nLink: https://lore.kernel.org/r/20231118124443.1007116-1-akinobu.mita@gmail.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Akinobu Mita <akinobu.mita@gmail.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231118124443.1007116-1-akinobu.mita@gmail.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231118124443.1007116-1-akinobu.mita@gmail.com",
+  "series_id": "20231118124443.1007116-akinobu.mita@gmail.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-fault-injection.c",
+    "status": "M",
+    "in_track": true,
+    "added": 15,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufs-fault-injection.h",
+    "status": "M",
+    "in_track": true,
+    "added": 9,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/045da3077bc5.diff",
+  "patch_bytes": 3755
+ },
+ {
+  "sha": "db80df77025ee0a5e6e089cc2f2b0c4b97867bea",
+  "release": "v6.8",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2023-11-15T11:33:47-08:00",
+  "commit_date": "2023-11-24T19:23:48-05:00",
+  "subject": "scsi: ufs: core: Warn if the request tag is truncated",
+  "body": "ufshcd_prepare_utp_scsi_cmd_upiu() only uses the lowest eight bits of\nlrbp->task_tag. Issue a runtime warning if this results in truncation.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20231115193359.2262044-1-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231115193359.2262044-1-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231115193359.2262044-1-bvanassche@acm.org",
+  "series_id": "20231115193359.2262044-bvanassche@acm.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/db80df77025e.diff",
+  "patch_bytes": 531
+ },
+ {
+  "sha": "af85d689ae08860e4f9648f05e09f1de868091f4",
+  "release": "v6.8",
+  "author": {
+   "name": "Ziqi Chen",
+   "email": "quic_ziqichen@quicinc.com"
+  },
+  "author_date": "2023-11-28T12:07:47+08:00",
+  "commit_date": "2023-12-05T21:01:52-05:00",
+  "subject": "scsi: ufs: dt-bindings: Add msi-parent for UFS MCQ",
+  "body": "The Message Signaled Interrupts (MSI) support has been introduced in UFSHCI\nversion 4.0 (JESD223E). The MSI is the recommended interrupt approach for\nMCQ. If choose to use MSI, in UFS DT, we need to provide msi-parent\nproperty that point to the hardware entity which serves as the MSI\ncontroller for this UFS controller.\n\nAcked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nAcked-by: Conor Dooley <conor.dooley@microchip.com>\nSigned-off-by: Ziqi Chen <quic_ziqichen@quicinc.com>\nLink: https://lore.kernel.org/r/1701144469-1018-1-git-send-email-quic_ziqichen@quicinc.com\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "acked_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>",
+    "Conor Dooley <conor.dooley@microchip.com>"
+   ],
+   "signed_off_by": [
+    "Ziqi Chen <quic_ziqichen@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/1701144469-1018-1-git-send-email-quic_ziqichen@quicinc.com"
+   ],
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "1701144469-1018-1-git-send-email-quic_ziqichen@quicinc.com",
+  "series_id": "1701144469-1018-1-git-send-email-quic_ziqichen@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/ufs-common.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "bindings",
+    "vendor": null
+   }
+  ],
+  "area": "bindings",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/af85d689ae08.diff",
+  "patch_bytes": 510
+ },
+ {
+  "sha": "fa3dca8251c4fff88da9f64ba931942638ab0c00",
+  "release": "v6.8",
+  "author": {
+   "name": "Can Guo",
+   "email": "quic_cang@quicinc.com"
+  },
+  "author_date": "2023-12-02T04:36:07-08:00",
+  "commit_date": "2023-12-13T22:37:20-05:00",
+  "subject": "scsi: ufs: host: Rename structure ufs_dev_params to ufs_host_params",
+  "body": "Structure ufs_dev_params is actually used in UFS host drivers to declare\nhost specific power mode parameters, like ufs_<vendor>_params or host_cap,\nwhich makes the code not very straightforward to read. Rename the structure\nufs_dev_params to ufs_host_params and unify the declarations in all drivers\nto host_params.\n\nIn addition, rename the two functions ufshcd_init_pwr_dev_param() and\nufshcd_get_pwr_dev_param() which work based on the ufs_host_params to\nufshcd_init_host_params() and ufshcd_negotiate_pwr_params() respectively to\navoid confusions.\n\nThis change does not change any functionalities or logic.\n\nAcked-by: Andrew Halaney <ahalaney@redhat.com>\nReviewed-by: Nitin Rawat <quic_nitirawa@quicinc.com>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Can Guo <quic_cang@quicinc.com>\nLink: https://lore.kernel.org/r/1701520577-31163-2-git-send-email-quic_cang@quicinc.com\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nTested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "acked_by": [
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ],
+   "reviewed_by": [
+    "Nitin Rawat <quic_nitirawa@quicinc.com>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <quic_cang@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/1701520577-31163-2-git-send-email-quic_cang@quicinc.com"
+   ],
+   "tested_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "1701520577-31163-2-git-send-email-quic_cang@quicinc.com",
+  "series_id": "1701520577-31163-2-git-send-email-quic_cang@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-exynos.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 4,
+    "area": "host",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-hisi.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 6,
+    "area": "host",
+    "vendor": "hisi"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 7,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 7,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufshcd-pltfrm.c",
+    "status": "M",
+    "in_track": true,
+    "added": 34,
+    "deleted": 35,
+    "area": "host",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufshcd-pltfrm.h",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 5,
+    "area": "host",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "exynos",
+   "hisi",
+   "mediatek",
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/fa3dca8251c4.diff",
+  "patch_bytes": 11138
+ },
+ {
+  "sha": "dc604b4c9d6007c0a03ad90296e849bc38c0d2cc",
+  "release": "v6.8",
+  "author": {
+   "name": "Can Guo",
+   "email": "quic_cang@quicinc.com"
+  },
+  "author_date": "2023-12-02T04:36:08-08:00",
+  "commit_date": "2023-12-13T22:37:20-05:00",
+  "subject": "scsi: ufs: ufs-qcom: No need to set hs_rate after ufshcd_init_host_param()",
+  "body": "In ufs_qcom_pwr_change_notify(), host_params.hs_rate has been set to\nPA_HS_MODE_B by ufshcd_init_host_param(), hence remove the duplicated line\nof work. Meanwhile, removed the macro UFS_QCOM_LIMIT_HS_RATE as it is only\nused here.\n\nReviewed-by: Nitin Rawat <quic_nitirawa@quicinc.com>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nReviewed-by: Andrew Halaney <ahalaney@redhat.com>\nSigned-off-by: Can Guo <quic_cang@quicinc.com>\nLink: https://lore.kernel.org/r/1701520577-31163-3-git-send-email-quic_cang@quicinc.com\nTested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Nitin Rawat <quic_nitirawa@quicinc.com>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <quic_cang@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/1701520577-31163-3-git-send-email-quic_cang@quicinc.com"
+   ],
+   "tested_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "1701520577-31163-3-git-send-email-quic_cang@quicinc.com",
+  "series_id": "1701520577-31163-3-git-send-email-quic_cang@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 2,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/dc604b4c9d60.diff",
+  "patch_bytes": 948
+ },
+ {
+  "sha": "55820a7f2cb9b9a4b603cc22dcf0ca5331f86d25",
+  "release": "v6.8",
+  "author": {
+   "name": "Can Guo",
+   "email": "quic_cang@quicinc.com"
+  },
+  "author_date": "2023-12-02T04:36:09-08:00",
+  "commit_date": "2023-12-13T22:37:21-05:00",
+  "subject": "scsi: ufs: ufs-qcom: Setup host power mode during init",
+  "body": "Setup host power mode and its limitations during UFS host driver init to\navoid repetitive work during every power mode change.\n\nAcked-by: Andrew Halaney <ahalaney@redhat.com>\nReviewed-by: Nitin Rawat <quic_nitirawa@quicinc.com>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nCo-developed-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nSigned-off-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nSigned-off-by: Can Guo <quic_cang@quicinc.com>\nLink: https://lore.kernel.org/r/1701520577-31163-4-git-send-email-quic_cang@quicinc.com\nTested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "acked_by": [
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ],
+   "reviewed_by": [
+    "Nitin Rawat <quic_nitirawa@quicinc.com>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ],
+   "co_developed_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>"
+   ],
+   "signed_off_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Can Guo <quic_cang@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/1701520577-31163-4-git-send-email-quic_cang@quicinc.com"
+   ],
+   "tested_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "1701520577-31163-4-git-send-email-quic_cang@quicinc.com",
+  "series_id": "1701520577-31163-4-git-send-email-quic_cang@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 14,
+    "deleted": 7,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/55820a7f2cb9.diff",
+  "patch_bytes": 2299
+ },
+ {
+  "sha": "743e1f596cccd371e7467fe585a1836773fbd922",
+  "release": "v6.8",
+  "author": {
+   "name": "Can Guo",
+   "email": "quic_cang@quicinc.com"
+  },
+  "author_date": "2023-12-02T04:36:10-08:00",
+  "commit_date": "2023-12-13T22:37:21-05:00",
+  "subject": "scsi: ufs: ufs-qcom: Allow the first init start with the maximum supported gear",
+  "body": "During host driver init, the phy_gear is set to the minimum supported gear\n(HS_G2). Then, during the first power mode change, the negotiated gear, say\nHS-G4, is updated to the phy_gear variable so that in the second init the\nupdated phy_gear can be used to program the PHY.\n\nBut the current code only allows update the phy_gear to a higher value. If\none wants to start the first init with the maximum support gear, say HS-G4,\nthe phy_gear is not updated to HS-G3 if the device only supports HS-G3.\n\nThe original check added there is intend to make sure the phy_gear won't be\nupdated when gear is scaled down (during clock scaling). Update the check\nso that one can start the first init with the maximum support gear without\nbreaking the original fix by checking the ufshcd_state, that is, allow\nupdate to phy_gear only if power mode change is invoked from\nufshcd_probe_hba().\n\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nReviewed-by: Nitin Rawat <quic_nitirawa@quicinc.com>\nSigned-off-by: Can Guo <quic_cang@quicinc.com>\nLink: https://lore.kernel.org/r/1701520577-31163-5-git-send-email-quic_cang@quicinc.com\nTested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Nitin Rawat <quic_nitirawa@quicinc.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <quic_cang@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/1701520577-31163-5-git-send-email-quic_cang@quicinc.com"
+   ],
+   "tested_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "1701520577-31163-5-git-send-email-quic_cang@quicinc.com",
+  "series_id": "1701520577-31163-5-git-send-email-quic_cang@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 4,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/743e1f596ccc.diff",
+  "patch_bytes": 1041
+ },
+ {
+  "sha": "9d8528a833fc0b4f47f7e43481c037390dd9ed71",
+  "release": "v6.8",
+  "author": {
+   "name": "Can Guo",
+   "email": "quic_cang@quicinc.com"
+  },
+  "author_date": "2023-12-02T04:36:11-08:00",
+  "commit_date": "2023-12-13T22:37:21-05:00",
+  "subject": "scsi: ufs: ufs-qcom: Limit HS-G5 Rate-A to hosts with HW version 5",
+  "body": "Qcom UFS hosts, with HW ver 5, can only support up to HS-G5 Rate-A due to\nHW limitations. If the HS-G5 PHY gear is used, update host_params->hs_rate\nto Rate-A, so that the subsequent power mode changes shall stick to Rate-A.\n\nReviewed-by: Nitin Rawat <quic_nitirawa@quicinc.com>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Can Guo <quic_cang@quicinc.com>\nLink: https://lore.kernel.org/r/1701520577-31163-6-git-send-email-quic_cang@quicinc.com\nTested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Nitin Rawat <quic_nitirawa@quicinc.com>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ],
+   "signed_off_by": [
+    "Can Guo <quic_cang@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/1701520577-31163-6-git-send-email-quic_cang@quicinc.com"
+   ],
+   "tested_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "1701520577-31163-6-git-send-email-quic_cang@quicinc.com",
+  "series_id": "1701520577-31163-6-git-send-email-quic_cang@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 17,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/9d8528a833fc.diff",
+  "patch_bytes": 1375
+ },
+ {
+  "sha": "0bd3cb895d195cdd44da9186bb5b3e0333f1d381",
+  "release": "v6.8",
+  "author": {
+   "name": "Can Guo",
+   "email": "quic_cang@quicinc.com"
+  },
+  "author_date": "2023-12-02T04:36:12-08:00",
+  "commit_date": "2023-12-13T22:37:21-05:00",
+  "subject": "scsi: ufs: ufs-qcom: Set initial PHY gear to max HS gear for HW ver 4 and newer",
+  "body": "Since HW ver 4, max HS gear can be get from UFS host controller's register,\nuse the max HS gear as the initial PHY gear instead of UFS_HS_G2, so that\nwe don't need to update the hard code for newer targets in future.\n\nReviewed-by: Nitin Rawat <quic_nitirawa@quicinc.com>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Can Guo <quic_cang@quicinc.com>\nLink: https://lore.kernel.org/r/1701520577-31163-7-git-send-email-quic_cang@quicinc.com\nTested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Nitin Rawat <quic_nitirawa@quicinc.com>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ],
+   "signed_off_by": [
+    "Can Guo <quic_cang@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/1701520577-31163-7-git-send-email-quic_cang@quicinc.com"
+   ],
+   "tested_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "1701520577-31163-7-git-send-email-quic_cang@quicinc.com",
+  "series_id": "1701520577-31163-7-git-send-email-quic_cang@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 17,
+    "deleted": 6,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/0bd3cb895d19.diff",
+  "patch_bytes": 1598
+ },
+ {
+  "sha": "a68abdadfe13fa95a306363fa284b5cf0b79776d",
+  "release": "v6.8",
+  "author": {
+   "name": "Can Guo",
+   "email": "quic_cang@quicinc.com"
+  },
+  "author_date": "2023-12-02T04:36:13-08:00",
+  "commit_date": "2023-12-13T22:37:21-05:00",
+  "subject": "scsi: ufs: ufs-qcom: Check return value of phy_set_mode_ext()",
+  "body": "In ufs_qcom_power_up_sequence(), check return value of phy_set_mode_ext()\nand stop proceeding if phy_set_mode_ext() fails.\n\nReviewed-by: Nitin Rawat <quic_nitirawa@quicinc.com>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Can Guo <quic_cang@quicinc.com>\nLink: https://lore.kernel.org/r/1701520577-31163-8-git-send-email-quic_cang@quicinc.com\nTested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Nitin Rawat <quic_nitirawa@quicinc.com>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ],
+   "signed_off_by": [
+    "Can Guo <quic_cang@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/1701520577-31163-8-git-send-email-quic_cang@quicinc.com"
+   ],
+   "tested_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "1701520577-31163-8-git-send-email-quic_cang@quicinc.com",
+  "series_id": "1701520577-31163-8-git-send-email-quic_cang@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/a68abdadfe13.diff",
+  "patch_bytes": 506
+ },
+ {
+  "sha": "dc7c948d74e12ed9f40328696b301860243a1ae8",
+  "release": "v6.8",
+  "author": {
+   "name": "Bao D. Nguyen",
+   "email": "quic_nguyenb@quicinc.com"
+  },
+  "author_date": "2023-12-02T04:36:14-08:00",
+  "commit_date": "2023-12-13T22:37:21-05:00",
+  "subject": "scsi: ufs: ufs-qcom: Add support for UFS device version detection",
+  "body": "Start from HW ver 5, a spare register in UFS host controller is added and\nused to indicate the UFS device version. The spare register is populated by\nbootloader for now, but in future it will be populated by HW automatically\nduring link startup with its best efforts in any boot stage prior to Linux.\n\nDuring host driver init, read the spare register, if it is not populated\nwith a UFS device version, go ahead with the dual init mechanism. If a UFS\ndevice version is in there, use the UFS device version together with host\ncontroller's HW version to decide the proper PHY gear which should be used\nto configure the UFS PHY without going through the second init.\n\nSigned-off-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nSigned-off-by: Can Guo <quic_cang@quicinc.com>\nLink: https://lore.kernel.org/r/1701520577-31163-9-git-send-email-quic_cang@quicinc.com\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nReviewed-by: Nitin Rawat <quic_nitirawa@quicinc.com>\nTested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Can Guo <quic_cang@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/1701520577-31163-9-git-send-email-quic_cang@quicinc.com"
+   ],
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Nitin Rawat <quic_nitirawa@quicinc.com>"
+   ],
+   "tested_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "1701520577-31163-9-git-send-email-quic_cang@quicinc.com",
+  "series_id": "1701520577-31163-9-git-send-email-quic_cang@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 28,
+    "deleted": 7,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.h",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/dc7c948d74e1.diff",
+  "patch_bytes": 2471
+ },
+ {
+  "sha": "98bfeda319691c2f337b83774c067f5708b802f5",
+  "release": "v6.8",
+  "author": {
+   "name": "Nitin Rawat",
+   "email": "quic_nitirawa@quicinc.com"
+  },
+  "author_date": "2023-12-05T15:38:54+01:00",
+  "commit_date": "2023-12-13T22:51:45-05:00",
+  "subject": "scsi: ufs: qcom: dt-bindings: Add SC7280 compatible string",
+  "body": "Document the compatible string for the UFS found on SC7280.\n\nSigned-off-by: Nitin Rawat <quic_nitirawa@quicinc.com>\nReviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nReviewed-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nAcked-by: Manivannan Sadhasivam <mani@kernel.org>\nSigned-off-by: Luca Weiss <luca.weiss@fairphone.com>\nLink: https://lore.kernel.org/r/20231205-sc7280-ufs-v6-1-ad6ca7796de7@fairphone.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Nitin Rawat <quic_nitirawa@quicinc.com>",
+    "Luca Weiss <luca.weiss@fairphone.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>",
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>"
+   ],
+   "acked_by": [
+    "Manivannan Sadhasivam <mani@kernel.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231205-sc7280-ufs-v6-1-ad6ca7796de7@fairphone.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231205-sc7280-ufs-v6-1-ad6ca7796de7@fairphone.com",
+  "series_id": "20231205-sc7280-ufs-v6-ad6ca7796de7@fairphone.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/qcom,ufs.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "bindings",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/98bfeda31969.diff",
+  "patch_bytes": 786
+ },
+ {
+  "sha": "9caef8568831c3e4bff77036d1515c7abb79eb92",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:28:46+05:30",
+  "commit_date": "2023-12-13T23:03:45-05:00",
+  "subject": "scsi: ufs: qcom: Use clk_bulk APIs for managing lane clocks",
+  "body": "Lane clock handling can be simplified by using the clk_bulk APIs. So let's\nmake use of them. This also get's rid of the clock validation in the driver\nas kernel should just rely on the firmware (DT/ACPI) to provide the clocks\nrequired for proper functioning.\n\nReviewed-by: Andrew Halaney <ahalaney@redhat.com>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-2-manivannan.sadhasivam@linaro.org\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-2-manivannan.sadhasivam@linaro.org"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-2-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 89,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 4,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/9caef8568831.diff",
+  "patch_bytes": 3860
+ },
+ {
+  "sha": "3bf7ab4ac30c03beecf57c052e87d5a38fb8aed6",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:28:47+05:30",
+  "commit_date": "2023-12-13T23:03:45-05:00",
+  "subject": "scsi: ufs: qcom: Fix the return value of ufs_qcom_ice_program_key()",
+  "body": "Currently, the function returns -EINVAL if algorithm other than AES-256-XTS\nis requested. But the correct error code is -EOPNOTSUPP. Fix it!\n\nCc: Abel Vesa <abel.vesa@linaro.org>\nFixes: 56541c7c4468 (\"scsi: ufs: ufs-qcom: Switch to the new ICE API\")\nReviewed-by: Abel Vesa <abel.vesa@linaro.org>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-3-manivannan.sadhasivam@linaro.org\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "cc": [
+    "Abel Vesa <abel.vesa@linaro.org>"
+   ],
+   "fixes": [
+    "56541c7c4468 (\"scsi: ufs: ufs-qcom: Switch to the new ICE API\")"
+   ],
+   "reviewed_by": [
+    "Abel Vesa <abel.vesa@linaro.org>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-3-manivannan.sadhasivam@linaro.org"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "56541c7c4468",
+    "subject": "scsi: ufs: ufs-qcom: Switch to the new ICE API",
+    "sha": "56541c7c4468a9de26d82ba6e8c10ace286f8fdd",
+    "introduced_in": "v6.5"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-3-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/3bf7ab4ac30c.diff",
+  "patch_bytes": 513
+ },
+ {
+  "sha": "3a747c5cf9b6c36649783b28d2ef8f9c92b16a0f",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:28:48+05:30",
+  "commit_date": "2023-12-13T23:03:45-05:00",
+  "subject": "scsi: ufs: qcom: Fix the return value when platform_get_resource_byname() fails",
+  "body": "The return value should be -ENODEV indicating that the resource is not\nprovided in DT, not -ENOMEM. Fix it!\n\nFixes: c263b4ef737e (\"scsi: ufs: core: mcq: Configure resource regions\")\nReviewed-by: Andrew Halaney <ahalaney@redhat.com>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-4-manivannan.sadhasivam@linaro.org\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "c263b4ef737e (\"scsi: ufs: core: mcq: Configure resource regions\")"
+   ],
+   "reviewed_by": [
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-4-manivannan.sadhasivam@linaro.org"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "c263b4ef737e",
+    "subject": "scsi: ufs: core: mcq: Configure resource regions",
+    "sha": "c263b4ef737e622e2a908c58ca4bb68a89376387",
+    "introduced_in": "v6.3"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-4-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/3a747c5cf9b6.diff",
+  "patch_bytes": 488
+ },
+ {
+  "sha": "1f165c87ec3ec9bd87860f2adef3f1333106f082",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:28:49+05:30",
+  "commit_date": "2023-12-13T23:03:45-05:00",
+  "subject": "scsi: ufs: qcom: Remove superfluous variable assignments",
+  "body": "There are many instances where the variable assignments are not needed.\nRemove them.\n\nReviewed-by: Andrew Halaney <ahalaney@redhat.com>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-5-manivannan.sadhasivam@linaro.org\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-5-manivannan.sadhasivam@linaro.org"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-5-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 8,
+    "deleted": 8,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/1f165c87ec3e.diff",
+  "patch_bytes": 2268
+ },
+ {
+  "sha": "d42d368647dac42e8e91c10daf3f8261d7996380",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:28:50+05:30",
+  "commit_date": "2023-12-13T23:03:45-05:00",
+  "subject": "scsi: ufs: qcom: Remove the warning message when core_reset is not available",
+  "body": "core_reset is optional, so there is no need to warn the user if it is not\navailable.\n\nReviewed-by: Andrew Halaney <ahalaney@redhat.com>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-6-manivannan.sadhasivam@linaro.org\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-6-manivannan.sadhasivam@linaro.org"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-6-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 6,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 3,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d42d368647da.diff",
+  "patch_bytes": 530
+ },
+ {
+  "sha": "0ae7a02726bca95ee9d17de0ccfcd1de0ff4e429",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:28:51+05:30",
+  "commit_date": "2023-12-13T23:03:45-05:00",
+  "subject": "scsi: ufs: qcom: Export ufshcd_{enable/disable}_irq helpers and make use of them",
+  "body": "Instead of duplicating the enable/disable IRQ part, let's export the\nhelpers available in ufshcd driver and make use of them. This also fixes\nthe possible redundant IRQ disable before asserting reset (when IRQ was\nalready disabled).\n\nFixes: 4a791574a0cc (\"scsi: ufs: ufs-qcom: Disable interrupt in reset path\")\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-7-manivannan.sadhasivam@linaro.org\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "4a791574a0cc (\"scsi: ufs: ufs-qcom: Disable interrupt in reset path\")"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-7-manivannan.sadhasivam@linaro.org"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "4a791574a0cc",
+    "subject": "scsi: ufs: ufs-qcom: Disable interrupt in reset path",
+    "sha": "4a791574a0ccf36eb3a0a46fbd71d2768df3eef9",
+    "introduced_in": "v5.12"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-7-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 7,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 6,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/0ae7a02726bc.diff",
+  "patch_bytes": 2162
+ },
+ {
+  "sha": "d11954711499f02fb57d1f6a7022f13b5380c046",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:28:52+05:30",
+  "commit_date": "2023-12-13T23:03:45-05:00",
+  "subject": "scsi: ufs: qcom: Fail ufs_qcom_power_up_sequence() when core_reset fails",
+  "body": "Even though core_reset is optional, a failure during assert/deassert should\nbe considered fatal, if core_reset is available. So fail\nufs_qcom_power_up_sequence() if an error happens during reset and also get\nrid of the redundant warning as the ufs_qcom_host_reset() function itself\nprints error messages.\n\nReviewed-by: Andrew Halaney <ahalaney@redhat.com>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-8-manivannan.sadhasivam@linaro.org\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-8-manivannan.sadhasivam@linaro.org"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-8-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 8,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 3,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d11954711499.diff",
+  "patch_bytes": 823
+ },
+ {
+  "sha": "e430c0e08957d111b068d5c0a3f4ddd1b8d790cb",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:28:53+05:30",
+  "commit_date": "2023-12-13T23:03:45-05:00",
+  "subject": "scsi: ufs: qcom: Check the return value of ufs_qcom_power_up_sequence()",
+  "body": "If ufs_qcom_power_up_sequence() fails, then it makes no sense to enable the\nlane clocks and continue ufshcd_hba_enable(). So let's check the return\nvalue of ufs_qcom_power_up_sequence().\n\nReviewed-by: Andrew Halaney <ahalaney@redhat.com>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-9-manivannan.sadhasivam@linaro.org\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-9-manivannan.sadhasivam@linaro.org"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-9-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 9,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/e430c0e08957.diff",
+  "patch_bytes": 532
+ },
+ {
+  "sha": "8291652ed8a20b7c19a6fce0ad04cccbd629a620",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:28:54+05:30",
+  "commit_date": "2023-12-13T23:03:46-05:00",
+  "subject": "scsi: ufs: qcom: Remove redundant error print for devm_kzalloc() failure",
+  "body": "devm_kzalloc() will itself print the error message on failure. So let's get\nrid of the redundant error message in ufs_qcom_init().\n\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-10-manivannan.sadhasivam@linaro.org\nReviewed-by: Nitin Rawat <quic_nitirawa@quicinc.com>\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-10-manivannan.sadhasivam@linaro.org"
+   ],
+   "reviewed_by": [
+    "Nitin Rawat <quic_nitirawa@quicinc.com>"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-10-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 10,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 3,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/8291652ed8a2.diff",
+  "patch_bytes": 531
+ },
+ {
+  "sha": "c7afadacc180ae655aa98577aca8fb5fdfb4a761",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:28:55+05:30",
+  "commit_date": "2023-12-13T23:03:46-05:00",
+  "subject": "scsi: ufs: qcom: Use dev_err_probe() to simplify error handling of devm_gpiod_get_optional()",
+  "body": "As done in other places, let's use dev_err_probe() to simplify the error\nhandling while acquiring the device reset gpio using\ndevm_gpiod_get_optional().\n\nWhile at it, let's reword the error message to make it clear that the\nfailure is due to acquiring \"device reset gpio\".\n\nReviewed-by: Andrew Halaney <ahalaney@redhat.com>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-11-manivannan.sadhasivam@linaro.org\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-11-manivannan.sadhasivam@linaro.org"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-11-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 11,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 3,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/c7afadacc180.diff",
+  "patch_bytes": 641
+ },
+ {
+  "sha": "e7458beab8094bc9b0e1feecaa2c7bef1718aa2f",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:28:56+05:30",
+  "commit_date": "2023-12-13T23:03:46-05:00",
+  "subject": "scsi: ufs: qcom: Remove unused ufs_qcom_hosts struct array",
+  "body": "ufs_qcom_hosts array is assigned, but not used anywhere. So let's remove\nit.\n\nReviewed-by: Andrew Halaney <ahalaney@redhat.com>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-12-manivannan.sadhasivam@linaro.org\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-12-manivannan.sadhasivam@linaro.org"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-12-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 12,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 5,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/e7458beab809.diff",
+  "patch_bytes": 1210
+ },
+ {
+  "sha": "be2e06c81a31cf4cf388d80af5ebc9bdc7a8430e",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:28:57+05:30",
+  "commit_date": "2023-12-13T23:03:46-05:00",
+  "subject": "scsi: ufs: qcom: Sort includes alphabetically",
+  "body": "Sort includes alphabetically.\n\nReviewed-by: Nitin Rawat <quic_nitirawa@quicinc.com>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-13-manivannan.sadhasivam@linaro.org\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Nitin Rawat <quic_nitirawa@quicinc.com>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-13-manivannan.sadhasivam@linaro.org"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-13-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 13,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 7,
+    "deleted": 7,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/be2e06c81a31.diff",
+  "patch_bytes": 1008
+ },
+ {
+  "sha": "3b60f4564ff5b0e33d0d256b17594e223f0bcac8",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:28:58+05:30",
+  "commit_date": "2023-12-13T23:03:46-05:00",
+  "subject": "scsi: ufs: qcom: Initialize cycles_in_1us variable in ufs_qcom_set_core_clk_ctrl()",
+  "body": "In case the \"core_clk_unipro\" clock is not provided, \"cycles_in_1us\"\nvariable will be used as uninitialized. So initialize it with 0.\n\nIssue reported by Smatch tool:\n\ndrivers/ufs/host/ufs-qcom.c:1336 ufs_qcom_set_core_clk_ctrl() error: uninitialized symbol 'cycles_in_1us'.\ndrivers/ufs/host/ufs-qcom.c:1341 ufs_qcom_set_core_clk_ctrl() error: uninitialized symbol 'cycles_in_1us'.\n\nReviewed-by: Nitin Rawat <quic_nitirawa@quicinc.com>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-14-manivannan.sadhasivam@linaro.org\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Nitin Rawat <quic_nitirawa@quicinc.com>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-14-manivannan.sadhasivam@linaro.org"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-14-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 14,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/3b60f4564ff5.diff",
+  "patch_bytes": 494
+ },
+ {
+  "sha": "6b481af25ec0edaff8d7b39b2fa17e2f645afc8d",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:28:59+05:30",
+  "commit_date": "2023-12-13T23:03:46-05:00",
+  "subject": "scsi: ufs: qcom: Simplify ufs_qcom_{assert/deassert}_reset",
+  "body": "In both the functions, UFS_PHY_SOFT_RESET contains the mask of the reset\nbit. So this can be passed directly as the value to be written for\nasserting the reset. For deasserting, 0 can be passed.\n\nThis gets rid of the FIELD_PREP() inside these functions and also\nUFS_PHY_RESET_{ENABLE/DISABLE} definitions.\n\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-15-manivannan.sadhasivam@linaro.org\nReviewed-by: Andrew Halaney <ahalaney@redhat.com>\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-15-manivannan.sadhasivam@linaro.org"
+   ],
+   "reviewed_by": [
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-15-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 15,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 7,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/6b481af25ec0.diff",
+  "patch_bytes": 1246
+ },
+ {
+  "sha": "104cd58d9af80f03993607ac86bcd88c10cfba3d",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:29:00+05:30",
+  "commit_date": "2023-12-13T23:03:46-05:00",
+  "subject": "scsi: ufs: qcom: Remove support for host controllers older than v2.0",
+  "body": "The legacy platforms making use of host controllers older than version 2.0\nare not supported in upstream. So there is no need to carry code to support\nthem.\n\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-16-manivannan.sadhasivam@linaro.org\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-16-manivannan.sadhasivam@linaro.org"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-16-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 16,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 11,
+    "deleted": 185,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 27,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/104cd58d9af8.diff",
+  "patch_bytes": 11349
+ },
+ {
+  "sha": "0e9f4375db1ce3fa231d8c7b27dbec9341a2e3ef",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:29:01+05:30",
+  "commit_date": "2023-12-13T23:03:46-05:00",
+  "subject": "scsi: ufs: qcom: Use ufshcd_rmwl() where applicable",
+  "body": "Instead of using both ufshcd_readl() and ufshcd_writel() to read/modify/\nwrite a register, let's make use of the existing helper.\n\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-17-manivannan.sadhasivam@linaro.org\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-17-manivannan.sadhasivam@linaro.org"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-17-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 17,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 8,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.h",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/0e9f4375db1c.diff",
+  "patch_bytes": 1525
+ },
+ {
+  "sha": "cac50d04fffe2ac546a406ea8f5759e0741b2c16",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-08T12:29:02+05:30",
+  "commit_date": "2023-12-13T23:03:46-05:00",
+  "subject": "scsi: ufs: qcom: Remove unused definitions",
+  "body": "Remove unused definitions.\n\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231208065902.11006-18-manivannan.sadhasivam@linaro.org\nReviewed-by: Andrew Halaney <ahalaney@redhat.com>\nTested-by: Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231208065902.11006-18-manivannan.sadhasivam@linaro.org"
+   ],
+   "reviewed_by": [
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ],
+   "tested_by": [
+    "Andrew Halaney <ahalaney@redhat.com> # sa8775p-ride"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231208065902.11006-18-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "series_index": 18,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 6,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/cac50d04fffe.diff",
+  "patch_bytes": 839
+ },
+ {
+  "sha": "9fa268875ca4ff5cad0c1b957388a0aef39920c3",
+  "release": "v6.8",
+  "author": {
+   "name": "Bean Huo",
+   "email": "beanhuo@micron.com"
+  },
+  "author_date": "2023-12-12T23:08:23+01:00",
+  "commit_date": "2023-12-13T23:16:11-05:00",
+  "subject": "scsi: ufs: core: Add ufshcd_is_ufs_dev_busy()",
+  "body": "Add helper inline for retrieving whether UFS device is busy or not.\n\nSigned-off-by: Bean Huo <beanhuo@micron.com>\nLink: https://lore.kernel.org/r/20231212220825.85255-2-beanhuo@iokpp.de\nReviewed-by: Avri Altman <avri.altman@wdc.com>\nReviewed-by: Thomas Weißschuh <linux@weissschuh.net>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231212220825.85255-2-beanhuo@iokpp.de"
+   ],
+   "reviewed_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Thomas Weißschuh <linux@weissschuh.net>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231212220825.85255-2-beanhuo@iokpp.de",
+  "series_id": "20231212220825.85255-beanhuo@iokpp.de",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 7,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/9fa268875ca4.diff",
+  "patch_bytes": 1079
+ },
+ {
+  "sha": "6bf999e0eb41850d5c857102535d5c53b2ede224",
+  "release": "v6.8",
+  "author": {
+   "name": "Bean Huo",
+   "email": "beanhuo@micron.com"
+  },
+  "author_date": "2023-12-12T23:08:24+01:00",
+  "commit_date": "2023-12-13T23:16:11-05:00",
+  "subject": "scsi: ufs: core: Add UFS RTC support",
+  "body": "Add Real Time Clock (RTC) support for UFS device. This enhancement is\ncrucial for the internal maintenance operations of the UFS device. The\npatch enables the device to handle both absolute and relative time\ninformation. Furthermore, it includes periodic task to update the RTC in\naccordance with the UFS Spec, ensuring the accuracy of RTC information for\nthe device's internal processes.\n\nRTC and qTimestamp serve distinct purposes. The RTC provides a coarse level\nof granularity with, at best, approximate single-second resolution. This\nmakes the RTC well-suited for the device to determine the approximate age\nof programmed blocks after being updated by the host. On the other hand,\nqTimestamp offers nanosecond granularity and is specifically designed for\nsynchronizing Device Error Log entries with corresponding host-side logs.\n\nGiven that the RTC has been a standard feature since UFS Spec 2.0, and\nqTimestamp was introduced in UFS Spec 4.0, the majority of UFS devices\ncurrently on the market rely on RTC. Therefore, it is advisable to continue\nsupporting RTC in the Linux kernel. This ensures compatibility with the\nprevailing UFS device implementations and facilitates seamless integration\nwith existing hardware.  By maintaining support for RTC, we ensure broad\ncompatibility and avoid potential issues arising from deviations in device\nspecifications across different UFS versions.\n\nSigned-off-by: Bean Huo <beanhuo@micron.com>\nSigned-off-by: Mike Bi <mikebi@micron.com>\nSigned-off-by: Luca Porzio <lporzio@micron.com>\nLink: https://lore.kernel.org/r/20231212220825.85255-3-beanhuo@iokpp.de\nAcked-by: Avri Altman <avri.altman@wdc.com>\nReviewed-by: Thomas Weißschuh <linux@weissschuh.net>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Mike Bi <mikebi@micron.com>",
+    "Luca Porzio <lporzio@micron.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231212220825.85255-3-beanhuo@iokpp.de"
+   ],
+   "acked_by": [
+    "Avri Altman <avri.altman@wdc.com>"
+   ],
+   "reviewed_by": [
+    "Thomas Weißschuh <linux@weissschuh.net>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231212220825.85255-3-beanhuo@iokpp.de",
+  "series_id": "20231212220825.85255-beanhuo@iokpp.de",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 81,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufs.h",
+    "status": "M",
+    "in_track": true,
+    "added": 13,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/6bf999e0eb41.diff",
+  "patch_bytes": 6488
+ },
+ {
+  "sha": "838f595a567257e3ac0ac33cdb6bb644ca326cc1",
+  "release": "v6.8",
+  "author": {
+   "name": "Bean Huo",
+   "email": "beanhuo@micron.com"
+  },
+  "author_date": "2023-12-12T23:08:25+01:00",
+  "commit_date": "2023-12-13T23:16:12-05:00",
+  "subject": "scsi: ufs: core: Add sysfs node for UFS RTC update",
+  "body": "Introduce a sysfs node named 'rtc_update_ms' within the kernel, enabling\nuser to adjust the RTC periodic update frequency to suit the specific\nrequirements of the system and UFS. Also, this patch allows the user to\ndisable/enable periodic update RTC in the UFS idle time.\n\nSigned-off-by: Bean Huo <beanhuo@micron.com>\nLink: https://lore.kernel.org/r/20231212220825.85255-4-beanhuo@iokpp.de\nAcked-by: Avri Altman <avri.altman@wdc.com>\nReviewed-by: Thomas Weißschuh <linux@weissschuh.net>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231212220825.85255-4-beanhuo@iokpp.de"
+   ],
+   "acked_by": [
+    "Avri Altman <avri.altman@wdc.com>"
+   ],
+   "reviewed_by": [
+    "Thomas Weißschuh <linux@weissschuh.net>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231212220825.85255-4-beanhuo@iokpp.de",
+  "series_id": "20231212220825.85255-beanhuo@iokpp.de",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "Documentation/ABI/testing/sysfs-driver-ufs",
+    "status": "M",
+    "in_track": true,
+    "added": 7,
+    "deleted": 0,
+    "area": "docs",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufs-sysfs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 31,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 9,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufs.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/838f595a5672.diff",
+  "patch_bytes": 3996
+ },
+ {
+  "sha": "24db9626baedf9520f13af58cc5c02756721ec04",
+  "release": "v6.8",
+  "author": {
+   "name": "Martin K. Petersen",
+   "email": "martin.petersen@oracle.com"
+  },
+  "author_date": "2023-12-18T20:23:57-05:00",
+  "commit_date": "2023-12-18T20:23:57-05:00",
+  "subject": "scsi: ufs: host: Fix kernel-doc warning",
+  "body": "Commit fa3dca8251c4 (\"scsi: ufs: host: Rename structure ufs_dev_params\nto ufs_host_params\") inadvertently introduced a comment line without\n'*' prefix. Format the comment section correctly.\n\nReported-by: kernel test robot <lkp@intel.com>\nCloses: https://lore.kernel.org/oe-kbuild-all/202312171915.YhlTLvLL-lkp@intel.com/\nFixes: fa3dca8251c4 (\"scsi: ufs: host: Rename structure ufs_dev_params to ufs_host_params\")\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reported_by": [
+    "kernel test robot <lkp@intel.com>"
+   ],
+   "closes": [
+    "https://lore.kernel.org/oe-kbuild-all/202312171915.YhlTLvLL-lkp@intel.com/"
+   ],
+   "fixes": [
+    "fa3dca8251c4 (\"scsi: ufs: host: Rename structure ufs_dev_params to ufs_host_params\")"
+   ],
+   "signed_off_by": [
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "fa3dca8251c4",
+    "subject": "scsi: ufs: host: Rename structure ufs_dev_params to ufs_host_params",
+    "sha": "fa3dca8251c4fff88da9f64ba931942638ab0c00",
+    "introduced_in": "v6.8"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": null,
+  "series_id": "24db9626baedf9520f13af58cc5c02756721ec04",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufshcd-pltfrm.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/24db9626baed.diff",
+  "patch_bytes": 583
+ },
+ {
+  "sha": "26cdd6940c94cbd81cc524093bd689b061df58c4",
+  "release": "v6.8",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2023-12-14T18:25:32+05:30",
+  "commit_date": "2023-12-18T20:44:17-05:00",
+  "subject": "scsi: ufs: qcom: Fix ESI vector mask",
+  "body": "While cleaning up the code to use ufshcd_rmwl() helper, the ESI vector mask\nwas changed incorrectly. Fix it and also define a proper macro for the\nvalue together with FIELD_PREP().\n\nReported-by: Andrew Halaney <ahalaney@redhat.com>\nFixes: 0e9f4375db1c (\"scsi: ufs: qcom: Use ufshcd_rmwl() where applicable\")\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20231214125532.55109-1-manivannan.sadhasivam@linaro.org\nReviewed-by: Konrad Dybcio <konrad.dybcio@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reported_by": [
+    "Andrew Halaney <ahalaney@redhat.com>"
+   ],
+   "fixes": [
+    "0e9f4375db1c (\"scsi: ufs: qcom: Use ufshcd_rmwl() where applicable\")"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231214125532.55109-1-manivannan.sadhasivam@linaro.org"
+   ],
+   "reviewed_by": [
+    "Konrad Dybcio <konrad.dybcio@linaro.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "0e9f4375db1c",
+    "subject": "scsi: ufs: qcom: Use ufshcd_rmwl() where applicable",
+    "sha": "0e9f4375db1ce3fa231d8c7b27dbec9341a2e3ef",
+    "introduced_in": "v6.8"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20231214125532.55109-1-manivannan.sadhasivam@linaro.org",
+  "series_id": "20231214125532.55109-manivannan.sadhasivam@linaro.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/26cdd6940c94.diff",
+  "patch_bytes": 983
+ },
+ {
+  "sha": "bdf5c0bb4dd9e7a8a4423643e6c73a7114bd58d8",
+  "release": "v6.8",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2023-12-14T11:23:57-08:00",
+  "commit_date": "2023-12-18T20:51:14-05:00",
+  "subject": "scsi: ufs: core: Rename ufshcd_auto_hibern8_enable() and make it static",
+  "body": "Rename ufshcd_auto_hibern8_enable() into ufshcd_configure_auto_hibern8()\nsince this function can enable or disable auto-hibernation. Since\nufshcd_auto_hibern8_enable() is only used inside the UFSHCI driver core,\ndeclare it static. Additionally, move the definition of this function to\njust before its first caller.\n\nSuggested-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nReviewed-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nCc: Avri Altman <avri.altman@wdc.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20231214192416.3638077-2-bvanassche@acm.org\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "suggested_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>"
+   ],
+   "reviewed_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Can Guo <quic_cang@quicinc.com>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "cc": [
+    "Avri Altman <avri.altman@wdc.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231214192416.3638077-2-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231214192416.3638077-2-bvanassche@acm.org",
+  "series_id": "20231214192416.3638077-bvanassche@acm.org",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 11,
+    "deleted": 13,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/bdf5c0bb4dd9.diff",
+  "patch_bytes": 2396
+ },
+ {
+  "sha": "45a2c87f28ad0ee8c286bb6dd5686bc54f5b7160",
+  "release": "v6.8",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2023-12-14T11:23:58-08:00",
+  "commit_date": "2023-12-18T20:51:14-05:00",
+  "subject": "scsi: ufs: core: Simplify ufshcd_auto_hibern8_update()",
+  "body": "Calls to ufshcd_auto_hibern8_update() are already serialized: this function\nis either called if user space software is not running (preparing to\nsuspend) or from a single sysfs store callback function.  Kernfs serializes\nsysfs .store() callbacks. No functionality is changed.\n\nReviewed-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nCc: Avri Altman <avri.altman@wdc.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20231214192416.3638077-3-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "cc": [
+    "Avri Altman <avri.altman@wdc.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231214192416.3638077-3-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231214192416.3638077-3-bvanassche@acm.org",
+  "series_id": "20231214192416.3638077-bvanassche@acm.org",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 12,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/45a2c87f28ad.diff",
+  "patch_bytes": 991
+ },
+ {
+  "sha": "5301b7a04040b0a6191856c765146e0a9ab88ebc",
+  "release": "v6.8",
+  "author": {
+   "name": "Can Guo",
+   "email": "quic_cang@quicinc.com"
+  },
+  "author_date": "2023-12-02T04:36:15-08:00",
+  "commit_date": "2023-12-21T22:39:44+05:30",
+  "subject": "phy: qualcomm: phy-qcom-qmp-ufs: Rectify SM8550 UFS HS-G4 PHY Settings",
+  "body": "The registers, which are being touched in current SM8550 UFS PHY settings,\nand the values being programmed are mainly the ones working for HS-G4 mode,\nmeanwhile, there are also a few ones somehow taken from HS-G5 PHY settings.\nHowever, even consider HS-G4 mode only, some of them are incorrect and some\nare missing. Rectify the HS-G4 PHY settings by strictly aligning with the\nSM8550 UFS PHY Hardware Programming Guide suggested HS-G4 PHY settings.\n\nFixes: 1679bfef906f (\"phy: qcom-qmp-ufs: Add SM8550 support\")\nReviewed-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>\nReviewed-by: Abel Vesa <abel.vesa@linaro.org>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Can Guo <quic_cang@quicinc.com>\nTested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD\nLink: https://lore.kernel.org/r/1701520577-31163-10-git-send-email-quic_cang@quicinc.com\nSigned-off-by: Vinod Koul <vkoul@kernel.org>",
+  "trailers": {
+   "fixes": [
+    "1679bfef906f (\"phy: qcom-qmp-ufs: Add SM8550 support\")"
+   ],
+   "reviewed_by": [
+    "Dmitry Baryshkov <dmitry.baryshkov@linaro.org>",
+    "Abel Vesa <abel.vesa@linaro.org>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ],
+   "signed_off_by": [
+    "Can Guo <quic_cang@quicinc.com>",
+    "Vinod Koul <vkoul@kernel.org>"
+   ],
+   "tested_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/1701520577-31163-10-git-send-email-quic_cang@quicinc.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "1679bfef906f",
+    "subject": "phy: qcom-qmp-ufs: Add SM8550 support",
+    "sha": "1679bfef906f1a722be6e79071a0a7889d21875f",
+    "introduced_in": "v6.3"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "1701520577-31163-10-git-send-email-quic_cang@quicinc.com",
+  "series_id": "1701520577-31163-10-git-send-email-quic_cang@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-qserdes-txrx-ufs-v6.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 19,
+    "deleted": 9,
+    "area": "phy",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "phy",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/5301b7a04040.diff",
+  "patch_bytes": 3503
+ },
+ {
+  "sha": "daf7795406bf307997366f694888bd317ae5b5fa",
+  "release": "v6.8",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2023-12-18T14:52:14-08:00",
+  "commit_date": "2024-01-03T23:03:04-05:00",
+  "subject": "scsi: ufs: core: Simplify power management during async scan",
+  "body": "ufshcd_init() calls pm_runtime_get_sync() before it calls\nasync_schedule(). ufshcd_async_scan() calls pm_runtime_put_sync() directly\nor indirectly from ufshcd_add_lus(). Simplify ufshcd_async_scan() by always\ncalling pm_runtime_put_sync() from ufshcd_async_scan().\n\nCc: <stable@vger.kernel.org>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20231218225229.2542156-2-bvanassche@acm.org\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "cc": [
+    "<stable@vger.kernel.org>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231218225229.2542156-2-bvanassche@acm.org"
+   ],
+   "reviewed_by": [
+    "Can Guo <quic_cang@quicinc.com>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": true,
+  "message_id": "20231218225229.2542156-2-bvanassche@acm.org",
+  "series_id": "20231218225229.2542156-bvanassche@acm.org",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/daf7795406bf.diff",
+  "patch_bytes": 838
+ },
+ {
+  "sha": "ee36710912b2075c417100a8acc642c9c6496501",
+  "release": "v6.8",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2023-12-18T14:52:15-08:00",
+  "commit_date": "2024-01-03T23:03:05-05:00",
+  "subject": "scsi: ufs: core: Remove the ufshcd_hba_exit() call from ufshcd_async_scan()",
+  "body": "Calling ufshcd_hba_exit() from a function that is called asynchronously\nfrom ufshcd_init() is wrong because this triggers multiple race\nconditions. Instead of calling ufshcd_hba_exit(), log an error message.\n\nReported-by: Daniel Mentz <danielmentz@google.com>\nFixes: 1d337ec2f35e (\"ufs: improve init sequence\")\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20231218225229.2542156-3-bvanassche@acm.org\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reported_by": [
+    "Daniel Mentz <danielmentz@google.com>"
+   ],
+   "fixes": [
+    "1d337ec2f35e (\"ufs: improve init sequence\")"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231218225229.2542156-3-bvanassche@acm.org"
+   ],
+   "reviewed_by": [
+    "Can Guo <quic_cang@quicinc.com>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "1d337ec2f35e",
+    "subject": "ufs: improve init sequence",
+    "sha": "1d337ec2f35e69a046dab0cc77e64e68d1cdcd8b",
+    "introduced_in": "v3.18"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20231218225229.2542156-3-bvanassche@acm.org",
+  "series_id": "20231218225229.2542156-bvanassche@acm.org",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 5,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/ee36710912b2.diff",
+  "patch_bytes": 595
+ },
+ {
+  "sha": "b08d86e6eb03566c5dc32e6ff10147f80aeb7511",
+  "release": "v6.8",
+  "author": {
+   "name": "ChanWoo Lee",
+   "email": "cw9316.lee@samsung.com"
+  },
+  "author_date": "2023-12-19T17:27:40+09:00",
+  "commit_date": "2024-01-03T23:05:21-05:00",
+  "subject": "scsi: ufs: qcom: Remove unnecessary goto statement from ufs_qcom_config_esi()",
+  "body": "There is only one place where goto is used, and it is unnecessary to check\nthe ret value through 'goto out' because the ret value is already true.\n\nTherefore, remove the goto statement and integrate the '!ret' condition\ninto the existing code.\n\nSigned-off-by: ChanWoo Lee <cw9316.lee@samsung.com>\nLink: https://lore.kernel.org/r/20231219082740.27644-1-cw9316.lee@samsung.com\nReviewed-by: Christophe JAILLET <christophe.jaillet@wanadoo.fr>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "ChanWoo Lee <cw9316.lee@samsung.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20231219082740.27644-1-cw9316.lee@samsung.com"
+   ],
+   "reviewed_by": [
+    "Christophe JAILLET <christophe.jaillet@wanadoo.fr>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20231219082740.27644-1-cw9316.lee@samsung.com",
+  "series_id": "20231219082740.27644-cw9316.lee@samsung.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 5,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b08d86e6eb03.diff",
+  "patch_bytes": 687
+ },
+ {
+  "sha": "b513d30d59bb383a6a5d6b533afcab2cee99a8f8",
+  "release": "v6.8",
+  "author": {
+   "name": "Alice Chao",
+   "email": "alice.chao@mediatek.com"
+  },
+  "author_date": "2024-02-05T18:49:04+08:00",
+  "commit_date": "2024-02-05T16:23:28-05:00",
+  "subject": "scsi: ufs: core: Fix shift issue in ufshcd_clear_cmd()",
+  "body": "When task_tag >= 32 (in MCQ mode) and sizeof(unsigned int) == 4, 1U <<\ntask_tag will out of bounds for a u32 mask. Fix this up to prevent\nSHIFT_ISSUE (bitwise shifts that are out of bounds for their data type).\n\n[name:debug_monitors&]Unexpected kernel BRK exception at EL1\n[name:traps&]Internal error: BRK handler: 00000000f2005514 [#1] PREEMPT SMP\n[name:mediatek_cpufreq_hw&]cpufreq stop DVFS log done\n[name:mrdump&]Kernel Offset: 0x1ba5800000 from 0xffffffc008000000\n[name:mrdump&]PHYS_OFFSET: 0x80000000\n[name:mrdump&]pstate: 22400005 (nzCv daif +PAN -UAO)\n[name:mrdump&]pc : [0xffffffdbaf52bb2c] ufshcd_clear_cmd+0x280/0x288\n[name:mrdump&]lr : [0xffffffdbaf52a774] ufshcd_wait_for_dev_cmd+0x3e4/0x82c\n[name:mrdump&]sp : ffffffc0081471b0\n<snip>\nWorkqueue: ufs_eh_wq_0 ufshcd_err_handler\nCall trace:\n dump_backtrace+0xf8/0x144\n show_stack+0x18/0x24\n dump_stack_lvl+0x78/0x9c\n dump_stack+0x18/0x44\n mrdump_common_die+0x254/0x480 [mrdump]\n ipanic_die+0x20/0x30 [mrdump]\n notify_die+0x15c/0x204\n die+0x10c/0x5f8\n arm64_notify_die+0x74/0x13c\n do_debug_exception+0x164/0x26c\n el1_dbg+0x64/0x80\n el1h_64_sync_handler+0x3c/0x90\n el1h_64_sync+0x68/0x6c\n ufshcd_clear_cmd+0x280/0x288\n ufshcd_wait_for_dev_cmd+0x3e4/0x82c\n ufshcd_exec_dev_cmd+0x5bc/0x9ac\n ufshcd_verify_dev_init+0x84/0x1c8\n ufshcd_probe_hba+0x724/0x1ce0\n ufshcd_host_reset_and_restore+0x260/0x574\n ufshcd_reset_and_restore+0x138/0xbd0\n ufshcd_err_handler+0x1218/0x2f28\n process_one_work+0x5fc/0x1140\n worker_thread+0x7d8/0xe20\n kthread+0x25c/0x468\n ret_from_fork+0x10/0x20\n\nSigned-off-by: Alice Chao <alice.chao@mediatek.com>\nLink: https://lore.kernel.org/r/20240205104905.24929-1-alice.chao@mediatek.com\nReviewed-by: Stanley Jhu <chu.stanley@gmail.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Alice Chao <alice.chao@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240205104905.24929-1-alice.chao@mediatek.com"
+   ],
+   "reviewed_by": [
+    "Stanley Jhu <chu.stanley@gmail.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240205104905.24929-1-alice.chao@mediatek.com",
+  "series_id": "20240205104905.24929-alice.chao@mediatek.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b513d30d59bb.diff",
+  "patch_bytes": 653
+ },
+ {
+  "sha": "17e94b2585417e04dabc2f13bc03b4665ae687f3",
+  "release": "v6.8",
+  "author": {
+   "name": "SEO HOYOUNG",
+   "email": "hy50.seo@samsung.com"
+  },
+  "author_date": "2024-01-22T17:33:24+09:00",
+  "commit_date": "2024-02-05T16:31:18-05:00",
+  "subject": "scsi: ufs: core: Remove the ufshcd_release() in ufshcd_err_handling_prepare()",
+  "body": "If ufshcd_err_handler() is called in a suspend/resume situation,\nufs_release() can be called twice and active_reqs end up going negative.\nThis is because ufshcd_err_handling_prepare() and\nufshcd_err_handling_unprepare() both call ufshcd_release().\n\nRemove superfluous call to ufshcd_release().\n\nSigned-off-by: SEO HOYOUNG <hy50.seo@samsung.com>\nLink: https://lore.kernel.org/r/20240122083324.11797-1-hy50.seo@samsung.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "SEO HOYOUNG <hy50.seo@samsung.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240122083324.11797-1-hy50.seo@samsung.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Can Guo <quic_cang@quicinc.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240122083324.11797-1-hy50.seo@samsung.com",
+  "series_id": "20240122083324.11797-hy50.seo@samsung.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/17e94b258541.diff",
+  "patch_bytes": 489
+ },
+ {
+  "sha": "4e06ec0774f5bebf10e27bc7a5ace4b48ae0fa56",
+  "release": "v6.8",
+  "author": {
+   "name": "Rob Herring",
+   "email": "robh@kernel.org"
+  },
+  "author_date": "2024-01-24T13:07:33-06:00",
+  "commit_date": "2024-02-13T10:32:13-06:00",
+  "subject": "dt-bindings: ufs: samsung,exynos-ufs: Add size constraints on \"samsung,sysreg\"",
+  "body": "The 'phandle-array' type is a bit ambiguous. It can be either just an\narray of phandles or an array of phandles plus args. \"samsung,sysreg\" is\nthe latter and needs to be constrained to a single entry with a phandle and\noffset.\n\nReviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nLink: https://lore.kernel.org/r/20240124190733.1554314-1-robh@kernel.org\nSigned-off-by: Rob Herring <robh@kernel.org>",
+  "trailers": {
+   "reviewed_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240124190733.1554314-1-robh@kernel.org"
+   ],
+   "signed_off_by": [
+    "Rob Herring <robh@kernel.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240124190733.1554314-1-robh@kernel.org",
+  "series_id": "20240124190733.1554314-robh@kernel.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/samsung,exynos-ufs.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 3,
+    "area": "bindings",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/4e06ec0774f5.diff",
+  "patch_bytes": 941
+ },
+ {
+  "sha": "f2dced9d1992824d677593072bc20eccf66ac5d5",
+  "release": "v6.8",
+  "author": {
+   "name": "Dan Carpenter",
+   "email": "dan.carpenter@linaro.org"
+  },
+  "author_date": "2024-02-13T21:08:09+03:00",
+  "commit_date": "2024-02-15T14:46:13-05:00",
+  "subject": "scsi: ufs: Uninitialized variable in ufshcd_devfreq_target()",
+  "body": "There is one goto where \"sched_clk_scaling_suspend_work\" is true but\n\"scale_up\" is uninitialized.  It leads to a Smatch uninitialized variable\nwarning:\n\ndrivers/ufs/core/ufshcd.c:1589 ufshcd_devfreq_target() error: uninitialized symbol 'scale_up'.\n\nFixes: 1d969731b87f (\"scsi: ufs: core: Only suspend clock scaling if scaling down\")\nSigned-off-by: Dan Carpenter <dan.carpenter@linaro.org>\nLink: https://lore.kernel.org/r/c787d37f-1107-4512-8991-bccf80e74a35@moroto.mountain\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "1d969731b87f (\"scsi: ufs: core: Only suspend clock scaling if scaling down\")"
+   ],
+   "signed_off_by": [
+    "Dan Carpenter <dan.carpenter@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/c787d37f-1107-4512-8991-bccf80e74a35@moroto.mountain"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "1d969731b87f",
+    "subject": "scsi: ufs: core: Only suspend clock scaling if scaling down",
+    "sha": "1d969731b87f122108c50a64acfdbaa63486296e",
+    "introduced_in": "v6.7"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "c787d37f-1107-4512-8991-bccf80e74a35@moroto.mountain",
+  "series_id": "c787d37f-1107-4512-bccf80e74a35@moroto.mountain",
+  "series_index": 8991,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/f2dced9d1992.diff",
+  "patch_bytes": 553
+ }
+]

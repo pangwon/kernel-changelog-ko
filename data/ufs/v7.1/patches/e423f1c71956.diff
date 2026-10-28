@@ -1,0 +1,14 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 5c3518f1f97c..4805e40ed4d7 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -315,6 +315,9 @@ static const struct ufs_dev_quirk ufs_fixups[] = {
+ 	{ .wmanufacturerid = UFS_VENDOR_TOSHIBA,
+ 	  .model = "THGLF2G9D8KBADG",
+ 	  .quirk = UFS_DEVICE_QUIRK_PA_TACTIVATE },
++	{ .wmanufacturerid = UFS_VENDOR_TOSHIBA,
++	  .model = "THGJFJT0E25BAIP",
++	  .quirk = UFS_DEVICE_QUIRK_NO_TIMESTAMP_SUPPORT },
+ 	{ .wmanufacturerid = UFS_VENDOR_TOSHIBA,
+ 	  .model = "THGJFJT1E45BATP",
+ 	  .quirk = UFS_DEVICE_QUIRK_NO_TIMESTAMP_SUPPORT },

@@ -1,0 +1,25 @@
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index b499eade957e..10a28079c8bb 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -14,6 +14,7 @@
+ #include <linux/of.h>
+ #include <linux/of_address.h>
+ #include <linux/of_device.h>
++#include <linux/of_platform.h>
+ #include <linux/phy/phy.h>
+ #include <linux/platform_device.h>
+ #include <linux/pm_qos.h>
+diff --git a/drivers/ufs/host/ufs-renesas.c b/drivers/ufs/host/ufs-renesas.c
+index f8a5e79ed3b4..49f7bafc7d55 100644
+--- a/drivers/ufs/host/ufs-renesas.c
++++ b/drivers/ufs/host/ufs-renesas.c
+@@ -12,7 +12,7 @@
+ #include <linux/kernel.h>
+ #include <linux/module.h>
+ #include <linux/of.h>
+-#include <linux/of_device.h>
++#include <linux/platform_device.h>
+ #include <linux/pm_runtime.h>
+ #include <ufs/ufshcd.h>
+ 

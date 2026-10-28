@@ -1,0 +1,13 @@
+diff --git a/drivers/ufs/core/ufs_bsg.c b/drivers/ufs/core/ufs_bsg.c
+index 252186124669..58b506eac6dc 100644
+--- a/drivers/ufs/core/ufs_bsg.c
++++ b/drivers/ufs/core/ufs_bsg.c
+@@ -105,7 +105,7 @@ static int ufs_bsg_exec_advanced_rpmb_req(struct ufs_hba *hba, struct bsg_job *j
+ 
+ 	if (dir != DMA_NONE) {
+ 		payload = &job->request_payload;
+-		if (!payload || !payload->payload_len || !payload->sg_cnt)
++		if (!payload->payload_len || !payload->sg_cnt)
+ 			return -EINVAL;
+ 
+ 		sg_cnt = dma_map_sg(hba->host->dma_dev, payload->sg_list, payload->sg_cnt, dir);

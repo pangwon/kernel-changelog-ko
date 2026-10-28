@@ -1,0 +1,69 @@
+diff --git a/drivers/ufs/core/ufshcd-crypto.c b/drivers/ufs/core/ufshcd-crypto.c
+index 694ff7578fc1..9e63a9d3cb7e 100644
+--- a/drivers/ufs/core/ufshcd-crypto.c
++++ b/drivers/ufs/core/ufshcd-crypto.c
+@@ -72,11 +72,11 @@ static int ufshcd_crypto_keyslot_program(struct blk_crypto_profile *profile,
+ 
+ 	if (ccap_array[cap_idx].algorithm_id == UFS_CRYPTO_ALG_AES_XTS) {
+ 		/* In XTS mode, the blk_crypto_key's size is already doubled */
+-		memcpy(cfg.crypto_key, key->raw, key->size/2);
++		memcpy(cfg.crypto_key, key->bytes, key->size/2);
+ 		memcpy(cfg.crypto_key + UFS_CRYPTO_KEY_MAX_SIZE/2,
+-		       key->raw + key->size/2, key->size/2);
++		       key->bytes + key->size/2, key->size/2);
+ 	} else {
+-		memcpy(cfg.crypto_key, key->raw, key->size);
++		memcpy(cfg.crypto_key, key->bytes, key->size);
+ 	}
+ 
+ 	ufshcd_program_key(hba, &cfg, slot);
+@@ -185,6 +185,7 @@ int ufshcd_hba_init_crypto_capabilities(struct ufs_hba *hba)
+ 	hba->crypto_profile.ll_ops = ufshcd_crypto_ops;
+ 	/* UFS only supports 8 bytes for any DUN */
+ 	hba->crypto_profile.max_dun_bytes_supported = 8;
++	hba->crypto_profile.key_types_supported = BLK_CRYPTO_KEY_TYPE_RAW;
+ 	hba->crypto_profile.dev = hba->dev;
+ 
+ 	/*
+diff --git a/drivers/ufs/host/ufs-exynos.c b/drivers/ufs/host/ufs-exynos.c
+index 13dd5dfc03eb..6a415d9bdc85 100644
+--- a/drivers/ufs/host/ufs-exynos.c
++++ b/drivers/ufs/host/ufs-exynos.c
+@@ -1320,6 +1320,7 @@ static void exynos_ufs_fmp_init(struct ufs_hba *hba, struct exynos_ufs *ufs)
+ 		return;
+ 	}
+ 	profile->max_dun_bytes_supported = AES_BLOCK_SIZE;
++	profile->key_types_supported = BLK_CRYPTO_KEY_TYPE_RAW;
+ 	profile->dev = hba->dev;
+ 	profile->modes_supported[BLK_ENCRYPTION_MODE_AES_256_XTS] =
+ 		DATA_UNIT_SIZE;
+@@ -1366,7 +1367,7 @@ static int exynos_ufs_fmp_fill_prdt(struct ufs_hba *hba,
+ 				    void *prdt, unsigned int num_segments)
+ {
+ 	struct fmp_sg_entry *fmp_prdt = prdt;
+-	const u8 *enckey = crypt_ctx->bc_key->raw;
++	const u8 *enckey = crypt_ctx->bc_key->bytes;
+ 	const u8 *twkey = enckey + AES_KEYSIZE_256;
+ 	u64 dun_lo = crypt_ctx->bc_dun[0];
+ 	u64 dun_hi = crypt_ctx->bc_dun[1];
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 23b9f6efa047..c3f0aa81ff98 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -147,6 +147,7 @@ static int ufs_qcom_ice_init(struct ufs_qcom_host *host)
+ 
+ 	profile->ll_ops = ufs_qcom_crypto_ops;
+ 	profile->max_dun_bytes_supported = 8;
++	profile->key_types_supported = BLK_CRYPTO_KEY_TYPE_RAW;
+ 	profile->dev = dev;
+ 
+ 	/*
+@@ -202,7 +203,7 @@ static int ufs_qcom_ice_keyslot_program(struct blk_crypto_profile *profile,
+ 	err = qcom_ice_program_key(host->ice,
+ 				   QCOM_ICE_CRYPTO_ALG_AES_XTS,
+ 				   QCOM_ICE_CRYPTO_KEY_SIZE_256,
+-				   key->raw,
++				   key->bytes,
+ 				   key->crypto_cfg.data_unit_size / 512,
+ 				   slot);
+ 	ufshcd_release(hba);

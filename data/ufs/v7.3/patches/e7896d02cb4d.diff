@@ -1,0 +1,37 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index d3044a3089b5..8e8cb04fad1d 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -2506,7 +2506,10 @@ static inline int ufshcd_hba_capabilities(struct ufs_hba *hba)
+ 	hba->nutmrs =
+ 	((hba->capabilities & MASK_TASK_MANAGEMENT_REQUEST_SLOTS) >> 16) + 1;
+ 
+-	hba->nortt = FIELD_GET(MASK_NUMBER_OUTSTANDING_RTT, hba->capabilities) + 1;
++	if (hba->vops && hba->vops->get_hba_nortt)
++		hba->nortt = hba->vops->get_hba_nortt(hba);
++	else
++		hba->nortt = FIELD_GET(MASK_NUMBER_OUTSTANDING_RTT, hba->capabilities) + 1;
+ 
+ 	/* Read crypto capabilities */
+ 	err = ufshcd_hba_init_crypto_capabilities(hba);
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 248d0a5bef40..8e24c4b8e963 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -417,6 +417,8 @@ struct ufshcd_tx_eq_params {
+  * @get_rx_fom: called to get Figure of Merit (FOM) value.
+  * @tx_eqtr_notify: called before and after TX Equalization Training procedure
+  *	to allow platform vendor specific configs to take place.
++ * @get_hba_nortt: called to get maximum number of outstanding RTTs supported by
++ *	the controller.
+  */
+ struct ufs_hba_variant_ops {
+ 	const char *name;
+@@ -479,6 +481,7 @@ struct ufs_hba_variant_ops {
+ 	int	(*tx_eqtr_notify)(struct ufs_hba *hba,
+ 				  enum ufs_notify_change_status status,
+ 				  struct ufs_pa_layer_attr *pwr_mode);
++	int	(*get_hba_nortt)(struct ufs_hba *hba);
+ };
+ 
+ /* clock gating state  */

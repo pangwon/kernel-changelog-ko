@@ -1,0 +1,182 @@
+diff --git a/Documentation/ABI/testing/sysfs-driver-ufs b/Documentation/ABI/testing/sysfs-driver-ufs
+index a90612ab5780..3c422aac778b 100644
+--- a/Documentation/ABI/testing/sysfs-driver-ufs
++++ b/Documentation/ABI/testing/sysfs-driver-ufs
+@@ -1768,3 +1768,26 @@ Description:
+ 		====================   ===========================
+ 
+ 		The attribute is read only.
++
++What:		/sys/bus/platform/drivers/ufshcd/*/dme_qos_notification
++What:		/sys/bus/platform/devices/*.ufs/dme_qos_notification
++Date:		March 2026
++Contact:	Can Guo <can.guo@oss.qualcomm.com>
++Description:
++		This attribute reports and clears pending DME (Device Management
++		Entity) Quality of Service (QoS) notifications. This attribute
++		is a bitfield with the following bit assignments:
++
++		Bit	Description
++		===	======================================
++		0	DME QoS Monitor has been reset by host
++		1	QoS from TX is detected
++		2	QoS from RX is detected
++		3	QoS from PA_INIT is detected
++
++		Reading this attribute returns the pending DME QoS notification
++		bits. Writing '0' to this attribute clears pending DME QoS
++		notification bits. Writing any non-zero value is invalid and
++		will be rejected.
++
++		The attribute is read/write.
+diff --git a/drivers/ufs/core/ufs-sysfs.c b/drivers/ufs/core/ufs-sysfs.c
+index 384d958615d7..99af3c73f1af 100644
+--- a/drivers/ufs/core/ufs-sysfs.c
++++ b/drivers/ufs/core/ufs-sysfs.c
+@@ -605,6 +605,34 @@ static ssize_t device_lvl_exception_id_show(struct device *dev,
+ 	return sysfs_emit(buf, "%llu\n", exception_id);
+ }
+ 
++static ssize_t dme_qos_notification_show(struct device *dev,
++					 struct device_attribute *attr,
++					 char *buf)
++{
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++
++	return sysfs_emit(buf, "0x%x\n", atomic_read(&hba->dme_qos_notification));
++}
++
++static ssize_t dme_qos_notification_store(struct device *dev,
++					  struct device_attribute *attr,
++					  const char *buf, size_t count)
++{
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++	unsigned int value;
++
++	if (kstrtouint(buf, 0, &value))
++		return -EINVAL;
++
++	/* the only supported usecase is to reset the dme_qos_notification */
++	if (value)
++		return -EINVAL;
++
++	atomic_set(&hba->dme_qos_notification, 0);
++
++	return count;
++}
++
+ static DEVICE_ATTR_RW(rpm_lvl);
+ static DEVICE_ATTR_RO(rpm_target_dev_state);
+ static DEVICE_ATTR_RO(rpm_target_link_state);
+@@ -621,6 +649,7 @@ static DEVICE_ATTR_RW(pm_qos_enable);
+ static DEVICE_ATTR_RO(critical_health);
+ static DEVICE_ATTR_RW(device_lvl_exception_count);
+ static DEVICE_ATTR_RO(device_lvl_exception_id);
++static DEVICE_ATTR_RW(dme_qos_notification);
+ 
+ static struct attribute *ufs_sysfs_ufshcd_attrs[] = {
+ 	&dev_attr_rpm_lvl.attr,
+@@ -639,6 +668,7 @@ static struct attribute *ufs_sysfs_ufshcd_attrs[] = {
+ 	&dev_attr_critical_health.attr,
+ 	&dev_attr_device_lvl_exception_count.attr,
+ 	&dev_attr_device_lvl_exception_id.attr,
++	&dev_attr_dme_qos_notification.attr,
+ 	NULL
+ };
+ 
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 017d05ef94e2..8658e6dc8634 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -6966,10 +6966,19 @@ static irqreturn_t ufshcd_update_uic_error(struct ufs_hba *hba)
+ 	}
+ 
+ 	reg = ufshcd_readl(hba, REG_UIC_ERROR_CODE_DME);
+-	if ((reg & UIC_DME_ERROR) &&
+-	    (reg & UIC_DME_ERROR_CODE_MASK)) {
++	if (reg & UIC_DME_ERROR) {
+ 		ufshcd_update_evt_hist(hba, UFS_EVT_DME_ERR, reg);
+-		hba->uic_error |= UFSHCD_UIC_DME_ERROR;
++
++		if (reg & UIC_DME_ERROR_CODE_MASK)
++			hba->uic_error |= UFSHCD_UIC_DME_ERROR;
++
++		if (reg & UIC_DME_QOS_MASK) {
++			atomic_set(&hba->dme_qos_notification,
++				   reg & UIC_DME_QOS_MASK);
++			if (hba->dme_qos_sysfs_handle)
++				sysfs_notify_dirent(hba->dme_qos_sysfs_handle);
++		}
++
+ 		retval |= IRQ_HANDLED;
+ 	}
+ 
+@@ -9101,6 +9110,12 @@ static int ufshcd_post_device_init(struct ufs_hba *hba)
+ 
+ 	/* UFS device is also active now */
+ 	ufshcd_set_ufs_dev_active(hba);
++
++	/* Indicate that DME QoS Monitor has been reset */
++	atomic_set(&hba->dme_qos_notification, 0x1);
++	if (hba->dme_qos_sysfs_handle)
++		sysfs_notify_dirent(hba->dme_qos_sysfs_handle);
++
+ 	ufshcd_force_reset_auto_bkops(hba);
+ 
+ 	ufshcd_set_timestamp_attr(hba);
+@@ -9733,6 +9748,7 @@ static void ufshcd_hba_exit(struct ufs_hba *hba)
+ 		hba->is_powered = false;
+ 		ufs_put_device_desc(hba);
+ 	}
++	sysfs_put(hba->dme_qos_sysfs_handle);
+ }
+ 
+ static int ufshcd_execute_start_stop(struct scsi_device *sdev,
+@@ -11052,6 +11068,8 @@ initialized:
+ 		goto out_disable;
+ 
+ 	ufs_sysfs_add_nodes(hba->dev);
++	hba->dme_qos_sysfs_handle = sysfs_get_dirent(hba->dev->kobj.sd,
++						     "dme_qos_notification");
+ 	async_schedule(ufshcd_async_scan, hba);
+ 
+ 	device_enable_async_suspend(dev);
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 8563b6648976..182f301c11e7 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -943,6 +943,11 @@ enum ufshcd_mcq_opr {
+  * @critical_health_count: count of critical health exceptions
+  * @dev_lvl_exception_count: count of device level exceptions since last reset
+  * @dev_lvl_exception_id: vendor specific information about the device level exception event.
++ * @dme_qos_notification: Bitfield of pending DME Quality of Service (QoS)
++ *	events. Bits[3:1] reflect the corresponding bits of UIC DME Error Code
++ *	field within the Host Controller's UECDME register. Bit[0] is a flag
++ *	indicating that the DME QoS Monitor has been reset by the host.
++ * @dme_qos_sysfs_handle: handle for 'dme_qos_notification' sysfs entry
+  * @rpmbs: list of OP-TEE RPMB devices (one per RPMB region)
+  */
+ struct ufs_hba {
+@@ -1116,6 +1121,10 @@ struct ufs_hba {
+ 	int critical_health_count;
+ 	atomic_t dev_lvl_exception_count;
+ 	u64 dev_lvl_exception_id;
++
++	atomic_t dme_qos_notification;
++	struct kernfs_node *dme_qos_sysfs_handle;
++
+ 	u32 vcc_off_delay_us;
+ 	struct list_head rpmbs;
+ };
+diff --git a/include/ufs/ufshci.h b/include/ufs/ufshci.h
+index 806fdaf52bd9..49a3a279e448 100644
+--- a/include/ufs/ufshci.h
++++ b/include/ufs/ufshci.h
+@@ -271,6 +271,7 @@ enum {
+ /* UECDME - Host UIC Error Code DME 48h */
+ #define UIC_DME_ERROR			0x80000000
+ #define UIC_DME_ERROR_CODE_MASK		0x1
++#define UIC_DME_QOS_MASK		0xE
+ 
+ /* UTRIACR - Interrupt Aggregation control register - 0x4Ch */
+ #define INT_AGGR_TIMEOUT_VAL_MASK		0xFF

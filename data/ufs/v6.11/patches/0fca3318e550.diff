@@ -1,0 +1,177 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index aed6b7acfcc9..a40b0bf2922e 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -453,7 +453,7 @@ static void ufshcd_add_command_trace(struct ufs_hba *hba, unsigned int tag,
+ 
+ 	intr = ufshcd_readl(hba, REG_INTERRUPT_STATUS);
+ 
+-	if (is_mcq_enabled(hba)) {
++	if (hba->mcq_enabled) {
+ 		struct ufs_hw_queue *hwq = ufshcd_mcq_req_to_hwq(hba, rq);
+ 
+ 		hwq_id = hwq->id;
+@@ -2301,7 +2301,7 @@ void ufshcd_send_command(struct ufs_hba *hba, unsigned int task_tag,
+ 	if (unlikely(ufshcd_should_inform_monitor(hba, lrbp)))
+ 		ufshcd_start_monitor(hba, lrbp);
+ 
+-	if (is_mcq_enabled(hba)) {
++	if (hba->mcq_enabled) {
+ 		int utrd_size = sizeof(struct utp_transfer_req_desc);
+ 		struct utp_transfer_req_desc *src = lrbp->utr_descriptor_ptr;
+ 		struct utp_transfer_req_desc *dest;
+@@ -3000,7 +3000,7 @@ static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)
+ 		goto out;
+ 	}
+ 
+-	if (is_mcq_enabled(hba))
++	if (hba->mcq_enabled)
+ 		hwq = ufshcd_mcq_req_to_hwq(hba, scsi_cmd_to_rq(cmd));
+ 
+ 	ufshcd_send_command(hba, tag, hwq);
+@@ -3059,7 +3059,7 @@ static int ufshcd_clear_cmd(struct ufs_hba *hba, u32 task_tag)
+ 	unsigned long flags;
+ 	int err;
+ 
+-	if (is_mcq_enabled(hba)) {
++	if (hba->mcq_enabled) {
+ 		/*
+ 		 * MCQ mode. Clean up the MCQ resources similar to
+ 		 * what the ufshcd_utrl_clear() does for SDB mode.
+@@ -3169,7 +3169,7 @@ retry:
+ 			__func__, lrbp->task_tag);
+ 
+ 		/* MCQ mode */
+-		if (is_mcq_enabled(hba)) {
++		if (hba->mcq_enabled) {
+ 			/* successfully cleared the command, retry if needed */
+ 			if (ufshcd_clear_cmd(hba, lrbp->task_tag) == 0)
+ 				err = -EAGAIN;
+@@ -5560,7 +5560,7 @@ static int ufshcd_poll(struct Scsi_Host *shost, unsigned int queue_num)
+ 	u32 tr_doorbell;
+ 	struct ufs_hw_queue *hwq;
+ 
+-	if (is_mcq_enabled(hba)) {
++	if (hba->mcq_enabled) {
+ 		hwq = &hba->uhq[queue_num];
+ 
+ 		return ufshcd_mcq_poll_cqe_lock(hba, hwq);
+@@ -6201,7 +6201,7 @@ out:
+ /* Complete requests that have door-bell cleared */
+ static void ufshcd_complete_requests(struct ufs_hba *hba, bool force_compl)
+ {
+-	if (is_mcq_enabled(hba))
++	if (hba->mcq_enabled)
+ 		ufshcd_mcq_compl_pending_transfer(hba, force_compl);
+ 	else
+ 		ufshcd_transfer_req_compl(hba);
+@@ -6458,7 +6458,7 @@ static bool ufshcd_abort_one(struct request *rq, void *priv)
+ 		*ret ? "failed" : "succeeded");
+ 
+ 	/* Release cmd in MCQ mode if abort succeeds */
+-	if (is_mcq_enabled(hba) && (*ret == 0)) {
++	if (hba->mcq_enabled && (*ret == 0)) {
+ 		hwq = ufshcd_mcq_req_to_hwq(hba, scsi_cmd_to_rq(lrbp->cmd));
+ 		spin_lock_irqsave(&hwq->cq_lock, flags);
+ 		if (ufshcd_cmd_inflight(lrbp->cmd))
+@@ -7389,7 +7389,7 @@ static int ufshcd_eh_device_reset_handler(struct scsi_cmnd *cmd)
+ 		goto out;
+ 	}
+ 
+-	if (is_mcq_enabled(hba)) {
++	if (hba->mcq_enabled) {
+ 		for (pos = 0; pos < hba->nutrs; pos++) {
+ 			lrbp = &hba->lrb[pos];
+ 			if (ufshcd_cmd_inflight(lrbp->cmd) &&
+@@ -7485,7 +7485,7 @@ int ufshcd_try_to_abort_task(struct ufs_hba *hba, int tag)
+ 			 */
+ 			dev_err(hba->dev, "%s: cmd at tag %d not pending in the device.\n",
+ 				__func__, tag);
+-			if (is_mcq_enabled(hba)) {
++			if (hba->mcq_enabled) {
+ 				/* MCQ mode */
+ 				if (ufshcd_cmd_inflight(lrbp->cmd)) {
+ 					/* sleep for max. 200us same delay as in SDB mode */
+@@ -7563,7 +7563,7 @@ static int ufshcd_abort(struct scsi_cmnd *cmd)
+ 
+ 	ufshcd_hold(hba);
+ 
+-	if (!is_mcq_enabled(hba)) {
++	if (!hba->mcq_enabled) {
+ 		reg = ufshcd_readl(hba, REG_UTP_TRANSFER_REQ_DOOR_BELL);
+ 		if (!test_bit(tag, &hba->outstanding_reqs)) {
+ 			/* If command is already aborted/completed, return FAILED. */
+@@ -7596,7 +7596,7 @@ static int ufshcd_abort(struct scsi_cmnd *cmd)
+ 	}
+ 	hba->req_abort_count++;
+ 
+-	if (!is_mcq_enabled(hba) && !(reg & (1 << tag))) {
++	if (!hba->mcq_enabled && !(reg & (1 << tag))) {
+ 		/* only execute this code in single doorbell mode */
+ 		dev_err(hba->dev,
+ 		"%s: cmd was completed, but without a notifying intr, tag = %d",
+@@ -7623,7 +7623,7 @@ static int ufshcd_abort(struct scsi_cmnd *cmd)
+ 		goto release;
+ 	}
+ 
+-	if (is_mcq_enabled(hba)) {
++	if (hba->mcq_enabled) {
+ 		/* MCQ mode. Branch off to handle abort for mcq mode */
+ 		err = ufshcd_mcq_abort(cmd);
+ 		goto release;
+@@ -8732,7 +8732,7 @@ static int ufshcd_device_init(struct ufs_hba *hba, bool init_dev_params)
+ 	ufshcd_set_link_active(hba);
+ 
+ 	/* Reconfigure MCQ upon reset */
+-	if (is_mcq_enabled(hba) && !init_dev_params)
++	if (hba->mcq_enabled && !init_dev_params)
+ 		ufshcd_config_mcq(hba);
+ 
+ 	/* Verify device initialization by sending NOP OUT UPIU */
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index c7a0ab9b1f59..02c9064284e1 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -693,7 +693,7 @@ static void ufs_mtk_mcq_disable_irq(struct ufs_hba *hba)
+ 	struct ufs_mtk_host *host = ufshcd_get_variant(hba);
+ 	u32 irq, i;
+ 
+-	if (!is_mcq_enabled(hba))
++	if (!hba->mcq_enabled)
+ 		return;
+ 
+ 	if (host->mcq_nr_intr == 0)
+@@ -711,7 +711,7 @@ static void ufs_mtk_mcq_enable_irq(struct ufs_hba *hba)
+ 	struct ufs_mtk_host *host = ufshcd_get_variant(hba);
+ 	u32 irq, i;
+ 
+-	if (!is_mcq_enabled(hba))
++	if (!hba->mcq_enabled)
+ 		return;
+ 
+ 	if (host->mcq_nr_intr == 0)
+@@ -1308,7 +1308,7 @@ static int ufs_mtk_link_set_hpm(struct ufs_hba *hba)
+ 	if (err)
+ 		return err;
+ 
+-	if (is_mcq_enabled(hba)) {
++	if (hba->mcq_enabled) {
+ 		ufs_mtk_config_mcq(hba, false);
+ 		ufshcd_mcq_make_queues_operational(hba);
+ 		ufshcd_mcq_config_mac(hba, hba->nutrs);
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index d4d63507d090..c0e28a512b3c 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -1132,11 +1132,6 @@ struct ufs_hw_queue {
+ 
+ #define MCQ_QCFG_SIZE		0x40
+ 
+-static inline bool is_mcq_enabled(struct ufs_hba *hba)
+-{
+-	return hba->mcq_enabled;
+-}
+-
+ static inline unsigned int ufshcd_mcq_opr_offset(struct ufs_hba *hba,
+ 		enum ufshcd_mcq_opr opr, int idx)
+ {

@@ -1,0 +1,60 @@
+[
+ {
+  "sha": "08f959759e1e6e9c4b898c51a7d387ac3480630b",
+  "subject": "mmc: sdhci-of-dwcmshc: add PD workaround on RK3576",
+  "files": [
+   "drivers/mmc/host/sdhci-of-dwcmshc.c"
+  ]
+ },
+ {
+  "sha": "12185bc38f7667b1d895b2165a8a47335a4cf31b",
+  "subject": "dt-bindings: phy: qcom,sc8280xp-qmp-ufs-phy: document the SM8750 QMP UFS PHY",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "769c2b450b89b6a71ed614b7c507d17a84f52a4e",
+  "subject": "arm64: defconfig: Enable Rockchip UFS host driver",
+  "files": [
+   "arch/arm64/configs/defconfig"
+  ]
+ },
+ {
+  "sha": "11fd259b7a9c386179f4bb9657c7597c8e8de067",
+  "subject": "clk: samsung: introduce Exynos2200 clock driver",
+  "files": [
+   "drivers/clk/samsung/Makefile",
+   "drivers/clk/samsung/clk-exynos2200.c"
+  ]
+ },
+ {
+  "sha": "c75e5e010fef2a62e6f2fe00ee8584e7b3ec82a6",
+  "subject": "scsi: arm64: dts: rockchip: Add UFS support for RK3576 SoC",
+  "files": [
+   "arch/arm64/boot/dts/rockchip/rk3576.dtsi"
+  ]
+ },
+ {
+  "sha": "5893f538e331609fbea244ed14732291edd6ab22",
+  "subject": "arm64: dts: exynosautov920: add ufs phy for ExynosAutov920 SoC",
+  "files": [
+   "arch/arm64/boot/dts/exynos/exynosautov920.dtsi"
+  ]
+ },
+ {
+  "sha": "887ff17cdd8f088a52e2b61e71f2b6c9b9678de6",
+  "subject": "arm64: dts: rockchip: Add devicetree for the ROC-RK3576-PC",
+  "files": [
+   "arch/arm64/boot/dts/rockchip/Makefile",
+   "arch/arm64/boot/dts/rockchip/rk3576-roc-pc.dts"
+  ]
+ },
+ {
+  "sha": "0ee54dcfe76760a65d86437f66df7f93b8b81903",
+  "subject": "dt-bindings: phy: Add ExynosAutov920 UFS PHY bindings",
+  "files": [
+   "Documentation/devicetree/bindings/phy/samsung,ufs-phy.yaml"
+  ]
+ }
+]

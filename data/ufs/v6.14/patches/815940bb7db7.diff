@@ -1,0 +1,125 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 43ddae7318cb..0920a443588c 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -2411,12 +2411,7 @@ static inline int ufshcd_hba_capabilities(struct ufs_hba *hba)
+ 	else
+ 		hba->lsdb_sup = true;
+ 
+-	if (!hba->mcq_sup)
+-		return 0;
+-
+ 	hba->mcq_capabilities = ufshcd_readl(hba, REG_MCQCAP);
+-	hba->ext_iid_sup = FIELD_GET(MASK_EXT_IID_SUPPORT,
+-				     hba->mcq_capabilities);
+ 
+ 	return 0;
+ }
+@@ -8120,31 +8115,6 @@ static void ufshcd_temp_notif_probe(struct ufs_hba *hba, const u8 *desc_buf)
+ 	}
+ }
+ 
+-static void ufshcd_ext_iid_probe(struct ufs_hba *hba, u8 *desc_buf)
+-{
+-	struct ufs_dev_info *dev_info = &hba->dev_info;
+-	u32 ext_ufs_feature;
+-	u32 ext_iid_en = 0;
+-	int err;
+-
+-	/* Only UFS-4.0 and above may support EXT_IID */
+-	if (dev_info->wspecversion < 0x400)
+-		goto out;
+-
+-	ext_ufs_feature = get_unaligned_be32(desc_buf +
+-				     DEVICE_DESC_PARAM_EXT_UFS_FEATURE_SUP);
+-	if (!(ext_ufs_feature & UFS_DEV_EXT_IID_SUP))
+-		goto out;
+-
+-	err = ufshcd_query_attr_retry(hba, UPIU_QUERY_OPCODE_READ_ATTR,
+-				      QUERY_ATTR_IDN_EXT_IID_EN, 0, 0, &ext_iid_en);
+-	if (err)
+-		dev_err(hba->dev, "failed reading bEXTIIDEn. err = %d\n", err);
+-
+-out:
+-	dev_info->b_ext_iid_en = ext_iid_en;
+-}
+-
+ static void ufshcd_set_rtt(struct ufs_hba *hba)
+ {
+ 	struct ufs_dev_info *dev_info = &hba->dev_info;
+@@ -8340,9 +8310,6 @@ static int ufs_get_device_desc(struct ufs_hba *hba)
+ 
+ 	ufs_init_rtc(hba, desc_buf);
+ 
+-	if (hba->ext_iid_sup)
+-		ufshcd_ext_iid_probe(hba, desc_buf);
+-
+ 	/*
+ 	 * ufshcd_read_string_desc returns size of the string
+ 	 * reset the error value
+diff --git a/include/ufs/ufs.h b/include/ufs/ufs.h
+index e594abe5d05f..89672ad8c3bb 100644
+--- a/include/ufs/ufs.h
++++ b/include/ufs/ufs.h
+@@ -180,7 +180,6 @@ enum attr_idn {
+ 	QUERY_ATTR_IDN_AVAIL_WB_BUFF_SIZE       = 0x1D,
+ 	QUERY_ATTR_IDN_WB_BUFF_LIFE_TIME_EST    = 0x1E,
+ 	QUERY_ATTR_IDN_CURR_WB_BUFF_SIZE        = 0x1F,
+-	QUERY_ATTR_IDN_EXT_IID_EN		= 0x2A,
+ 	QUERY_ATTR_IDN_TIMESTAMP		= 0x30
+ };
+ 
+@@ -391,7 +390,6 @@ enum {
+ 	UFS_DEV_EXT_TEMP_NOTIF		= BIT(6),
+ 	UFS_DEV_HPB_SUPPORT		= BIT(7),
+ 	UFS_DEV_WRITE_BOOSTER_SUP	= BIT(8),
+-	UFS_DEV_EXT_IID_SUP		= BIT(16),
+ };
+ #define UFS_DEV_HPB_SUPPORT_VERSION		0x310
+ 
+@@ -585,9 +583,6 @@ struct ufs_dev_info {
+ 
+ 	bool    b_advanced_rpmb_en;
+ 
+-	/* UFS EXT_IID Enable */
+-	bool	b_ext_iid_en;
+-
+ 	/* UFS RTC */
+ 	enum ufs_rtc_time rtc_type;
+ 	time64_t rtc_time_baseline;
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index da0fa5c65081..650ff238cd74 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -952,7 +952,6 @@ enum ufshcd_mcq_opr {
+  * @nr_queues: number of Queues of different queue types
+  * @complete_put: whether or not to call ufshcd_rpm_put() from inside
+  *	ufshcd_resume_complete()
+- * @ext_iid_sup: is EXT_IID is supported by UFSHC
+  * @mcq_sup: is mcq supported by UFSHC
+  * @mcq_enabled: is mcq ready to accept requests
+  * @res: array of resource info of MCQ registers
+@@ -1118,7 +1117,6 @@ struct ufs_hba {
+ 	unsigned int nr_hw_queues;
+ 	unsigned int nr_queues[HCTX_MAX_TYPES];
+ 	bool complete_put;
+-	bool ext_iid_sup;
+ 	bool scsi_host_added;
+ 	bool mcq_sup;
+ 	bool lsdb_sup;
+diff --git a/include/ufs/ufshci.h b/include/ufs/ufshci.h
+index 27364c4a6ef9..612500a7088f 100644
+--- a/include/ufs/ufshci.h
++++ b/include/ufs/ufshci.h
+@@ -82,11 +82,6 @@ enum {
+ 	MASK_MCQ_SUPPORT			= 0x40000000,
+ };
+ 
+-/* MCQ capability mask */
+-enum {
+-	MASK_EXT_IID_SUPPORT = 0x00000400,
+-};
+-
+ enum {
+ 	REG_SQATTR		= 0x0,
+ 	REG_SQLBA		= 0x4,

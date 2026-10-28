@@ -1,0 +1,14 @@
+diff --git a/drivers/ufs/core/ufs-hwmon.c b/drivers/ufs/core/ufs-hwmon.c
+index 101d7082446f..34194064367f 100644
+--- a/drivers/ufs/core/ufs-hwmon.c
++++ b/drivers/ufs/core/ufs-hwmon.c
+@@ -127,7 +127,8 @@ static int ufs_hwmon_write(struct device *dev, enum hwmon_sensor_types type, u32
+ 	return err;
+ }
+ 
+-static umode_t ufs_hwmon_is_visible(const void *_data, enum hwmon_sensor_types type, u32 attr,
++static umode_t ufs_hwmon_is_visible(const void *data,
++				    enum hwmon_sensor_types type, u32 attr,
+ 				    int channel)
+ {
+ 	if (type != hwmon_temp)

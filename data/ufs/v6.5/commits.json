@@ -1,0 +1,2664 @@
+[
+ {
+  "sha": "9a4327fd8864ff78d97e9a3c3c3c992353d06fee",
+  "release": "v6.5",
+  "author": {
+   "name": "Keoseong Park",
+   "email": "keosung.park@samsung.com"
+  },
+  "author_date": "2023-04-27T18:44:20+09:00",
+  "commit_date": "2023-05-08T07:19:20-04:00",
+  "subject": "scsi: ufs: core: Change the module parameter macro of use_mcq_mode",
+  "body": "mcq_mode_ops uses only param_{set,get}_bool(). Therefore, convert\nmodule_param_cb() to module_param() and remove the mcq_mode_ops.\n\nSigned-off-by: Keoseong Park <keosung.park@samsung.com>\nLink: https://lore.kernel.org/r/20230427094420epcms2p1043333a3e0c0cf58e66164e0b83b3b02@epcms2p1\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Keoseong Park <keosung.park@samsung.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230427094420epcms2p1043333a3e0c0cf58e66164e0b83b3b02@epcms2p1"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Stanley Chu <stanley.chu@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230427094420epcms2p1043333a3e0c0cf58e66164e0b83b3b02@epcms2p1",
+  "series_id": "20230427094420epcms2p1043333a3e0c0cf58e66164e0b83b3b02@epcms2p1",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 18,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/9a4327fd8864.diff",
+  "patch_bytes": 1221
+ },
+ {
+  "sha": "19c9322e36a0c8726b901d6c8adb7c9d785da393",
+  "release": "v6.5",
+  "author": {
+   "name": "Dan Carpenter",
+   "email": "dan.carpenter@linaro.org"
+  },
+  "author_date": "2023-05-03T13:40:59+03:00",
+  "commit_date": "2023-05-08T07:19:21-04:00",
+  "subject": "scsi: ufs: ufs-mediatek: Delete some dead code",
+  "body": "There is already a test for \"if (val == state)\" earlier so it's not\npossible here.  Delete the dead code.\n\nFixes: 9006e3986f66 (\"scsi: ufs-mediatek: Do not gate clocks if auto-hibern8 is not entered yet\")\nSigned-off-by: Dan Carpenter <dan.carpenter@linaro.org>\nLink: https://lore.kernel.org/r/68fce64f-4970-45f1-807e-6c0eecdfcdc2@kili.mountain\nReviewed-by: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "9006e3986f66 (\"scsi: ufs-mediatek: Do not gate clocks if auto-hibern8 is not entered yet\")"
+   ],
+   "signed_off_by": [
+    "Dan Carpenter <dan.carpenter@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/68fce64f-4970-45f1-807e-6c0eecdfcdc2@kili.mountain"
+   ],
+   "reviewed_by": [
+    "AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>",
+    "Stanley Chu <stanley.chu@mediatek.com>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "9006e3986f66",
+    "subject": "scsi: ufs-mediatek: Do not gate clocks if auto-hibern8 is not entered yet",
+    "sha": "9006e3986f6689897c2f1ede2671656b1cb41582",
+    "introduced_in": "v5.9"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "68fce64f-4970-45f1-807e-6c0eecdfcdc2@kili.mountain",
+  "series_id": "68fce64f-4970-45f1-807e-6c0eecdfcdc2@kili.mountain",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 3,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/19c9322e36a0.diff",
+  "patch_bytes": 420
+ },
+ {
+  "sha": "7e79881d92e8d52c45992ed4d669985c167fa0ad",
+  "release": "v6.5",
+  "author": {
+   "name": "Krzysztof Kozlowski",
+   "email": "krzysztof.kozlowski@linaro.org"
+  },
+  "author_date": "2023-05-11T19:52:04+02:00",
+  "commit_date": "2023-05-16T21:29:11-04:00",
+  "subject": "scsi: ufs: hwmon: Constify pointers to hwmon_channel_info",
+  "body": "Statically allocated array of pointers to hwmon_channel_info can be made\nconst for safety.\n\nSigned-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nLink: https://lore.kernel.org/r/20230511175204.281038-1-krzysztof.kozlowski@linaro.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230511175204.281038-1-krzysztof.kozlowski@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230511175204.281038-1-krzysztof.kozlowski@linaro.org",
+  "series_id": "20230511175204.281038-krzysztof.kozlowski@linaro.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-hwmon.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/7e79881d92e8.diff",
+  "patch_bytes": 532
+ },
+ {
+  "sha": "a1f871f9f30124669d7afbdb8754f0826f49b564",
+  "release": "v6.5",
+  "author": {
+   "name": "Keoseong Park",
+   "email": "keosung.park@samsung.com"
+  },
+  "author_date": "2023-05-03T19:46:30+09:00",
+  "commit_date": "2023-05-22T17:26:09-04:00",
+  "subject": "scsi: ufs: core: Return earlier if ufshcd_hba_init_crypto_capabilities() fails",
+  "body": "The 'err' variable is used only as the result of\nufshcd_hba_init_crypto_capabilities(), so return 'err' immediately when\nfailed. If it is not an error, explicitly return 0.\n\nSigned-off-by: Keoseong Park <keosung.park@samsung.com>\nLink: https://lore.kernel.org/r/20230503104630epcms2p8b82734102ffb920531e9264604086372@epcms2p8\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Keoseong Park <keosung.park@samsung.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230503104630epcms2p8b82734102ffb920531e9264604086372@epcms2p8"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230503104630epcms2p8b82734102ffb920531e9264604086372@epcms2p8",
+  "series_id": "20230503104630epcms2p8b82734102ffb920531e9264604086372@epcms2p8",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/a1f871f9f301.diff",
+  "patch_bytes": 732
+ },
+ {
+  "sha": "6c03c8e9b729a1ca2131a187233f8836a66a277b",
+  "release": "v6.5",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2023-05-29T13:26:38-07:00",
+  "commit_date": "2023-05-31T11:42:46-04:00",
+  "subject": "scsi: ufs: Conditionally enable the BLK_MQ_F_BLOCKING flag",
+  "body": "Prepare for adding code in ufshcd_queuecommand() that may sleep.\n\nAcked-by: Adrian Hunter <adrian.hunter@intel.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20230529202640.11883-4-bvanassche@acm.org\nReviewed-by: Bean Huo <beanhuo@micron.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "acked_by": [
+    "Adrian Hunter <adrian.hunter@intel.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230529202640.11883-4-bvanassche@acm.org"
+   ],
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230529202640.11883-4-bvanassche@acm.org",
+  "series_id": "20230529202640.11883-bvanassche@acm.org",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/6c03c8e9b729.diff",
+  "patch_bytes": 501
+ },
+ {
+  "sha": "4b68b7f9c46d90c541d39c8b397a86ac0ca4c765",
+  "release": "v6.5",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2023-05-29T13:26:39-07:00",
+  "commit_date": "2023-05-31T11:42:46-04:00",
+  "subject": "scsi: ufs: Declare ufshcd_{hold,release}() once",
+  "body": "ufshcd_hold() and ufshcd_release are declared twice: once in\ndrivers/ufs/core/ufshcd-priv.h and a second time in include/ufs/ufshcd.h.\nRemove the declarations from ufshcd-priv.h.\n\nFixes: dd11376b9f1b (\"scsi: ufs: Split the drivers/scsi/ufs directory\")\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20230529202640.11883-5-bvanassche@acm.org\nReviewed-by: Adrian Hunter <adrian.hunter@intel.com>\nReviewed-by: Keoseong Park <keosung.park@samsung.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "dd11376b9f1b (\"scsi: ufs: Split the drivers/scsi/ufs directory\")"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230529202640.11883-5-bvanassche@acm.org"
+   ],
+   "reviewed_by": [
+    "Adrian Hunter <adrian.hunter@intel.com>",
+    "Keoseong Park <keosung.park@samsung.com>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "dd11376b9f1b",
+    "subject": "scsi: ufs: Split the drivers/scsi/ufs directory",
+    "sha": "dd11376b9f1b73aca3f8c6eb541486bbb6996f05",
+    "introduced_in": "v5.19"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20230529202640.11883-5-bvanassche@acm.org",
+  "series_id": "20230529202640.11883-bvanassche@acm.org",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/4b68b7f9c46d.diff",
+  "patch_bytes": 591
+ },
+ {
+  "sha": "078f4f4b34d6c2dadabb363d3fc6c84b32927dea",
+  "release": "v6.5",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2023-05-29T13:26:40-07:00",
+  "commit_date": "2023-05-31T11:44:01-04:00",
+  "subject": "scsi: ufs: Ungate the clock synchronously",
+  "body": "Ungating the clock asynchronously causes ufshcd_queuecommand() to return\nSCSI_MLQUEUE_HOST_BUSY and hence causes commands to be requeued.  This is\nsuboptimal. Allow ufshcd_queuecommand() to sleep such that clock ungating\ndoes not trigger command requeuing. Remove the ufshcd_scsi_block_requests()\nand ufshcd_scsi_unblock_requests() calls because these are no longer\nneeded. The flush_work(&hba->clk_gating.ungate_work) call is sufficient to\nmake the SCSI core wait for clock ungating to complete.\n\nAcked-by: Adrian Hunter <adrian.hunter@intel.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20230529202640.11883-6-bvanassche@acm.org\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "acked_by": [
+    "Adrian Hunter <adrian.hunter@intel.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230529202640.11883-6-bvanassche@acm.org"
+   ],
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230529202640.11883-6-bvanassche@acm.org",
+  "series_id": "20230529202640.11883-bvanassche@acm.org",
+  "series_index": 6,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-sysfs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-crypto.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 27,
+    "deleted": 59,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/078f4f4b34d6.diff",
+  "patch_bytes": 10636
+ },
+ {
+  "sha": "23caa33d36e7e6f75597b333634d9e54fb40001b",
+  "release": "v6.5",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2023-05-31T10:00:09+03:00",
+  "commit_date": "2023-05-31T11:49:28-04:00",
+  "subject": "scsi: ufs: core: Do not open code SZ_x",
+  "body": "Do not open code SZ_x.\n\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20230531070009.4593-1-avri.altman@wdc.com\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nReviewed-by: Keoseong Park <keosung.park@samsung.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230531070009.4593-1-avri.altman@wdc.com"
+   ],
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Keoseong Park <keosung.park@samsung.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230531070009.4593-1-avri.altman@wdc.com",
+  "series_id": "20230531070009.4593-avri.altman@wdc.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 7,
+    "deleted": 7,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshpb.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshpb.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufs-exynos.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-hisi.c",
+    "status": "M",
+    "in_track": true,
+    "added": 12,
+    "deleted": 12,
+    "area": "host",
+    "vendor": "hisi"
+   },
+   {
+    "path": "include/ufs/ufshci.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": "hisi",
+  "vendors": [
+   "exynos",
+   "hisi"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/23caa33d36e7.diff",
+  "patch_bytes": 7868
+ },
+ {
+  "sha": "8f0c17bf6bf33b1dc4b9ebf33650f7e60b7d5c55",
+  "release": "v6.5",
+  "author": {
+   "name": "Bartosz Golaszewski",
+   "email": "bartosz.golaszewski@linaro.org"
+  },
+  "author_date": "2023-04-11T15:04:42+02:00",
+  "commit_date": "2023-05-31T11:53:53-04:00",
+  "subject": "scsi: dt-bindings: ufs: qcom: Add compatible for sa8775p",
+  "body": "Add the compatible string for the UFS on sa8775p platforms.\n\nSigned-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>\nLink: https://lore.kernel.org/r/20230411130446.401440-2-brgl@bgdev.pl\nReviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bartosz Golaszewski <bartosz.golaszewski@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230411130446.401440-2-brgl@bgdev.pl"
+   ],
+   "reviewed_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230411130446.401440-2-brgl@bgdev.pl",
+  "series_id": "20230411130446.401440-brgl@bgdev.pl",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/qcom,ufs.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "bindings",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/8f0c17bf6bf3.diff",
+  "patch_bytes": 773
+ },
+ {
+  "sha": "2516cb882295694623811f2a1b2d33aa5fc9139c",
+  "release": "v6.5",
+  "author": {
+   "name": "Azeem Shaikh",
+   "email": "azeemshaikh38@gmail.com"
+  },
+  "author_date": "2023-05-30T16:41:31Z",
+  "commit_date": "2023-05-31T18:06:54-04:00",
+  "subject": "scsi: ufs: Replace all non-returning strlcpy() with strscpy()",
+  "body": "strlcpy() reads the entire source buffer first.  This read may exceed the\ndestination size limit.  This is both inefficient and can lead to linear\nread overflows if a source string is not NUL-terminated [1].  In an effort\nto remove strlcpy() completely [2], replace strlcpy() here with strscpy().\nNo return values were used, so direct replacement is safe.\n\n[1] https://www.kernel.org/doc/html/latest/process/deprecated.html#strlcpy\n[2] https://github.com/KSPP/linux/issues/89\n\nSigned-off-by: Azeem Shaikh <azeemshaikh38@gmail.com>\nLink: https://lore.kernel.org/r/20230530164131.987213-1-azeemshaikh38@gmail.com\nReviewed-by: Kees Cook <keescook@chromium.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Azeem Shaikh <azeemshaikh38@gmail.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230530164131.987213-1-azeemshaikh38@gmail.com"
+   ],
+   "reviewed_by": [
+    "Kees Cook <keescook@chromium.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230530164131.987213-1-azeemshaikh38@gmail.com",
+  "series_id": "20230530164131.987213-azeemshaikh38@gmail.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-fault-injection.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/2516cb882295.diff",
+  "patch_bytes": 485
+ },
+ {
+  "sha": "a8f9a36e46344ea5bdc301c2fde0389a463bf0a3",
+  "release": "v6.5",
+  "author": {
+   "name": "Bao D. Nguyen",
+   "email": "quic_nguyenb@quicinc.com"
+  },
+  "author_date": "2023-05-29T15:12:20-07:00",
+  "commit_date": "2023-05-31T20:17:07-04:00",
+  "subject": "scsi: ufs: core: Combine 32-bit command_desc_base_addr_lo/hi",
+  "body": "The UTP command descriptor base address is a 57-bit field in the UTP\ntransfer request descriptor. Combine the two 32-bit\ncommand_desc_base_addr_lo/hi fields into a 64-bit for better handling of\nthis field.\n\nSigned-off-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nLink: https://lore.kernel.org/r/4e6f7f5a15000cdae77c3014b477264f57bf572c.1685396241.git.quic_nguyenb@quicinc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nTested-by: Stanley Chu <stanley.chu@mediatek.com>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/4e6f7f5a15000cdae77c3014b477264f57bf572c.1685396241.git.quic_nguyenb@quicinc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "tested_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "4e6f7f5a15000cdae77c3014b477264f57bf572c.1685396241.git.quic_nguyenb@quicinc.com",
+  "series_id": "4e6f7f5a15000cdae77c3014b477264f57bf572c.1685396241.git.quic_nguyenb@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshci.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/a8f9a36e4634.diff",
+  "patch_bytes": 1697
+ },
+ {
+  "sha": "7aa12d2fe89d7b95ad01ca38a291c7ec3efe7599",
+  "release": "v6.5",
+  "author": {
+   "name": "Bao D. Nguyen",
+   "email": "quic_nguyenb@quicinc.com"
+  },
+  "author_date": "2023-05-29T15:12:21-07:00",
+  "commit_date": "2023-05-31T20:17:08-04:00",
+  "subject": "scsi: ufs: core: Update the ufshcd_clear_cmds() functionality",
+  "body": "In the ufshcd_clear_cmds(), the 2nd parameter would be the bit mask of the\ncommand to be cleared in the transfer request door bell register. This bit\nmask mechanism does not scale well in MCQ mode when the queue depth becomes\nmuch greater than 64. Change the 2nd parameter to the function to be the\ntask_tag number of the corresponding bit to be cleared in the door bell\nregister.  By doing so, MCQ mode with a large queue depth can reuse this\nfunction.\n\nSince the behavior of this function is changed from handling multiple\ncommands into a single command, rename ufshcd_clear_cmds() into\nufshcd_clear_cmd().\n\nSigned-off-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nLink: https://lore.kernel.org/r/8411fb5363acc90519bced30ea2c2ac582ff2340.1685396241.git.quic_nguyenb@quicinc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nTested-by: Stanley Chu <stanley.chu@mediatek.com>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/8411fb5363acc90519bced30ea2c2ac582ff2340.1685396241.git.quic_nguyenb@quicinc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "tested_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "8411fb5363acc90519bced30ea2c2ac582ff2340.1685396241.git.quic_nguyenb@quicinc.com",
+  "series_id": "8411fb5363acc90519bced30ea2c2ac582ff2340.1685396241.git.quic_nguyenb@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 21,
+    "deleted": 16,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/7aa12d2fe89d.diff",
+  "patch_bytes": 3040
+ },
+ {
+  "sha": "8d7290348992f27242dd6a696fa2eede709f0b14",
+  "release": "v6.5",
+  "author": {
+   "name": "Bao D. Nguyen",
+   "email": "quic_nguyenb@quicinc.com"
+  },
+  "author_date": "2023-05-29T15:12:22-07:00",
+  "commit_date": "2023-05-31T20:17:08-04:00",
+  "subject": "scsi: ufs: mcq: Add supporting functions for MCQ abort",
+  "body": "Add supporting functions to handle UFS abort in MCQ mode.\n\nSigned-off-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nLink: https://lore.kernel.org/r/d452c5ad62dc863cc067ec82daa0885ec98bd508.1685396241.git.quic_nguyenb@quicinc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nTested-by: Stanley Chu <stanley.chu@mediatek.com>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/d452c5ad62dc863cc067ec82daa0885ec98bd508.1685396241.git.quic_nguyenb@quicinc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "tested_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "d452c5ad62dc863cc067ec82daa0885ec98bd508.1685396241.git.quic_nguyenb@quicinc.com",
+  "series_id": "d452c5ad62dc863cc067ec82daa0885ec98bd508.1685396241.git.quic_nguyenb@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 167,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 10,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshci.h",
+    "status": "M",
+    "in_track": true,
+    "added": 17,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/8d7290348992.diff",
+  "patch_bytes": 8588
+ },
+ {
+  "sha": "adf452611677d048203398f489e2175a9068f9f7",
+  "release": "v6.5",
+  "author": {
+   "name": "Bao D. Nguyen",
+   "email": "quic_nguyenb@quicinc.com"
+  },
+  "author_date": "2023-05-29T15:12:23-07:00",
+  "commit_date": "2023-05-31T20:17:08-04:00",
+  "subject": "scsi: ufs: mcq: Add support for cleaning up MCQ resources",
+  "body": "Update ufshcd_clear_cmd() to clean up the MCQ resources similar to the\nfunction ufshcd_utrl_clear() does for SDB mode.\n\nUpdate ufshcd_try_to_abort_task() to support MCQ mode so that this function\ncan be invoked in either mcq or SDB mode.\n\nSigned-off-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nLink: https://lore.kernel.org/r/dc6d30b3ee55e2072c162b2c08504ba349b87139.1685396241.git.quic_nguyenb@quicinc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nTested-by: Stanley Chu <stanley.chu@mediatek.com>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/dc6d30b3ee55e2072c162b2c08504ba349b87139.1685396241.git.quic_nguyenb@quicinc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "tested_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "dc6d30b3ee55e2072c162b2c08504ba349b87139.1685396241.git.quic_nguyenb@quicinc.com",
+  "series_id": "dc6d30b3ee55e2072c162b2c08504ba349b87139.1685396241.git.quic_nguyenb@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 65,
+    "deleted": 9,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/adf452611677.diff",
+  "patch_bytes": 4261
+ },
+ {
+  "sha": "f1304d4420777f82a1d844c606db3d9eca841765",
+  "release": "v6.5",
+  "author": {
+   "name": "Bao D. Nguyen",
+   "email": "quic_nguyenb@quicinc.com"
+  },
+  "author_date": "2023-05-29T15:12:24-07:00",
+  "commit_date": "2023-05-31T20:17:08-04:00",
+  "subject": "scsi: ufs: mcq: Added ufshcd_mcq_abort()",
+  "body": "Add ufshcd_mcq_abort() to support UFS abort in MCQ mode.\n\nSigned-off-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nLink: https://lore.kernel.org/r/c80c0adadf09ac1d909ed53b36d54737f62c2332.1685396241.git.quic_nguyenb@quicinc.com\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nTested-by: Stanley Chu <stanley.chu@mediatek.com>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/c80c0adadf09ac1d909ed53b36d54737f62c2332.1685396241.git.quic_nguyenb@quicinc.com"
+   ],
+   "reviewed_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "tested_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "c80c0adadf09ac1d909ed53b36d54737f62c2332.1685396241.git.quic_nguyenb@quicinc.com",
+  "series_id": "c80c0adadf09ac1d909ed53b36d54737f62c2332.1685396241.git.quic_nguyenb@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 60,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 7,
+    "deleted": 5,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/f1304d442077.diff",
+  "patch_bytes": 4232
+ },
+ {
+  "sha": "57d6ef4601c0b7975aab5144c7c3760846362e1c",
+  "release": "v6.5",
+  "author": {
+   "name": "Bao D. Nguyen",
+   "email": "quic_nguyenb@quicinc.com"
+  },
+  "author_date": "2023-05-29T15:12:25-07:00",
+  "commit_date": "2023-05-31T20:17:08-04:00",
+  "subject": "scsi: ufs: mcq: Use ufshcd_mcq_poll_cqe_lock() in MCQ mode",
+  "body": "In preparation for adding MCQ error handler support, update the MCQ code to\nuse the ufshcd_mcq_poll_cqe_lock() in interrupt context instead of using\nufshcd_mcq_poll_cqe_nolock(). This is to keep synchronization between MCQ\ninterrupt and error handler contexts because both need to access the MCQ\nhardware in separate contexts.\n\nSigned-off-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nLink: https://lore.kernel.org/r/6ae727ad2a4040469b8f0632b55e0577d80da11b.1685396241.git.quic_nguyenb@quicinc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nTested-by: Stanley Chu <stanley.chu@mediatek.com>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/6ae727ad2a4040469b8f0632b55e0577d80da11b.1685396241.git.quic_nguyenb@quicinc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "tested_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "6ae727ad2a4040469b8f0632b55e0577d80da11b.1685396241.git.quic_nguyenb@quicinc.com",
+  "series_id": "6ae727ad2a4040469b8f0632b55e0577d80da11b.1685396241.git.quic_nguyenb@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/57d6ef4601c0.diff",
+  "patch_bytes": 3332
+ },
+ {
+  "sha": "ab248643d3d68b30f95ee9c238a5a20a06891204",
+  "release": "v6.5",
+  "author": {
+   "name": "Bao D. Nguyen",
+   "email": "quic_nguyenb@quicinc.com"
+  },
+  "author_date": "2023-05-29T15:12:26-07:00",
+  "commit_date": "2023-05-31T20:17:08-04:00",
+  "subject": "scsi: ufs: core: Add error handling for MCQ mode",
+  "body": "Add support for error handling for MCQ mode.\n\nSuggested-by: Can Guo <quic_cang@quicinc.com>\nCo-developed-by: Stanley Chu <stanley.chu@mediatek.com>\nSigned-off-by: Stanley Chu <stanley.chu@mediatek.com>\nSigned-off-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nLink: https://lore.kernel.org/r/f0d923ee1f009f171a55c258d044e814ec0917ab.1685396241.git.quic_nguyenb@quicinc.com\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nTested-by: Stanley Chu <stanley.chu@mediatek.com>\nReviewed-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "suggested_by": [
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "co_developed_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/f0d923ee1f009f171a55c258d044e814ec0917ab.1685396241.git.quic_nguyenb@quicinc.com"
+   ],
+   "reviewed_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "tested_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "f0d923ee1f009f171a55c258d044e814ec0917ab.1685396241.git.quic_nguyenb@quicinc.com",
+  "series_id": "f0d923ee1f009f171a55c258d044e814ec0917ab.1685396241.git.quic_nguyenb@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 24,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 113,
+    "deleted": 15,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/ab248643d3d6.diff",
+  "patch_bytes": 8182
+ },
+ {
+  "sha": "fe8637f7708c16765ecf4035813efbfdd2c9be10",
+  "release": "v6.5",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2023-05-24T13:36:19-07:00",
+  "commit_date": "2023-05-31T20:35:01-04:00",
+  "subject": "scsi: ufs: core: Increase the START STOP UNIT timeout from one to ten seconds",
+  "body": "One UFS vendor asked to increase the UFS timeout from 1 s to 3 s.  Another\nUFS vendor asked to increase the UFS timeout from 1 s to 10 s.  Hence this\npatch that increases the UFS timeout to 10 s. This patch can cause the\ntotal timeout to exceed 20 s, the Android shutdown timeout.  This is fine\nsince the loop around ufshcd_execute_start_stop() exists to deal with unit\nattentions and because unit attentions are reported quickly.\n\nFixes: dcd5b7637c6d (\"scsi: ufs: Reduce the START STOP UNIT timeout\")\nFixes: 8f2c96420c6e (\"scsi: ufs: core: Reduce the power mode change timeout\")\nAcked-by: Adrian Hunter <adrian.hunter@intel.com>\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nReviewed-by: Bean Huo <beanhuo@micron.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20230524203659.1394307-2-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "dcd5b7637c6d (\"scsi: ufs: Reduce the START STOP UNIT timeout\")",
+    "8f2c96420c6e (\"scsi: ufs: core: Reduce the power mode change timeout\")"
+   ],
+   "acked_by": [
+    "Adrian Hunter <adrian.hunter@intel.com>"
+   ],
+   "reviewed_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Bean Huo <beanhuo@micron.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230524203659.1394307-2-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "dcd5b7637c6d",
+    "subject": "scsi: ufs: Reduce the START STOP UNIT timeout",
+    "sha": "dcd5b7637c6d442d957f73780a03047413ed3a10",
+    "introduced_in": "v6.2"
+   },
+   {
+    "abbrev": "8f2c96420c6e",
+    "subject": "scsi: ufs: core: Reduce the power mode change timeout",
+    "sha": "8f2c96420c6ec3dcb18c8be923e24c6feaa5ccf6",
+    "introduced_in": "v6.0"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20230524203659.1394307-2-bvanassche@acm.org",
+  "series_id": "20230524203659.1394307-bvanassche@acm.org",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/fe8637f7708c.diff",
+  "patch_bytes": 466
+ },
+ {
+  "sha": "549e91a9bbaa0ee480f59357868421a61d369770",
+  "release": "v6.5",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2023-05-24T13:36:20-07:00",
+  "commit_date": "2023-05-31T20:35:01-04:00",
+  "subject": "scsi: ufs: core: Fix handling of lrbp->cmd",
+  "body": "ufshcd_queuecommand() may be called two times in a row for a SCSI command\nbefore it is completed. Hence make the following changes:\n\n - In the functions that submit a command, do not check the old value of\n   lrbp->cmd nor clear lrbp->cmd in error paths.\n\n - In ufshcd_release_scsi_cmd(), do not clear lrbp->cmd.\n\nSee also scsi_send_eh_cmnd().\n\nThis commit prevents that the following appears if a command times out:\n\nWARNING: at drivers/ufs/core/ufshcd.c:2965 ufshcd_queuecommand+0x6f8/0x9a8\nCall trace:\n ufshcd_queuecommand+0x6f8/0x9a8\n scsi_send_eh_cmnd+0x2c0/0x960\n scsi_eh_test_devices+0x100/0x314\n scsi_eh_ready_devs+0xd90/0x114c\n scsi_error_handler+0x2b4/0xb70\n kthread+0x16c/0x1e0\n\nFixes: 5a0b0cb9bee7 (\"[SCSI] ufs: Add support for sending NOP OUT UPIU\")\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20230524203659.1394307-3-bvanassche@acm.org\nAcked-by: Adrian Hunter <adrian.hunter@intel.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "5a0b0cb9bee7 (\"[SCSI] ufs: Add support for sending NOP OUT UPIU\")"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230524203659.1394307-3-bvanassche@acm.org"
+   ],
+   "acked_by": [
+    "Adrian Hunter <adrian.hunter@intel.com>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "5a0b0cb9bee7",
+    "subject": "[SCSI] ufs: Add support for sending NOP OUT UPIU",
+    "sha": "5a0b0cb9bee767ef10ff9ce2fb4141af06416288",
+    "introduced_in": "v3.12"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20230524203659.1394307-3-bvanassche@acm.org",
+  "series_id": "20230524203659.1394307-bvanassche@acm.org",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 6,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/549e91a9bbaa.diff",
+  "patch_bytes": 1702
+ },
+ {
+  "sha": "b251f6c5fe3b57898896df06a5cf90865596ee5e",
+  "release": "v6.5",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2023-05-24T13:36:21-07:00",
+  "commit_date": "2023-05-31T20:35:01-04:00",
+  "subject": "scsi: ufs: core: Move ufshcd_wl_shutdown()",
+  "body": "Move the definition of ufshcd_wl_shutdown() to make the next patch in this\nseries easier to review.\n\nReviewed-by: Adrian Hunter <adrian.hunter@intel.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20230524203659.1394307-4-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Adrian Hunter <adrian.hunter@intel.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230524203659.1394307-4-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230524203659.1394307-4-bvanassche@acm.org",
+  "series_id": "20230524203659.1394307-bvanassche@acm.org",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 22,
+    "deleted": 22,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b251f6c5fe3b.diff",
+  "patch_bytes": 1562
+ },
+ {
+  "sha": "0818a6903c8081a17da4b1f50ff156537f99b02f",
+  "release": "v6.5",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2023-05-24T13:36:22-07:00",
+  "commit_date": "2023-05-31T20:35:01-04:00",
+  "subject": "scsi: ufs: core: Simplify driver shutdown",
+  "body": "All UFS host drivers call ufshcd_shutdown(). Hence, instead of calling\nufshcd_shutdown() from the host driver .shutdown() callback, inline that\nfunction into ufshcd_wl_shutdown().\n\nReviewed-by: Adrian Hunter <adrian.hunter@intel.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20230524203659.1394307-5-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Adrian Hunter <adrian.hunter@intel.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230524203659.1394307-5-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230524203659.1394307-5-bvanassche@acm.org",
+  "series_id": "20230524203659.1394307-bvanassche@acm.org",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 18,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/cdns-pltfrm.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "cdns"
+   },
+   {
+    "path": "drivers/ufs/host/tc-dwc-g210-pci.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 10,
+    "area": "host",
+    "vendor": "snps"
+   },
+   {
+    "path": "drivers/ufs/host/tc-dwc-g210-pltfrm.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "snps"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-exynos.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-hisi.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "hisi"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-sprd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "sprd"
+   },
+   {
+    "path": "drivers/ufs/host/ufshcd-pci.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 10,
+    "area": "host",
+    "vendor": "intel"
+   },
+   {
+    "path": "drivers/ufs/host/ufshcd-pltfrm.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 6,
+    "area": "host",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufshcd-pltfrm.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "host",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": "snps",
+  "vendors": [
+   "cdns",
+   "exynos",
+   "hisi",
+   "intel",
+   "mediatek",
+   "qcom",
+   "snps",
+   "sprd"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/0818a6903c80.diff",
+  "patch_bytes": 8247
+ },
+ {
+  "sha": "72554035b9797e00e68cd866e6cefa7f0b2c6f76",
+  "release": "v6.5",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2023-05-31T15:40:47-07:00",
+  "commit_date": "2023-06-07T21:20:21-04:00",
+  "subject": "scsi: ufs: core: Remove a ufshcd_add_command_trace() call",
+  "body": "ufshcd_add_command_trace() traces SCSI commands. Remove a\nufshcd_add_command_trace() call from a code path that is not related to\nSCSI commands.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20230531224050.25554-1-bvanassche@acm.org\nReviewed-by: Avri Altman <avri.altman@wdc.com>\nReviewed-by: Bean Huo <beanhuo@micron.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230531224050.25554-1-bvanassche@acm.org"
+   ],
+   "reviewed_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Bean Huo <beanhuo@micron.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230531224050.25554-1-bvanassche@acm.org",
+  "series_id": "20230531224050.25554-bvanassche@acm.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/72554035b979.diff",
+  "patch_bytes": 511
+ },
+ {
+  "sha": "e01d05bbf6348ccd9f5a057280310d78ea9e7b52",
+  "release": "v6.5",
+  "author": {
+   "name": "zhanghui",
+   "email": "zhanghui31@xiaomi.com"
+  },
+  "author_date": "2023-06-01T20:46:14+08:00",
+  "commit_date": "2023-06-07T21:20:21-04:00",
+  "subject": "scsi: ufs: core: Fix ufshcd_inc_sq_tail() function bug",
+  "body": "When qdepth is not power of 2, not every bit of the mask is 1, so\nin sq_tail_slot some bits will be cleared unexpectedly.\n\nSigned-off-by: zhanghui <zhanghui31@xiaomi.com>\nLink: https://lore.kernel.org/r/20230601124613.1446-1-zhanghui31@xiaomi.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "zhanghui <zhanghui31@xiaomi.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230601124613.1446-1-zhanghui31@xiaomi.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Stanley Chu <stanley.chu@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230601124613.1446-1-zhanghui31@xiaomi.com",
+  "series_id": "20230601124613.1446-zhanghui31@xiaomi.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/e01d05bbf634.diff",
+  "patch_bytes": 665
+ },
+ {
+  "sha": "9c24f90f6a5f3ec0d782813ac5f211d411e4f542",
+  "release": "v6.5",
+  "author": {
+   "name": "Stanley Chu",
+   "email": "stanley.chu@mediatek.com"
+  },
+  "author_date": "2023-06-02T06:50:48+08:00",
+  "commit_date": "2023-06-07T21:20:21-04:00",
+  "subject": "scsi: ufs: core: Combine ufshcd_mq_poll_cqe functions",
+  "body": "Currently, ufshcd_mcq_poll_cqe_nolock() is only called by\nufshcd_mcq_poll_cqe_lock() with the addition of a spinlock wrapper for\nufshcd_mcq_poll_cqe_nolock(). Combining these two functions into one\nresults in cleaner code.\n\nReviewed-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nSigned-off-by: Stanley Chu <stanley.chu@mediatek.com>\nLink: https://lore.kernel.org/r/20230601225048.12228-1-stanley.chu@mediatek.com\nReviewed-by: Keoseong Park <keosung.park@samsung.com>\nAcked-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Keoseong Park <keosung.park@samsung.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230601225048.12228-1-stanley.chu@mediatek.com"
+   ],
+   "acked_by": [
+    "Bean Huo <beanhuo@micron.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230601225048.12228-1-stanley.chu@mediatek.com",
+  "series_id": "20230601225048.12228-stanley.chu@mediatek.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 13,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/9c24f90f6a5f.diff",
+  "patch_bytes": 1231
+ },
+ {
+  "sha": "e246514ae698813ab1eadb1600aeea0a0c959769",
+  "release": "v6.5",
+  "author": {
+   "name": "Krzysztof Kozlowski",
+   "email": "krzysztof.kozlowski@linaro.org"
+  },
+  "author_date": "2023-06-09T16:06:51+02:00",
+  "commit_date": "2023-06-16T12:04:30-04:00",
+  "subject": "scsi: ufs: dt-bindings: samsung,exynos: Drop unneeded quotes",
+  "body": "Clean up bindings dropping unneeded quotes. Once all these are fixed,\nchecking for this can be enabled in yamllint.\n\nSigned-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nLink: https://lore.kernel.org/r/20230609140651.64488-1-krzysztof.kozlowski@linaro.org\nAcked-by: Alim Akhtar <alim.akhtar@samsung.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230609140651.64488-1-krzysztof.kozlowski@linaro.org"
+   ],
+   "acked_by": [
+    "Alim Akhtar <alim.akhtar@samsung.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230609140651.64488-1-krzysztof.kozlowski@linaro.org",
+  "series_id": "20230609140651.64488-krzysztof.kozlowski@linaro.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/samsung,exynos-ufs.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "bindings",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/e246514ae698.diff",
+  "patch_bytes": 731
+ },
+ {
+  "sha": "0fef6bb730c490fcdc4347dbd21646d3ffe62cf5",
+  "release": "v6.5",
+  "author": {
+   "name": "Stanley Chu",
+   "email": "stanley.chu@mediatek.com"
+  },
+  "author_date": "2023-06-10T10:15:51+08:00",
+  "commit_date": "2023-06-16T12:04:30-04:00",
+  "subject": "scsi: ufs: core: mcq: Fix the incorrect OCS value for the device command",
+  "body": "In MCQ mode, when a device command uses a hardware queue shared with other\ncommands, a race condition may occur in the following scenario:\n\n 1. A device command is completed in CQx with CQE entry \"e\".\n\n 2. The interrupt handler copies the \"cqe\" pointer to \"hba->dev_cmd.cqe\"\n    and completes \"hba->dev_cmd.complete\".\n\n 3. The \"ufshcd_wait_for_dev_cmd()\" function is awakened and retrieves the\n    OCS value from \"hba->dev_cmd.cqe\".\n\nHowever, there is a possibility that the CQE entry \"e\" will be overwritten\nby newly completed commands in CQx, resulting in an incorrect OCS value\nbeing received by \"ufshcd_wait_for_dev_cmd()\".\n\nTo avoid this race condition, the OCS value should be immediately copied to\nthe struct \"lrb\" of the device command. Then \"ufshcd_wait_for_dev_cmd()\"\ncan retrieve the OCS value from the struct \"lrb\".\n\nFixes: 57b1c0ef89ac (\"scsi: ufs: core: mcq: Add support to allocate multiple queues\")\nSuggested-by: Can Guo <quic_cang@quicinc.com>\nSigned-off-by: Stanley Chu <stanley.chu@mediatek.com>\nLink: https://lore.kernel.org/r/20230610021553.1213-2-powen.kao@mediatek.com\nTested-by: Po-Wen Kao <powen.kao@mediatek.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "57b1c0ef89ac (\"scsi: ufs: core: mcq: Add support to allocate multiple queues\")"
+   ],
+   "suggested_by": [
+    "Can Guo <quic_cang@quicinc.com>"
+   ],
+   "signed_off_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230610021553.1213-2-powen.kao@mediatek.com"
+   ],
+   "tested_by": [
+    "Po-Wen Kao <powen.kao@mediatek.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "57b1c0ef89ac",
+    "subject": "scsi: ufs: core: mcq: Add support to allocate multiple queues",
+    "sha": "57b1c0ef89ac9d9e7475df7843aeb7672ebcd197",
+    "introduced_in": "v6.3"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20230610021553.1213-2-powen.kao@mediatek.com",
+  "series_id": "20230610021553.1213-powen.kao@mediatek.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 7,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/0fef6bb730c4.diff",
+  "patch_bytes": 1687
+ },
+ {
+  "sha": "ccb23dc3435a0d9dbc07c5156a530a4aae6c851a",
+  "release": "v6.5",
+  "author": {
+   "name": "Po-Wen Kao",
+   "email": "powen.kao@mediatek.com"
+  },
+  "author_date": "2023-06-10T10:15:52+08:00",
+  "commit_date": "2023-06-16T12:04:30-04:00",
+  "subject": "scsi: ufs: core: Remove dedicated hwq for dev command",
+  "body": "This commit depends on \"scsi: ufs: core: mcq: Fix the incorrect OCS value\nfor the device command\" which takes care of the OCS value of dev commands\nin MCQ mode.\n\nIt is safe to share first hwq for dev command and I/O request here.\n\nTested-by: Po-Wen Kao <powen.kao@mediatek.com>\nSigned-off-by: Po-Wen Kao <powen.kao@mediatek.com>\nLink: https://lore.kernel.org/r/20230610021553.1213-3-powen.kao@mediatek.com\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "tested_by": [
+    "Po-Wen Kao <powen.kao@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Po-Wen Kao <powen.kao@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230610021553.1213-3-powen.kao@mediatek.com"
+   ],
+   "reviewed_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230610021553.1213-3-powen.kao@mediatek.com",
+  "series_id": "20230610021553.1213-powen.kao@mediatek.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 10,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/ccb23dc3435a.diff",
+  "patch_bytes": 3426
+ },
+ {
+  "sha": "c4ad4f2e6646dcd29a1ff7ff682bf650a67b0335",
+  "release": "v6.5",
+  "author": {
+   "name": "Po-Wen Kao",
+   "email": "powen.kao@mediatek.com"
+  },
+  "author_date": "2023-06-12T16:58:09+08:00",
+  "commit_date": "2023-06-16T12:04:30-04:00",
+  "subject": "scsi: ufs: core: Add host quirk UFSHCD_QUIRK_MCQ_BROKEN_INTR",
+  "body": "Quirk UFSHCD_QUIRK_MCQ_BROKEN_INTR is introduced for hosts that implement a\ndifferent interrupt topology from the UFSHCI 4.0 spec.  Some hosts raise\nper hw queue interrupt in addition to CQES (traditional) when ESI is\ndisabled.\n\nEnabling this quirk will disable CQES and use only per hw queue interrupt.\n\nSigned-off-by: Po-Wen Kao <powen.kao@mediatek.com>\nLink: https://lore.kernel.org/r/20230612085817.12275-2-powen.kao@mediatek.com\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Po-Wen Kao <powen.kao@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230612085817.12275-2-powen.kao@mediatek.com"
+   ],
+   "reviewed_by": [
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230612085817.12275-2-powen.kao@mediatek.com",
+  "series_id": "20230612085817.12275-powen.kao@mediatek.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 7,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/c4ad4f2e6646.diff",
+  "patch_bytes": 1258
+ },
+ {
+  "sha": "aa9d5d0015a8b73aa557ab45933efe9cb68a3784",
+  "release": "v6.5",
+  "author": {
+   "name": "Po-Wen Kao",
+   "email": "powen.kao@mediatek.com"
+  },
+  "author_date": "2023-06-12T16:58:10+08:00",
+  "commit_date": "2023-06-16T12:04:31-04:00",
+  "subject": "scsi: ufs: core: Add host quirk UFSHCD_QUIRK_MCQ_BROKEN_RTC",
+  "body": "Some hosts do not implement SQ Run Time Command (SQRTC) register, thus we\nneed this quirk to skip the related flow.\n\nSigned-off-by: Po-Wen Kao <powen.kao@mediatek.com>\nLink: https://lore.kernel.org/r/20230612085817.12275-3-powen.kao@mediatek.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Po-Wen Kao <powen.kao@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230612085817.12275-3-powen.kao@mediatek.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Stanley Chu <stanley.chu@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230612085817.12275-3-powen.kao@mediatek.com",
+  "series_id": "20230612085817.12275-powen.kao@mediatek.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 12,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/aa9d5d0015a8.diff",
+  "patch_bytes": 1974
+ },
+ {
+  "sha": "95cd364ccc975e05881012832dc121c19049d405",
+  "release": "v6.5",
+  "author": {
+   "name": "Po-Wen Kao",
+   "email": "powen.kao@mediatek.com"
+  },
+  "author_date": "2023-06-12T16:58:11+08:00",
+  "commit_date": "2023-06-16T12:04:31-04:00",
+  "subject": "scsi: ufs: ufs-mediatek: Set UFSHCD_QUIRK_MCQ_BROKEN_INTR quirk",
+  "body": "Enable UFSHCD_QUIRK_MCQ_BROKEN_INTR for MediaTek host.\n\nSigned-off-by: Po-Wen Kao <powen.kao@mediatek.com>\nLink: https://lore.kernel.org/r/20230612085817.12275-4-powen.kao@mediatek.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Po-Wen Kao <powen.kao@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230612085817.12275-4-powen.kao@mediatek.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Stanley Chu <stanley.chu@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230612085817.12275-4-powen.kao@mediatek.com",
+  "series_id": "20230612085817.12275-powen.kao@mediatek.com",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/95cd364ccc97.diff",
+  "patch_bytes": 514
+ },
+ {
+  "sha": "3c9b49be666679d64191b05c6f3e3fcc9259040d",
+  "release": "v6.5",
+  "author": {
+   "name": "Po-Wen Kao",
+   "email": "powen.kao@mediatek.com"
+  },
+  "author_date": "2023-06-12T16:58:12+08:00",
+  "commit_date": "2023-06-16T12:04:31-04:00",
+  "subject": "scsi: ufs: ufs-mediatek: Set UFSHCD_QUIRK_MCQ_BROKEN_RTC quirk",
+  "body": "Enable UFSHCD_QUIRK_MCQ_BROKEN_RTC for MediaTek host.\n\nSigned-off-by: Po-Wen Kao <powen.kao@mediatek.com>\nLink: https://lore.kernel.org/r/20230612085817.12275-5-powen.kao@mediatek.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Stanley Chu <stanley.chu@mediatek.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Po-Wen Kao <powen.kao@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230612085817.12275-5-powen.kao@mediatek.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Stanley Chu <stanley.chu@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230612085817.12275-5-powen.kao@mediatek.com",
+  "series_id": "20230612085817.12275-powen.kao@mediatek.com",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/3c9b49be6666.diff",
+  "patch_bytes": 521
+ },
+ {
+  "sha": "29a6d1215b7cd5fdff9c3c31ea26076a694ee0a3",
+  "release": "v6.5",
+  "author": {
+   "name": "Abel Vesa",
+   "email": "abel.vesa@linaro.org"
+  },
+  "author_date": "2023-06-12T22:28:45+03:00",
+  "commit_date": "2023-06-16T12:04:31-04:00",
+  "subject": "scsi: ufs: dt-bindings: qcom: Add ICE phandle",
+  "body": "Starting with SM8550, the ICE will have its own devicetree node so add the\nqcom,ice property to reference it.\n\nReviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nSigned-off-by: Abel Vesa <abel.vesa@linaro.org>\nLink: https://lore.kernel.org/r/20230612192847.1599416-2-abel.vesa@linaro.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>"
+   ],
+   "signed_off_by": [
+    "Abel Vesa <abel.vesa@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230612192847.1599416-2-abel.vesa@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230612192847.1599416-2-abel.vesa@linaro.org",
+  "series_id": "20230612192847.1599416-abel.vesa@linaro.org",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/qcom,ufs.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 24,
+    "deleted": 0,
+    "area": "bindings",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/29a6d1215b7c.diff",
+  "patch_bytes": 999
+ },
+ {
+  "sha": "56541c7c4468a9de26d82ba6e8c10ace286f8fdd",
+  "release": "v6.5",
+  "author": {
+   "name": "Abel Vesa",
+   "email": "abel.vesa@linaro.org"
+  },
+  "author_date": "2023-06-12T22:28:46+03:00",
+  "commit_date": "2023-06-16T12:04:31-04:00",
+  "subject": "scsi: ufs: ufs-qcom: Switch to the new ICE API",
+  "body": "Now that there is a new dedicated ICE driver, drop the ufs-qcom-ice and use\nthe new ICE api provided by the Qualcomm soc driver ice. The platforms that\nalready have ICE support will use the API as library since there will not\nbe a devicetree node, but instead they have reg range. In this case, the\nof_qcom_ice_get will return an ICE instance created for the consumer's\ndevice. But if there are platforms that do not have ice reg in the consumer\ndevicetree node and instead provide a dedicated ICE devicetree node, the\nof_qcom_ice_get will look up the device based on qcom,ice property and will\nget the ICE instance registered by the probe function of the ice driver.\n\nThe ICE clock is now handle by the new driver. This is done by enabling it\non the creation of the ICE instance and then enabling/disabling it on UFS\nruntime resume/suspend.\n\nSigned-off-by: Abel Vesa <abel.vesa@linaro.org>\nLink: https://lore.kernel.org/r/20230612192847.1599416-3-abel.vesa@linaro.org\nReviewed-by: Eric Biggers <ebiggers@google.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Abel Vesa <abel.vesa@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230612192847.1599416-3-abel.vesa@linaro.org"
+   ],
+   "reviewed_by": [
+    "Eric Biggers <ebiggers@google.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230612192847.1599416-3-abel.vesa@linaro.org",
+  "series_id": "20230612192847.1599416-abel.vesa@linaro.org",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/host/Kconfig",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/Makefile",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 3,
+    "area": "host",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom-ice.c",
+    "status": "D",
+    "in_track": true,
+    "added": 0,
+    "deleted": 244,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 97,
+    "deleted": 2,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.h",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 27,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/56541c7c4468.diff",
+  "patch_bytes": 13405
+ },
+ {
+  "sha": "e3d55626cff32cf7defff7f2053672adc4a712da",
+  "release": "v6.5",
+  "author": {
+   "name": "Lu Hongfei",
+   "email": "luhongfei@vivo.com"
+  },
+  "author_date": "2023-06-13T10:22:34+08:00",
+  "commit_date": "2023-06-16T12:04:31-04:00",
+  "subject": "scsi: ufs: wb: Add explicit flush_threshold sysfs attribute",
+  "body": "There are three flags that control Write Booster Feature:\n\n    1. WB ON/OFF\n    2. WB Hibern Flush ON/OFF (implicitly)\n    3. WB Flush ON/OFF (explicit)\n\nIn the case of \"Hibern Flush\", one of the conditions for flush WB buffer is\nthat avail_wb_buff < wb_flush_threshold.\n\nAs we know, different users have different requirements for power\nconsumption and performance. Therefore, we need the ability to manually set\nwb_flush_threshold, so that users can easily and flexibly adjust the\nwb_flush_threshold value, thereby achieving a balance between power\nconsumption and performance.\n\nSo the sysfs attribute that controls this is necessary.\n\nwb_flush_threshold represents the threshold for flushing WB buffer, whose\nvalue expressed in unit of 10% granularity, such as '1' representing 10%,\n'2' representing 20%, and so on.\n\nSigned-off-by: Lu Hongfei <luhongfei@vivo.com>\nLink: https://lore.kernel.org/r/20230613022240.16595-1-luhongfei@vivo.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Lu Hongfei <luhongfei@vivo.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230613022240.16595-1-luhongfei@vivo.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230613022240.16595-1-luhongfei@vivo.com",
+  "series_id": "20230613022240.16595-luhongfei@vivo.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "Documentation/ABI/testing/sysfs-driver-ufs",
+    "status": "M",
+    "in_track": true,
+    "added": 11,
+    "deleted": 0,
+    "area": "docs",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufs-sysfs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 33,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/e3d55626cff3.diff",
+  "patch_bytes": 2879
+ },
+ {
+  "sha": "51031cc3f903e202cb79a27766e10227b9cace97",
+  "release": "v6.5",
+  "author": {
+   "name": "Adrian Hunter",
+   "email": "adrian.hunter@intel.com"
+  },
+  "author_date": "2023-06-13T20:03:27+03:00",
+  "commit_date": "2023-06-16T12:04:31-04:00",
+  "subject": "scsi: ufs: ufs-pci: Add support for Intel Arrow Lake",
+  "body": "Add PCI ID to support Intel Arrow Lake, same as MTL (Intel Meteor Lake).\n\nSigned-off-by: Adrian Hunter <adrian.hunter@intel.com>\nLink: https://lore.kernel.org/r/20230613170327.61186-1-adrian.hunter@intel.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Avri Altman <avri.altman@wdc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Adrian Hunter <adrian.hunter@intel.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230613170327.61186-1-adrian.hunter@intel.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Avri Altman <avri.altman@wdc.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230613170327.61186-1-adrian.hunter@intel.com",
+  "series_id": "20230613170327.61186-adrian.hunter@intel.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufshcd-pci.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "intel"
+   }
+  ],
+  "area": "host",
+  "vendor": "intel",
+  "vendors": [
+   "intel"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/51031cc3f903.diff",
+  "patch_bytes": 594
+ },
+ {
+  "sha": "9b7c13b83c1dedb79a746eae9dfabc10a2673049",
+  "release": "v6.5",
+  "author": {
+   "name": "Abel Vesa",
+   "email": "abel.vesa@linaro.org"
+  },
+  "author_date": "2023-06-23T14:30:05+03:00",
+  "commit_date": "2023-06-28T21:56:24-04:00",
+  "subject": "scsi: dt-bindings: ufs: qcom: Fix ICE phandle",
+  "body": "The check for 'qcom,ice' property is wrong. Fix it by checking using\nif-required clause and expand the clocks minItems and maxItems for\nplatforms where 'qcom,ice' is not required so that it includes platforms\nwith single reg entry and clocks that do not provide an ICE one.\n\nFixes: 29a6d1215b7c (\"scsi: ufs: dt-bindings: qcom: Add ICE phandle\")\nSigned-off-by: Abel Vesa <abel.vesa@linaro.org>\nLink: https://lore.kernel.org/r/20230623113009.2512206-2-abel.vesa@linaro.org\nReviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "29a6d1215b7c (\"scsi: ufs: dt-bindings: qcom: Add ICE phandle\")"
+   ],
+   "signed_off_by": [
+    "Abel Vesa <abel.vesa@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230623113009.2512206-2-abel.vesa@linaro.org"
+   ],
+   "reviewed_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "29a6d1215b7c",
+    "subject": "scsi: ufs: dt-bindings: qcom: Add ICE phandle",
+    "sha": "29a6d1215b7cd5fdff9c3c31ea26076a694ee0a3",
+    "introduced_in": "v6.5"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20230623113009.2512206-2-abel.vesa@linaro.org",
+  "series_id": "20230623113009.2512206-abel.vesa@linaro.org",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/qcom,ufs.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 5,
+    "area": "bindings",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/9b7c13b83c1d.diff",
+  "patch_bytes": 773
+ },
+ {
+  "sha": "24033d71cc36ae8af02b56ec22c7490779a9e39f",
+  "release": "v6.5",
+  "author": {
+   "name": "Keoseong Park",
+   "email": "keosung.park@samsung.com"
+  },
+  "author_date": "2023-06-27T10:29:31+09:00",
+  "commit_date": "2023-06-28T22:22:43-04:00",
+  "subject": "scsi: ufs: core: Remove unused function declaration",
+  "body": "Commit 2468da61ea09 (\"scsi: ufs: core: mcq: Configure operation and runtime\ninterface\") added ufshcd_mcq_select_mcq_mode(), but it's not used\nanywhere. So remove it.\n\nSigned-off-by: Keoseong Park <keosung.park@samsung.com>\nLink: https://lore.kernel.org/r/20230627012931epcms2p76f458e0b2ce8a591b56bbcc6a2f1a3bb@epcms2p7\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Keoseong Park <keosung.park@samsung.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230627012931epcms2p76f458e0b2ce8a591b56bbcc6a2f1a3bb@epcms2p7"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230627012931epcms2p76f458e0b2ce8a591b56bbcc6a2f1a3bb@epcms2p7",
+  "series_id": "20230627012931epcms2p76f458e0b2ce8a591b56bbcc6a2f1a3bb@epcms2p7",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/24033d71cc36.diff",
+  "patch_bytes": 690
+ },
+ {
+  "sha": "ef470b862dc7e5e169167301b9862bed54d7f969",
+  "release": "v6.5",
+  "author": {
+   "name": "Can Guo",
+   "email": "quic_cang@quicinc.com"
+  },
+  "author_date": "2023-06-29T17:39:09-07:00",
+  "commit_date": "2023-07-05T21:39:38-04:00",
+  "subject": "scsi: ufs: core: Update contact email for monitor sysfs nodes",
+  "body": "Update contact email addresses for Can Guo and Asutosh Das, replace Subhash\nJadavani's contact.\n\nSigned-off-by: Can Guo <quic_cang@quicinc.com>\nLink: https://lore.kernel.org/r/20230630003913.3713155-1-quic_cang@quicinc.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Can Guo <quic_cang@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230630003913.3713155-1-quic_cang@quicinc.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230630003913.3713155-1-quic_cang@quicinc.com",
+  "series_id": "20230630003913.3713155-quic_cang@quicinc.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "Documentation/ABI/testing/sysfs-driver-ufs",
+    "status": "M",
+    "in_track": true,
+    "added": 38,
+    "deleted": 38,
+    "area": "docs",
+    "vendor": null
+   }
+  ],
+  "area": "docs",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/ef470b862dc7.diff",
+  "patch_bytes": 17719
+ },
+ {
+  "sha": "89f7ef7f2b23b2a7b8ce346c23161916eae5b15c",
+  "release": "v6.5",
+  "author": {
+   "name": "Randy Dunlap",
+   "email": "rdunlap@infradead.org"
+  },
+  "author_date": "2023-06-30T22:23:48-07:00",
+  "commit_date": "2023-07-05T21:40:53-04:00",
+  "subject": "scsi: ufs: ufs-mediatek: Add dependency for RESET_CONTROLLER",
+  "body": "When RESET_CONTROLLER is not set, kconfig complains about missing\ndependencies for RESET_TI_SYSCON, so add the missing dependency just as is\ndone above for SCSI_UFS_QCOM.\n\nSilences this kconfig warning:\n\nWARNING: unmet direct dependencies detected for RESET_TI_SYSCON\n  Depends on [n]: RESET_CONTROLLER [=n] && HAS_IOMEM [=y]\n  Selected by [m]:\n  - SCSI_UFS_MEDIATEK [=m] && SCSI_UFSHCD [=y] && SCSI_UFSHCD_PLATFORM [=y] && ARCH_MEDIATEK [=y]\n\nFixes: de48898d0cb6 (\"scsi: ufs-mediatek: Create reset control device_link\")\nSigned-off-by: Randy Dunlap <rdunlap@infradead.org>\nLink: lore.kernel.org/r/202306020859.1wHg9AaT-lkp@intel.com\nLink: https://lore.kernel.org/r/20230701052348.28046-1-rdunlap@infradead.org\nCc: Stanley Chu <stanley.chu@mediatek.com>\nCc: Peter Wang <peter.wang@mediatek.com>\nCc: Paul Gazzillo <paul@pgazz.com>\nCc: Necip Fazil Yildiran <fazilyildiran@gmail.com>\nCc: linux-scsi@vger.kernel.org\nCc: linux-arm-kernel@lists.infradead.org\nCc: linux-mediatek@lists.infradead.org\nCc: \"James E.J. Bottomley\" <jejb@linux.ibm.com>\nCc: \"Martin K. Petersen\" <martin.petersen@oracle.com>\nReported-by: kernel test robot <lkp@intel.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "de48898d0cb6 (\"scsi: ufs-mediatek: Create reset control device_link\")"
+   ],
+   "signed_off_by": [
+    "Randy Dunlap <rdunlap@infradead.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "lore.kernel.org/r/202306020859.1wHg9AaT-lkp@intel.com",
+    "https://lore.kernel.org/r/20230701052348.28046-1-rdunlap@infradead.org"
+   ],
+   "cc": [
+    "Stanley Chu <stanley.chu@mediatek.com>",
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Paul Gazzillo <paul@pgazz.com>",
+    "Necip Fazil Yildiran <fazilyildiran@gmail.com>",
+    "linux-scsi@vger.kernel.org",
+    "linux-arm-kernel@lists.infradead.org",
+    "linux-mediatek@lists.infradead.org",
+    "\"James E.J. Bottomley\" <jejb@linux.ibm.com>",
+    "\"Martin K. Petersen\" <martin.petersen@oracle.com>"
+   ],
+   "reported_by": [
+    "kernel test robot <lkp@intel.com>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "de48898d0cb6",
+    "subject": "scsi: ufs-mediatek: Create reset control device_link",
+    "sha": "de48898d0cb6a3750558f35e14af799eafc3e6db",
+    "introduced_in": "v5.14"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20230701052348.28046-1-rdunlap@infradead.org",
+  "series_id": "20230701052348.28046-rdunlap@infradead.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/Kconfig",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/89f7ef7f2b23.diff",
+  "patch_bytes": 436
+ },
+ {
+  "sha": "24befa92ed47ed2af25868412a1275602ca8f4ea",
+  "release": "v6.5",
+  "author": {
+   "name": "Arthur Simchaev",
+   "email": "Arthur.Simchaev@wdc.com"
+  },
+  "author_date": "2023-06-26T13:33:19+03:00",
+  "commit_date": "2023-07-05T21:44:07-04:00",
+  "subject": "scsi: ufs: core: Add support for qTimestamp attribute",
+  "body": "The new qTimestamp attribute was added to UFS 4.0 spec, in order to\nsynchronize timestamp between device logs and the host. The spec recommends\nto send this attribute upon device power-on Reset/HW reset or when\nswitching to Active state (using SSU command). Due to this attribute, the\nattribute's max value was extended to 8 bytes. As a result, the new\ndefinition of struct utp_upiu_query_v4_0 was added.\n\nSigned-off-by: Arthur Simchaev <Arthur.Simchaev@wdc.com>\n\n-----------------\nChanges to v2:\n- Adressed Bart's comments\n- Add missed response variable to ufshcd_set_timestamp_attr\n\nLink: https://lore.kernel.org/r/20230626103320.8737-1-arthur.simchaev@wdc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "link": [
+    "https://lore.kernel.org/r/20230626103320.8737-1-arthur.simchaev@wdc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20230626103320.8737-1-arthur.simchaev@wdc.com",
+  "series_id": "20230626103320.8737-arthur.simchaev@wdc.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 38,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/uapi/scsi/scsi_bsg_ufs.h",
+    "status": "M",
+    "in_track": true,
+    "added": 25,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufs.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/24befa92ed47.diff",
+  "patch_bytes": 3167
+ },
+ {
+  "sha": "b6d128f89a85771433a004e8656090ccbe1fb969",
+  "release": "v6.5",
+  "author": {
+   "name": "Yoshihiro Shimoda",
+   "email": "yoshihiro.shimoda.uh@renesas.com"
+  },
+  "author_date": "2023-08-03T17:18:12+09:00",
+  "commit_date": "2023-08-07T21:34:08-04:00",
+  "subject": "scsi: ufs: renesas: Fix private allocation",
+  "body": "Should use devm_kzalloc() for struct ufs_renesas_priv because the\n.initialized should be false as default.\n\nFixes: d69520288efd (\"scsi: ufs: ufs-renesas: Add support for Renesas R-Car UFS controller\")\nSigned-off-by: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>\nLink: https://lore.kernel.org/r/20230803081812.1446282-1-yoshihiro.shimoda.uh@renesas.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "d69520288efd (\"scsi: ufs: ufs-renesas: Add support for Renesas R-Car UFS controller\")"
+   ],
+   "signed_off_by": [
+    "Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230803081812.1446282-1-yoshihiro.shimoda.uh@renesas.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "d69520288efd",
+    "subject": "scsi: ufs: ufs-renesas: Add support for Renesas R-Car UFS controller",
+    "sha": "d69520288efd4908c543cc7414fb5877015eda2a",
+    "introduced_in": "v6.0"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20230803081812.1446282-1-yoshihiro.shimoda.uh@renesas.com",
+  "series_id": "20230803081812.1446282-yoshihiro.shimoda.uh@renesas.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-renesas.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "renesas"
+   }
+  ],
+  "area": "host",
+  "vendor": "renesas",
+  "vendors": [
+   "renesas"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b6d128f89a85.diff",
+  "patch_bytes": 482
+ },
+ {
+  "sha": "d0c89af3130eb4ff962266bb7597690a696f1cbc",
+  "release": "v6.5",
+  "author": {
+   "name": "Bao D. Nguyen",
+   "email": "quic_nguyenb@quicinc.com"
+  },
+  "author_date": "2023-08-15T18:38:29-07:00",
+  "commit_date": "2023-08-21T17:19:02-04:00",
+  "subject": "scsi: ufs: mcq: Fix the search/wrap around logic",
+  "body": "The search and wrap around logic in the ufshcd_mcq_sqe_search() function\ndoes not work correctly when the hwq's queue depth is not a power of two\nnumber. Correct it so that any queue depth with a positive integer value\nwithin the supported range would work.\n\nSigned-off-by: \"Bao D. Nguyen\" <quic_nguyenb@quicinc.com>\nLink: https://lore.kernel.org/r/ff49c15be205135ed3ec186f3086694c02867dbd.1692149603.git.quic_nguyenb@quicinc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nFixes: 8d7290348992 (\"scsi: ufs: mcq: Add supporting functions for MCQ abort\")\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "\"Bao D. Nguyen\" <quic_nguyenb@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/ff49c15be205135ed3ec186f3086694c02867dbd.1692149603.git.quic_nguyenb@quicinc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "fixes": [
+    "8d7290348992 (\"scsi: ufs: mcq: Add supporting functions for MCQ abort\")"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "8d7290348992",
+    "subject": "scsi: ufs: mcq: Add supporting functions for MCQ abort",
+    "sha": "8d7290348992f27242dd6a696fa2eede709f0b14",
+    "introduced_in": "v6.5"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "ff49c15be205135ed3ec186f3086694c02867dbd.1692149603.git.quic_nguyenb@quicinc.com",
+  "series_id": "ff49c15be205135ed3ec186f3086694c02867dbd.1692149603.git.quic_nguyenb@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d0c89af3130e.diff",
+  "patch_bytes": 695
+ },
+ {
+  "sha": "c422fbd5cb58c9a078172ae1e9750971b738a197",
+  "release": "v6.5",
+  "author": {
+   "name": "Neil Armstrong",
+   "email": "neil.armstrong@linaro.org"
+  },
+  "author_date": "2023-08-21T14:11:21+02:00",
+  "commit_date": "2023-08-21T17:32:55-04:00",
+  "subject": "scsi: ufs: ufs-qcom: Clear qunipro_g4_sel for HW major version > 5",
+  "body": "The qunipro_g4_sel clear is also needed for new platforms with major\nversion > 5. Fix the version check to take this into account.\n\nFixes: 9c02aa24bf40 (\"scsi: ufs: ufs-qcom: Clear qunipro_g4_sel for HW version major 5\")\nAcked-by: Manivannan Sadhasivam <mani@kernel.org>\nReviewed-by: Nitin Rawat <quic_nitirawa@quicinc.com>\nSigned-off-by: Neil Armstrong <neil.armstrong@linaro.org>\nLink: https://lore.kernel.org/r/20230821-topic-sm8x50-upstream-ufs-major-5-plus-v2-1-f42a4b712e58@linaro.org\nReviewed-by: \"Bao D. Nguyen\" <quic_nguyenb@quicinc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "9c02aa24bf40 (\"scsi: ufs: ufs-qcom: Clear qunipro_g4_sel for HW version major 5\")"
+   ],
+   "acked_by": [
+    "Manivannan Sadhasivam <mani@kernel.org>"
+   ],
+   "reviewed_by": [
+    "Nitin Rawat <quic_nitirawa@quicinc.com>",
+    "\"Bao D. Nguyen\" <quic_nguyenb@quicinc.com>"
+   ],
+   "signed_off_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20230821-topic-sm8x50-upstream-ufs-major-5-plus-v2-1-f42a4b712e58@linaro.org"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "9c02aa24bf40",
+    "subject": "scsi: ufs: ufs-qcom: Clear qunipro_g4_sel for HW version major 5",
+    "sha": "9c02aa24bf404a39ec509d9f50539056b9b128f7",
+    "introduced_in": "v6.3"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20230821-topic-sm8x50-upstream-ufs-major-5-plus-v2-1-f42a4b712e58@linaro.org",
+  "series_id": "20230821-topic-sm8x50-upstream-ufs-major-5-plus-v2-f42a4b712e58@linaro.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/c422fbd5cb58.diff",
+  "patch_bytes": 537
+ }
+]

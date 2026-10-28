@@ -1,0 +1,50 @@
+diff --git a/drivers/ufs/core/ufs-mcq.c b/drivers/ufs/core/ufs-mcq.c
+index 64c234096e23..18a95b728633 100644
+--- a/drivers/ufs/core/ufs-mcq.c
++++ b/drivers/ufs/core/ufs-mcq.c
+@@ -444,7 +444,6 @@ EXPORT_SYMBOL_GPL(ufshcd_mcq_config_esi);
+ 
+ int ufshcd_mcq_init(struct ufs_hba *hba)
+ {
+-	struct Scsi_Host *host = hba->host;
+ 	struct ufs_hw_queue *hwq;
+ 	int ret, i;
+ 
+@@ -478,7 +477,6 @@ int ufshcd_mcq_init(struct ufs_hba *hba)
+ 		mutex_init(&hwq->sq_mutex);
+ 	}
+ 
+-	host->host_tagset = 1;
+ 	return 0;
+ }
+ 
+diff --git a/drivers/ufs/core/ufshcd-priv.h b/drivers/ufs/core/ufshcd-priv.h
+index 4259f499382f..7d6d19361af9 100644
+--- a/drivers/ufs/core/ufshcd-priv.h
++++ b/drivers/ufs/core/ufshcd-priv.h
+@@ -374,12 +374,7 @@ static inline bool ufs_is_valid_unit_desc_lun(struct ufs_dev_info *dev_info, u8
+  */
+ static inline struct scsi_cmnd *ufshcd_tag_to_cmd(struct ufs_hba *hba, u32 tag)
+ {
+-	/*
+-	 * Host-wide tags are enabled in MCQ mode only. See also the
+-	 * host->host_tagset assignment in ufs-mcq.c.
+-	 */
+-	struct blk_mq_tags *tags = hba->host->tag_set.shared_tags ?:
+-					   hba->host->tag_set.tags[0];
++	struct blk_mq_tags *tags = hba->host->tag_set.shared_tags;
+ 	struct request *rq = blk_mq_tag_to_rq(tags, tag);
+ 
+ 	if (WARN_ON_ONCE(!rq))
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 0369043ca010..66223d290853 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -9321,6 +9321,7 @@ static const struct scsi_host_template ufshcd_driver_template = {
+ 	.max_segment_size	= PRDT_DATA_BYTE_COUNT_MAX,
+ 	.max_sectors		= SZ_1M / SECTOR_SIZE,
+ 	.max_host_blocked	= 1,
++	.host_tagset		= true,
+ 	.track_queue_depth	= 1,
+ 	.skip_settle_delay	= 1,
+ 	.sdev_groups		= ufshcd_driver_groups,

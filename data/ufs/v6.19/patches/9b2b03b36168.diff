@@ -1,0 +1,64 @@
+diff --git a/drivers/ufs/core/ufs-sysfs.c b/drivers/ufs/core/ufs-sysfs.c
+index c040afc6668e..af9615587bf3 100644
+--- a/drivers/ufs/core/ufs-sysfs.c
++++ b/drivers/ufs/core/ufs-sysfs.c
+@@ -235,7 +235,7 @@ static int ufshcd_ahit_to_us(u32 ahit)
+ }
+ 
+ /* Convert microseconds to Auto-Hibernate Idle Timer register value */
+-static u32 ufshcd_us_to_ahit(unsigned int timer)
++u32 ufshcd_us_to_ahit(unsigned int timer)
+ {
+ 	unsigned int scale;
+ 
+@@ -245,6 +245,7 @@ static u32 ufshcd_us_to_ahit(unsigned int timer)
+ 	return FIELD_PREP(UFSHCI_AHIBERN8_TIMER_MASK, timer) |
+ 	       FIELD_PREP(UFSHCI_AHIBERN8_SCALE_MASK, scale);
+ }
++EXPORT_SYMBOL_GPL(ufshcd_us_to_ahit);
+ 
+ static int ufshcd_read_hci_reg(struct ufs_hba *hba, u32 *val, unsigned int reg)
+ {
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index c00e62adbbda..3e54154d5547 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -1109,18 +1109,6 @@ static void ufs_mtk_setup_clk_gating(struct ufs_hba *hba)
+ 	}
+ }
+ 
+-/* Convert microseconds to Auto-Hibernate Idle Timer register value */
+-static u32 ufs_mtk_us_to_ahit(unsigned int timer)
+-{
+-	unsigned int scale;
+-
+-	for (scale = 0; timer > UFSHCI_AHIBERN8_TIMER_MASK; ++scale)
+-		timer /= UFSHCI_AHIBERN8_SCALE_FACTOR;
+-
+-	return FIELD_PREP(UFSHCI_AHIBERN8_TIMER_MASK, timer) |
+-	       FIELD_PREP(UFSHCI_AHIBERN8_SCALE_MASK, scale);
+-}
+-
+ static void ufs_mtk_fix_ahit(struct ufs_hba *hba)
+ {
+ 	unsigned int us;
+@@ -1143,7 +1131,7 @@ static void ufs_mtk_fix_ahit(struct ufs_hba *hba)
+ 			break;
+ 		}
+ 
+-		hba->ahit = ufs_mtk_us_to_ahit(us);
++		hba->ahit = ufshcd_us_to_ahit(us);
+ 	}
+ 
+ 	ufs_mtk_setup_clk_gating(hba);
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index ce7301d63c5c..4b3a8daf8e0b 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -1488,5 +1488,6 @@ int ufshcd_update_ee_control(struct ufs_hba *hba, u16 *mask,
+ 			     const u16 *other_mask, u16 set, u16 clr);
+ void ufshcd_force_error_recovery(struct ufs_hba *hba);
+ void ufshcd_pm_qos_update(struct ufs_hba *hba, bool on);
++u32 ufshcd_us_to_ahit(unsigned int timer);
+ 
+ #endif /* End of Header */

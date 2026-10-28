@@ -1,0 +1,26 @@
+diff --git a/drivers/ufs/core/ufs-txeq.c b/drivers/ufs/core/ufs-txeq.c
+index fa5f539632eb..6192512e29de 100644
+--- a/drivers/ufs/core/ufs-txeq.c
++++ b/drivers/ufs/core/ufs-txeq.c
+@@ -1073,7 +1073,7 @@ static int __ufshcd_tx_eqtr(struct ufs_hba *hba,
+ 			    struct ufs_pa_layer_attr *pwr_mode)
+ {
+ 	struct ufshcd_tx_eqtr_data *eqtr_data  __free(kfree) =
+-		kzalloc(sizeof(*eqtr_data), GFP_KERNEL);
++		kzalloc_obj(*eqtr_data);
+ 	struct tx_eqtr_iter h_iter = {};
+ 	struct tx_eqtr_iter d_iter = {};
+ 	u32 gear = pwr_mode->gear_tx;
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 62396212a0a7..65c0816bc675 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -2761,7 +2761,7 @@ static int ufs_qcom_get_rx_fom(struct ufs_hba *hba,
+ 			       struct tx_eqtr_iter *d_iter)
+ {
+ 	struct ufshcd_tx_eq_params *params __free(kfree) =
+-		kzalloc(sizeof(*params), GFP_KERNEL);
++		kzalloc_obj(*params);
+ 	struct ufs_qcom_host *host = ufshcd_get_variant(hba);
+ 	struct ufs_pa_layer_attr old_pwr_info;
+ 	u32 fom[PA_MAXDATALANES] = { 0 };

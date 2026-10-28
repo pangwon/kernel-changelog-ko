@@ -1,0 +1,24 @@
+diff --git a/drivers/ufs/core/ufs-mcq.c b/drivers/ufs/core/ufs-mcq.c
+index 4bcae410c268..0a9597a6d059 100644
+--- a/drivers/ufs/core/ufs-mcq.c
++++ b/drivers/ufs/core/ufs-mcq.c
+@@ -416,6 +416,7 @@ EXPORT_SYMBOL_GPL(ufshcd_mcq_enable_esi);
+ void ufshcd_mcq_enable(struct ufs_hba *hba)
+ {
+ 	ufshcd_rmwl(hba, MCQ_MODE_SELECT, MCQ_MODE_SELECT, REG_UFS_MEM_CFG);
++	hba->mcq_enabled = true;
+ }
+ EXPORT_SYMBOL_GPL(ufshcd_mcq_enable);
+ 
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index a40b0bf2922e..c96c57fe5834 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -8703,7 +8703,6 @@ static void ufshcd_config_mcq(struct ufs_hba *hba)
+ 	ufshcd_mcq_config_mac(hba, hba->nutrs);
+ 
+ 	ufshcd_mcq_enable(hba);
+-	hba->mcq_enabled = true;
+ 
+ 	dev_info(hba->dev, "MCQ configured, nr_queues=%d, io_queues=%d, read_queue=%d, poll_queues=%d, queue_depth=%d\n",
+ 		 hba->nr_hw_queues, hba->nr_queues[HCTX_TYPE_DEFAULT],

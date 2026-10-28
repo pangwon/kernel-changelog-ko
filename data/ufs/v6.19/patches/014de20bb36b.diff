@@ -1,0 +1,16 @@
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index 2a69b4cede22..c00e62adbbda 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -2425,6 +2425,11 @@ static int ufs_mtk_system_suspend(struct device *dev)
+ 	struct arm_smccc_res res;
+ 	int ret;
+ 
++	if (hba->shutting_down) {
++		ret = -EBUSY;
++		goto out;
++	}
++
+ 	ret = ufshcd_system_suspend(dev);
+ 	if (ret)
+ 		goto out;

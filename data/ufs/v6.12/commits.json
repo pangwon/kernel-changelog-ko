@@ -1,0 +1,5641 @@
+[
+ {
+  "sha": "4e92d504475ea5841716ad775f412342520a3d26",
+  "release": "v6.12",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2024-07-31T20:55:48+05:30",
+  "commit_date": "2024-07-31T22:23:07+05:30",
+  "subject": "phy: qcom: qmp: Add debug prints for register writes",
+  "body": "These register prints are useful to validate the init sequence against the\nQcom internal documentation and also to share with the Qcom hw engineers to\ndebug issues related to PHY.\n\nSample debug prints:\n\nqcom-qmp-pcie-phy 1c0e000.phy: Writing Reg: QSERDES_V5_COM_SYSCLK_EN_SEL Offset: 0x0094 Val: 0xd9\nqcom-qmp-pcie-phy 1c0e000.phy: Writing Reg: QSERDES_V5_COM_HSCLK_SEL Offset: 0x0158 Val: 0x11\n\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nReviewed-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>\nLink: https://lore.kernel.org/r/20240731152548.102987-1-manivannan.sadhasivam@linaro.org\nSigned-off-by: Vinod Koul <vkoul@kernel.org>",
+  "trailers": {
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Vinod Koul <vkoul@kernel.org>"
+   ],
+   "reviewed_by": [
+    "Dmitry Baryshkov <dmitry.baryshkov@linaro.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240731152548.102987-1-manivannan.sadhasivam@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240731152548.102987-1-manivannan.sadhasivam@linaro.org",
+  "series_id": "20240731152548.102987-manivannan.sadhasivam@linaro.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-combo.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-common.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-pcie-msm8996.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-pcie.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 6,
+    "area": "phy",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-usb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-usbc.c",
+    "status": "M",
+    "in_track": false
+   }
+  ],
+  "area": "phy",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/4e92d504475e.diff",
+  "patch_bytes": 1625
+ },
+ {
+  "sha": "88e6804fb323d1dbe477f002a89755f8b034e890",
+  "release": "v6.12",
+  "author": {
+   "name": "Bao D. Nguyen",
+   "email": "quic_nguyenb@quicinc.com"
+  },
+  "author_date": "2024-07-23T20:49:32-07:00",
+  "commit_date": "2024-08-02T21:42:08-04:00",
+  "subject": "scsi: ufs: core: Support Updating UIC Command Timeout",
+  "body": "The default UIC command timeout still remains 500ms.  Allow platform\ndrivers to override the UIC command timeout if desired.\n\nIn a real product, the 500ms timeout value is probably good enough.\nHowever, during the product development where there are a lot of logging\nand debug messages being printed to the UART console, interrupt starvations\nhappen occasionally because the UART may print long debug messages from\ndifferent modules in the system.  While printing, the UART may have\ninterrupts disabled for more than 500ms, causing UIC command timeout.  The\nUIC command timeout would trigger more printing from the UFS driver, and\neventually a watchdog timeout may occur unnecessarily.\n\nAdd support for overriding the UIC command timeout value with the newly\ncreated uic_cmd_timeout kernel module parameter.  Default value is\n500ms. Supported values range from 500ms to 2 seconds.\n\nSigned-off-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nLink: https://lore.kernel.org/r/e4e1c87f3f867f270a3d4b5d57a00139ff0e9741.1721792309.git.quic_nguyenb@quicinc.com\nSuggested-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/e4e1c87f3f867f270a3d4b5d57a00139ff0e9741.1721792309.git.quic_nguyenb@quicinc.com"
+   ],
+   "suggested_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "e4e1c87f3f867f270a3d4b5d57a00139ff0e9741.1721792309.git.quic_nguyenb@quicinc.com",
+  "series_id": "e4e1c87f3f867f270a3d4b5d57a00139ff0e9741.1721792309.git.quic_nguyenb@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 24,
+    "deleted": 5,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/88e6804fb323.diff",
+  "patch_bytes": 2614
+ },
+ {
+  "sha": "fd9cb9615fca4fa322a43eeecbd71d4de1ba146a",
+  "release": "v6.12",
+  "author": {
+   "name": "Rob Herring (Arm)",
+   "email": "robh@kernel.org"
+  },
+  "author_date": "2024-08-08T11:06:44-06:00",
+  "commit_date": "2024-08-12T18:16:40-04:00",
+  "subject": "scsi: ufs: ufshcd-pltfrm: Use of_property_present()",
+  "body": "Use of_property_present() to test for property presence rather than\nof_find_property(). This is part of a larger effort to remove callers of\nof_find_property() and similar functions. of_find_property() leaks the DT\nstruct property and data pointers which is a problem for dynamically\nallocated nodes which may be freed.\n\nSigned-off-by: Rob Herring (Arm) <robh@kernel.org>\nLink: https://lore.kernel.org/r/20240808170644.1436991-1-robh@kernel.org\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Rob Herring (Arm) <robh@kernel.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240808170644.1436991-1-robh@kernel.org"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240808170644.1436991-1-robh@kernel.org",
+  "series_id": "20240808170644.1436991-robh@kernel.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufshcd-pltfrm.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 2,
+    "area": "host",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/fd9cb9615fca.diff",
+  "patch_bytes": 672
+ },
+ {
+  "sha": "eab0dce11dd91410204aae39d33124d9c16ab5f0",
+  "release": "v6.12",
+  "author": {
+   "name": "Rob Herring (Arm)",
+   "email": "robh@kernel.org"
+  },
+  "author_date": "2024-08-08T11:07:03-06:00",
+  "commit_date": "2024-08-12T18:17:43-04:00",
+  "subject": "scsi: ufs: ufshcd-pltfrm: Use of_property_count_u32_elems() to get property length",
+  "body": "Replace of_get_property() with the type specific\nof_property_count_u32_elems() to get the property length.\n\nThis is part of a larger effort to remove callers of of_get_property() and\nsimilar functions. of_get_property() leaks the DT property data pointer\nwhich is a problem for dynamically allocated nodes which may be freed.\n\nSigned-off-by: Rob Herring (Arm) <robh@kernel.org>\nLink: https://lore.kernel.org/r/20240808170704.1438658-1-robh@kernel.org\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Rob Herring (Arm) <robh@kernel.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240808170704.1438658-1-robh@kernel.org"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240808170704.1438658-1-robh@kernel.org",
+  "series_id": "20240808170704.1438658-robh@kernel.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufshcd-pltfrm.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 6,
+    "area": "host",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/eab0dce11dd9.diff",
+  "patch_bytes": 860
+ },
+ {
+  "sha": "b9d104465a6c2f1bb27ae247bd90b4ab079a1699",
+  "release": "v6.12",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2024-08-11T17:37:56+03:00",
+  "commit_date": "2024-08-12T22:11:23-04:00",
+  "subject": "scsi: ufs: Prepare to add HCI capabilities sysfs",
+  "body": "Prepare so we'll be able to read various other HCI registers.  While at it,\nfix the HCPID & HCMID register names to stand for what they really are.\nAlso replace the pm_runtime_{get/put}_sync() calls in auto_hibern8_show to\nufshcd_rpm_{get/put}_sync() as any host controller register reads should.\n\nReviewed-by: Keoseong Park <keosung.park@samsung.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Bean Huo <beanhuo@micron.com>\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20240811143757.2538212-2-avri.altman@wdc.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Keoseong Park <keosung.park@samsung.com>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Bean Huo <beanhuo@micron.com>"
+   ],
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240811143757.2538212-2-avri.altman@wdc.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240811143757.2538212-2-avri.altman@wdc.com",
+  "series_id": "20240811143757.2538212-avri.altman@wdc.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-sysfs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 22,
+    "deleted": 16,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshci.h",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b9d104465a6c.diff",
+  "patch_bytes": 2080
+ },
+ {
+  "sha": "f51d748195773c7780deca815dc787c281d77eb5",
+  "release": "v6.12",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2024-08-11T17:37:57+03:00",
+  "commit_date": "2024-08-12T22:11:24-04:00",
+  "subject": "scsi: ufs: Add HCI capabilities sysfs group",
+  "body": "The standard register map of UFSHCI is comprised of several groups.  The\nfirst group (starting from offset 0x00), is the host capabilities group.\nIt contains some interesting information that otherwise is not available,\ne.g. the UFS version of the platform etc.\n\nReviewed-by: Keoseong Park <keosung.park@samsung.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Bean Huo <beanhuo@micron.com>\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20240811143757.2538212-3-avri.altman@wdc.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Keoseong Park <keosung.park@samsung.com>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Bean Huo <beanhuo@micron.com>"
+   ],
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240811143757.2538212-3-avri.altman@wdc.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240811143757.2538212-3-avri.altman@wdc.com",
+  "series_id": "20240811143757.2538212-avri.altman@wdc.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "Documentation/ABI/testing/sysfs-driver-ufs",
+    "status": "M",
+    "in_track": true,
+    "added": 27,
+    "deleted": 0,
+    "area": "docs",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufs-sysfs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 53,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/f51d74819577.diff",
+  "patch_bytes": 3465
+ },
+ {
+  "sha": "877840f13bcc96e05aca2e1e6cc0f957afb788a4",
+  "release": "v6.12",
+  "author": {
+   "name": "Krzysztof Kozlowski",
+   "email": "krzysztof.kozlowski@linaro.org"
+  },
+  "author_date": "2024-08-13T15:09:49+02:00",
+  "commit_date": "2024-08-14T22:14:43-05:00",
+  "subject": "soc: qcom: ice: use scoped device node handling to simplify error paths",
+  "body": "Obtain the device node reference with scoped/cleanup.h to reduce error\nhandling and make the code a bit simpler.\n\nSigned-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nLink: https://lore.kernel.org/r/20240813-b4-cleanup-h-of-node-put-other-v1-3-cfb67323a95c@linaro.org\nSigned-off-by: Bjorn Andersson <andersson@kernel.org>",
+  "trailers": {
+   "signed_off_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>",
+    "Bjorn Andersson <andersson@kernel.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240813-b4-cleanup-h-of-node-put-other-v1-3-cfb67323a95c@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240813-b4-cleanup-h-of-node-put-other-v1-3-cfb67323a95c@linaro.org",
+  "series_id": "20240813-b4-cleanup-h-of-node-put-other-v1-cfb67323a95c@linaro.org",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/soc/qcom/ice.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 9,
+    "area": "crypto",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "crypto",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/877840f13bcc.diff",
+  "patch_bytes": 1726
+ },
+ {
+  "sha": "3ba963597d19d88eb06b50af8e8757abbdc9035b",
+  "release": "v6.12",
+  "author": {
+   "name": "Dan Carpenter",
+   "email": "dan.carpenter@linaro.org"
+  },
+  "author_date": "2024-08-15T14:24:36+03:00",
+  "commit_date": "2024-08-16T21:07:31-04:00",
+  "subject": "scsi: ufs: ufshcd-pltfrm: Signedness bug in ufshcd_parse_clock_info()",
+  "body": "The \"sz\" variable needs to be a signed type for the error handling to work\nas intended.  Fortunately, there is some sanity checking on \"sz\" on the\nnext line, so negative values would be caught and it doesn't really affect\nruntime.\n\nFixes: eab0dce11dd9 (\"scsi: ufs: ufshcd-pltfrm: Use of_property_count_u32_elems() to get property length\")\nSigned-off-by: Dan Carpenter <dan.carpenter@linaro.org>\nLink: https://lore.kernel.org/r/404a4727-89c6-410b-9ece-301fa399d4db@stanley.mountain\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "eab0dce11dd9 (\"scsi: ufs: ufshcd-pltfrm: Use of_property_count_u32_elems() to get property length\")"
+   ],
+   "signed_off_by": [
+    "Dan Carpenter <dan.carpenter@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/404a4727-89c6-410b-9ece-301fa399d4db@stanley.mountain"
+   ],
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "eab0dce11dd9",
+    "subject": "scsi: ufs: ufshcd-pltfrm: Use of_property_count_u32_elems() to get property length",
+    "sha": "eab0dce11dd91410204aae39d33124d9c16ab5f0",
+    "introduced_in": "v6.12"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "404a4727-89c6-410b-9ece-301fa399d4db@stanley.mountain",
+  "series_id": "404a4727-89c6-410b-9ece-301fa399d4db@stanley.mountain",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufshcd-pltfrm.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/3ba963597d19.diff",
+  "patch_bytes": 405
+ },
+ {
+  "sha": "89835a58f5f54d52537709f2513fb91024e2d069",
+  "release": "v6.12",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2024-08-21T08:54:11+03:00",
+  "commit_date": "2024-08-22T20:54:46-04:00",
+  "subject": "scsi: ufs: Move UFS trace events to private header",
+  "body": "UFS trace events are called exclusively from the UFS core drivers.  Make\nthose events private to the core driver.\n\nThe MAINTAINERS file does not need updating as the maintainership remains\nthe same and the relevant directory is already covered.\n\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20240821055411.3128159-1-avri.altman@wdc.com\nAcked-by: Bean Huo <beanhuo@micron.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240821055411.3128159-1-avri.altman@wdc.com"
+   ],
+   "acked_by": [
+    "Bean Huo <beanhuo@micron.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240821055411.3128159-1-avri.altman@wdc.com",
+  "series_id": "20240821055411.3128159-avri.altman@wdc.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs_trace.h",
+    "status": "A",
+    "in_track": true,
+    "added": 405,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/trace/events/ufs.h",
+    "status": "D",
+    "in_track": true,
+    "added": 0,
+    "deleted": 399,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufs.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/89835a58f5f5.diff",
+  "patch_bytes": 24384
+ },
+ {
+  "sha": "b97c0741c7dccedec60524b596c4fa9d6a136523",
+  "release": "v6.12",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2024-08-22T12:59:05-07:00",
+  "commit_date": "2024-08-22T21:28:55-04:00",
+  "subject": "scsi: Expand all create*_workqueue() invocations",
+  "body": "The workqueue maintainer wants to remove the create*_workqueue() macros\nbecause these macros always set the WQ_MEM_RECLAIM flag and because these\nonly support literal workqueue names. Hence this patch that replaces the\ncreate*_workqueue() invocations with the definition of this macro. The\nWQ_MEM_RECLAIM flag has been retained because I think that flag is necessary\nfor workqueues created by storage drivers. This patch has been generated by\nrunning spatch and git clang-format. spatch has been invoked as follows:\n\nspatch --in-place --sp-file expand-create-workqueue.spatch $(git grep -lEw 'create_(freezable_|singlethread_|)workqueue' */scsi */ufs)\n\nThe contents of the expand-create-workqueue.spatch file is as follows:\n\n@@\nexpression name;\n@@\n-create_workqueue(name)\n+alloc_workqueue(\"%s\", WQ_MEM_RECLAIM, 1, name)\n@@\nexpression name;\n@@\n-create_freezable_workqueue(name)\n+alloc_workqueue(\"%s\", WQ_FREEZABLE | WQ_UNBOUND | WQ_MEM_RECLAIM, 1, name)\n@@\nexpression name;\n@@\n-create_singlethread_workqueue(name)\n+alloc_ordered_workqueue(\"%s\", WQ_MEM_RECLAIM, name)\n\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20240822195944.654691-2-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240822195944.654691-2-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240822195944.654691-2-bvanassche@acm.org",
+  "series_id": "20240822195944.654691-bvanassche@acm.org",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/scsi/bfa/bfad_im.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/bnx2fc/bnx2fc_fcoe.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/device_handler/scsi_dh_rdac.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/elx/efct/efct_lio.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/esas2r/esas2r_init.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/fcoe/fcoe_sysfs.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/fnic/fnic_main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/hisi_sas/hisi_sas_main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/ibmvscsi_tgt/ibmvscsi_tgt.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/libfc/fc_exch.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/libfc/fc_rport.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/libsas/sas_init.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/megaraid/megaraid_sas_fusion.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/mpi3mr/mpi3mr_fw.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/mpt3sas/mpt3sas_base.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/myrb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/myrs.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/qedf/qedf_main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/qedi/qedi_main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/qla2xxx/qla_os.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/qla4xxx/ql4_os.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/snic/snic_main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/stex.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/vmw_pvscsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b97c0741c7dc.diff",
+  "patch_bytes": 981
+ },
+ {
+  "sha": "1aa992cbc272beceba40ae39b33b2848c228c0c9",
+  "release": "v6.12",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2024-08-22T12:59:21-07:00",
+  "commit_date": "2024-08-22T21:28:57-04:00",
+  "subject": "scsi: ufs: Simplify alloc*_workqueue() invocation",
+  "body": "Let alloc*_workqueue() format the workqueue name instead of calling\nsnprintf() explicitly.\n\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20240822195944.654691-18-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240822195944.654691-18-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20240822195944.654691-18-bvanassche@acm.org",
+  "series_id": "20240822195944.654691-bvanassche@acm.org",
+  "series_index": 18,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 7,
+    "deleted": 16,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/1aa992cbc272.diff",
+  "patch_bytes": 2591
+ },
+ {
+  "sha": "0a5167e21126c4b1d35aaab64ad04ea056ec8aab",
+  "release": "v6.12",
+  "author": {
+   "name": "Bao D. Nguyen",
+   "email": "quic_nguyenb@quicinc.com"
+  },
+  "author_date": "2024-08-27T16:14:13-07:00",
+  "commit_date": "2024-08-28T21:17:50-04:00",
+  "subject": "scsi: ufs: core: Remove ufshcd_urgent_bkops()",
+  "body": "ufshcd_urgent_bkops() is a wrapper function. It only calls\nufshcd_bkops_ctrl(). Remove it to simplify the ufs core driver. Replace any\nreferences to ufshcd_urgent_bkops() with ufshcd_bkops_ctrl().\n\nIn addition, remove the second parameter in the ufshcd_bkops_ctrl() because\nthe information can be retrieved from the first parameter.\n\nSigned-off-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nLink: https://lore.kernel.org/r/0c7f2c8d68408e39c28e3e81addce09cc0ee3969.1724800328.git.quic_nguyenb@quicinc.com\nAcked-by: Avri Altman <avri.altman@wdc.com>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/0c7f2c8d68408e39c28e3e81addce09cc0ee3969.1724800328.git.quic_nguyenb@quicinc.com"
+   ],
+   "acked_by": [
+    "Avri Altman <avri.altman@wdc.com>"
+   ],
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "0c7f2c8d68408e39c28e3e81addce09cc0ee3969.1724800328.git.quic_nguyenb@quicinc.com",
+  "series_id": "0c7f2c8d68408e39c28e3e81addce09cc0ee3969.1724800328.git.quic_nguyenb@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 7,
+    "deleted": 25,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/0a5167e21126.diff",
+  "patch_bytes": 2712
+ },
+ {
+  "sha": "6ce2082fd3a25d5a8c756120959237cace0379f1",
+  "release": "v6.12",
+  "author": {
+   "name": "Jani Nikula",
+   "email": "jani.nikula@intel.com"
+  },
+  "author_date": "2024-08-13T15:12:35+03:00",
+  "commit_date": "2024-09-01T20:43:33-07:00",
+  "subject": "fault-inject: improve build for CONFIG_FAULT_INJECTION=n",
+  "body": "The fault-inject.h users across the kernel need to add a lot of #ifdef\nCONFIG_FAULT_INJECTION to cater for shortcomings in the header.  Make\nfault-inject.h self-contained for CONFIG_FAULT_INJECTION=n, and add stubs\nfor DECLARE_FAULT_ATTR(), setup_fault_attr(), should_fail_ex(), and\nshould_fail() to allow removal of conditional compilation.\n\n[akpm@linux-foundation.org: repair fallout from no longer including debugfs.h into fault-inject.h]\n[akpm@linux-foundation.org: fix drivers/misc/xilinx_tmr_inject.c]\n[akpm@linux-foundation.org: Add debugfs.h inclusion to more files, per Stephen]\nLink: https://lkml.kernel.org/r/20240813121237.2382534-1-jani.nikula@intel.com\nFixes: 6ff1cb355e62 (\"[PATCH] fault-injection capabilities infrastructure\")\nSigned-off-by: Jani Nikula <jani.nikula@intel.com>\nCc: Akinobu Mita <akinobu.mita@gmail.com>\nCc: Abhinav Kumar <quic_abhinavk@quicinc.com>\nCc: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>\nCc: Himal Prasad Ghimiray <himal.prasad.ghimiray@intel.com>\nCc: Lucas De Marchi <lucas.demarchi@intel.com>\nCc: Rob Clark <robdclark@gmail.com>\nCc: Rodrigo Vivi <rodrigo.vivi@intel.com>\nCc: Thomas Hellström <thomas.hellstrom@linux.intel.com>\nCc: Stephen Rothwell <sfr@canb.auug.org.au>\nSigned-off-by: Andrew Morton <akpm@linux-foundation.org>",
+  "trailers": {
+   "link": [
+    "https://lkml.kernel.org/r/20240813121237.2382534-1-jani.nikula@intel.com"
+   ],
+   "fixes": [
+    "6ff1cb355e62 (\"[PATCH] fault-injection capabilities infrastructure\")"
+   ],
+   "signed_off_by": [
+    "Jani Nikula <jani.nikula@intel.com>",
+    "Andrew Morton <akpm@linux-foundation.org>"
+   ],
+   "cc": [
+    "Akinobu Mita <akinobu.mita@gmail.com>",
+    "Abhinav Kumar <quic_abhinavk@quicinc.com>",
+    "Dmitry Baryshkov <dmitry.baryshkov@linaro.org>",
+    "Himal Prasad Ghimiray <himal.prasad.ghimiray@intel.com>",
+    "Lucas De Marchi <lucas.demarchi@intel.com>",
+    "Rob Clark <robdclark@gmail.com>",
+    "Rodrigo Vivi <rodrigo.vivi@intel.com>",
+    "Thomas Hellström <thomas.hellstrom@linux.intel.com>",
+    "Stephen Rothwell <sfr@canb.auug.org.au>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "6ff1cb355e62",
+    "subject": "[PATCH] fault-injection capabilities infrastructure",
+    "sha": "6ff1cb355e628f8fc55fa2d01e269e5e1bbc2fe9",
+    "introduced_in": "v3.0"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": null,
+  "series_id": "6ce2082fd3a25d5a8c756120959237cace0379f1",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/gpu/drm/msm/msm_drv.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iommu/iommufd/selftest.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/misc/xilinx_tmr_inject.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/host/fault_inject.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ufs/core/ufs-fault-injection.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/linux/fault-inject.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/linux/mmc/host.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "kernel/futex/core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/fault-inject.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "mm/fail_page_alloc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "mm/failslab.c",
+    "status": "M",
+    "in_track": false
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/6ce2082fd3a2.diff",
+  "patch_bytes": 813
+ },
+ {
+  "sha": "0c40f079f1c808e7e480c795a79009f200366eb1",
+  "release": "v6.12",
+  "author": {
+   "name": "Manish Pandey",
+   "email": "quic_mapa@quicinc.com"
+  },
+  "author_date": "2024-09-03T12:07:09+05:30",
+  "commit_date": "2024-09-12T20:31:54-04:00",
+  "subject": "scsi: ufs: qcom: Update MODE_MAX cfg_bw value",
+  "body": "Commit 8db8f6ce556a (\"scsi: ufs: qcom: Add missing interconnect bandwidth\nvalues for Gear 5\") updated the ufs_qcom_bw_table for Gear 5. However, it\nmissed updating the cfg_bw value for the max mode.\n\nHence update the cfg_bw value for the max mode for UFS 4.x devices.\n\nFixes: 8db8f6ce556a (\"scsi: ufs: qcom: Add missing interconnect bandwidth values for Gear 5\")\nCc: stable@vger.kernel.org\nSigned-off-by: Manish Pandey <quic_mapa@quicinc.com>\nLink: https://lore.kernel.org/r/20240903063709.4335-1-quic_mapa@quicinc.com\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "8db8f6ce556a (\"scsi: ufs: qcom: Add missing interconnect bandwidth values for Gear 5\")"
+   ],
+   "cc": [
+    "stable@vger.kernel.org"
+   ],
+   "signed_off_by": [
+    "Manish Pandey <quic_mapa@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240903063709.4335-1-quic_mapa@quicinc.com"
+   ],
+   "reviewed_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "8db8f6ce556a",
+    "subject": "scsi: ufs: qcom: Add missing interconnect bandwidth values for Gear 5",
+    "sha": "8db8f6ce556af60ca9a9fd5e826d369ded70fcc7",
+    "introduced_in": "v6.9"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "20240903063709.4335-1-quic_mapa@quicinc.com",
+  "series_id": "20240903063709.4335-quic_mapa@quicinc.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/0c40f079f1c8.diff",
+  "patch_bytes": 596
+ },
+ {
+  "sha": "5f60d5f6bbc12e782fac78110b0ee62698f3b576",
+  "release": "v6.12",
+  "author": {
+   "name": "Al Viro",
+   "email": "viro@zeniv.linux.org.uk"
+  },
+  "author_date": "2024-10-01T15:35:57-04:00",
+  "commit_date": "2024-10-02T17:23:23-04:00",
+  "subject": "move asm/unaligned.h to linux/unaligned.h",
+  "body": "asm/unaligned.h is always an include of asm-generic/unaligned.h;\nmight as well move that thing to linux/unaligned.h and include\nthat - there's nothing arch-specific in that header.\n\nauto-generated by the following:\n\nfor i in `git grep -l -w asm/unaligned.h`; do\n\tsed -i -e \"s/asm\\/unaligned.h/linux\\/unaligned.h/\" $i\ndone\nfor i in `git grep -l -w asm-generic/unaligned.h`; do\n\tsed -i -e \"s/asm-generic\\/unaligned.h/linux\\/unaligned.h/\" $i\ndone\ngit mv include/asm-generic/unaligned.h include/linux/unaligned.h\ngit mv tools/include/asm-generic/unaligned.h tools/include/linux/unaligned.h\nsed -i -e \"/unaligned.h/d\" include/asm-generic/Kbuild\nsed -i -e \"s/__ASM_GENERIC/__LINUX/\" include/linux/unaligned.h tools/include/linux/unaligned.h",
+  "trailers": {},
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": null,
+  "series_id": "5f60d5f6bbc12e782fac78110b0ee62698f3b576",
+  "series_index": null,
+  "files": [
+   {
+    "path": "Documentation/arch/arm/mem_alignment.rst",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "Documentation/core-api/unaligned-memory-access.rst",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "Documentation/translations/zh_CN/core-api/unaligned-memory-access.rst",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/alpha/kernel/traps.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arc/include/asm/io.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arc/kernel/traps.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arc/kernel/unwind.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm/crypto/aes-ce-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm/crypto/crc32-ce-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm/crypto/ghash-ce-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm/crypto/poly1305-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm/crypto/sha2-ce-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm/include/asm/uaccess.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm/mm/alignment.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm64/crypto/aes-ce-ccm-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm64/crypto/aes-ce-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm64/crypto/ghash-ce-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm64/crypto/poly1305-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm64/crypto/sha1-ce-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm64/crypto/sha2-ce-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm64/crypto/sha3-ce-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm64/crypto/sha512-ce-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm64/crypto/sm3-ce-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/arm64/crypto/sm3-neon-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/loongarch/crypto/crc32-loongarch.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/microblaze/include/asm/flat.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/mips/boot/compressed/decompress.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/mips/crypto/crc32-mips.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/mips/crypto/poly1305-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/nios2/kernel/misaligned.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/parisc/boot/compressed/misc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/parisc/kernel/traps.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/parisc/kernel/unaligned.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/powerpc/crypto/aes-gcm-p10-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/powerpc/crypto/poly1305-p10-glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/powerpc/platforms/pseries/papr_scm.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/sh/include/asm/flat.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/sh/kernel/dwarf.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/sh/kernel/module.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/sparc/crypto/crc32c_glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/um/drivers/virt-pci.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/um/include/asm/uaccess.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/x86/crypto/camellia_glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/x86/crypto/ghash-clmulni-intel_glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/x86/lib/insn.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "arch/xtensa/include/asm/flat.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/partitions/ldm.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/partitions/msdos.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/t10-pi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/aes_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/blake2b_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/blowfish_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/camellia_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/cast5_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/cast6_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/chacha_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/crc32_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/crc32c_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/crc64_rocksoft_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/ecc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/michael_mic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/nhpoly1305.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/poly1305_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/polyval-generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/serpent_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/sha256_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/sha3_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/sha512_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/sm3.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/sm3_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/sm4.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/sm4_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/twofish_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/vmac.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "crypto/xxhash_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/acpi/apei/apei-base.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/acpi/apei/einj-core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/acpi/battery.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/acpi/cppc_acpi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ata/libata-core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ata/libata-sata.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ata/libata-scsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/auxdisplay/ht16k33.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/base/regmap/regmap.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/block/aoe/aoecmd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/block/aoe/aoenet.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/block/drbd/drbd_nl.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/block/pktcdvd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/ath3k.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/btbcm.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/btintel.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/btintel_pcie.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/btmtk.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/btmtksdio.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/btmtkuart.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/btnxpuart.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/btrsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/btrtl.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/btusb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/h4_recv.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/hci_bcm4377.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/hci_bcsp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/hci_h4.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/hci_nokia.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/hci_qca.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/bluetooth/hci_vhci.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/char/tpm/tpm2-sessions.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/char/tpm/tpm2-space.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/clk/clk-si5341.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/comedi/drivers/usbduxsigma.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/counter/104-quad-8.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/counter/i8254.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/cpufreq/cppc_cpufreq.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/crypto/allwinner/sun4i-ss/sun4i-ss-hash.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/crypto/caam/caamalg.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/crypto/caam/caamalg_qi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/crypto/caam/caamalg_qi2.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/crypto/inside-secure/safexcel_cipher.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/crypto/rockchip/rk3288_crypto_ahash.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/crypto/stm32/stm32-crc32.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/cxl/core/mbox.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/cxl/core/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/cxl/pci.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/cxl/pmem.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/cxl/security.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/firewire/net.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/firmware/arm_scmi/common.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/firmware/arm_scmi/protocols.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/firmware/dmi_scan.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/firmware/efi/fdtparams.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/firmware/efi/libstub/riscv-stub.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/firmware/efi/libstub/riscv.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/firmware/efi/libstub/zboot.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/fpga/microchip-spi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/fsi/fsi-occ.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/amd/amdgpu/atom.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-hdcp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/bridge/samsung-dsim.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/bridge/sil-sii8620.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/bridge/tc358775.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/bridge/ti-sn65dsi86.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/i915/display/intel_dsi_vbt.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/nouveau/include/nvif/os.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/radeon/atom.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/gpu/drm/udl/udl_transfer.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/greybus/es2.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/greybus/gb-beagleplay.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/hid-alps.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/hid-core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/hid-generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/hid-goodix-spi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/hid-google-hammer.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/hid-kye.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/hid-letsketch.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/hid-logitech-dj.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/hid-logitech-hidpp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/hid-nintendo.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/hid-playstation.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/hid-sony.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/hid-uclogic-params.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/hid-uclogic-rdesc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/i2c-hid/i2c-hid-core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/surface-hid/surface_hid.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/surface-hid/surface_hid_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/surface-hid/surface_kbd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/usbhid/hid-core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hid/wacom.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hwmon/adt7310.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hwmon/aquacomputer_d5next.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hwmon/asus-ec-sensors.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hwmon/asus_rog_ryujin.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hwmon/dell-smm-hwmon.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hwmon/gigabyte_waterforce.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hwmon/nzxt-kraken2.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hwmon/nzxt-kraken3.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hwmon/nzxt-smart2.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hwmon/occ/common.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/hwmon/occ/p8_i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/i2c/busses/i2c-nvidia-gpu.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/accel/adxl355_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/accel/adxl367.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/accel/adxl380.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/accel/bma400_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/accel/bmi088-accel-core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/accel/dmard09.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/accel/sca3300.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/ad4130.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/ad_sigma_delta.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/axp20x_adc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/intel_mrfld_adc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/ltc2497.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/max11100.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/max11410.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/mcp3422.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/mcp3911.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/mt6360-adc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/pac1921.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/pac1934.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/qcom-spmi-rradc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/ti-ads124s08.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/ti-ads1298.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/ti-ads131e08.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/adc/ti-tsc2046.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/addac/ad74115.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/addac/ad74413r.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/amplifiers/ada4250.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/cdc/ad7746.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/chemical/bme680_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/chemical/pms7003.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/chemical/scd30_i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/chemical/scd30_serial.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/chemical/scd4x.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/chemical/sps30_i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/common/st_sensors/st_sensors_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/dac/ad3552r.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/dac/ad5064.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/dac/ad5446.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/dac/ad5449.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/dac/ad5593r.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/dac/ad5624r_spi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/dac/ad5766.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/dac/ad7293.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/dac/ltc2632.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/dac/mcp4821.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/frequency/adf4377.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/frequency/admv1013.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/frequency/admv1014.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/frequency/admv4420.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/frequency/adrf6780.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/gyro/adis16130.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/health/afe4403.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/humidity/ens210.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/humidity/hdc3020.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/imu/adis.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/imu/bmi323/bmi323_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/light/apds9306.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/light/gp2ap020a00f.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/light/ltr390.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/light/ltrf216a.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/light/si1133.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/light/tsl2591.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/light/zopt2201.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/magnetometer/rm3100-core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/magnetometer/yamaha-yas530.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/pressure/bmp280-core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/pressure/dlhl60d.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/pressure/hp206c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/pressure/hsc030pa.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/pressure/mprls0025pa.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/pressure/ms5611_i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/pressure/ms5611_spi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/pressure/sdp500.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/pressure/st_pressure_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/pressure/zpa2326.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/proximity/aw96103.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/proximity/cros_ec_mkbp_proximity.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/proximity/hx9023s.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/proximity/irsd200.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/temperature/ltc2983.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/temperature/max31856.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/iio/temperature/max31865.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/joystick/adafruit-seesaw.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/joystick/adc-joystick.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/joystick/iforce/iforce-main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/joystick/iforce/iforce-packets.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/joystick/spaceball.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/keyboard/applespi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/keyboard/cros_ec_keyb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/misc/ims-pcu.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/misc/iqs7222.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/mouse/cyapa_gen3.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/mouse/cyapa_gen5.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/mouse/cyapa_gen6.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/mouse/elan_i2c_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/mouse/elan_i2c_i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/mouse/elantech.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/rmi4/rmi_f01.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/rmi4/rmi_f34.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/rmi4/rmi_f34v7.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/tablet/aiptek.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/tablet/kbtab.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/ads7846.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/atmel_mxt_ts.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/chipone_icn8505.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/cy8ctma140.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/cyttsp5.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/edt-ft5x06.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/eeti_ts.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/elants_i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/exc3000.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/goodix.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/goodix_berlin_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/goodix_berlin_spi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/hideep.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/hycon-hy46xx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/hynitron_cstxxx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/ili210x.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/ilitek_ts_i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/iqs5xx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/iqs7211.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/melfas_mip4.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/novatek-nvt-ts.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/pixcir_i2c_ts.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/raydium_i2c_ts.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/s6sy761.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/silead.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/sis_i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/surface3_spi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/wacom_i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/wdt87xx_i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/zet6223.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/input/touchscreen/zforce_ts.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/isdn/hardware/mISDN/avmfritz.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/leds/rgb/leds-mt6370-rgb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/macintosh/adb-iop.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/md/dm-crypt.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/md/dm-vdo/murmurhash3.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/md/dm-vdo/numeric.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/dvb-frontends/mxl5xx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/ccs/ccs-reg-access.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/hi556.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/hi846.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/hi847.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/imx208.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/imx258.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/imx290.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/imx319.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/imx334.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/imx335.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/imx355.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/imx412.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/ir-kbd-i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/og01a1b.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/ov01a10.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/ov08x40.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/ov2740.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/ov5670.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/ov5675.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/ov8856.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/ov8858.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/ov9282.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/ov9734.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/thp7312.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/i2c/vgxy61.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/pci/bt8xx/bttv-cards.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/platform/chips-media/coda/coda-jpeg.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/platform/renesas/rcar_jpu.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/platform/verisilicon/hantro_g1_mpeg2_dec.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/platform/verisilicon/hantro_h1_jpeg_enc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/platform/verisilicon/rockchip_vpu2_hw_jpeg_enc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/platform/verisilicon/rockchip_vpu2_hw_mpeg2_dec.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/radio/radio-raremono.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/radio/si470x/radio-si470x.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/rc/ir_toy.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/rc/redrat3.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/tuners/xc2028.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/tuners/xc4000.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/usb/dvb-usb/m920x.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/usb/uvc/uvc_driver.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/usb/uvc/uvc_video.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/v4l2-core/v4l2-cci.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/media/v4l2-core/v4l2-jpeg.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/memstick/host/rtsx_usb_ms.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/mfd/gateworks-gsc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/mfd/iqs62x.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/mfd/ntxec.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/mfd/rave-sp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/mfd/si476x-cmd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/misc/altera-stapl/altera.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/misc/bcm-vk/bcm_vk_sg.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/misc/cardreader/rtsx_pcr.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/misc/lattice-ecp3-config.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/misc/mei/platform-vsc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/misc/mei/vsc-fw-loader.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/mmc/host/atmel-mci.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/mmc/host/mmc_spi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/mmc/host/mvsdio.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/mmc/host/rtsx_pci_sdmmc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/mmc/host/rtsx_usb_sdmmc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/mtd/nand/raw/intel-nand-controller.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/mtd/nand/raw/marvell_nand.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/can/spi/mcp251xfd/mcp251xfd-core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/can/spi/mcp251xfd/mcp251xfd-regmap.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/can/spi/mcp251xfd/mcp251xfd-ring.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/can/spi/mcp251xfd/mcp251xfd-tx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/can/usb/etas_es58x/es581_4.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/can/usb/etas_es58x/es58x_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/can/usb/etas_es58x/es58x_fd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/can/usb/f81604.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/can/usb/mcba_usb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/can/usb/peak_usb/pcan_usb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/dsa/b53/b53_spi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/dsa/microchip/ksz_spi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/adi/adin1110.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/broadcom/asp2/bcmasp_ethtool.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/broadcom/genet/bcmgenet.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/dec/tulip/de2104x.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/dec/tulip/eeprom.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/dec/tulip/tulip.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/dec/tulip/tulip_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/freescale/enetc/enetc_pf.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/intel/e100.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/intel/ice/ice_fw_update.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/mediatek/mtk_wed_mcu.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/meta/fbnic/fbnic_devlink.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/netronome/nfp/crypto/ipsec.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/netronome/nfp/nfpcore/nfp6000_pcie.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/netronome/nfp/nfpcore/nfp_cppcore.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/netronome/nfp/nfpcore/nfp_cpplib.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/netronome/nfp/nfpcore/nfp_hwinfo.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/netronome/nfp/nfpcore/nfp_nsp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/netronome/nfp/nfpcore/nfp_rtsym.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/packetengines/hamachi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/packetengines/yellowfin.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/realtek/r8169_main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ethernet/smsc/smsc9420.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ieee802154/cc2520.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/mctp/mctp-i3c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/phy/air_en8811h.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/phy/aquantia/aquantia_firmware.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/phy/bcm-phy-ptp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/phy/mscc/mscc_ptp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ppp/ppp_async.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ppp/ppp_deflate.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ppp/ppp_generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ppp/ppp_mppe.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/ppp/ppp_synctty.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/slip/slhc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/usb/net1080.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/usb/sierra_net.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath5k/base.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath5k/mac80211-ops.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath5k/pcu.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath5k/phy.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath5k/reset.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath6kl/htc_mbox.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath9k/ar9003_eeprom.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath9k/debug.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath9k/eeprom_4k.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath9k/eeprom_9287.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath9k/eeprom_def.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath9k/hif_usb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/ath9k/hw.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/carl9170/mac.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/hw.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/ath/key.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/broadcom/b43/main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/broadcom/b43legacy/main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/broadcom/brcm80211/brcmfmac/fweh.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/broadcom/brcm80211/brcmfmac/pcie.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/broadcom/brcm80211/brcmfmac/xtlv.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/intel/iwlegacy/3945.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/intel/iwlegacy/4965.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/intel/iwlwifi/dvm/led.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/intel/iwlwifi/dvm/rx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/intel/iwlwifi/mvm/rx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/marvell/libertas/cfg.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/marvell/libertas/cmdresp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/marvell/mwifiex/cmdevt.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/mediatek/mt76/mt76x0/eeprom.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/mediatek/mt76/mt76x02_eeprom.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/mediatek/mt76/mt76x2/eeprom.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/mediatek/mt7601u/dma.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/mediatek/mt7601u/eeprom.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/purelifi/plfxlc/usb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/net/wireless/zydas/zd1211rw/zd_usb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nfc/nfcmrvl/fw_dnld.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nfc/nxp-nci/firmware.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nfc/nxp-nci/i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nfc/pn544/i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/common/auth.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/host/auth.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/host/core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/host/hwmon.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/host/pr.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/host/rdma.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/host/trace.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/target/admin-cmd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/target/auth.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/target/rdma.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/target/trace.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/pci/vpd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/pcmcia/cistpl.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/peci/controller/peci-aspeed.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/peci/request.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/arm64/acer-aspire1-ec.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/chrome/cros_ec_proto.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/chrome/cros_ec_proto_test.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/chrome/wilco_ec/properties.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/cznic/turris-omnia-mcu-gpio.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/cznic/turris-omnia-mcu.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/surface/aggregator/ssh_msgb.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/surface/aggregator/ssh_packet_layer.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/surface/aggregator/ssh_parser.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/surface/aggregator/ssh_request_layer.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/surface/aggregator/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/surface/surface3_power.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/surface/surface_acpi_notify.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/surface/surface_aggregator_tabletsw.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/surface/surface_platform_profile.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/x86/asus-tf103c-dock.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/x86/dell/dell-wmi-ddv.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/x86/msi-wmi-platform.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/platform/x86/quickstart.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/power/supply/axp288_fuel_gauge.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/power/supply/bq27xxx_battery_i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/power/supply/cros_peripheral_charger.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/power/supply/max1720x_battery.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/power/supply/rk817_charger.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/power/supply/surface_battery.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/power/supply/surface_charger.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ptp/ptp_clockmatrix.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ptp/ptp_fc3.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/rtc/rtc-max31335.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/rtc/rtc-pm8xxx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/aacraid/aachba.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/csiostor/csio_lnode.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/csiostor/csio_scsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/cxlflash/lunmgt.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/cxlflash/main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/cxlflash/superpipe.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/cxlflash/vlun.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/device_handler/scsi_dh_alua.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/hpsa.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/ipr.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/libfc/fc_disc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/libfc/fc_elsct.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/libfc/fc_encode.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/libfc/fc_lport.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/libfc/fc_rport.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/libiscsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/libsas/sas_expander.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/lpfc/lpfc_nvme.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/lpfc/lpfc_nvmet.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/lpfc/lpfc_scsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/megaraid/megaraid_sas_base.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/mpi3mr/mpi3mr.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/mpt3sas/mpt3sas_scsih.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/mpt3sas/mpt3sas_warpdrive.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/mvsas/mv_sas.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/myrb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/myrs.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/qla2xxx/qla_dsd.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/qla2xxx/qla_target.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/qla2xxx/tcm_qla2xxx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_common.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_debug.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_error.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_lib.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_proto_test.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_scan.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_trace.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsicam.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/sd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/sd_zbc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/ses.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/smartpqi/smartpqi_init.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/smartpqi/smartpqi_sas_transport.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/smartpqi/smartpqi_sis.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/sr.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/st.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/soc/qcom/socinfo.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/spi/spi-airoha-snfi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/spi/spi-dln2.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/spi/spi-npcm-pspi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/spi/spi-orion.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/spi/spi-rpc-if.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/spi/spi-sh-msiof.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/spi/spi-uniphier.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/spi/spi-xcomm.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/staging/media/av7110/av7110.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/staging/rtl8192e/rtl819x_BAProc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/staging/rtl8723bs/core/rtw_ap.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/staging/rtl8723bs/core/rtw_ieee80211.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/staging/rtl8723bs/core/rtw_mlme_ext.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/staging/rtl8723bs/core/rtw_recv.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/staging/rtl8723bs/os_dep/recv_linux.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/iscsi/cxgbit/cxgbit_target.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/iscsi/iscsi_target.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/iscsi/iscsi_target_tmr.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/sbp/sbp_target.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/target_core_alua.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/target_core_device.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/target_core_fabric_lib.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/target_core_file.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/target_core_iblock.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/target_core_pr.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/target_core_pscsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/target_core_sbc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/target_core_spc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/target_core_transport.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/target_core_xcopy.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/tcm_fc/tfc_cmd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/tcm_fc/tfc_conf.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/tcm_fc/tfc_io.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/target/tcm_fc/tfc_sess.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/thermal/qcom/qcom-spmi-adc-tm5.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/tty/serial/max3100.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/tty/vt/vc_screen.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufs-sysfs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufs-exynos.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/usb/atm/cxacru.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/atm/ueagle-atm.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/class/cdc-acm.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/class/cdc-wdm.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/core/hcd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/fotg210/fotg210-hcd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/composite.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/function/f_fs.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/function/f_mass_storage.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/function/f_printer.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/function/f_tcm.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/function/rndis.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/function/storage_common.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/function/uvc_video.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/legacy/tcm_usb_gadget.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/u_os_desc.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/bdc/bdc.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/bdc/bdc_ep.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/bdc/bdc_udc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/cdns2/cdns2-ep0.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/dummy_hcd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/fsl_udc_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/goku_udc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/mv_udc_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/net2272.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/net2280.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/omap_udc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/pxa25x_udc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/gadget/udc/snps_udc_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/host/ehci-hcd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/host/isp1362-hcd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/host/ohci-da8xx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/host/ohci-hcd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/host/oxu210hp-hcd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/host/sl811-hcd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/host/xhci-hub.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/host/xhci-pci-renesas.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/isp1760/isp1760-hcd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/misc/usb-ljca.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/musb/musb_virthub.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/phy/phy-fsl-usb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/serial/aircable.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/serial/ch341.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/serial/cypress_m8.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/serial/kl5kusb105.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/serial/mct_u232.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/serial/mxuport.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/serial/pl2303.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/serial/quatech2.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/typec/ucsi/ucsi.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/typec/ucsi/ucsi_ccg.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/typec/ucsi/ucsi_stm32g0.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/vhost/scsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/video/fbdev/aty/mach64_accel.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/video/fbdev/c2p_iplan2.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/video/fbdev/c2p_planar.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/video/fbdev/matrox/matroxfb_base.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/video/fbdev/metronomefb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/video/fbdev/udlfb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/watchdog/ziirave_wdt.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/adfs/map.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/bcachefs/bset.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/bcachefs/inode.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/bcachefs/siphash.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/bcachefs/varint.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/binfmt_flat.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/btrfs/accessors.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/btrfs/accessors.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/btrfs/disk-io.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/btrfs/inode.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/btrfs/uuid-tree.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/ceph/export.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/ceph/super.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/crypto/keyring.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/ecryptfs/crypto.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/ecryptfs/inode.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/ecryptfs/mmap.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/erofs/zmap.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/exfat/cache.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/exfat/fatent.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/exfat/nls.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/f2fs/dir.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/f2fs/recovery.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/fat/inode.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/hfsplus/wrapper.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/hpfs/hpfs_fn.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/isofs/isofs.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/lockd/mon.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/nls/nls_ucs2_utils.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/ntfs3/lib/decompress_common.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/orangefs/orangefs-kernel.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/reiserfs/inode.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/reiserfs/reiserfs.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/smb/client/cifspdu.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/smb/client/compress/lz77.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/smb/server/unicode.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "fs/xfs/xfs_linux.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/asm-generic/Kbuild",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/asm-generic/uaccess.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/asm-generic/unaligned.h",
+    "status": "D",
+    "in_track": false
+   },
+   {
+    "path": "include/crypto/chacha.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/crypto/internal/ecc.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/crypto/internal/poly1305.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/crypto/sha1_base.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/crypto/sha256_base.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/crypto/sha512_base.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/crypto/sm3_base.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/crypto/utils.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/linux/ceph/decode.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/linux/ceph/libceph.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/linux/etherdevice.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/linux/ieee80211.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/linux/mtd/map.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/linux/ptp_classify.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/linux/sunrpc/xdr.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/linux/tpm.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/linux/unaligned.h",
+    "status": "A",
+    "in_track": false
+   },
+   {
+    "path": "include/net/bluetooth/l2cap.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/net/calipso.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/net/cipso_ipv4.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/net/ieee80211_radiotap.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/net/mac80211.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/net/mac802154.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/net/netfilter/nf_tables.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/rdma/ib_hdrs.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/rdma/iba.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/scsi/scsi_transport_fc.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/target/target_core_backend.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "kernel/bpf/core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "kernel/debug/gdbstub.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/842/842.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/aes.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/blake2s-generic.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/chacha.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/chacha20poly1305-selftest.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/chacha20poly1305.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/curve25519-fiat32.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/curve25519-hacl64.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/des.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/memneq.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/poly1305-donna32.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/poly1305-donna64.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/poly1305.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/sha1.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/sha256.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/crypto/utils.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/decompress_unlz4.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/decompress_unlzo.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/hexdump.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/lz4/lz4_compress.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/lz4/lz4_decompress.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/lz4/lz4defs.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/lzo/lzo1x_compress.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/lzo/lzo1x_decompress_safe.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/pldmfw/pldmfw.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/random32.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/siphash.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/string.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/vsprintf.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/xxhash.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/xz/xz_private.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "lib/zstd/common/mem.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/802/garp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/802/mrp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/batman-adv/distributed-arp-table.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/bluetooth/bnep/core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/bluetooth/coredump.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/bluetooth/eir.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/bluetooth/hci_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/bluetooth/hci_event.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/bluetooth/hci_sock.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/bluetooth/mgmt.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/bluetooth/mgmt_util.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/bluetooth/rfcomm/core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/bridge/br_fdb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/bridge/br_stp_bpdu.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/caif/cfrfml.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/core/drop_monitor.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/core/filter.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/core/net-traces.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/core/netpoll.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/core/sock.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/core/tso.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/dccp/ccids/ccid3.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/dccp/options.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/ipv4/cipso_ipv4.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/ipv4/ip_options.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/ipv4/tcp_input.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/ipv6/addrconf.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/ipv6/calipso.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac80211/key.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac80211/mesh.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac80211/mesh_hwmp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac80211/michael.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac80211/mlme.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac80211/ocb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac80211/rx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac80211/status.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac80211/tkip.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac80211/tx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac80211/wep.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac80211/wpa.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac802154/rx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mac802154/tx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/mptcp/crypto.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/netfilter/ipvs/ip_vs_ftp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/netfilter/ipvs/ip_vs_sync.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/netfilter/nf_conntrack_proto_tcp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/netfilter/nf_synproxy_core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/netfilter/nft_byteorder.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/netfilter/nft_exthdr.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/phonet/af_phonet.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/sched/em_cmp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/sunrpc/xprtrdma/svc_rdma_recvfrom.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/sunrpc/xprtrdma/svc_rdma_sendto.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/tls/trace.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/wireless/radiotap.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "net/xfrm/xfrm_user.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "security/apparmor/policy_unpack.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "security/keys/trusted-keys/trusted_tpm2.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/i2c/cs8427.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/pci/hda/hda_eld.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/pci/hda/tas2781_hda_i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/soc/codecs/adau1701.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/soc/codecs/adau17x1.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/soc/codecs/pcm6240.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/soc/codecs/peb2466.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/soc/codecs/sigmadsp-i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/soc/codecs/tas2781-fmwlib.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/soc/codecs/tas2781-i2c.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/soc/codecs/tas571x.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/soc/codecs/tlv320aic31xx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/soc/codecs/wm5102.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/soc/codecs/wm8958-dsp2.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/soc/sof/iomem-utils.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "sound/soc/sof/sof-utils.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "tools/arch/x86/lib/insn.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "tools/include/asm-generic/unaligned.h",
+    "status": "D",
+    "in_track": false
+   },
+   {
+    "path": "tools/include/linux/unaligned.h",
+    "status": "A",
+    "in_track": false
+   },
+   {
+    "path": "tools/perf/check-headers.sh",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "tools/perf/util/arm-spe-decoder/arm-spe-pkt-decoder.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "tools/perf/util/intel-pt-decoder/intel-pt-pkt-decoder.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "tools/testing/cxl/test/mem.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "tools/testing/selftests/bpf/progs/test_tcp_custom_syncookie.h",
+    "status": "M",
+    "in_track": false
+   }
+  ],
+  "area": "core",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/5f60d5f6bbc1.diff",
+  "patch_bytes": 1509
+ },
+ {
+  "sha": "d5130c5a093257aa4542aaded8034ef116a7624a",
+  "release": "v6.12",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2024-09-10T07:45:43+03:00",
+  "commit_date": "2024-10-03T21:30:54-04:00",
+  "subject": "scsi: ufs: Use pre-calculated offsets in ufshcd_init_lrb()",
+  "body": "Replace manual offset calculations for response_upiu and prd_table in\nufshcd_init_lrb() with pre-calculated offsets already stored in the\nutp_transfer_req_desc structure. The pre-calculated offsets are set\ndifferently in ufshcd_host_memory_configure() based on the\nUFSHCD_QUIRK_PRDT_BYTE_GRAN quirk, ensuring correct alignment and\naccess.\n\nFixes: 26f968d7de82 (\"scsi: ufs: Introduce UFSHCD_QUIRK_PRDT_BYTE_GRAN quirk\")\nCc: stable@vger.kernel.org\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20240910044543.3812642-1-avri.altman@wdc.com\nAcked-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "26f968d7de82 (\"scsi: ufs: Introduce UFSHCD_QUIRK_PRDT_BYTE_GRAN quirk\")"
+   ],
+   "cc": [
+    "stable@vger.kernel.org"
+   ],
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240910044543.3812642-1-avri.altman@wdc.com"
+   ],
+   "acked_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "26f968d7de82",
+    "subject": "scsi: ufs: Introduce UFSHCD_QUIRK_PRDT_BYTE_GRAN quirk",
+    "sha": "26f968d7de823ba4974a8f25c8bd8ee2df6ab74b",
+    "introduced_in": "v5.9"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "20240910044543.3812642-1-avri.altman@wdc.com",
+  "series_id": "20240910044543.3812642-avri.altman@wdc.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d5130c5a0932.diff",
+  "patch_bytes": 805
+ },
+ {
+  "sha": "bf0c6cc73f7f91ec70307f7c72343f6cb7d65d01",
+  "release": "v6.12",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2024-10-01T17:19:16+08:00",
+  "commit_date": "2024-10-15T22:07:31-04:00",
+  "subject": "scsi: ufs: core: Fix the issue of ICU failure",
+  "body": "When setting the ICU bit without using read-modify-write, SQRTCy will\nrestart SQ again and receive an RTC return error code 2 (Failure - SQ\nnot stopped).\n\nAdditionally, the error log has been modified so that this type of error\ncan be observed.\n\nFixes: ab248643d3d6 (\"scsi: ufs: core: Add error handling for MCQ mode\")\nCc: stable@vger.kernel.org\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://lore.kernel.org/r/20241001091917.6917-2-peter.wang@mediatek.com\nReviewed-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "ab248643d3d6 (\"scsi: ufs: core: Add error handling for MCQ mode\")"
+   ],
+   "cc": [
+    "stable@vger.kernel.org"
+   ],
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241001091917.6917-2-peter.wang@mediatek.com"
+   ],
+   "reviewed_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "ab248643d3d6",
+    "subject": "scsi: ufs: core: Add error handling for MCQ mode",
+    "sha": "ab248643d3d68b30f95ee9c238a5a20a06891204",
+    "introduced_in": "v6.5"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "20241001091917.6917-2-peter.wang@mediatek.com",
+  "series_id": "20241001091917.6917-peter.wang@mediatek.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 8,
+    "deleted": 7,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/bf0c6cc73f7f.diff",
+  "patch_bytes": 1386
+ },
+ {
+  "sha": "8fa075804cb3b00960dd5c06554308175c834530",
+  "release": "v6.12",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2024-10-01T17:19:17+08:00",
+  "commit_date": "2024-10-15T22:07:32-04:00",
+  "subject": "scsi: ufs: core: Requeue aborted request",
+  "body": "After the SQ cleanup fix, the CQ will receive a response with the\ncorresponding tag marked as OCS: ABORTED. To align with the behavior of\nLegacy SDB mode, the handling of OCS: ABORTED has been changed to match\nthat of OCS_INVALID_COMMAND_STATUS (SDB), with both returning a SCSI\nresult of DID_REQUEUE.\n\nFurthermore, the workaround implemented before the SQ cleanup fix can be\nremoved.\n\nFixes: ab248643d3d6 (\"scsi: ufs: core: Add error handling for MCQ mode\")\nCc: stable@vger.kernel.org\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://lore.kernel.org/r/20241001091917.6917-3-peter.wang@mediatek.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "ab248643d3d6 (\"scsi: ufs: core: Add error handling for MCQ mode\")"
+   ],
+   "cc": [
+    "stable@vger.kernel.org"
+   ],
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241001091917.6917-3-peter.wang@mediatek.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "ab248643d3d6",
+    "subject": "scsi: ufs: core: Add error handling for MCQ mode",
+    "sha": "ab248643d3d68b30f95ee9c238a5a20a06891204",
+    "introduced_in": "v6.5"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "20241001091917.6917-3-peter.wang@mediatek.com",
+  "series_id": "20241001091917.6917-peter.wang@mediatek.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 16,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/8fa075804cb3.diff",
+  "patch_bytes": 1514
+ },
+ {
+  "sha": "19a198b67767d952c8f3d0cf24eb3100522a8223",
+  "release": "v6.12",
+  "author": {
+   "name": "Seunghwan Baek",
+   "email": "sh8267.baek@samsung.com"
+  },
+  "author_date": "2024-08-29T18:39:13+09:00",
+  "commit_date": "2024-10-15T22:11:11-04:00",
+  "subject": "scsi: ufs: core: Set SDEV_OFFLINE when UFS is shut down",
+  "body": "There is a history of deadlock if reboot is performed at the beginning\nof booting. SDEV_QUIESCE was set for all LU's scsi_devices by UFS\nshutdown, and at that time the audio driver was waiting on\nblk_mq_submit_bio() holding a mutex_lock while reading the fw binary.\nAfter that, a deadlock issue occurred while audio driver shutdown was\nwaiting for mutex_unlock of blk_mq_submit_bio(). To solve this, set\nSDEV_OFFLINE for all LUs except WLUN, so that any I/O that comes down\nafter a UFS shutdown will return an error.\n\n[   31.907781]I[0:      swapper/0:    0]        1        130705007       1651079834      11289729804                0 D(   2) 3 ffffff882e208000 *             init [device_shutdown]\n[   31.907793]I[0:      swapper/0:    0] Mutex: 0xffffff8849a2b8b0: owner[0xffffff882e28cb00 kworker/6:0 :49]\n[   31.907806]I[0:      swapper/0:    0] Call trace:\n[   31.907810]I[0:      swapper/0:    0]  __switch_to+0x174/0x338\n[   31.907819]I[0:      swapper/0:    0]  __schedule+0x5ec/0x9cc\n[   31.907826]I[0:      swapper/0:    0]  schedule+0x7c/0xe8\n[   31.907834]I[0:      swapper/0:    0]  schedule_preempt_disabled+0x24/0x40\n[   31.907842]I[0:      swapper/0:    0]  __mutex_lock+0x408/0xdac\n[   31.907849]I[0:      swapper/0:    0]  __mutex_lock_slowpath+0x14/0x24\n[   31.907858]I[0:      swapper/0:    0]  mutex_lock+0x40/0xec\n[   31.907866]I[0:      swapper/0:    0]  device_shutdown+0x108/0x280\n[   31.907875]I[0:      swapper/0:    0]  kernel_restart+0x4c/0x11c\n[   31.907883]I[0:      swapper/0:    0]  __arm64_sys_reboot+0x15c/0x280\n[   31.907890]I[0:      swapper/0:    0]  invoke_syscall+0x70/0x158\n[   31.907899]I[0:      swapper/0:    0]  el0_svc_common+0xb4/0xf4\n[   31.907909]I[0:      swapper/0:    0]  do_el0_svc+0x2c/0xb0\n[   31.907918]I[0:      swapper/0:    0]  el0_svc+0x34/0xe0\n[   31.907928]I[0:      swapper/0:    0]  el0t_64_sync_handler+0x68/0xb4\n[   31.907937]I[0:      swapper/0:    0]  el0t_64_sync+0x1a0/0x1a4\n\n[   31.908774]I[0:      swapper/0:    0]       49                0         11960702      11236868007                0 D(   2) 6 ffffff882e28cb00 *      kworker/6:0 [__bio_queue_enter]\n[   31.908783]I[0:      swapper/0:    0] Call trace:\n[   31.908788]I[0:      swapper/0:    0]  __switch_to+0x174/0x338\n[   31.908796]I[0:      swapper/0:    0]  __schedule+0x5ec/0x9cc\n[   31.908803]I[0:      swapper/0:    0]  schedule+0x7c/0xe8\n[   31.908811]I[0:      swapper/0:    0]  __bio_queue_enter+0xb8/0x178\n[   31.908818]I[0:      swapper/0:    0]  blk_mq_submit_bio+0x194/0x67c\n[   31.908827]I[0:      swapper/0:    0]  __submit_bio+0xb8/0x19c\n\nFixes: b294ff3e3449 (\"scsi: ufs: core: Enable power management for wlun\")\nCc: stable@vger.kernel.org\nSigned-off-by: Seunghwan Baek <sh8267.baek@samsung.com>\nLink: https://lore.kernel.org/r/20240829093913.6282-2-sh8267.baek@samsung.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "b294ff3e3449 (\"scsi: ufs: core: Enable power management for wlun\")"
+   ],
+   "cc": [
+    "stable@vger.kernel.org"
+   ],
+   "signed_off_by": [
+    "Seunghwan Baek <sh8267.baek@samsung.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20240829093913.6282-2-sh8267.baek@samsung.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "b294ff3e3449",
+    "subject": "scsi: ufs: core: Enable power management for wlun",
+    "sha": "b294ff3e34490f36233230e9ca70503d3924a6f3",
+    "introduced_in": "v5.14"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "20240829093913.6282-2-sh8267.baek@samsung.com",
+  "series_id": "20240829093913.6282-sh8267.baek@samsung.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/19a198b67767.diff",
+  "patch_bytes": 538
+ },
+ {
+  "sha": "cb7e509c4e0197f63717fee54fb41c4990ba8d3a",
+  "release": "v6.12",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2024-10-24T09:54:53+08:00",
+  "commit_date": "2024-10-25T14:51:34-04:00",
+  "subject": "scsi: ufs: core: Fix another deadlock during RTC update",
+  "body": "If ufshcd_rtc_work calls ufshcd_rpm_put_sync() and the pm's usage_count\nis 0, we will enter the runtime suspend callback.  However, the runtime\nsuspend callback will wait to flush ufshcd_rtc_work, causing a deadlock.\n\nReplace ufshcd_rpm_put_sync() with ufshcd_rpm_put() to avoid the\ndeadlock.\n\nFixes: 6bf999e0eb41 (\"scsi: ufs: core: Add UFS RTC support\")\nCc: stable@vger.kernel.org #6.11.x\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://lore.kernel.org/r/20241024015453.21684-1-peter.wang@mediatek.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "6bf999e0eb41 (\"scsi: ufs: core: Add UFS RTC support\")"
+   ],
+   "cc": [
+    "stable@vger.kernel.org #6.11.x"
+   ],
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241024015453.21684-1-peter.wang@mediatek.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "6bf999e0eb41",
+    "subject": "scsi: ufs: core: Add UFS RTC support",
+    "sha": "6bf999e0eb41850d5c857102535d5c53b2ede224",
+    "introduced_in": "v6.8"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "20241024015453.21684-1-peter.wang@mediatek.com",
+  "series_id": "20241024015453.21684-peter.wang@mediatek.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/cb7e509c4e01.diff",
+  "patch_bytes": 489
+ },
+ {
+  "sha": "54c814c8b23bc7617be3d46abdb896937695dbfa",
+  "release": "v6.12",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2024-10-31T14:26:24-07:00",
+  "commit_date": "2024-11-04T20:56:59-05:00",
+  "subject": "scsi: ufs: core: Start the RTC update work later",
+  "body": "The RTC update work involves runtime resuming the UFS controller. Hence,\nonly start the RTC update work after runtime power management in the UFS\ndriver has been fully initialized. This patch fixes the following kernel\ncrash:\n\nInternal error: Oops: 0000000096000006 [#1] PREEMPT SMP\nWorkqueue: events ufshcd_rtc_work\nCall trace:\n _raw_spin_lock_irqsave+0x34/0x8c (P)\n pm_runtime_get_if_active+0x24/0x9c (L)\n pm_runtime_get_if_active+0x24/0x9c\n ufshcd_rtc_work+0x138/0x1b4\n process_one_work+0x148/0x288\n worker_thread+0x2cc/0x3d4\n kthread+0x110/0x114\n ret_from_fork+0x10/0x20\n\nReported-by: Neil Armstrong <neil.armstrong@linaro.org>\nCloses: https://lore.kernel.org/linux-scsi/0c0bc528-fdc2-4106-bc99-f23ae377f6f5@linaro.org/\nFixes: 6bf999e0eb41 (\"scsi: ufs: core: Add UFS RTC support\")\nCc: Bean Huo <beanhuo@micron.com>\nCc: stable@vger.kernel.org\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20241031212632.2799127-1-bvanassche@acm.org\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Bean Huo <beanhuo@micron.com>\nTested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8650-HDK\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reported_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org>"
+   ],
+   "closes": [
+    "https://lore.kernel.org/linux-scsi/0c0bc528-fdc2-4106-bc99-f23ae377f6f5@linaro.org/"
+   ],
+   "fixes": [
+    "6bf999e0eb41 (\"scsi: ufs: core: Add UFS RTC support\")"
+   ],
+   "cc": [
+    "Bean Huo <beanhuo@micron.com>",
+    "stable@vger.kernel.org"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241031212632.2799127-1-bvanassche@acm.org"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Bean Huo <beanhuo@micron.com>"
+   ],
+   "tested_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org> # on SM8650-HDK"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "6bf999e0eb41",
+    "subject": "scsi: ufs: core: Add UFS RTC support",
+    "sha": "6bf999e0eb41850d5c857102535d5c53b2ede224",
+    "introduced_in": "v6.8"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "20241031212632.2799127-1-bvanassche@acm.org",
+  "series_id": "20241031212632.2799127-bvanassche@acm.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 8,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/54c814c8b23b.diff",
+  "patch_bytes": 1006
+ }
+]

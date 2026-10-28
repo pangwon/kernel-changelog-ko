@@ -1,0 +1,73 @@
+diff --git a/drivers/ufs/core/ufs-mcq.c b/drivers/ufs/core/ufs-mcq.c
+index 0787456c2b89..edc752e55878 100644
+--- a/drivers/ufs/core/ufs-mcq.c
++++ b/drivers/ufs/core/ufs-mcq.c
+@@ -399,6 +399,12 @@ void ufshcd_mcq_enable_esi(struct ufs_hba *hba)
+ }
+ EXPORT_SYMBOL_GPL(ufshcd_mcq_enable_esi);
+ 
++void ufshcd_mcq_enable(struct ufs_hba *hba)
++{
++	ufshcd_rmwl(hba, MCQ_MODE_SELECT, MCQ_MODE_SELECT, REG_UFS_MEM_CFG);
++}
++EXPORT_SYMBOL_GPL(ufshcd_mcq_enable);
++
+ void ufshcd_mcq_config_esi(struct ufs_hba *hba, struct msi_msg *msg)
+ {
+ 	ufshcd_writel(hba, msg->address_lo, REG_UFS_ESILBA);
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index e519695b704f..f10a92681bba 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -8847,9 +8847,7 @@ static void ufshcd_config_mcq(struct ufs_hba *hba)
+ 	hba->host->can_queue = hba->nutrs - UFSHCD_NUM_RESERVED;
+ 	hba->reserved_slot = hba->nutrs - UFSHCD_NUM_RESERVED;
+ 
+-	/* Select MCQ mode */
+-	ufshcd_writel(hba, ufshcd_readl(hba, REG_UFS_MEM_CFG) | 0x1,
+-		      REG_UFS_MEM_CFG);
++	ufshcd_mcq_enable(hba);
+ 	hba->mcq_enabled = true;
+ 
+ 	dev_info(hba->dev, "MCQ configured, nr_queues=%d, io_queues=%d, read_queue=%d, poll_queues=%d, queue_depth=%d\n",
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index 72a7b3a7cc00..b8a8801322e2 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -1254,9 +1254,7 @@ static int ufs_mtk_link_set_hpm(struct ufs_hba *hba)
+ 		ufs_mtk_config_mcq(hba, false);
+ 		ufshcd_mcq_make_queues_operational(hba);
+ 		ufshcd_mcq_config_mac(hba, hba->nutrs);
+-		/* Enable MCQ mode */
+-		ufshcd_writel(hba, ufshcd_readl(hba, REG_UFS_MEM_CFG) | 0x1,
+-			      REG_UFS_MEM_CFG);
++		ufshcd_mcq_enable(hba);
+ 	}
+ 
+ 	return 0;
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index c491671e79b7..cb2afcebbdf5 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -1267,6 +1267,7 @@ unsigned long ufshcd_mcq_poll_cqe_lock(struct ufs_hba *hba,
+ 					 struct ufs_hw_queue *hwq);
+ void ufshcd_mcq_make_queues_operational(struct ufs_hba *hba);
+ void ufshcd_mcq_enable_esi(struct ufs_hba *hba);
++void ufshcd_mcq_enable(struct ufs_hba *hba);
+ void ufshcd_mcq_config_esi(struct ufs_hba *hba, struct msi_msg *msg);
+ 
+ int ufshcd_opp_config_clks(struct device *dev, struct opp_table *opp_table,
+diff --git a/include/ufs/ufshci.h b/include/ufs/ufshci.h
+index d5accacae6bc..a196e1c4c3bb 100644
+--- a/include/ufs/ufshci.h
++++ b/include/ufs/ufshci.h
+@@ -282,6 +282,9 @@ enum {
+ /* UTMRLRSR - UTP Task Management Request Run-Stop Register 80h */
+ #define UTP_TASK_REQ_LIST_RUN_STOP_BIT		0x1
+ 
++/* REG_UFS_MEM_CFG - Global Config Registers 300h */
++#define MCQ_MODE_SELECT	BIT(0)
++
+ /* CQISy - CQ y Interrupt Status Register  */
+ #define UFSHCD_MCQ_CQIS_TAIL_ENT_PUSH_STS	0x1
+ 

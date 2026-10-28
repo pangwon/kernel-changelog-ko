@@ -1,0 +1,84 @@
+diff --git a/drivers/phy/samsung/phy-exynos7-ufs.c b/drivers/phy/samsung/phy-exynos7-ufs.c
+index a982e7c128c5..15eec1d9e0e0 100644
+--- a/drivers/phy/samsung/phy-exynos7-ufs.c
++++ b/drivers/phy/samsung/phy-exynos7-ufs.c
+@@ -82,4 +82,5 @@ const struct samsung_ufs_phy_drvdata exynos7_ufs_phy = {
+ 	.clk_list = exynos7_ufs_phy_clks,
+ 	.num_clks = ARRAY_SIZE(exynos7_ufs_phy_clks),
+ 	.cdr_lock_status_offset = EXYNOS7_EMBEDDED_COMBO_PHY_CDR_LOCK_STATUS,
++	.wait_for_cdr = samsung_ufs_phy_wait_for_lock_acq,
+ };
+diff --git a/drivers/phy/samsung/phy-exynosautov9-ufs.c b/drivers/phy/samsung/phy-exynosautov9-ufs.c
+index 49e2bcbef0b4..9c3e030f07ba 100644
+--- a/drivers/phy/samsung/phy-exynosautov9-ufs.c
++++ b/drivers/phy/samsung/phy-exynosautov9-ufs.c
+@@ -71,4 +71,5 @@ const struct samsung_ufs_phy_drvdata exynosautov9_ufs_phy = {
+ 	.clk_list = exynosautov9_ufs_phy_clks,
+ 	.num_clks = ARRAY_SIZE(exynosautov9_ufs_phy_clks),
+ 	.cdr_lock_status_offset = EXYNOSAUTOV9_EMBEDDED_COMBO_PHY_CDR_LOCK_STATUS,
++	.wait_for_cdr = samsung_ufs_phy_wait_for_lock_acq,
+ };
+diff --git a/drivers/phy/samsung/phy-fsd-ufs.c b/drivers/phy/samsung/phy-fsd-ufs.c
+index d36cabd53434..f2361746db0e 100644
+--- a/drivers/phy/samsung/phy-fsd-ufs.c
++++ b/drivers/phy/samsung/phy-fsd-ufs.c
+@@ -60,4 +60,5 @@ const struct samsung_ufs_phy_drvdata fsd_ufs_phy = {
+ 	.clk_list = fsd_ufs_phy_clks,
+ 	.num_clks = ARRAY_SIZE(fsd_ufs_phy_clks),
+ 	.cdr_lock_status_offset = FSD_EMBEDDED_COMBO_PHY_CDR_LOCK_STATUS,
++	.wait_for_cdr = samsung_ufs_phy_wait_for_lock_acq,
+ };
+diff --git a/drivers/phy/samsung/phy-samsung-ufs.c b/drivers/phy/samsung/phy-samsung-ufs.c
+index c567efafc30f..f57a2f2a415d 100644
+--- a/drivers/phy/samsung/phy-samsung-ufs.c
++++ b/drivers/phy/samsung/phy-samsung-ufs.c
+@@ -46,7 +46,7 @@ static void samsung_ufs_phy_config(struct samsung_ufs_phy *phy,
+ 	}
+ }
+ 
+-static int samsung_ufs_phy_wait_for_lock_acq(struct phy *phy)
++int samsung_ufs_phy_wait_for_lock_acq(struct phy *phy, u8 lane)
+ {
+ 	struct samsung_ufs_phy *ufs_phy = get_samsung_ufs_phy(phy);
+ 	const unsigned int timeout_us = 100000;
+@@ -98,8 +98,15 @@ static int samsung_ufs_phy_calibrate(struct phy *phy)
+ 		}
+ 	}
+ 
+-	if (ufs_phy->ufs_phy_state == CFG_POST_PWR_HS)
+-		err = samsung_ufs_phy_wait_for_lock_acq(phy);
++	for_each_phy_lane(ufs_phy, i) {
++		if (ufs_phy->ufs_phy_state == CFG_PRE_INIT &&
++		    ufs_phy->drvdata->wait_for_cal)
++			err = ufs_phy->drvdata->wait_for_cal(phy, i);
++
++		if (ufs_phy->ufs_phy_state == CFG_POST_PWR_HS &&
++		    ufs_phy->drvdata->wait_for_cdr)
++			err = ufs_phy->drvdata->wait_for_cdr(phy, i);
++	}
+ 
+ 	/**
+ 	 * In Samsung ufshci, PHY need to be calibrated at different
+diff --git a/drivers/phy/samsung/phy-samsung-ufs.h b/drivers/phy/samsung/phy-samsung-ufs.h
+index e122960cfee8..7de6b574b94d 100644
+--- a/drivers/phy/samsung/phy-samsung-ufs.h
++++ b/drivers/phy/samsung/phy-samsung-ufs.h
+@@ -112,6 +112,9 @@ struct samsung_ufs_phy_drvdata {
+ 	const char * const *clk_list;
+ 	int num_clks;
+ 	u32 cdr_lock_status_offset;
++	/* SoC's specific operations */
++	int (*wait_for_cal)(struct phy *phy, u8 lane);
++	int (*wait_for_cdr)(struct phy *phy, u8 lane);
+ };
+ 
+ struct samsung_ufs_phy {
+@@ -139,6 +142,8 @@ static inline void samsung_ufs_phy_ctrl_isol(
+ 			   phy->isol.mask, isol ? 0 : phy->isol.en);
+ }
+ 
++int samsung_ufs_phy_wait_for_lock_acq(struct phy *phy, u8 lane);
++
+ extern const struct samsung_ufs_phy_drvdata exynos7_ufs_phy;
+ extern const struct samsung_ufs_phy_drvdata exynosautov9_ufs_phy;
+ extern const struct samsung_ufs_phy_drvdata fsd_ufs_phy;

@@ -1,0 +1,12 @@
+diff --git a/drivers/ufs/host/Kconfig b/drivers/ufs/host/Kconfig
+index 16624ba08050..580c8d0bd8bb 100644
+--- a/drivers/ufs/host/Kconfig
++++ b/drivers/ufs/host/Kconfig
+@@ -72,6 +72,7 @@ config SCSI_UFS_QCOM
+ config SCSI_UFS_MEDIATEK
+ 	tristate "Mediatek specific hooks to UFS controller platform driver"
+ 	depends on SCSI_UFSHCD_PLATFORM && ARCH_MEDIATEK
++	depends on RESET_CONTROLLER
+ 	select PHY_MTK_UFS
+ 	select RESET_TI_SYSCON
+ 	help

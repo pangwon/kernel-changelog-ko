@@ -1,0 +1,117 @@
+diff --git a/drivers/ufs/host/cdns-pltfrm.c b/drivers/ufs/host/cdns-pltfrm.c
+index 66811d8d1929..c80f770a6285 100644
+--- a/drivers/ufs/host/cdns-pltfrm.c
++++ b/drivers/ufs/host/cdns-pltfrm.c
+@@ -321,7 +321,7 @@ static const struct dev_pm_ops cdns_ufs_dev_pm_ops = {
+ 
+ static struct platform_driver cdns_ufs_pltfrm_driver = {
+ 	.probe	= cdns_ufs_pltfrm_probe,
+-	.remove_new = cdns_ufs_pltfrm_remove,
++	.remove = cdns_ufs_pltfrm_remove,
+ 	.driver	= {
+ 		.name   = "cdns-ufshcd",
+ 		.pm     = &cdns_ufs_dev_pm_ops,
+diff --git a/drivers/ufs/host/tc-dwc-g210-pltfrm.c b/drivers/ufs/host/tc-dwc-g210-pltfrm.c
+index a3877592604d..9bfaa36cc898 100644
+--- a/drivers/ufs/host/tc-dwc-g210-pltfrm.c
++++ b/drivers/ufs/host/tc-dwc-g210-pltfrm.c
+@@ -89,7 +89,7 @@ static const struct dev_pm_ops tc_dwc_g210_pltfm_pm_ops = {
+ 
+ static struct platform_driver tc_dwc_g210_pltfm_driver = {
+ 	.probe		= tc_dwc_g210_pltfm_probe,
+-	.remove_new	= tc_dwc_g210_pltfm_remove,
++	.remove		= tc_dwc_g210_pltfm_remove,
+ 	.driver		= {
+ 		.name	= "tc-dwc-g210-pltfm",
+ 		.pm	= &tc_dwc_g210_pltfm_pm_ops,
+diff --git a/drivers/ufs/host/ti-j721e-ufs.c b/drivers/ufs/host/ti-j721e-ufs.c
+index 250c22df000d..21214e5d5896 100644
+--- a/drivers/ufs/host/ti-j721e-ufs.c
++++ b/drivers/ufs/host/ti-j721e-ufs.c
+@@ -83,7 +83,7 @@ MODULE_DEVICE_TABLE(of, ti_j721e_ufs_of_match);
+ 
+ static struct platform_driver ti_j721e_ufs_driver = {
+ 	.probe	= ti_j721e_ufs_probe,
+-	.remove_new = ti_j721e_ufs_remove,
++	.remove = ti_j721e_ufs_remove,
+ 	.driver	= {
+ 		.name   = "ti-j721e-ufs",
+ 		.of_match_table = ti_j721e_ufs_of_match,
+diff --git a/drivers/ufs/host/ufs-exynos.c b/drivers/ufs/host/ufs-exynos.c
+index 91827b3e582b..4a9173cf4404 100644
+--- a/drivers/ufs/host/ufs-exynos.c
++++ b/drivers/ufs/host/ufs-exynos.c
+@@ -2166,7 +2166,7 @@ static const struct dev_pm_ops exynos_ufs_pm_ops = {
+ 
+ static struct platform_driver exynos_ufs_pltform = {
+ 	.probe	= exynos_ufs_probe,
+-	.remove_new = exynos_ufs_remove,
++	.remove = exynos_ufs_remove,
+ 	.driver	= {
+ 		.name	= "exynos-ufshc",
+ 		.pm	= &exynos_ufs_pm_ops,
+diff --git a/drivers/ufs/host/ufs-hisi.c b/drivers/ufs/host/ufs-hisi.c
+index 5ee73ff05251..494f593702a3 100644
+--- a/drivers/ufs/host/ufs-hisi.c
++++ b/drivers/ufs/host/ufs-hisi.c
+@@ -590,7 +590,7 @@ static const struct dev_pm_ops ufs_hisi_pm_ops = {
+ 
+ static struct platform_driver ufs_hisi_pltform = {
+ 	.probe	= ufs_hisi_probe,
+-	.remove_new = ufs_hisi_remove,
++	.remove = ufs_hisi_remove,
+ 	.driver	= {
+ 		.name	= "ufshcd-hisi",
+ 		.pm	= &ufs_hisi_pm_ops,
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index 06ab1e5e8b6f..6fc848d0ada8 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -1962,7 +1962,7 @@ static const struct dev_pm_ops ufs_mtk_pm_ops = {
+ 
+ static struct platform_driver ufs_mtk_pltform = {
+ 	.probe      = ufs_mtk_probe,
+-	.remove_new = ufs_mtk_remove,
++	.remove = ufs_mtk_remove,
+ 	.driver = {
+ 		.name   = "ufshcd-mtk",
+ 		.pm     = &ufs_mtk_pm_ops,
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 3b592492e152..d2b8d97b480e 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -1897,7 +1897,7 @@ static const struct dev_pm_ops ufs_qcom_pm_ops = {
+ 
+ static struct platform_driver ufs_qcom_pltform = {
+ 	.probe	= ufs_qcom_probe,
+-	.remove_new = ufs_qcom_remove,
++	.remove = ufs_qcom_remove,
+ 	.driver	= {
+ 		.name	= "ufshcd-qcom",
+ 		.pm	= &ufs_qcom_pm_ops,
+diff --git a/drivers/ufs/host/ufs-renesas.c b/drivers/ufs/host/ufs-renesas.c
+index 3ff97112e1f6..f404019dc5d9 100644
+--- a/drivers/ufs/host/ufs-renesas.c
++++ b/drivers/ufs/host/ufs-renesas.c
+@@ -404,7 +404,7 @@ static void ufs_renesas_remove(struct platform_device *pdev)
+ 
+ static struct platform_driver ufs_renesas_platform = {
+ 	.probe	= ufs_renesas_probe,
+-	.remove_new = ufs_renesas_remove,
++	.remove = ufs_renesas_remove,
+ 	.driver	= {
+ 		.name	= "ufshcd-renesas",
+ 		.of_match_table	= of_match_ptr(ufs_renesas_of_match),
+diff --git a/drivers/ufs/host/ufs-sprd.c b/drivers/ufs/host/ufs-sprd.c
+index d8b165908809..b1ffb9b05fa7 100644
+--- a/drivers/ufs/host/ufs-sprd.c
++++ b/drivers/ufs/host/ufs-sprd.c
+@@ -442,7 +442,7 @@ static const struct dev_pm_ops ufs_sprd_pm_ops = {
+ 
+ static struct platform_driver ufs_sprd_pltform = {
+ 	.probe = ufs_sprd_probe,
+-	.remove_new = ufs_sprd_remove,
++	.remove = ufs_sprd_remove,
+ 	.driver = {
+ 		.name = "ufshcd-sprd",
+ 		.pm = &ufs_sprd_pm_ops,

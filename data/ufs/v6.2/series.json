@@ -1,0 +1,345 @@
+[
+ {
+  "id": "20221017065013.19647-johan+linaro@kernel.org",
+  "title": "phy: qcom-qmp: fix obsolete lane comments",
+  "commits": [
+   "8d3bf72497a8def5dc75e10a2229f1c692598b97",
+   "2d3068cf8d9aa80cfbe2dd4226abbf425c26f8b7"
+  ],
+  "authors": [
+   "Johan Hovold"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221015002418.30955-bvanassche@acm.org",
+  "title": "scsi: ufs: Simplify ufshcd_set_dev_pwr_mode()",
+  "commits": [
+   "6d1aa3b0589bdd17a46ed74fbd2c2d0fc59038ff"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221013194559.128643-mranostay@ti.com",
+  "title": "dt-bindings: ufs: cdns,ufshc: add missing dma-coherent field",
+  "commits": [
+   "3eecdba4c01c8fcc3de69278a1da6e596280c582"
+  ],
+  "authors": [
+   "Matt Ranostay"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221018202958.1902564-bvanassche@acm.org",
+  "title": "scsi: ufs: Remove an outdated comment",
+  "commits": [
+   "1626c7bba1c42499d6753bd919803158e5792f08",
+   "836d322d73cb08486ecc50787695175a135e62ba",
+   "dcd5b7637c6d442d957f73780a03047413ed3a10",
+   "579a4e9dbd53978cad8df88dc612837cdd210ce0",
+   "1a547cbc6fdd07992f915a614a3f7ba3fccef8fb",
+   "6a354a7e740ee779d8595bb3c555d415433f2b19",
+   "7029e2151a7c6a5c60b35996d026528e7d51aae3"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221018135720.670094-hch@lst.de",
+  "title": "blk-mq: move the call to blk_put_queue out of blk_mq_destroy_queue",
+  "commits": [
+   "2b3f056f72e56fa07df69b4705e0b46a6c08e77c"
+  ],
+  "authors": [
+   "Christoph Hellwig"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221024120602.30019-peter.wang@mediatek.com",
+  "title": "scsi: ufs: core: Print events for WLUN suspend and resume failures",
+  "commits": [
+   "a301d487d7bde62de43671a1642f8f5a2e2cceef"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221025222430.277768-beanhuo@iokpp.de",
+  "title": "scsi: ufs: core: Revert \"WB is only available on LUN #0 to #7\"",
+  "commits": [
+   "b43678ea5bbd92388339ecae47ed44955474f53b",
+   "dca899bc02231214e25cffd3014cc77018dae942",
+   "9d266e792b0fb4c25448dc240a808667e0932ef2"
+  ],
+  "authors": [
+   "Bean Huo"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221012081241.18273-johan+linaro@kernel.org",
+  "title": "phy: qcom-qmp: drop regulator error message",
+  "commits": [
+   "28d74fc36a3e667b51a437fbf6c45264a0c8f2db",
+   "17302d3630030db09947241451f3d984bc0d3144",
+   "91496846a9e863f7caa2db4a828844746b6f6b32"
+  ],
+  "authors": [
+   "Johan Hovold"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221012085002.24099-johan+linaro@kernel.org",
+  "title": "phy: qcom-qmp-ufs: drop unused phy-status config",
+  "commits": [
+   "c8f5c188156b87c115f27d44004428ede2e262f8",
+   "2f561b687cf47e289b7e068881ad87530c1f1435",
+   "7516edbfaf708e5b987f1b9f23aa7336dd4a812d",
+   "cb4a982fa94a106c3e5d7d9f596375ae442a71ba"
+  ],
+  "authors": [
+   "Johan Hovold"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221024090041.19574-johan+linaro@kernel.org",
+  "title": "phy: qcom-qmp-ufs: move device-id table",
+  "commits": [
+   "d907774ed5aab5a33ef4106ea3830e673196313b",
+   "a36032db30deb2235bc18a8f1088c9a801bf66b0",
+   "cb2c3d2ee46fe56144b74a22504e023aa59835aa",
+   "018dfc99aef2f487f95e07fcbd600e02d290ba18",
+   "b98e44e608bcb4a2c235b50cc48144e7043595b5",
+   "e0a0c761d2203955585b2c93126d6a712726c368",
+   "c64d39b403d8dc751ea6a56f97962f93f811fed4",
+   "0e089bb8b31f7651d364723122af7ba7be7b98a9"
+  ],
+  "authors": [
+   "Johan Hovold"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221028073553epcms2p6dc4f8bdbebdc8f96f43fc4197b3edd0c@epcms2p6",
+  "title": "scsi: ufs: core: Refactor ufshcd_hba_enable()",
+  "commits": [
+   "bc77fb9ce40c276cedf889dca2bc6d1b1edc2763"
+  ],
+  "authors": [
+   "Keoseong Park"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221031183433.2443554-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Introduce ufshcd_abort_all()",
+  "commits": [
+   "b817e6ffbad7a1a0a5ca5bb7d4020823c3f4d9d0"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221103055349epcms2p338f2550c2dd78d00231a83b24719a3d4@epcms2p3",
+  "title": "scsi: ufs: core: Remove check_upiu_size() from ufshcd.h",
+  "commits": [
+   "3d6d7930928ace6b982258ebb81d585fe20e9f44"
+  ],
+  "authors": [
+   "Keoseong Park"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221111094239.11547-johan+linaro@kernel.org",
+  "title": "phy: qcom-qmp: drop unused type header",
+  "commits": [
+   "905abf1229efd33aa57f3f65881c378770dfbb65"
+  ],
+  "authors": [
+   "Johan Hovold"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221111062126.7307-cw9316.lee@samsung.com",
+  "title": "scsi: ufs: core: Separate function name and message",
+  "commits": [
+   "859ed37c9c3f456510b97ecb0bf155cee2b9d3fc"
+  ],
+  "authors": [
+   "ChanWoo Lee"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221111062209.7365-cw9316.lee@samsung.com",
+  "title": "scsi: ufs: core: Switch 'check_for_bkops' to bool",
+  "commits": [
+   "5277326d07fbf68aa7fc9e7bce6c381002e00fca"
+  ],
+  "authors": [
+   "ChanWoo Lee"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221111062301.7423-cw9316.lee@samsung.com",
+  "title": "scsi: ufs: core: Fix unnecessary operation for early return",
+  "commits": [
+   "222d227f375b4cfa517a8f1f0f266ebe0263ad05"
+  ],
+  "authors": [
+   "ChanWoo Lee"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221118044136.921-cw9316.lee@samsung.com",
+  "title": "scsi: ufs: ufs-mediatek: Remove unneeded code",
+  "commits": [
+   "541555285339313e831f8e446c03a7994c604d65"
+  ],
+  "authors": [
+   "ChanWoo Lee"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221118045242.2770-cw9316.lee@samsung.com",
+  "title": "scsi: ufs: ufs-mediatek: Modify the return value",
+  "commits": [
+   "96a2dfa1df4b9df0cfa2e807153b4d254db2fa82"
+  ],
+  "authors": [
+   "ChanWoo Lee"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221118233717.441298-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Fix the polling implementation",
+  "commits": [
+   "ee8c88cab4afbd5ee10a127d6cbecd6b200185a5"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221121003338.11034-cw9316.lee@samsung.com",
+  "title": "scsi: ufs: ufs-mediatek: Remove unnecessary return code",
+  "commits": [
+   "d29c32efebf3f10b25e9f88ac75c962e7259412d"
+  ],
+  "authors": [
+   "ChanWoo Lee"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20221208072520.26210-peter.wang@mediatek.com",
+  "title": "scsi: ufs: core: WLUN suspend SSU/enter hibern8 fail recovery",
+  "commits": [
+   "1a5665fc8d7a000671ebd3fe69c6f9acf1e0dcd9"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230116161201.16923-johan+linaro@kernel.org",
+  "title": "scsi: ufs: core: Fix devfreq deadlocks",
+  "commits": [
+   "ba81043753fffbc2ad6e0c5ff2659f12ac2f46b4"
+  ],
+  "authors": [
+   "Johan Hovold"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ }
+]

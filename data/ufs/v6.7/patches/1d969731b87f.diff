@@ -1,0 +1,13 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index c45737c5adb9..c6c53bdd3e43 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -1430,7 +1430,7 @@ static int ufshcd_devfreq_target(struct device *dev,
+ 		ktime_to_us(ktime_sub(ktime_get(), start)), ret);
+ 
+ out:
+-	if (sched_clk_scaling_suspend_work)
++	if (sched_clk_scaling_suspend_work && !scale_up)
+ 		queue_work(hba->clk_scaling.workq,
+ 			   &hba->clk_scaling.suspend_work);
+ 

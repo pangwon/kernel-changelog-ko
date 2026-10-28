@@ -1,0 +1,24 @@
+diff --git a/drivers/ufs/core/ufs-fault-injection.c b/drivers/ufs/core/ufs-fault-injection.c
+index 169540417079..55db38e75cc4 100644
+--- a/drivers/ufs/core/ufs-fault-injection.c
++++ b/drivers/ufs/core/ufs-fault-injection.c
+@@ -3,6 +3,7 @@
+ #include <linux/kconfig.h>
+ #include <linux/types.h>
+ #include <linux/fault-inject.h>
++#include <linux/debugfs.h>
+ #include <linux/module.h>
+ #include <ufs/ufshcd.h>
+ #include "ufs-fault-injection.h"
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 0fd2aebac728..3f68ae3e4330 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -17,6 +17,7 @@
+ #include <linux/blk-mq.h>
+ #include <linux/devfreq.h>
+ #include <linux/fault-inject.h>
++#include <linux/debugfs.h>
+ #include <linux/msi.h>
+ #include <linux/pm_runtime.h>
+ #include <linux/dma-direction.h>

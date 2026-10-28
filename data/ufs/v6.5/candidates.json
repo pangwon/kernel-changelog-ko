@@ -1,0 +1,89 @@
+[
+ {
+  "sha": "e608d16e01456f82738bd98f6f5ca9f46634369d",
+  "subject": "arm64: dts: qcom: sa8775p-ride: Update L4C parameters",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sa8775p-ride.dts"
+  ]
+ },
+ {
+  "sha": "4d29db2043610dd70be00a61f26fd64256a2a6c5",
+  "subject": "arm64: dts: qcom: sm8350: fix BAM DMA crash and reboot",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8350.dtsi"
+  ]
+ },
+ {
+  "sha": "30654614f3d27230200b1650f6025a2ce67900b4",
+  "subject": "blk-mq: check on cpu id when there is only one ctx mapping",
+  "files": [
+   "block/blk-mq.c"
+  ]
+ },
+ {
+  "sha": "04abeb699ddce800837c4039ea1cc7d4d139bb36",
+  "subject": "f2fs: close unused open zones while mounting",
+  "files": [
+   "fs/f2fs/segment.c"
+  ]
+ },
+ {
+  "sha": "20dea72a393c6d5572088b8ad01dbb9e9aca64ce",
+  "subject": "arm64: dts: qcom: sc8180x: Introduce Lenovo Flex 5G",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/sc8180x-lenovo-flex-5g.dts"
+  ]
+ },
+ {
+  "sha": "2ce38cc1e8fea4e251e4563e436104369bf3b322",
+  "subject": "arm64: dts: qcom: sc8180x: Introduce Primus",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/sc8180x-primus.dts"
+  ]
+ },
+ {
+  "sha": "50da4496761b44752dfdf8096cbee399058aa7da",
+  "subject": "dt-bindings: phy: qcom,qmp-ufs: fix the sc8180x regs",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,msm8996-qmp-ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "2b967894f80aac2c7421eb545c32ed995f8d9877",
+  "subject": "arm64: dts: qcom: sa8775p: mark the UFS controller as dma-coherent",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sa8775p.dtsi"
+  ]
+ },
+ {
+  "sha": "35c45a1125fc0772b95aa41acc25deddcf5492be",
+  "subject": "arm64: dts: qcom: sa8775p-ride: enable UFS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sa8775p-ride.dts"
+  ]
+ },
+ {
+  "sha": "be543efeee17b93edaac61e49c6361d2209bd3d3",
+  "subject": "arm64: dts: qcom: sa8775p: add UFS nodes",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sa8775p.dtsi"
+  ]
+ },
+ {
+  "sha": "0e59d9e210912e037ec28bd057d06481100f0ba5",
+  "subject": "arm64: dts: qcom: Add Fxtec Pro1X (QX1050) DTS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/sm6115-fxtec-pro1x.dts"
+  ]
+ },
+ {
+  "sha": "d8c66cbbdd4fa9ef84497ee509f15aff94a98a59",
+  "subject": "dt-bindings: phy: qmp-ufs: tweak clock and clock-names for sa8775p",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ }
+]

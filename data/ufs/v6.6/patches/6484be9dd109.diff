@@ -1,0 +1,14 @@
+diff --git a/drivers/soc/qcom/ice.c b/drivers/soc/qcom/ice.c
+index a6123ea96272..fbab7fe5c652 100644
+--- a/drivers/soc/qcom/ice.c
++++ b/drivers/soc/qcom/ice.c
+@@ -11,7 +11,9 @@
+ #include <linux/clk.h>
+ #include <linux/delay.h>
+ #include <linux/iopoll.h>
++#include <linux/of.h>
+ #include <linux/of_platform.h>
++#include <linux/platform_device.h>
+ 
+ #include <linux/firmware/qcom/qcom_scm.h>
+ 

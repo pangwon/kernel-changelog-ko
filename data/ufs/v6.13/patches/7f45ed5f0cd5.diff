@@ -1,0 +1,53 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 25c8b3f57171..b7ec5797d5ba 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -4671,9 +4671,6 @@ static int ufshcd_change_power_mode(struct ufs_hba *hba,
+ 		dev_err(hba->dev,
+ 			"%s: power mode change failed %d\n", __func__, ret);
+ 	} else {
+-		ufshcd_vops_pwr_change_notify(hba, POST_CHANGE, NULL,
+-								pwr_mode);
+-
+ 		memcpy(&hba->pwr_info, pwr_mode,
+ 			sizeof(struct ufs_pa_layer_attr));
+ 	}
+@@ -4702,6 +4699,10 @@ int ufshcd_config_pwr_mode(struct ufs_hba *hba,
+ 
+ 	ret = ufshcd_change_power_mode(hba, &final_params);
+ 
++	if (!ret)
++		ufshcd_vops_pwr_change_notify(hba, POST_CHANGE, NULL,
++					&final_params);
++
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(ufshcd_config_pwr_mode);
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index d7aca9e61684..d650ae6b58d3 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -310,7 +310,9 @@ struct ufs_pwr_mode_info {
+  *                       to allow variant specific Uni-Pro initialization.
+  * @pwr_change_notify: called before and after a power mode change
+  *			is carried out to allow vendor spesific capabilities
+- *			to be set.
++ *			to be set. PRE_CHANGE can modify final_params based
++ *			on desired_pwr_mode, but POST_CHANGE must not alter
++ *			the final_params parameter
+  * @setup_xfer_req: called before any transfer request is issued
+  *                  to set some things
+  * @setup_task_mgmt: called before any task management request is issued
+@@ -353,9 +355,9 @@ struct ufs_hba_variant_ops {
+ 	int	(*link_startup_notify)(struct ufs_hba *,
+ 				       enum ufs_notify_change_status);
+ 	int	(*pwr_change_notify)(struct ufs_hba *,
+-					enum ufs_notify_change_status status,
+-					struct ufs_pa_layer_attr *,
+-					struct ufs_pa_layer_attr *);
++				enum ufs_notify_change_status status,
++				struct ufs_pa_layer_attr *desired_pwr_mode,
++				struct ufs_pa_layer_attr *final_params);
+ 	void	(*setup_xfer_req)(struct ufs_hba *hba, int tag,
+ 				  bool is_scsi_cmd);
+ 	void	(*setup_task_mgmt)(struct ufs_hba *, int, u8);

@@ -1,0 +1,12 @@
+diff --git a/include/ufs/unipro.h b/include/ufs/unipro.h
+index 6c553f98fe57..dc9dd1d23f0f 100644
+--- a/include/ufs/unipro.h
++++ b/include/ufs/unipro.h
+@@ -141,7 +141,6 @@
+ #define PA_SAVECONFIGTIME	0x15A4
+ #define PA_RXHSUNTERMCAP	0x15A5
+ #define PA_RXLSTERMCAP		0x15A6
+-#define PA_GRANULARITY		0x15AA
+ #define PA_HIBERN8TIME		0x15A7
+ #define PA_LOCALVERINFO		0x15A9
+ #define PA_GRANULARITY		0x15AA

@@ -1,0 +1,44 @@
+diff --git a/drivers/ufs/host/tc-dwc-g210-pci.c b/drivers/ufs/host/tc-dwc-g210-pci.c
+index 876781fd6861..0167d8bef71a 100644
+--- a/drivers/ufs/host/tc-dwc-g210-pci.c
++++ b/drivers/ufs/host/tc-dwc-g210-pci.c
+@@ -80,14 +80,12 @@ tc_dwc_g210_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+ 
+ 	pci_set_master(pdev);
+ 
+-	err = pcim_iomap_regions(pdev, 1 << 0, UFSHCD);
+-	if (err < 0) {
++	mmio_base = pcim_iomap_region(pdev, 0, UFSHCD);
++	if (IS_ERR(mmio_base)) {
+ 		dev_err(&pdev->dev, "request and iomap failed\n");
+-		return err;
++		return PTR_ERR(mmio_base);
+ 	}
+ 
+-	mmio_base = pcim_iomap_table(pdev)[0];
+-
+ 	err = ufshcd_alloc_host(&pdev->dev, &hba);
+ 	if (err) {
+ 		dev_err(&pdev->dev, "Allocation failed\n");
+diff --git a/drivers/ufs/host/ufshcd-pci.c b/drivers/ufs/host/ufshcd-pci.c
+index 54e0cc0653a2..ea39c5d5b8cf 100644
+--- a/drivers/ufs/host/ufshcd-pci.c
++++ b/drivers/ufs/host/ufshcd-pci.c
+@@ -588,14 +588,12 @@ ufshcd_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+ 
+ 	pci_set_master(pdev);
+ 
+-	err = pcim_iomap_regions(pdev, 1 << 0, UFSHCD);
+-	if (err < 0) {
++	mmio_base = pcim_iomap_region(pdev, 0, UFSHCD);
++	if (IS_ERR(mmio_base)) {
+ 		dev_err(&pdev->dev, "request and iomap failed\n");
+-		return err;
++		return PTR_ERR(mmio_base);
+ 	}
+ 
+-	mmio_base = pcim_iomap_table(pdev)[0];
+-
+ 	err = ufshcd_alloc_host(&pdev->dev, &hba);
+ 	if (err) {
+ 		dev_err(&pdev->dev, "Allocation failed\n");

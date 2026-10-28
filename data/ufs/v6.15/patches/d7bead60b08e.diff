@@ -1,0 +1,39 @@
+diff --git a/drivers/ufs/core/ufshcd-priv.h b/drivers/ufs/core/ufshcd-priv.h
+index dbdcf5219f26..37851efa6d5a 100644
+--- a/drivers/ufs/core/ufshcd-priv.h
++++ b/drivers/ufs/core/ufshcd-priv.h
+@@ -271,6 +271,14 @@ static inline int ufshcd_mcq_vops_config_esi(struct ufs_hba *hba)
+ 	return -EOPNOTSUPP;
+ }
+ 
++static inline u32 ufshcd_vops_freq_to_gear_speed(struct ufs_hba *hba, unsigned long freq)
++{
++	if (hba->vops && hba->vops->freq_to_gear_speed)
++		return hba->vops->freq_to_gear_speed(hba, freq);
++
++	return 0;
++}
++
+ extern const struct ufs_pm_lvl_states ufs_pm_lvl_states[];
+ 
+ /**
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index e069fc6bc35c..199c2cec29d0 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -336,6 +336,7 @@ struct ufs_pwr_mode_info {
+  * @get_outstanding_cqs: called to get outstanding completion queues
+  * @config_esi: called to config Event Specific Interrupt
+  * @config_scsi_dev: called to configure SCSI device parameters
++ * @freq_to_gear_speed: called to map clock frequency to the max supported gear speed
+  */
+ struct ufs_hba_variant_ops {
+ 	const char *name;
+@@ -384,6 +385,7 @@ struct ufs_hba_variant_ops {
+ 				       unsigned long *ocqs);
+ 	int	(*config_esi)(struct ufs_hba *hba);
+ 	void	(*config_scsi_dev)(struct scsi_device *sdev);
++	u32	(*freq_to_gear_speed)(struct ufs_hba *hba, unsigned long freq);
+ };
+ 
+ /* clock gating state  */

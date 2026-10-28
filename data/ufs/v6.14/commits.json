@@ -1,0 +1,2154 @@
+[
+ {
+  "sha": "e738ba458e7539be1757dcdf85835a5c7b11fad4",
+  "release": "v6.14",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2024-11-24T09:08:05+02:00",
+  "commit_date": "2024-12-04T13:12:07-05:00",
+  "subject": "scsi: ufs: core: Introduce ufshcd_has_pending_tasks()",
+  "body": "Prepare to remove hba->clk_gating.active_reqs check from\nufshcd_is_ufs_dev_busy().\n\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20241124070808.194860-2-avri.altman@wdc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241124070808.194860-2-avri.altman@wdc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20241124070808.194860-2-avri.altman@wdc.com",
+  "series_id": "20241124070808.194860-avri.altman@wdc.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 9,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/e738ba458e75.diff",
+  "patch_bytes": 1257
+ },
+ {
+  "sha": "7869c6521f5715688b3d1f1c897374a68544eef0",
+  "release": "v6.14",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2024-11-24T09:08:06+02:00",
+  "commit_date": "2024-12-04T13:12:07-05:00",
+  "subject": "scsi: ufs: core: Prepare to introduce a new clock_gating lock",
+  "body": "Remove hba->clk_gating.active_reqs check from ufshcd_is_ufs_dev_busy()\nfunction to separate clock gating logic from general device busy checks.\n\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20241124070808.194860-3-avri.altman@wdc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241124070808.194860-3-avri.altman@wdc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20241124070808.194860-3-avri.altman@wdc.com",
+  "series_id": "20241124070808.194860-avri.altman@wdc.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 7,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/7869c6521f57.diff",
+  "patch_bytes": 1489
+ },
+ {
+  "sha": "209f4e43b8068c24cde227f464111030430153fa",
+  "release": "v6.14",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2024-11-24T09:08:07+02:00",
+  "commit_date": "2024-12-04T13:12:07-05:00",
+  "subject": "scsi: ufs: core: Introduce a new clock_gating lock",
+  "body": "Introduce a new clock gating lock to serialize access to some of the clock\ngating members instead of the host_lock.\n\nWhile at it, simplify the code with the guard() macro and co for automatic\ncleanup of the new lock. There are some explicit\nspin_lock_irqsave()/spin_unlock_irqrestore() snaking instances I left\nbehind because I couldn't make heads or tails of it.\n\nAdditionally, move the trace_ufshcd_clk_gating() call from inside the\nregion protected by the lock as it doesn't needs protection.\n\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20241124070808.194860-4-avri.altman@wdc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241124070808.194860-4-avri.altman@wdc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20241124070808.194860-4-avri.altman@wdc.com",
+  "series_id": "20241124070808.194860-avri.altman@wdc.com",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 52,
+    "deleted": 57,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 7,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/209f4e43b806.diff",
+  "patch_bytes": 9900
+ },
+ {
+  "sha": "be769e5cf53b8a45eedcc7354bacf939ae16f72c",
+  "release": "v6.14",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2024-11-24T09:08:08+02:00",
+  "commit_date": "2024-12-04T13:12:07-05:00",
+  "subject": "scsi: ufs: core: Introduce a new clock_scaling lock",
+  "body": "Introduce a new clock scaling lock to serialize access to some of the clock\nscaling members instead of the host_lock. here also, simplify the code with\nthe guard() macro and co.\n\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20241124070808.194860-5-avri.altman@wdc.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241124070808.194860-5-avri.altman@wdc.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20241124070808.194860-5-avri.altman@wdc.com",
+  "series_id": "20241124070808.194860-avri.altman@wdc.com",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 61,
+    "deleted": 71,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 10,
+    "deleted": 6,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/be769e5cf53b.diff",
+  "patch_bytes": 10185
+ },
+ {
+  "sha": "ed638918f4df39daa458435f0825b487c1f192c8",
+  "release": "v6.14",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2024-10-22T11:07:53-07:00",
+  "commit_date": "2024-12-04T15:34:28-05:00",
+  "subject": "scsi: Rename .slave_alloc() and .slave_destroy()",
+  "body": "Rename .slave_alloc() into .sdev_init() and .slave_destroy() into\n.sdev_destroy(). The new names make it clear that these are actions on\nSCSI devices. Make this change in the SCSI core, SCSI drivers and also\nin the ATA drivers. No functionality has been changed.\n\nThis patch has been created as follows:\n* Change the text \"slave_alloc\" into \"sdev_init\" in all source files\n  except those in drivers/net/ and Documentation/.\n* Change the text \"slave_destroy\" into \"sdev_destroy\" in all source\n  files except those in drivers/net/ and Documentation/.\n* Rename lpfc_no_slave() into lpfc_no_sdev().\n* Manually adjust whitespace where necessary to restore vertical\n  alignment (dc395x driver and include/linux/libata.h).\n\nAcked-by: Damien Le Moal <dlemoal@kernel.org>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20241022180839.2712439-2-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "acked_by": [
+    "Damien Le Moal <dlemoal@kernel.org>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241022180839.2712439-2-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20241022180839.2712439-2-bvanassche@acm.org",
+  "series_id": "20241022180839.2712439-bvanassche@acm.org",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ata/libata-scsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/firewire/sbp2.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/message/fusion/mptfc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/message/fusion/mptsas.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/message/fusion/mptscsih.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/message/fusion/mptscsih.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/message/fusion/mptspi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/s390/scsi/zfcp_scsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/s390/scsi/zfcp_sysfs.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/s390/scsi/zfcp_unit.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/53c700.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/aic7xxx/aic79xx_osm.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/aic7xxx/aic7xxx_osm.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/bfa/bfad_im.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/bnx2fc/bnx2fc_fcoe.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/csiostor/csio_scsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/dc395x.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/esp_scsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/fcoe/fcoe.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/fnic/fnic_main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/hisi_sas/hisi_sas.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/hisi_sas/hisi_sas_main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/hisi_sas/hisi_sas_v1_hw.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/hisi_sas/hisi_sas_v2_hw.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/hisi_sas/hisi_sas_v3_hw.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/hpsa.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/ibmvscsi/ibmvfc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/ipr.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/libfc/fc_fcp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/libsas/sas_scsi_host.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/lpfc/lpfc_scsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/megaraid/megaraid_sas_base.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/mpi3mr/mpi3mr_os.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/mpt3sas/mpt3sas_scsih.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/myrb.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/myrs.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/ncr53c8xx.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/pmcraid.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/qla2xxx/qla_os.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/qla4xxx/ql4_os.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_debug.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_scan.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_sysfs.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/smartpqi/smartpqi_init.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/snic/snic_main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/storvsc_drv.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/sym53c8xx_2/sym_glue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/virtio_scsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/xen-scsifront.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 6,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/usb/image/microtek.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/storage/scsiglue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/storage/uas.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/linux/libata.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/scsi/libfc.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/scsi/libsas.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/scsi/scsi_device.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/scsi/scsi_host.h",
+    "status": "M",
+    "in_track": false
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/ed638918f4df.diff",
+  "patch_bytes": 1515
+ },
+ {
+  "sha": "47c2e30afcec52968e50db01f92dda7d373042cb",
+  "release": "v6.14",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2024-10-22T11:07:54-07:00",
+  "commit_date": "2024-12-04T15:34:28-05:00",
+  "subject": "scsi: Rename .device_configure() into .sdev_configure()",
+  "body": "Improve naming consistency with the .sdev_prep() and .sdev_destroy()\nmethods by renaming .device_configure() into .sdev_configure().\n\nCc: Christoph Hellwig <hch@lst.de>\nAcked-by: Damien Le Moal <dlemoal@kernel.org>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20241022180839.2712439-3-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "cc": [
+    "Christoph Hellwig <hch@lst.de>"
+   ],
+   "acked_by": [
+    "Damien Le Moal <dlemoal@kernel.org>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241022180839.2712439-3-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20241022180839.2712439-3-bvanassche@acm.org",
+  "series_id": "20241022180839.2712439-bvanassche@acm.org",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ata/ahci.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ata/libata-sata.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ata/libata-scsi.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ata/pata_macio.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ata/sata_mv.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ata/sata_nv.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ata/sata_sil24.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/firewire/sbp2.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/hisi_sas/hisi_sas.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/hisi_sas/hisi_sas_main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/hisi_sas/hisi_sas_v1_hw.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/hisi_sas/hisi_sas_v2_hw.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/hisi_sas/hisi_sas_v3_hw.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/hptiop.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/ipr.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/iscsi_tcp.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/libsas/sas_scsi_host.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/megaraid/megaraid_sas_base.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/mpi3mr/mpi3mr_os.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/mpt3sas/mpt3sas_scsih.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/pmcraid.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_scan.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/usb/storage/scsiglue.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/usb/storage/uas.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/linux/libata.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/scsi/libsas.h",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "include/scsi/scsi_host.h",
+    "status": "M",
+    "in_track": false
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/47c2e30afcec.diff",
+  "patch_bytes": 1185
+ },
+ {
+  "sha": "0d9fff6c57fee5cccba414a0c40d75812121bdd8",
+  "release": "v6.14",
+  "author": {
+   "name": "Peter Griffin",
+   "email": "peter.griffin@linaro.org"
+  },
+  "author_date": "2024-10-29T19:21:07Z",
+  "commit_date": "2024-12-08T21:35:45+05:30",
+  "subject": "phy: samsung-ufs: switch back to syscon_regmap_lookup_by_phandle()",
+  "body": "Now exynos-pmu can register its custom regmap for gs101 via\nof_syscon_register_regmap() we can switch back to the standard\nsyscon_regmap_lookup_by_phandle() api for obtaining the regmap.\n\nAdditionally add a Kconfig dependency for MFD_SYSCON.\n\nSigned-off-by: Peter Griffin <peter.griffin@linaro.org>\nReviewed-by: Sam Protsenko <semen.protsenko@linaro.org>\nLink: https://lore.kernel.org/r/20241029192107.2344279-1-peter.griffin@linaro.org\nSigned-off-by: Vinod Koul <vkoul@kernel.org>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Griffin <peter.griffin@linaro.org>",
+    "Vinod Koul <vkoul@kernel.org>"
+   ],
+   "reviewed_by": [
+    "Sam Protsenko <semen.protsenko@linaro.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241029192107.2344279-1-peter.griffin@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20241029192107.2344279-1-peter.griffin@linaro.org",
+  "series_id": "20241029192107.2344279-peter.griffin@linaro.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/phy/samsung/Kconfig",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/phy/samsung/phy-samsung-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 3,
+    "area": "phy",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "phy",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/0d9fff6c57fe.diff",
+  "patch_bytes": 946
+ },
+ {
+  "sha": "9db7a472423d3470fb4bd114d74d0bc0027995ae",
+  "release": "v6.14",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2024-11-28T09:25:42+02:00",
+  "commit_date": "2024-12-09T21:45:53-05:00",
+  "subject": "scsi: ufs: core: Do not hold any lock in ufshcd_hba_stop()",
+  "body": "This change is motivated by Bart's suggestion in [1], which enables to\nfurther reduce the SCSI host lock usage in the UFS driver. The reason why\nit makes sense, because although the legacy interrupt is disabled by some\nbut not all ufshcd_hba_stop() callers, it is safe to nest disable_irq()\ncalls as it checks the irq depth.\n\n[1] https://lore.kernel.org/linux-scsi/c58e4fce-0a74-4469-ad16-f1edbd670728@acm.org/\n\nSuggested-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20241128072542.219170-1-avri.altman@wdc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "suggested_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241128072542.219170-1-avri.altman@wdc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20241128072542.219170-1-avri.altman@wdc.com",
+  "series_id": "20241128072542.219170-avri.altman@wdc.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 8,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/9db7a472423d.diff",
+  "patch_bytes": 899
+ },
+ {
+  "sha": "7a0905caf5665be41094a6ceb5e9d2524de4627a",
+  "release": "v6.14",
+  "author": {
+   "name": "Eric Biggers",
+   "email": "ebiggers@google.com"
+  },
+  "author_date": "2024-12-09T19:08:39-08:00",
+  "commit_date": "2025-01-02T13:36:06-05:00",
+  "subject": "scsi: ufs: qcom: Fix crypto key eviction",
+  "body": "Commit 56541c7c4468 (\"scsi: ufs: ufs-qcom: Switch to the new ICE API\")\nintroduced an incorrect check of the algorithm ID into the key eviction\npath, and thus qcom_ice_evict_key() is no longer ever called.  Fix it.\n\nFixes: 56541c7c4468 (\"scsi: ufs: ufs-qcom: Switch to the new ICE API\")\nCc: stable@vger.kernel.org\nCc: Abel Vesa <abel.vesa@linaro.org>\nSigned-off-by: Eric Biggers <ebiggers@google.com>\nLink: https://lore.kernel.org/r/20241210030839.1118805-1-ebiggers@kernel.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "56541c7c4468 (\"scsi: ufs: ufs-qcom: Switch to the new ICE API\")"
+   ],
+   "cc": [
+    "stable@vger.kernel.org",
+    "Abel Vesa <abel.vesa@linaro.org>"
+   ],
+   "signed_off_by": [
+    "Eric Biggers <ebiggers@google.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241210030839.1118805-1-ebiggers@kernel.org"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "56541c7c4468",
+    "subject": "scsi: ufs: ufs-qcom: Switch to the new ICE API",
+    "sha": "56541c7c4468a9de26d82ba6e8c10ace286f8fdd",
+    "introduced_in": "v6.5"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "20241210030839.1118805-1-ebiggers@kernel.org",
+  "series_id": "20241210030839.1118805-ebiggers@kernel.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 8,
+    "deleted": 10,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/7a0905caf566.diff",
+  "patch_bytes": 1248
+ },
+ {
+  "sha": "75d0c649eca47af21533d9636723574116fe6987",
+  "release": "v6.14",
+  "author": {
+   "name": "Eric Biggers",
+   "email": "ebiggers@google.com"
+  },
+  "author_date": "2024-12-12T20:19:45-08:00",
+  "commit_date": "2025-01-02T13:36:15-05:00",
+  "subject": "scsi: ufs: crypto: Add ufs_hba_from_crypto_profile()",
+  "body": "Add a helper function that encapsulates a container_of expression.  For now\nthere are two users but soon there will be more.\n\nTested-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org> # sm8650\nSigned-off-by: Eric Biggers <ebiggers@google.com>\nLink: https://lore.kernel.org/r/20241213041958.202565-3-ebiggers@kernel.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "tested_by": [
+    "Bartosz Golaszewski <bartosz.golaszewski@linaro.org> # sm8650"
+   ],
+   "signed_off_by": [
+    "Eric Biggers <ebiggers@google.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241213041958.202565-3-ebiggers@kernel.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20241213041958.202565-3-ebiggers@kernel.org",
+  "series_id": "20241213041958.202565-ebiggers@kernel.org",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd-crypto.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 8,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/75d0c649eca4.diff",
+  "patch_bytes": 1811
+ },
+ {
+  "sha": "30b32c647cf309d8fc70ba068a2918033e3a1bc4",
+  "release": "v6.14",
+  "author": {
+   "name": "Eric Biggers",
+   "email": "ebiggers@google.com"
+  },
+  "author_date": "2024-12-12T20:19:46-08:00",
+  "commit_date": "2025-01-02T13:36:15-05:00",
+  "subject": "scsi: ufs: qcom: Convert to use UFSHCD_QUIRK_CUSTOM_CRYPTO_PROFILE",
+  "body": "By default the UFS core is responsible for initializing the\nblk_crypto_profile, but Qualcomm platforms have their own way of\nprogramming and evicting crypto keys.  So currently\nufs_hba_variant_ops::program_key is used to redirect control flow from\nufshcd_program_key().  This has worked until now, but it's a bit of a hack,\ngiven that the key (and algorithm ID etc.) ends up being converted from\nblk_crypto_key => ufs_crypto_cfg_entry => SCM call parameters, where the\nintermediate ufs_crypto_cfg_entry step is unnecessary.  Taking a similar\napproach with the upcoming wrapped key support, the implementation of which\nis similarly platform-specific, would require adding four new methods to\nufs_hba_variant_ops, changing program_key to take the struct\nblk_crypto_key, and adding a new UFSHCD_CAP_* flag to indicate support for\nwrapped keys.\n\nThis patch takes a different approach.  It changes ufs-qcom to use the\nexisting UFSHCD_QUIRK_CUSTOM_CRYPTO_PROFILE which was recently added for\nufs-exynos.  This allows it to override the full blk_crypto_profile,\neliminating the need for the existing ufs_hba_variant_ops::program_key and\nthe hooks that would have been needed for wrapped key support.  It does\nrequire a bit of duplicated code to read the crypto capability registers,\nbut it's worth the simplification in design with ufs-qcom and ufs-exynos\nnow using the same method to customize the crypto profile, and it makes it\nmuch easier to add wrapped key support.\n\nTested-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org> # sm8650\nSigned-off-by: Eric Biggers <ebiggers@google.com>\nLink: https://lore.kernel.org/r/20241213041958.202565-4-ebiggers@kernel.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "tested_by": [
+    "Bartosz Golaszewski <bartosz.golaszewski@linaro.org> # sm8650"
+   ],
+   "signed_off_by": [
+    "Eric Biggers <ebiggers@google.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241213041958.202565-4-ebiggers@kernel.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20241213041958.202565-4-ebiggers@kernel.org",
+  "series_id": "20241213041958.202565-ebiggers@kernel.org",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 72,
+    "deleted": 19,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/30b32c647cf3.diff",
+  "patch_bytes": 4522
+ },
+ {
+  "sha": "409f21010d92a9a5c3b66bacd3b853f4d71ca26c",
+  "release": "v6.14",
+  "author": {
+   "name": "Eric Biggers",
+   "email": "ebiggers@google.com"
+  },
+  "author_date": "2024-12-12T20:19:47-08:00",
+  "commit_date": "2025-01-02T13:36:15-05:00",
+  "subject": "scsi: ufs: crypto: Remove ufs_hba_variant_ops::program_key",
+  "body": "There are no longer any implementations of\nufs_hba_variant_ops::program_key, so remove it.\n\nAs a result, ufshcd_program_key() no longer can return an error, so also\nclean it up to return void.\n\nSigned-off-by: Eric Biggers <ebiggers@google.com>\nLink: https://lore.kernel.org/r/20241213041958.202565-5-ebiggers@kernel.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Eric Biggers <ebiggers@google.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241213041958.202565-5-ebiggers@kernel.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20241213041958.202565-5-ebiggers@kernel.org",
+  "series_id": "20241213041958.202565-ebiggers@kernel.org",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd-crypto.c",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 14,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/409f21010d92.diff",
+  "patch_bytes": 3233
+ },
+ {
+  "sha": "e7602bb4f3a1234df8b75728ac3260bcb8242612",
+  "release": "v6.14",
+  "author": {
+   "name": "Christoph Hellwig",
+   "email": "hch@lst.de"
+  },
+  "author_date": "2025-01-06T09:35:10+01:00",
+  "commit_date": "2025-01-06T07:37:41-07:00",
+  "subject": "block: remove BLK_MQ_F_NO_SCHED",
+  "body": "The only queues that really can't support a scheduler are those that\ndo not have a gendisk associated with them, and thus can't be used for\nnon-passthrough commands.  In addition to those null_blk can optionally\nset the flag, which is a bad odd.  Replace the null_blk usage with\nBLK_MQ_F_NO_SCHED_BY_DEFAULT to keep the expected semantics and then\nremove BLK_MQ_F_NO_SCHED as the non-disk queues never call into\nelevator_init_mq or blk_register_queue which adds the sysfs attributes.\n\nSigned-off-by: Christoph Hellwig <hch@lst.de>\nLink: https://lore.kernel.org/r/20250106083531.799976-4-hch@lst.de\nSigned-off-by: Jens Axboe <axboe@kernel.dk>",
+  "trailers": {
+   "signed_off_by": [
+    "Christoph Hellwig <hch@lst.de>",
+    "Jens Axboe <axboe@kernel.dk>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20250106083531.799976-4-hch@lst.de"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20250106083531.799976-4-hch@lst.de",
+  "series_id": "20250106083531.799976-hch@lst.de",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "block/blk-mq-debugfs.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/bsg-lib.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/elevator.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/block/null_blk/main.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/host/apple.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/host/core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/linux/blk-mq.h",
+    "status": "M",
+    "in_track": false
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/e7602bb4f3a1.diff",
+  "patch_bytes": 429
+ },
+ {
+  "sha": "815940bb7db7b37d058d76a575827287eebe39ce",
+  "release": "v6.14",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2025-01-03T10:02:04+02:00",
+  "commit_date": "2025-01-10T16:38:21-05:00",
+  "subject": "scsi: Revert \"scsi: ufs: core: Probe for EXT_IID support\"",
+  "body": "This reverts commit 6e1d850acff9477ae4c18a73c19ef52841ac2010.\n\nAlthough added a while ago, to date no one make use of ext_iid,\nspecifically incorporates it in the upiu header.  Therefore, remove it as\nit is currently unused and not serving any purpose.\n\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20250103080204.63951-1-avri.altman@wdc.com\nCc: Can Guo <quic_cang@quicinc.com>\nCc: Asutosh Das <quic_asutoshd@quicinc.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20250103080204.63951-1-avri.altman@wdc.com"
+   ],
+   "cc": [
+    "Can Guo <quic_cang@quicinc.com>",
+    "Asutosh Das <quic_asutoshd@quicinc.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20250103080204.63951-1-avri.altman@wdc.com",
+  "series_id": "20250103080204.63951-avri.altman@wdc.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 33,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufs.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 5,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshci.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 5,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/815940bb7db7.diff",
+  "patch_bytes": 3580
+ },
+ {
+  "sha": "fcf247deb3c3e1c6be5774e3fa03bbd018eff1a9",
+  "release": "v6.14",
+  "author": {
+   "name": "Guixin Liu",
+   "email": "kanie@linux.alibaba.com"
+  },
+  "author_date": "2024-12-18T09:42:13+08:00",
+  "commit_date": "2025-01-10T18:03:35-05:00",
+  "subject": "scsi: ufs: bsg: Delete bsg_dev when setting up bsg fails",
+  "body": "We should remove the bsg device when bsg_setup_queue() fails to release the\nresources.\n\nFixes: df032bf27a41 (\"scsi: ufs: Add a bsg endpoint that supports UPIUs\")\nSigned-off-by: Guixin Liu <kanie@linux.alibaba.com>\nLink: https://lore.kernel.org/r/20241218014214.64533-2-kanie@linux.alibaba.com\nReviewed-by: Avri Altman <avri.altman@wdc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "df032bf27a41 (\"scsi: ufs: Add a bsg endpoint that supports UPIUs\")"
+   ],
+   "signed_off_by": [
+    "Guixin Liu <kanie@linux.alibaba.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241218014214.64533-2-kanie@linux.alibaba.com"
+   ],
+   "reviewed_by": [
+    "Avri Altman <avri.altman@wdc.com>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "df032bf27a41",
+    "subject": "scsi: ufs: Add a bsg endpoint that supports UPIUs",
+    "sha": "df032bf27a414acf61c957ec2fad22a57d903b39",
+    "introduced_in": "v4.20"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20241218014214.64533-2-kanie@linux.alibaba.com",
+  "series_id": "20241218014214.64533-kanie@linux.alibaba.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs_bsg.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/fcf247deb3c3.diff",
+  "patch_bytes": 330
+ },
+ {
+  "sha": "1e95c798d8a7f70965f0f88d4657b682ff0ec75f",
+  "release": "v6.14",
+  "author": {
+   "name": "Guixin Liu",
+   "email": "kanie@linux.alibaba.com"
+  },
+  "author_date": "2024-12-18T09:42:14+08:00",
+  "commit_date": "2025-01-10T18:03:35-05:00",
+  "subject": "scsi: ufs: bsg: Set bsg_queue to NULL after removal",
+  "body": "Currently, this does not cause any issues, but I believe it is necessary to\nset bsg_queue to NULL after removing it to prevent potential use-after-free\n(UAF) access.\n\nSigned-off-by: Guixin Liu <kanie@linux.alibaba.com>\nLink: https://lore.kernel.org/r/20241218014214.64533-3-kanie@linux.alibaba.com\nReviewed-by: Avri Altman <avri.altman@wdc.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Guixin Liu <kanie@linux.alibaba.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241218014214.64533-3-kanie@linux.alibaba.com"
+   ],
+   "reviewed_by": [
+    "Avri Altman <avri.altman@wdc.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20241218014214.64533-3-kanie@linux.alibaba.com",
+  "series_id": "20241218014214.64533-kanie@linux.alibaba.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs_bsg.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/1e95c798d8a7.diff",
+  "patch_bytes": 357
+ },
+ {
+  "sha": "1b093633a1381c02854c53baf8657f74a40da3e4",
+  "release": "v6.14",
+  "author": {
+   "name": "Sayali Lokhande",
+   "email": "quic_sayalil@quicinc.com"
+  },
+  "author_date": "2024-12-16T17:54:37+08:00",
+  "commit_date": "2025-01-16T08:21:56-06:00",
+  "subject": "dt-bindings: ufs: qcom: Add UFS Host Controller for QCS615",
+  "body": "Document the Universal Flash Storage(UFS) Host Controller on the Qualcomm\nQCS615 Platform.\n\nSigned-off-by: Sayali Lokhande <quic_sayalil@quicinc.com>\nReviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nAcked-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nCo-developed-by: Xin Liu <quic_liuxin@quicinc.com>\nSigned-off-by: Xin Liu <quic_liuxin@quicinc.com>\nLink: https://lore.kernel.org/r/20241216095439.531357-2-quic_liuxin@quicinc.com\nSigned-off-by: Rob Herring (Arm) <robh@kernel.org>",
+  "trailers": {
+   "signed_off_by": [
+    "Sayali Lokhande <quic_sayalil@quicinc.com>",
+    "Xin Liu <quic_liuxin@quicinc.com>",
+    "Rob Herring (Arm) <robh@kernel.org>"
+   ],
+   "reviewed_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>"
+   ],
+   "acked_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ],
+   "co_developed_by": [
+    "Xin Liu <quic_liuxin@quicinc.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20241216095439.531357-2-quic_liuxin@quicinc.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20241216095439.531357-2-quic_liuxin@quicinc.com",
+  "series_id": "20241216095439.531357-quic_liuxin@quicinc.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/qcom,ufs.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "bindings",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/1b093633a138.diff",
+  "patch_bytes": 730
+ },
+ {
+  "sha": "1b3e2d4ec0c5848776cc56d2624998aa5b2f0d27",
+  "release": "v6.14",
+  "author": {
+   "name": "Bao D. Nguyen",
+   "email": "quic_nguyenb@quicinc.com"
+  },
+  "author_date": "2025-01-13T10:32:07-08:00",
+  "commit_date": "2025-01-21T12:18:13-05:00",
+  "subject": "scsi: ufs: core: Fix the HIGH/LOW_TEMP Bit Definitions",
+  "body": "According to the UFS Device Specification, the dExtendedUFSFeaturesSupport\ndefines the support for TOO_HIGH_TEMPERATURE as bit[4] and the\nTOO_LOW_TEMPERATURE as bit[5]. Correct the code to match with\nthe UFS device specification definition.\n\nCc: stable@vger.kernel.org\nFixes: e88e2d32200a (\"scsi: ufs: core: Probe for temperature notification support\")\nSigned-off-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nLink: https://lore.kernel.org/r/69992b3e3e3434a5c7643be5a64de48be892ca46.1736793068.git.quic_nguyenb@quicinc.com\nReviewed-by: Avri Altman <Avri.Altman@wdc.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "cc": [
+    "stable@vger.kernel.org"
+   ],
+   "fixes": [
+    "e88e2d32200a (\"scsi: ufs: core: Probe for temperature notification support\")"
+   ],
+   "signed_off_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/69992b3e3e3434a5c7643be5a64de48be892ca46.1736793068.git.quic_nguyenb@quicinc.com"
+   ],
+   "reviewed_by": [
+    "Avri Altman <Avri.Altman@wdc.com>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "e88e2d32200a",
+    "subject": "scsi: ufs: core: Probe for temperature notification support",
+    "sha": "e88e2d32200a1734cb4a2ca292c5c7b338257bb6",
+    "introduced_in": "v5.16"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "69992b3e3e3434a5c7643be5a64de48be892ca46.1736793068.git.quic_nguyenb@quicinc.com",
+  "series_id": "69992b3e3e3434a5c7643be5a64de48be892ca46.1736793068.git.quic_nguyenb@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "include/ufs/ufs.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/1b3e2d4ec0c5.diff",
+  "patch_bytes": 483
+ },
+ {
+  "sha": "8c09f612b2937da109ed0df583ace3a29fc95a93",
+  "release": "v6.14",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2025-01-14T20:12:05+02:00",
+  "commit_date": "2025-01-21T12:20:45-05:00",
+  "subject": "scsi: ufs: core: Simplify temperature exception event handling",
+  "body": "This commit simplifies the temperature exception event handling by removing\nthe ufshcd_temp_exception_event_handler() function and directly calling\nufs_hwmon_notify_event() in ufshcd_exception_event_handler().\n\nThe ufshcd_temp_exception_event_handler() function contained a placeholder\ncomment for platform vendors to add additional steps if required. However,\nsince its introduction a few years ago, no vendor has added any additional\nsteps. Therefore, the placeholder function is removed to streamline the\ncode.\n\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20250114181205.153760-1-avri.altman@wdc.com\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20250114181205.153760-1-avri.altman@wdc.com"
+   ],
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20250114181205.153760-1-avri.altman@wdc.com",
+  "series_id": "20250114181205.153760-avri.altman@wdc.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 19,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/8c09f612b293.diff",
+  "patch_bytes": 1137
+ },
+ {
+  "sha": "54f6052f904c3a5d4a63af4d907b2e19ecfbbcd9",
+  "release": "v6.14",
+  "author": {
+   "name": "Krzysztof Kozlowski",
+   "email": "krzysztof.kozlowski@linaro.org"
+  },
+  "author_date": "2025-01-07T14:10:19+01:00",
+  "commit_date": "2025-01-23T15:11:11-06:00",
+  "subject": "dt-bindings: ufs: Correct indentation and style in DTS example",
+  "body": "DTS example in the bindings should be indented with 2- or 4-spaces and\naligned with opening '- |', so correct any differences like 3-spaces or\nmixtures 2- and 4-spaces in one binding.\n\nNo functional changes here, but saves some comments during reviews of\nnew patches built on existing code.\n\nSigned-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nReviewed-by: Geert Uytterhoeven <geert+renesas@glider.be> # renesas\nLink: https://lore.kernel.org/r/20250107131019.246517-1-krzysztof.kozlowski@linaro.org\nSigned-off-by: Rob Herring (Arm) <robh@kernel.org>",
+  "trailers": {
+   "signed_off_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>",
+    "Rob Herring (Arm) <robh@kernel.org>"
+   ],
+   "reviewed_by": [
+    "Geert Uytterhoeven <geert+renesas@glider.be> # renesas"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20250107131019.246517-1-krzysztof.kozlowski@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20250107131019.246517-1-krzysztof.kozlowski@linaro.org",
+  "series_id": "20250107131019.246517-krzysztof.kozlowski@linaro.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/renesas,ufs.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 8,
+    "deleted": 8,
+    "area": "bindings",
+    "vendor": "renesas"
+   },
+   {
+    "path": "Documentation/devicetree/bindings/ufs/samsung,exynos-ufs.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 14,
+    "deleted": 14,
+    "area": "bindings",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos",
+   "renesas"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/54f6052f904c.diff",
+  "patch_bytes": 2841
+ },
+ {
+  "sha": "1e1a9cecfab3f22ebef0a976f849c87be8d03c1c",
+  "release": "v6.14",
+  "author": {
+   "name": "Christoph Hellwig",
+   "email": "hch@lst.de"
+  },
+  "author_date": "2025-01-31T13:03:47+01:00",
+  "commit_date": "2025-01-31T07:20:08-07:00",
+  "subject": "block: force noio scope in blk_mq_freeze_queue",
+  "body": "When block drivers or the core block code perform allocations with a\nfrozen queue, this could try to recurse into the block device to\nreclaim memory and deadlock.  Thus all allocations done by a process\nthat froze a queue need to be done without __GFP_IO and __GFP_FS.\nInstead of tying to track all of them down, force a noio scope as\npart of freezing the queue.\n\nNote that nvme is a bit of a mess here due to the non-owner freezes,\nand they will be addressed separately.\n\nSigned-off-by: Christoph Hellwig <hch@lst.de>\nLink: https://lore.kernel.org/r/20250131120352.1315351-2-hch@lst.de\nSigned-off-by: Jens Axboe <axboe@kernel.dk>",
+  "trailers": {
+   "signed_off_by": [
+    "Christoph Hellwig <hch@lst.de>",
+    "Jens Axboe <axboe@kernel.dk>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20250131120352.1315351-2-hch@lst.de"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20250131120352.1315351-2-hch@lst.de",
+  "series_id": "20250131120352.1315351-hch@lst.de",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "block/blk-cgroup.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/blk-iocost.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/blk-iolatency.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/blk-mq.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/blk-pm.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/blk-rq-qos.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/blk-settings.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/blk-sysfs.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/blk-throttle.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/blk-zoned.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "block/elevator.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/block/aoe/aoedev.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/block/ataflop.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/block/loop.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/block/nbd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/block/rbd.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/block/sunvdc.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/block/swim3.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/block/virtio_blk.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/mtd/mtd_blkdevs.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/host/core.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/nvme/host/multipath.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_lib.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/scsi/scsi_scan.c",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ufs/core/ufs-sysfs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/linux/blk-mq.h",
+    "status": "M",
+    "in_track": false
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/1e1a9cecfab3.diff",
+  "patch_bytes": 1063
+ },
+ {
+  "sha": "3d4114a1d34413dfffa0094c2eb7b95e61087abd",
+  "release": "v6.14",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2025-01-28T09:12:06+02:00",
+  "commit_date": "2025-02-03T16:53:00-05:00",
+  "subject": "scsi: ufs: core: Ensure clk_gating.lock is used only after initialization",
+  "body": "Address a lockdep warning triggered by the use of the clk_gating.lock before\nit is properly initialized. The warning is as follows:\n\n[    4.388838] INFO: trying to register non-static key.\n[    4.395673] The code is fine but needs lockdep annotation, or maybe\n[    4.402118] you didn't initialize this object before use?\n[    4.407673] turning off the locking correctness validator.\n[    4.413334] CPU: 5 UID: 0 PID: 58 Comm: kworker/u32:1 Not tainted 6.12-rc1 #185\n[    4.413343] Hardware name: Qualcomm Technologies, Inc. Robotics RB5 (DT)\n[    4.413362] Call trace:\n[    4.413364]  show_stack+0x18/0x24 (C)\n[    4.413374]  dump_stack_lvl+0x90/0xd0\n[    4.413384]  dump_stack+0x18/0x24\n[    4.413392]  register_lock_class+0x498/0x4a8\n[    4.413400]  __lock_acquire+0xb4/0x1b90\n[    4.413406]  lock_acquire+0x114/0x310\n[    4.413413]  _raw_spin_lock_irqsave+0x60/0x88\n[    4.413423]  ufshcd_setup_clocks+0x2c0/0x490\n[    4.413433]  ufshcd_init+0x198/0x10ec\n[    4.413437]  ufshcd_pltfrm_init+0x600/0x7c0\n[    4.413444]  ufs_qcom_probe+0x20/0x58\n[    4.413449]  platform_probe+0x68/0xd8\n[    4.413459]  really_probe+0xbc/0x268\n[    4.413466]  __driver_probe_device+0x78/0x12c\n[    4.413473]  driver_probe_device+0x40/0x11c\n[    4.413481]  __device_attach_driver+0xb8/0xf8\n[    4.413489]  bus_for_each_drv+0x84/0xe4\n[    4.413495]  __device_attach+0xfc/0x18c\n[    4.413502]  device_initial_probe+0x14/0x20\n[    4.413510]  bus_probe_device+0xb0/0xb4\n[    4.413517]  deferred_probe_work_func+0x8c/0xc8\n[    4.413524]  process_scheduled_works+0x250/0x658\n[    4.413534]  worker_thread+0x15c/0x2c8\n[    4.413542]  kthread+0x134/0x200\n[    4.413550]  ret_from_fork+0x10/0x20\n\nTo fix this issue, ensure that the spinlock is only used after it has been\nproperly initialized before using it in ufshcd_setup_clocks().  Do that\nunconditionally as initializing a spinlock is a fast operation.\n\nFixes: 209f4e43b806 (\"scsi: ufs: core: Introduce a new clock_gating lock\")\nReported-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>\nTested-by: Geert Uytterhoeven <geert+renesas@glider.be>\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20250128071207.75494-2-avri.altman@wdc.com\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "209f4e43b806 (\"scsi: ufs: core: Introduce a new clock_gating lock\")"
+   ],
+   "reported_by": [
+    "Dmitry Baryshkov <dmitry.baryshkov@linaro.org>"
+   ],
+   "tested_by": [
+    "Geert Uytterhoeven <geert+renesas@glider.be>"
+   ],
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20250128071207.75494-2-avri.altman@wdc.com"
+   ],
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "209f4e43b806",
+    "subject": "scsi: ufs: core: Introduce a new clock_gating lock",
+    "sha": "209f4e43b8068c24cde227f464111030430153fa",
+    "introduced_in": "v6.14"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20250128071207.75494-2-avri.altman@wdc.com",
+  "series_id": "20250128071207.75494-avri.altman@wdc.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/3d4114a1d344.diff",
+  "patch_bytes": 919
+ },
+ {
+  "sha": "839a74b5649c9f41d939a05059b5ca6b17156d03",
+  "release": "v6.14",
+  "author": {
+   "name": "Avri Altman",
+   "email": "avri.altman@wdc.com"
+  },
+  "author_date": "2025-01-28T09:12:07+02:00",
+  "commit_date": "2025-02-03T16:53:00-05:00",
+  "subject": "scsi: ufs: Fix toggling of clk_gating.state when clock gating is not allowed",
+  "body": "This commit addresses an issue where clk_gating.state is being toggled in\nufshcd_setup_clocks() even if clock gating is not allowed.\n\nThe fix is to add a check for hba->clk_gating.is_initialized before toggling\nclk_gating.state in ufshcd_setup_clocks().\n\nSince clk_gating.lock is now initialized unconditionally, it can no longer\nlead to the spinlock being used before it is properly initialized, but\ninstead it is mostly for documentation purposes.\n\nFixes: 1ab27c9cf8b6 (\"ufs: Add support for clock gating\")\nReported-by: Geert Uytterhoeven <geert@linux-m68k.org>\nTested-by: Geert Uytterhoeven <geert+renesas@glider.be>\nSigned-off-by: Avri Altman <avri.altman@wdc.com>\nLink: https://lore.kernel.org/r/20250128071207.75494-3-avri.altman@wdc.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "1ab27c9cf8b6 (\"ufs: Add support for clock gating\")"
+   ],
+   "reported_by": [
+    "Geert Uytterhoeven <geert@linux-m68k.org>"
+   ],
+   "tested_by": [
+    "Geert Uytterhoeven <geert+renesas@glider.be>"
+   ],
+   "signed_off_by": [
+    "Avri Altman <avri.altman@wdc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20250128071207.75494-3-avri.altman@wdc.com"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "1ab27c9cf8b6",
+    "subject": "ufs: Add support for clock gating",
+    "sha": "1ab27c9cf8b63dd8dec9e17b5c17721c7f3b6cc7",
+    "introduced_in": "v3.18"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20250128071207.75494-3-avri.altman@wdc.com",
+  "series_id": "20250128071207.75494-avri.altman@wdc.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/839a74b5649c.diff",
+  "patch_bytes": 523
+ },
+ {
+  "sha": "f8fb2403ddebb5eea0033d90d9daae4c88749ada",
+  "release": "v6.14",
+  "author": {
+   "name": "André Draszik",
+   "email": "andre.draszik@linaro.org"
+  },
+  "author_date": "2025-01-24T15:09:00Z",
+  "commit_date": "2025-02-03T17:20:01-05:00",
+  "subject": "scsi: ufs: core: Fix use-after free in init error and remove paths",
+  "body": "devm_blk_crypto_profile_init() registers a cleanup handler to run when\nthe associated (platform-) device is being released. For UFS, the\ncrypto private data and pointers are stored as part of the ufs_hba's\ndata structure 'struct ufs_hba::crypto_profile'. This structure is\nallocated as part of the underlying ufshcd and therefore Scsi_host\nallocation.\n\nDuring driver release or during error handling in ufshcd_pltfrm_init(),\nthis structure is released as part of ufshcd_dealloc_host() before the\n(platform-) device associated with the crypto call above is released.\nOnce this device is released, the crypto cleanup code will run, using\nthe just-released 'struct ufs_hba::crypto_profile'. This causes a\nuse-after-free situation:\n\n  Call trace:\n   kfree+0x60/0x2d8 (P)\n   kvfree+0x44/0x60\n   blk_crypto_profile_destroy_callback+0x28/0x70\n   devm_action_release+0x1c/0x30\n   release_nodes+0x6c/0x108\n   devres_release_all+0x98/0x100\n   device_unbind_cleanup+0x20/0x70\n   really_probe+0x218/0x2d0\n\nIn other words, the initialisation code flow is:\n\n  platform-device probe\n    ufshcd_pltfrm_init()\n      ufshcd_alloc_host()\n        scsi_host_alloc()\n          allocation of struct ufs_hba\n          creation of scsi-host devices\n    devm_blk_crypto_profile_init()\n      devm registration of cleanup handler using platform-device\n\nand during error handling of ufshcd_pltfrm_init() or during driver\nremoval:\n\n  ufshcd_dealloc_host()\n    scsi_host_put()\n      put_device(scsi-host)\n        release of struct ufs_hba\n  put_device(platform-device)\n    crypto cleanup handler\n\nTo fix this use-after free, change ufshcd_alloc_host() to register a\ndevres action to automatically cleanup the underlying SCSI device on\nufshcd destruction, without requiring explicit calls to\nufshcd_dealloc_host(). This way:\n\n    * the crypto profile and all other ufs_hba-owned resources are\n      destroyed before SCSI (as they've been registered after)\n    * a memleak is plugged in tc-dwc-g210-pci.c remove() as a\n      side-effect\n    * EXPORT_SYMBOL_GPL(ufshcd_dealloc_host) can be removed fully as\n      it's not needed anymore\n    * no future drivers using ufshcd_alloc_host() could ever forget\n      adding the cleanup\n\nFixes: cb77cb5abe1f (\"blk-crypto: rename blk_keyslot_manager to blk_crypto_profile\")\nFixes: d76d9d7d1009 (\"scsi: ufs: use devm_blk_ksm_init()\")\nCc: stable@vger.kernel.org\nSigned-off-by: André Draszik <andre.draszik@linaro.org>\nLink: https://lore.kernel.org/r/20250124-ufshcd-fix-v4-1-c5d0144aae59@linaro.org\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nAcked-by: Eric Biggers <ebiggers@kernel.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "cb77cb5abe1f (\"blk-crypto: rename blk_keyslot_manager to blk_crypto_profile\")",
+    "d76d9d7d1009 (\"scsi: ufs: use devm_blk_ksm_init()\")"
+   ],
+   "cc": [
+    "stable@vger.kernel.org"
+   ],
+   "signed_off_by": [
+    "André Draszik <andre.draszik@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20250124-ufshcd-fix-v4-1-c5d0144aae59@linaro.org"
+   ],
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>"
+   ],
+   "acked_by": [
+    "Eric Biggers <ebiggers@kernel.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "cb77cb5abe1f",
+    "subject": "blk-crypto: rename blk_keyslot_manager to blk_crypto_profile",
+    "sha": "cb77cb5abe1f4fae4a33b735606aae22f9eaa1c7",
+    "introduced_in": "v5.16"
+   },
+   {
+    "abbrev": "d76d9d7d1009",
+    "subject": "scsi: ufs: use devm_blk_ksm_init()",
+    "sha": "d76d9d7d1009968dd3a0fc30e5f5ee9fbffc1350",
+    "introduced_in": "v5.12"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "20250124-ufshcd-fix-v4-1-c5d0144aae59@linaro.org",
+  "series_id": "20250124-ufshcd-fix-v4-c5d0144aae59@linaro.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 21,
+    "deleted": 10,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufshcd-pci.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 2,
+    "area": "host",
+    "vendor": "intel"
+   },
+   {
+    "path": "drivers/ufs/host/ufshcd-pltfrm.c",
+    "status": "M",
+    "in_track": true,
+    "added": 9,
+    "deleted": 19,
+    "area": "host",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": "intel",
+  "vendors": [
+   "intel"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/f8fb2403ddeb.diff",
+  "patch_bytes": 5124
+ },
+ {
+  "sha": "1a78a56ea65252bb089e0daace989167227f2d31",
+  "release": "v6.14",
+  "author": {
+   "name": "Seunghui Lee",
+   "email": "sh043.lee@samsung.com"
+  },
+  "author_date": "2025-01-18T11:38:08+09:00",
+  "commit_date": "2025-02-03T17:34:24-05:00",
+  "subject": "scsi: ufs: core: Fix error return with query response",
+  "body": "There is currently no mechanism to return error from query responses.\nReturn the error and print the corresponding error message with it.\n\nSigned-off-by: Seunghui Lee <sh043.lee@samsung.com>\nLink: https://lore.kernel.org/r/20250118023808.24726-1-sh043.lee@samsung.com\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Seunghui Lee <sh043.lee@samsung.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20250118023808.24726-1-sh043.lee@samsung.com"
+   ],
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20250118023808.24726-1-sh043.lee@samsung.com",
+  "series_id": "20250118023808.24726-sh043.lee@samsung.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/1a78a56ea652.diff",
+  "patch_bytes": 634
+ },
+ {
+  "sha": "4fa382be430421e1445f9c95c4dc9b7e0949ae8a",
+  "release": "v6.14",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-02-14T14:43:44-08:00",
+  "commit_date": "2025-02-18T20:51:32-05:00",
+  "subject": "scsi: ufs: core: Fix ufshcd_is_ufs_dev_busy() and ufshcd_eh_timed_out()",
+  "body": "ufshcd_is_ufs_dev_busy(), ufshcd_print_host_state() and\nufshcd_eh_timed_out() are used in both modes (legacy mode and MCQ mode).\nhba->outstanding_reqs only represents the outstanding requests in legacy\nmode. Hence, change hba->outstanding_reqs into scsi_host_busy(hba->host) in\nthese functions.\n\nFixes: eacb139b77ff (\"scsi: ufs: core: mcq: Enable multi-circular queue\")\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://lore.kernel.org/r/20250214224352.3025151-1-bvanassche@acm.org\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "eacb139b77ff (\"scsi: ufs: core: mcq: Enable multi-circular queue\")"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20250214224352.3025151-1-bvanassche@acm.org"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "eacb139b77ff",
+    "subject": "scsi: ufs: core: mcq: Enable multi-circular queue",
+    "sha": "eacb139b77ff75b973cb99573b33a7adb1f4ca38",
+    "introduced_in": "v6.3"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20250214224352.3025151-1-bvanassche@acm.org",
+  "series_id": "20250214224352.3025151-bvanassche@acm.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/4fa382be4304.diff",
+  "patch_bytes": 1511
+ },
+ {
+  "sha": "fe06b7c07f3fbcce2a2ca6f7b0d543b5699ea00f",
+  "release": "v6.14",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@linaro.org"
+  },
+  "author_date": "2025-02-19T16:20:47+05:30",
+  "commit_date": "2025-02-20T21:29:21-05:00",
+  "subject": "scsi: ufs: core: Set default runtime/system PM levels before ufshcd_hba_init()",
+  "body": "Commit bb9850704c04 (\"scsi: ufs: core: Honor runtime/system PM levels if\nset by host controller drivers\") introduced the check for setting default\nPM levels only if the levels are uninitialized by the host controller\ndrivers. But it missed the fact that the levels could be initialized to 0\n(UFS_PM_LVL_0) on purpose by the controller drivers. Even though none of\nthe drivers are doing so now, the logic should be fixed irrespectively.\n\nSo set the default levels unconditionally before calling ufshcd_hba_init()\nAPI which initializes the controller drivers. It ensures that the\ncontroller drivers could override the default levels if required.\n\nFixes: bb9850704c04 (\"scsi: ufs: core: Honor runtime/system PM levels if set by host controller drivers\")\nReported-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>\nLink: https://lore.kernel.org/r/20250219105047.49932-1-manivannan.sadhasivam@linaro.org\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "bb9850704c04 (\"scsi: ufs: core: Honor runtime/system PM levels if set by host controller drivers\")"
+   ],
+   "reported_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20250219105047.49932-1-manivannan.sadhasivam@linaro.org"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "bb9850704c04",
+    "subject": "scsi: ufs: core: Honor runtime/system PM levels if set by host controller drivers",
+    "sha": "bb9850704c043e48c86cc9df90ee102e8a338229",
+    "introduced_in": "v6.13"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20250219105047.49932-1-manivannan.sadhasivam@linaro.org",
+  "series_id": "20250219105047.49932-manivannan.sadhasivam@linaro.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 15,
+    "deleted": 15,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/fe06b7c07f3f.diff",
+  "patch_bytes": 1720
+ },
+ {
+  "sha": "f27a95845b01e86d67c8b014b4f41bd3327daa63",
+  "release": "v6.14",
+  "author": {
+   "name": "Arthur Simchaev",
+   "email": "arthur.simchaev@sandisk.com"
+  },
+  "author_date": "2025-02-20T16:20:39+02:00",
+  "commit_date": "2025-02-20T22:18:24-05:00",
+  "subject": "scsi: ufs: core: bsg: Fix crash when arpmb command fails",
+  "body": "If the device doesn't support arpmb we'll crash due to copying user data in\nbsg_transport_sg_io_fn().\n\nIn the case where ufs_bsg_exec_advanced_rpmb_req() returns an error, do not\nset the job's reply_len.\n\nMemory crash backtrace:\n3,1290,531166405,-;ufshcd 0000:00:12.5: ARPMB OP failed: error code -22\n\n4,1308,531166555,-;Call Trace:\n\n4,1309,531166559,-; <TASK>\n\n4,1310,531166565,-; ? show_regs+0x6d/0x80\n\n4,1311,531166575,-; ? die+0x37/0xa0\n\n4,1312,531166583,-; ? do_trap+0xd4/0xf0\n\n4,1313,531166593,-; ? do_error_trap+0x71/0xb0\n\n4,1314,531166601,-; ? usercopy_abort+0x6c/0x80\n\n4,1315,531166610,-; ? exc_invalid_op+0x52/0x80\n\n4,1316,531166622,-; ? usercopy_abort+0x6c/0x80\n\n4,1317,531166630,-; ? asm_exc_invalid_op+0x1b/0x20\n\n4,1318,531166643,-; ? usercopy_abort+0x6c/0x80\n\n4,1319,531166652,-; __check_heap_object+0xe3/0x120\n\n4,1320,531166661,-; check_heap_object+0x185/0x1d0\n\n4,1321,531166670,-; __check_object_size.part.0+0x72/0x150\n\n4,1322,531166679,-; __check_object_size+0x23/0x30\n\n4,1323,531166688,-; bsg_transport_sg_io_fn+0x314/0x3b0\n\nFixes: 6ff265fc5ef6 (\"scsi: ufs: core: bsg: Add advanced RPMB support in ufs_bsg\")\nCc: stable@vger.kernel.org\nReviewed-by: Bean Huo <beanhuo@micron.com>\nSigned-off-by: Arthur Simchaev <arthur.simchaev@sandisk.com>\nLink: https://lore.kernel.org/r/20250220142039.250992-1-arthur.simchaev@sandisk.com\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "6ff265fc5ef6 (\"scsi: ufs: core: bsg: Add advanced RPMB support in ufs_bsg\")"
+   ],
+   "cc": [
+    "stable@vger.kernel.org"
+   ],
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Arthur Simchaev <arthur.simchaev@sandisk.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20250220142039.250992-1-arthur.simchaev@sandisk.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "6ff265fc5ef6",
+    "subject": "scsi: ufs: core: bsg: Add advanced RPMB support in ufs_bsg",
+    "sha": "6ff265fc5ef660499e0edc4641647e99eed3f519",
+    "introduced_in": "v6.3"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "20250220142039.250992-1-arthur.simchaev@sandisk.com",
+  "series_id": "20250220142039.250992-arthur.simchaev@sandisk.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs_bsg.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/f27a95845b01.diff",
+  "patch_bytes": 620
+ }
+]

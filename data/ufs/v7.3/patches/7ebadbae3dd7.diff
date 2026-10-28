@@ -1,0 +1,42 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 8e8cb04fad1d..9b696e48a9d1 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -8614,8 +8614,6 @@ static void ufshcd_set_rtt(struct ufs_hba *hba)
+ 	struct ufs_dev_info *dev_info = &hba->dev_info;
+ 	u32 rtt = 0;
+ 	u32 dev_rtt = 0;
+-	int host_rtt_cap = hba->vops && hba->vops->max_num_rtt ?
+-			   hba->vops->max_num_rtt : hba->nortt;
+ 
+ 	/* RTT override makes sense only for UFS-4.0 and above */
+ 	if (dev_info->wspecversion < 0x400)
+@@ -8631,7 +8629,7 @@ static void ufshcd_set_rtt(struct ufs_hba *hba)
+ 	if (dev_rtt != DEFAULT_MAX_NUM_RTT)
+ 		return;
+ 
+-	rtt = min_t(int, dev_info->rtt_cap, host_rtt_cap);
++	rtt = min_t(int, dev_info->rtt_cap, hba->nortt);
+ 
+ 	if (rtt == dev_rtt)
+ 		return;
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 8e24c4b8e963..36ffe87d2cd5 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -372,7 +372,6 @@ struct ufshcd_tx_eq_params {
+ /**
+  * struct ufs_hba_variant_ops - variant specific callbacks
+  * @name: variant name
+- * @max_num_rtt: maximum RTT supported by the host
+  * @init: called when the driver is initialized
+  * @exit: called to cleanup everything done in init
+  * @set_dma_mask: For setting another DMA mask than indicated by the 64AS
+@@ -422,7 +421,6 @@ struct ufshcd_tx_eq_params {
+  */
+ struct ufs_hba_variant_ops {
+ 	const char *name;
+-	int	max_num_rtt;
+ 	int	(*init)(struct ufs_hba *);
+ 	void    (*exit)(struct ufs_hba *);
+ 	u32	(*get_ufs_hci_version)(struct ufs_hba *);

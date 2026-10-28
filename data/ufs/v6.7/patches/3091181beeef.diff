@@ -1,0 +1,29 @@
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index a4855f0b93b0..d437c75c8e14 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -1416,12 +1416,6 @@ static int ufs_qcom_set_core_clk_ctrl(struct ufs_hba *hba, bool is_scale_up)
+ }
+ 
+ static int ufs_qcom_clk_scale_up_pre_change(struct ufs_hba *hba)
+-{
+-	/* nothing to do as of now */
+-	return 0;
+-}
+-
+-static int ufs_qcom_clk_scale_up_post_change(struct ufs_hba *hba)
+ {
+ 	struct ufs_qcom_host *host = ufshcd_get_variant(hba);
+ 
+@@ -1432,6 +1426,11 @@ static int ufs_qcom_clk_scale_up_post_change(struct ufs_hba *hba)
+ 	return ufs_qcom_set_core_clk_ctrl(hba, true);
+ }
+ 
++static int ufs_qcom_clk_scale_up_post_change(struct ufs_hba *hba)
++{
++	return 0;
++}
++
+ static int ufs_qcom_clk_scale_down_pre_change(struct ufs_hba *hba)
+ {
+ 	struct ufs_qcom_host *host = ufshcd_get_variant(hba);

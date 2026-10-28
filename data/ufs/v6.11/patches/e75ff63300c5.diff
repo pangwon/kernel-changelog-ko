@@ -1,0 +1,67 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index dda6d7e44436..41bf2e249c83 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -8131,6 +8131,8 @@ static void ufshcd_set_rtt(struct ufs_hba *hba)
+ 	struct ufs_dev_info *dev_info = &hba->dev_info;
+ 	u32 rtt = 0;
+ 	u32 dev_rtt = 0;
++	int host_rtt_cap = hba->vops && hba->vops->max_num_rtt ?
++			   hba->vops->max_num_rtt : hba->nortt;
+ 
+ 	/* RTT override makes sense only for UFS-4.0 and above */
+ 	if (dev_info->wspecversion < 0x400)
+@@ -8146,7 +8148,8 @@ static void ufshcd_set_rtt(struct ufs_hba *hba)
+ 	if (dev_rtt != DEFAULT_MAX_NUM_RTT)
+ 		return;
+ 
+-	rtt = min_t(int, dev_info->rtt_cap, hba->nortt);
++	rtt = min_t(int, dev_info->rtt_cap, host_rtt_cap);
++
+ 	if (rtt == dev_rtt)
+ 		return;
+ 
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index c4f997196c57..c7a0ab9b1f59 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -1785,6 +1785,7 @@ static int ufs_mtk_config_esi(struct ufs_hba *hba)
+  */
+ static const struct ufs_hba_variant_ops ufs_hba_mtk_vops = {
+ 	.name                = "mediatek.ufshci",
++	.max_num_rtt         = MTK_MAX_NUM_RTT,
+ 	.init                = ufs_mtk_init,
+ 	.get_ufs_hci_version = ufs_mtk_get_ufs_hci_version,
+ 	.setup_clocks        = ufs_mtk_setup_clocks,
+diff --git a/drivers/ufs/host/ufs-mediatek.h b/drivers/ufs/host/ufs-mediatek.h
+index 3ff17e95afab..05d76a6bd772 100644
+--- a/drivers/ufs/host/ufs-mediatek.h
++++ b/drivers/ufs/host/ufs-mediatek.h
+@@ -189,4 +189,7 @@ struct ufs_mtk_host {
+ /* MTK delay of autosuspend: 500 ms */
+ #define MTK_RPM_AUTOSUSPEND_DELAY_MS 500
+ 
++/* MTK RTT support number */
++#define MTK_MAX_NUM_RTT 2
++
+ #endif /* !_UFS_MEDIATEK_H */
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index d74bd2d67b06..ef04ec8aad69 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -295,6 +295,7 @@ struct ufs_pwr_mode_info {
+ /**
+  * struct ufs_hba_variant_ops - variant specific callbacks
+  * @name: variant name
++ * @max_num_rtt: maximum RTT supported by the host
+  * @init: called when the driver is initialized
+  * @exit: called to cleanup everything done in init
+  * @get_ufs_hci_version: called to get UFS HCI version
+@@ -332,6 +333,7 @@ struct ufs_pwr_mode_info {
+  */
+ struct ufs_hba_variant_ops {
+ 	const char *name;
++	int	max_num_rtt;
+ 	int	(*init)(struct ufs_hba *);
+ 	void    (*exit)(struct ufs_hba *);
+ 	u32	(*get_ufs_hci_version)(struct ufs_hba *);

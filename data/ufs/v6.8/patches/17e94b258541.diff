@@ -1,0 +1,12 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index c6cff4aa440a..d77b25b79ae3 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -6354,7 +6354,6 @@ static void ufshcd_err_handling_prepare(struct ufs_hba *hba)
+ 		ufshcd_hold(hba);
+ 		if (!ufshcd_is_clkgating_allowed(hba))
+ 			ufshcd_setup_clocks(hba, true);
+-		ufshcd_release(hba);
+ 		pm_op = hba->is_sys_suspended ? UFS_SYSTEM_PM : UFS_RUNTIME_PM;
+ 		ufshcd_vops_resume(hba, pm_op);
+ 	} else {

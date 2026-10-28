@@ -1,0 +1,68 @@
+diff --git a/drivers/ufs/core/ufs_trace.h b/drivers/ufs/core/ufs_trace.h
+index caa32e23ffa5..584c2b5c6ad9 100644
+--- a/drivers/ufs/core/ufs_trace.h
++++ b/drivers/ufs/core/ufs_trace.h
+@@ -11,6 +11,7 @@
+ 
+ #include <ufs/ufs.h>
+ #include <linux/tracepoint.h>
++#include "ufs_trace_types.h"
+ 
+ #define str_opcode(opcode)						\
+ 	__print_symbolic(opcode,					\
+diff --git a/drivers/ufs/core/ufs_trace_types.h b/drivers/ufs/core/ufs_trace_types.h
+new file mode 100644
+index 000000000000..f2d5ad1d92b9
+--- /dev/null
++++ b/drivers/ufs/core/ufs_trace_types.h
+@@ -0,0 +1,24 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef _UFS_TRACE_TYPES_H_
++#define _UFS_TRACE_TYPES_H_
++
++enum ufs_trace_str_t {
++	UFS_CMD_SEND,
++	UFS_CMD_COMP,
++	UFS_DEV_COMP,
++	UFS_QUERY_SEND,
++	UFS_QUERY_COMP,
++	UFS_QUERY_ERR,
++	UFS_TM_SEND,
++	UFS_TM_COMP,
++	UFS_TM_ERR
++};
++
++enum ufs_trace_tsf_t {
++	UFS_TSF_CDB,
++	UFS_TSF_OSF,
++	UFS_TSF_TM_INPUT,
++	UFS_TSF_TM_OUTPUT
++};
++
++#endif /* _UFS_TRACE_TYPES_H_ */
+diff --git a/include/ufs/ufs.h b/include/ufs/ufs.h
+index 72fd385037a6..245a6a829ce9 100644
+--- a/include/ufs/ufs.h
++++ b/include/ufs/ufs.h
+@@ -653,21 +653,4 @@ struct ufs_dev_info {
+ 	bool hid_sup;
+ };
+ 
+-/*
+- * This enum is used in string mapping in ufs_trace.h.
+- */
+-enum ufs_trace_str_t {
+-	UFS_CMD_SEND, UFS_CMD_COMP, UFS_DEV_COMP,
+-	UFS_QUERY_SEND, UFS_QUERY_COMP, UFS_QUERY_ERR,
+-	UFS_TM_SEND, UFS_TM_COMP, UFS_TM_ERR
+-};
+-
+-/*
+- * Transaction Specific Fields (TSF) type in the UPIU package, this enum is
+- * used in ufs_trace.h for UFS command trace.
+- */
+-enum ufs_trace_tsf_t {
+-	UFS_TSF_CDB, UFS_TSF_OSF, UFS_TSF_TM_INPUT, UFS_TSF_TM_OUTPUT
+-};
+-
+ #endif /* End of Header */

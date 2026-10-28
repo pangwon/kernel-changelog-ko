@@ -1,0 +1,13 @@
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index ecbbf52bf734..66b11cc0703b 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -1112,7 +1112,7 @@ static void ufs_mtk_setup_clk_gating(struct ufs_hba *hba)
+ 	unsigned long flags;
+ 	u32 ah_ms = 10;
+ 	u32 ah_scale, ah_timer;
+-	u32 scale_us[] = {1, 10, 100, 1000, 10000, 100000};
++	static const u32 scale_us[] = {1, 10, 100, 1000, 10000, 100000};
+ 
+ 	if (ufshcd_is_clkgating_allowed(hba)) {
+ 		if (ufshcd_is_auto_hibern8_supported(hba) && hba->ahit) {

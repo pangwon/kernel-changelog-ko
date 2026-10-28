@@ -1,0 +1,3621 @@
+[
+ {
+  "sha": "79a2287c1df4896d4f930a24c0dc77571959d3b3",
+  "release": "v6.19",
+  "author": {
+   "name": "André Draszik",
+   "email": "andre.draszik@linaro.org"
+  },
+  "author_date": "2025-10-07T16:56:28+01:00",
+  "commit_date": "2025-10-20T12:03:14-04:00",
+  "subject": "scsi: ufs: dt-bindings: exynos: Add power-domains",
+  "body": "The UFS controller can be part of a power domain, so we need to allow\nthe relevant property 'power-domains'.\n\nSigned-off-by: André Draszik <andre.draszik@linaro.org>\nReviewed-by: Peter Griffin <peter.griffin@linaro.org>\nReviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nReviewed-by: Alim Akhtar <alim.akhtar@samsung.com>\nLink: https://patch.msgid.link/20251007-power-domains-scsi-ufs-dt-bindings-exynos-v1-1-1acfa81a887a@linaro.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "André Draszik <andre.draszik@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Griffin <peter.griffin@linaro.org>",
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>",
+    "Alim Akhtar <alim.akhtar@samsung.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251007-power-domains-scsi-ufs-dt-bindings-exynos-v1-1-1acfa81a887a@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251007-power-domains-scsi-ufs-dt-bindings-exynos-v1-1-1acfa81a887a@linaro.org",
+  "series_id": "20251007-power-domains-scsi-ufs-dt-bindings-exynos-v1-1acfa81a887a@linaro.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/samsung,exynos-ufs.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 0,
+    "area": "bindings",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/79a2287c1df4.diff",
+  "patch_bytes": 506
+ },
+ {
+  "sha": "bfe0d22f12559f44bf27ae88b9c4a9f8fdae65d0",
+  "release": "v6.19",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2025-10-16T10:32:31+08:00",
+  "commit_date": "2025-10-21T21:16:04-04:00",
+  "subject": "scsi: ufs: core: Update CQ Entry to UFS 4.1 format",
+  "body": "Update the completion queue (CQ) entry format according to the UFS 4.1\nspecification. UFS 4.1 introduces new members in reserved record\nDW5. Also refine DW4 with detailed members defined in UFS 4.0. Modify\nthe code to incorporate these changes by updating the overall_status in\nthe CQ entry structure.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251016023507.1000664-2-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251016023507.1000664-2-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251016023507.1000664-2-peter.wang@mediatek.com",
+  "series_id": "20251016023507.1000664-peter.wang@mediatek.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshci.h",
+    "status": "M",
+    "in_track": true,
+    "added": 19,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/bfe0d22f1255.diff",
+  "patch_bytes": 1403
+ },
+ {
+  "sha": "8627f322cb7b6f1f9f7a78bd9c79b82534fbc9c9",
+  "release": "v6.19",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2025-10-16T10:32:32+08:00",
+  "commit_date": "2025-10-21T21:16:04-04:00",
+  "subject": "scsi: ufs: core: Support dumping CQ entry in MCQ Mode",
+  "body": "Enhance the ufshcd_print_tr() function to support dumping completion\nqueue (CQ) entries in MCQ mode when an error occurs.  This addition\nprovides more detailed debugging information by including the CQ entry\ndata in the error logs, aiding in the diagnosis of issues in MCQ mode.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251016023507.1000664-3-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251016023507.1000664-3-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251016023507.1000664-3-peter.wang@mediatek.com",
+  "series_id": "20251016023507.1000664-peter.wang@mediatek.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/8627f322cb7b.diff",
+  "patch_bytes": 619
+ },
+ {
+  "sha": "f8e82ae65eaf347fb8924a1d9c544da7bcb9f798",
+  "release": "v6.19",
+  "author": {
+   "name": "Bao D. Nguyen",
+   "email": "quic_nguyenb@quicinc.com"
+  },
+  "author_date": "2025-10-13T12:38:15-07:00",
+  "commit_date": "2025-10-21T21:22:17-04:00",
+  "subject": "scsi: ufs: core: Remove UFS_DEVICE_QUIRK_DELAY_AFTER_LPM quirk",
+  "body": "After the UFS device VCC is turned off, all the UFS device manufacturers\nrequire a period of power-off time before the VCC can be turned on\nagain. This requirement has been confirmed with all the UFS device\nmanufacturer's datasheets.\n\nRemove the UFS_DEVICE_QUIRK_DELAY_AFTER_LPM quirk in the UFS core driver\nand implement a universal delay that is required by all the UFS device\nmanufacturers. In addition, remove the support for this quirk in the\nplatform drivers.\n\nSigned-off-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/25f134d5a42e8b8365be64d512d1bb5fc2bce6ff.1760383740.git.quic_nguyenb@quicinc.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/25f134d5a42e8b8365be64d512d1bb5fc2bce6ff.1760383740.git.quic_nguyenb@quicinc.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "25f134d5a42e8b8365be64d512d1bb5fc2bce6ff.1760383740.git.quic_nguyenb@quicinc.com",
+  "series_id": "25f134d5a42e8b8365be64d512d1bb5fc2bce6ff.1760383740.git.quic_nguyenb@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 7,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 3,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "include/ufs/ufs_quirks.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 7,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek",
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/f8e82ae65eaf.diff",
+  "patch_bytes": 3262
+ },
+ {
+  "sha": "4760b639b43c107c8bfccd658478bbb3152fa56f",
+  "release": "v6.19",
+  "author": {
+   "name": "Bao D. Nguyen",
+   "email": "quic_nguyenb@quicinc.com"
+  },
+  "author_date": "2025-10-13T12:38:16-07:00",
+  "commit_date": "2025-10-21T21:22:17-04:00",
+  "subject": "scsi: ufs: core: Replace hard coded vcc-off delay with a variable",
+  "body": "After the UFS device VCC is powered off, all the UFS device\nmanufacturers require a minimum of 1ms of power-off time before VCC can\nbe powered on again. This requirement has been verified with all the UFS\ndevice manufacturer's datasheets.\n\nReplace the hard coded 5ms delay with a variable with a default setting\nof 2ms to improve the system resume latency. The platform drivers can\noverride this setting as needed.\n\nSigned-off-by: Bao D. Nguyen <quic_nguyenb@quicinc.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/72fa649406a0bf02271575b7d58f22c968aa5d7e.1760383740.git.quic_nguyenb@quicinc.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bao D. Nguyen <quic_nguyenb@quicinc.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/72fa649406a0bf02271575b7d58f22c968aa5d7e.1760383740.git.quic_nguyenb@quicinc.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "72fa649406a0bf02271575b7d58f22c968aa5d7e.1760383740.git.quic_nguyenb@quicinc.com",
+  "series_id": "72fa649406a0bf02271575b7d58f22c968aa5d7e.1760383740.git.quic_nguyenb@quicinc.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 9,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/4760b639b43c.diff",
+  "patch_bytes": 1321
+ },
+ {
+  "sha": "7162536410768ec6b219524c36d3a871ff97adf8",
+  "release": "v6.19",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2025-09-24T17:43:23+08:00",
+  "commit_date": "2025-10-21T21:36:45-04:00",
+  "subject": "scsi: ufs: host: mediatek: Correct clock scaling with PM QoS flow",
+  "body": "Correct clock scaling with PM QoS during suspend and resume.  Ensure PM\nQoS is released during suspend if scaling up and re-applied after\nresume. This prevents performance issues and maintains proper power\nmanagement.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nAcked-by: Chun-Hung Wu <chun-hung.wu@mediatek.com>\nLink: https://patch.msgid.link/20250924094527.2992256-2-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "acked_by": [
+    "Chun-Hung Wu <chun-hung.wu@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20250924094527.2992256-2-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20250924094527.2992256-2-peter.wang@mediatek.com",
+  "series_id": "20250924094527.2992256-peter.wang@mediatek.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 10,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/716253641076.diff",
+  "patch_bytes": 2703
+ },
+ {
+  "sha": "55ce691dc75a356e4b7c552505ce0a427c72f3af",
+  "release": "v6.19",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2025-09-24T17:43:24+08:00",
+  "commit_date": "2025-10-21T21:36:45-04:00",
+  "subject": "scsi: ufs: host: mediatek: Adjust clock scaling for PM flow",
+  "body": "Adjust clock scaling during suspend and resume in the UFS Mediatek\ndriver. Ensure that the clock scales down during suspend if it was\nscaled up, and scales up again after resume.  This adjustment maintains\nproper power management.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nAcked-by: Chun-Hung Wu <chun-hung.wu@mediatek.com>\nLink: https://patch.msgid.link/20250924094527.2992256-3-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "acked_by": [
+    "Chun-Hung Wu <chun-hung.wu@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20250924094527.2992256-3-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20250924094527.2992256-3-peter.wang@mediatek.com",
+  "series_id": "20250924094527.2992256-peter.wang@mediatek.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 8,
+    "deleted": 4,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/55ce691dc75a.diff",
+  "patch_bytes": 1201
+ },
+ {
+  "sha": "16b42c4281ae536a6ceda97303d9820ac5741293",
+  "release": "v6.19",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2025-09-24T17:43:25+08:00",
+  "commit_date": "2025-10-21T21:36:45-04:00",
+  "subject": "scsi: ufs: host: mediatek: Handle clock scaling for high gear in PM flow",
+  "body": "Add clock scaling down for power management flow in the UFS Mediatek\ndriver. If clock scaling is disabled and fixed in high gear, ensure the\nclock scales down during suspend and scales up again after resume to\nsupport high gear.  This adjustment maintains proper power management.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nAcked-by: Chun-Hung Wu <chun-hung.wu@mediatek.com>\nLink: https://patch.msgid.link/20250924094527.2992256-4-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "acked_by": [
+    "Chun-Hung Wu <chun-hung.wu@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20250924094527.2992256-4-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20250924094527.2992256-4-peter.wang@mediatek.com",
+  "series_id": "20250924094527.2992256-peter.wang@mediatek.com",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/16b42c4281ae.diff",
+  "patch_bytes": 987
+ },
+ {
+  "sha": "1fd05367d5b1a5edd3d14c966a5f510e5b8a0c5e",
+  "release": "v6.19",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2025-09-24T17:43:26+08:00",
+  "commit_date": "2025-10-21T21:36:45-04:00",
+  "subject": "scsi: ufs: host: mediatek: Adjust sync length for FASTAUTO mode",
+  "body": "Set the sync length for FASTAUTO G1 mode in the UFS Mediatek\ndriver. This ensures the sync length meets minimum values for high-speed\ngears, improving stability during power mode changes.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nAcked-by: Chun-Hung Wu <chun-hung.wu@mediatek.com>\nLink: https://patch.msgid.link/20250924094527.2992256-5-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "acked_by": [
+    "Chun-Hung Wu <chun-hung.wu@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20250924094527.2992256-5-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20250924094527.2992256-5-peter.wang@mediatek.com",
+  "series_id": "20250924094527.2992256-peter.wang@mediatek.com",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 32,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "include/ufs/unipro.h",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/1fd05367d5b1.diff",
+  "patch_bytes": 2389
+ },
+ {
+  "sha": "014de20bb36ba03e0e0b0a7e0a1406ab900c9fda",
+  "release": "v6.19",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2025-09-24T17:43:27+08:00",
+  "commit_date": "2025-10-21T21:36:46-04:00",
+  "subject": "scsi: ufs: host: mediatek: Fix shutdown/suspend race condition",
+  "body": "Address a race condition between shutdown and suspend operations in the\nUFS Mediatek driver. Before entering suspend, check if a shutdown is in\nprogress to prevent conflicts and ensure system stability.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nAcked-by: Chun-Hung Wu <chun-hung.wu@mediatek.com>\nLink: https://patch.msgid.link/20250924094527.2992256-6-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "acked_by": [
+    "Chun-Hung Wu <chun-hung.wu@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20250924094527.2992256-6-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20250924094527.2992256-6-peter.wang@mediatek.com",
+  "series_id": "20250924094527.2992256-peter.wang@mediatek.com",
+  "series_index": 6,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/014de20bb36b.diff",
+  "patch_bytes": 436
+ },
+ {
+  "sha": "9b2b03b36168bcda298546b121d6ecc530d01d25",
+  "release": "v6.19",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2025-09-24T17:43:28+08:00",
+  "commit_date": "2025-10-21T21:36:46-04:00",
+  "subject": "scsi: ufs: host: mediatek: Remove duplicate function",
+  "body": "Remove the duplicate ufs_mtk_us_to_ahit() function in the UFS Mediatek\ndriver and export the existing ufshcd_us_to_ahit() function for shared\nuse. This change reduces redundancy and maintains consistency across the\ncodebase.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nAcked-by: Chun-Hung Wu <chun-hung.wu@mediatek.com>\nLink: https://patch.msgid.link/20250924094527.2992256-7-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "acked_by": [
+    "Chun-Hung Wu <chun-hung.wu@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20250924094527.2992256-7-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20250924094527.2992256-7-peter.wang@mediatek.com",
+  "series_id": "20250924094527.2992256-peter.wang@mediatek.com",
+  "series_index": 7,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-sysfs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 13,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/9b2b03b36168.diff",
+  "patch_bytes": 2160
+ },
+ {
+  "sha": "4fb4c835a92b6dfa3a461102ba0943b416ae7e55",
+  "release": "v6.19",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2025-09-24T17:43:29+08:00",
+  "commit_date": "2025-10-21T21:36:46-04:00",
+  "subject": "scsi: ufs: host: mediatek: Add support for new platform with MMIO_OTSD_CTR",
+  "body": "Introduce support for a new UFS Mediatek platform by adding the\nREG_UFS_UFS_MMIO_OTSD_CTRL register. This update includes checks for\nlegacy platforms and uses the new register to replace debug selection\nand handle specific operations.  The changes ensure compatibility across\ndifferent hardware versions and prevent potential issues with debug\nusage on newer platforms.\n\nAdditional updates include error logging improvements during link setup\nfor newer and legacy platforms, ensuring proper event logging and\ndebugging.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nAcked-by: Chun-Hung Wu <chun-hung.wu@mediatek.com>\nLink: https://patch.msgid.link/20250924094527.2992256-8-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "acked_by": [
+    "Chun-Hung Wu <chun-hung.wu@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20250924094527.2992256-8-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20250924094527.2992256-8-peter.wang@mediatek.com",
+  "series_id": "20250924094527.2992256-peter.wang@mediatek.com",
+  "series_index": 8,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 35,
+    "deleted": 7,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/4fb4c835a92b.diff",
+  "patch_bytes": 3566
+ },
+ {
+  "sha": "9ce37e94c30090d26df26b1bbb2fa9c51ede7651",
+  "release": "v6.19",
+  "author": {
+   "name": "Naomi Chu",
+   "email": "naomi.chu@mediatek.com"
+  },
+  "author_date": "2025-09-24T17:43:30+08:00",
+  "commit_date": "2025-10-21T21:36:46-04:00",
+  "subject": "scsi: ufs: host: mediatek: Support new features for MT6991",
+  "body": "Add support for the MT6991 platform by enabling MRTT settings and random\nperformance improvements. These enhancements aim to optimize performance\nand efficiency on the MT6991 hardware.\n\nEnable multi-Round Trip Time (MRTT) for improved data handling.  Enable\nrandom performance improvement features to boost overall system\nresponsiveness.\n\nSigned-off-by: Naomi Chu <naomi.chu@mediatek.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nAcked-by: Chun-Hung Wu <chun-hung.wu@mediatek.com>\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20250924094527.2992256-9-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Naomi Chu <naomi.chu@mediatek.com>",
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "acked_by": [
+    "Chun-Hung Wu <chun-hung.wu@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20250924094527.2992256-9-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20250924094527.2992256-9-peter.wang@mediatek.com",
+  "series_id": "20250924094527.2992256-peter.wang@mediatek.com",
+  "series_index": 9,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.h",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/9ce37e94c300.diff",
+  "patch_bytes": 1125
+ },
+ {
+  "sha": "7b2c4224faa7bc6cdaf1fb6106ec7b46c63a28cb",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-14T13:00:55-07:00",
+  "commit_date": "2025-10-23T22:18:12-04:00",
+  "subject": "scsi: ufs: core: Improve documentation in include/ufs/ufshci.h",
+  "body": "Make it easier to find the sections in the UFSHCI standard where these\nconstants come from.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251014200118.3390839-4-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251014200118.3390839-4-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251014200118.3390839-4-bvanassche@acm.org",
+  "series_id": "20251014200118.3390839-bvanassche@acm.org",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "include/ufs/ufshci.h",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/7b2c4224faa7.diff",
+  "patch_bytes": 648
+ },
+ {
+  "sha": "b3b0842bcb0696e25b1977238ce2907a4c02d8c4",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-14T13:00:56-07:00",
+  "commit_date": "2025-10-23T22:18:12-04:00",
+  "subject": "scsi: ufs: core: Change the type of uic_command::cmd_active",
+  "body": "Since uic_command::cmd_active is used as a boolean variable, change its\ntype from 'int' into 'bool'. No functionality has been changed.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251014200118.3390839-5-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251014200118.3390839-5-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251014200118.3390839-5-bvanassche@acm.org",
+  "series_id": "20251014200118.3390839-bvanassche@acm.org",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b3b0842bcb06.diff",
+  "patch_bytes": 1256
+ },
+ {
+  "sha": "a332735a53d6877f0d4fe28bc9263864da3dd470",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-14T13:00:57-07:00",
+  "commit_date": "2025-10-23T22:18:12-04:00",
+  "subject": "scsi: ufs: core: Remove UFS_DEV_COMP",
+  "body": "Remove the UFS_DEV_COMP constant because it is not used.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20251014200118.3390839-6-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251014200118.3390839-6-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251014200118.3390839-6-bvanassche@acm.org",
+  "series_id": "20251014200118.3390839-bvanassche@acm.org",
+  "series_index": 6,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs_trace.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufs_trace_types.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/a332735a53d6.diff",
+  "patch_bytes": 824
+ },
+ {
+  "sha": "b30006b5bec1dcba207bc42e7f7cd96a568acc27",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-14T13:00:58-07:00",
+  "commit_date": "2025-10-23T22:18:12-04:00",
+  "subject": "scsi: ufs: core: Move the ufshcd_enable_intr() declaration",
+  "body": "ufshcd_enable_intr() is not exported and hence should not be declared in\ninclude/ufs/ufshcd.h.\n\nFixes: 253757797973 (\"scsi: ufs: core: Change MCQ interrupt enable flow\")\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20251014200118.3390839-7-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "253757797973 (\"scsi: ufs: core: Change MCQ interrupt enable flow\")"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251014200118.3390839-7-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "253757797973",
+    "subject": "scsi: ufs: core: Change MCQ interrupt enable flow",
+    "sha": "253757797973c54ea967f8fd8f40d16e4a78e6d4",
+    "introduced_in": "v6.18"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20251014200118.3390839-7-bvanassche@acm.org",
+  "series_id": "20251014200118.3390839-bvanassche@acm.org",
+  "series_index": 7,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b30006b5bec1.diff",
+  "patch_bytes": 1005
+ },
+ {
+  "sha": "047f190494a010d402b13f31bf37b2b16bf5720a",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-14T13:00:59-07:00",
+  "commit_date": "2025-10-23T22:18:12-04:00",
+  "subject": "scsi: ufs: core: Remove a goto label from ufshcd_uic_cmd_compl()",
+  "body": "Return directly instead of jumping to a return statement. No\nfunctionality has been changed.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20251014200118.3390839-8-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251014200118.3390839-8-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251014200118.3390839-8-bvanassche@acm.org",
+  "series_id": "20251014200118.3390839-bvanassche@acm.org",
+  "series_index": 8,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/047f190494a0.diff",
+  "patch_bytes": 728
+ },
+ {
+  "sha": "bfe5f5dacfbab96a6424c3bb376557bf0d8e4a20",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-14T13:01:00-07:00",
+  "commit_date": "2025-10-23T22:18:12-04:00",
+  "subject": "scsi: ufs: core: Simplify ufshcd_mcq_sq_cleanup() using guard()",
+  "body": "Simplify ufshcd_mcq_sq_cleanup() by using guard(mutex)() instead of\nexplicit mutex_lock() and mutex_unlock() calls. No functionality has\nbeen changed.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20251014200118.3390839-9-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251014200118.3390839-9-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251014200118.3390839-9-bvanassche@acm.org",
+  "series_id": "20251014200118.3390839-bvanassche@acm.org",
+  "series_index": 9,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/bfe5f5dacfba.diff",
+  "patch_bytes": 755
+ },
+ {
+  "sha": "754c6f539effa8ad332e305e34665849638fa40f",
+  "release": "v6.19",
+  "author": {
+   "name": "Sai Krishna Potthuri",
+   "email": "sai.krishna.potthuri@amd.com"
+  },
+  "author_date": "2025-10-21T17:00:00+05:30",
+  "commit_date": "2025-10-29T23:00:48-04:00",
+  "subject": "scsi: ufs: dt-bindings: amd-versal2: Add UFS Host Controller for AMD Versal Gen 2 SoC",
+  "body": "Add devicetree document for UFS Host Controller on AMD Versal Gen 2 SoC.\nThis includes clocks and clock-names as mandated by UFS common bindings.\n\nSigned-off-by: Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>\nCo-developed-by: Ajay Neeli <ajay.neeli@amd.com>\nSigned-off-by: Ajay Neeli <ajay.neeli@amd.com>\nReviewed-by: Conor Dooley <conor.dooley@microchip.com>\nAcked-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251021113003.13650-2-ajay.neeli@amd.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>",
+    "Ajay Neeli <ajay.neeli@amd.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "co_developed_by": [
+    "Ajay Neeli <ajay.neeli@amd.com>"
+   ],
+   "reviewed_by": [
+    "Conor Dooley <conor.dooley@microchip.com>"
+   ],
+   "acked_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251021113003.13650-2-ajay.neeli@amd.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251021113003.13650-2-ajay.neeli@amd.com",
+  "series_id": "20251021113003.13650-ajay.neeli@amd.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/amd,versal2-ufs.yaml",
+    "status": "A",
+    "in_track": true,
+    "added": 61,
+    "deleted": 0,
+    "area": "bindings",
+    "vendor": "amd"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "amd",
+  "vendors": [
+   "amd"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/754c6f539eff.diff",
+  "patch_bytes": 1478
+ },
+ {
+  "sha": "769b8b2ffded4cd880669edd83e2952efeeb27f7",
+  "release": "v6.19",
+  "author": {
+   "name": "Sai Krishna Potthuri",
+   "email": "sai.krishna.potthuri@amd.com"
+  },
+  "author_date": "2025-10-21T17:00:03+05:30",
+  "commit_date": "2025-10-29T23:00:49-04:00",
+  "subject": "scsi: ufs: amd-versal2: Add UFS support for AMD Versal Gen 2 SoC",
+  "body": "Add support for the UFS host controller on the AMD Versal Gen 2 SoC,\nbuilt on the Synopsys DWC UFS architecture, using the UFSHCD DWC and\nUFSHCD platform driver. This controller requires specific configurations\nlike M-PHY/RMMI/UniPro and vendor specific registers programming before\ndoing the UIC_LINKSTARTUP.\n\nSigned-off-by: Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>\nSigned-off-by: Ajay Neeli <ajay.neeli@amd.com>\nAcked-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251021113003.13650-5-ajay.neeli@amd.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>",
+    "Ajay Neeli <ajay.neeli@amd.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "acked_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251021113003.13650-5-ajay.neeli@amd.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251021113003.13650-5-ajay.neeli@amd.com",
+  "series_id": "20251021113003.13650-ajay.neeli@amd.com",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "MAINTAINERS",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ufs/host/Kconfig",
+    "status": "M",
+    "in_track": true,
+    "added": 13,
+    "deleted": 0,
+    "area": "host",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/Makefile",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufs-amd-versal2.c",
+    "status": "A",
+    "in_track": true,
+    "added": 564,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "amd"
+   },
+   {
+    "path": "drivers/ufs/host/ufshcd-dwc.h",
+    "status": "M",
+    "in_track": true,
+    "added": 46,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "snps"
+   },
+   {
+    "path": "include/ufs/unipro.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": "amd",
+  "vendors": [
+   "amd",
+   "snps"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/769b8b2ffded.diff",
+  "patch_bytes": 17245
+ },
+ {
+  "sha": "525a411f9a5ff736bf017c36823aefda93eeae36",
+  "release": "v6.19",
+  "author": {
+   "name": "Krzysztof Kozlowski",
+   "email": "krzysztof.kozlowski@linaro.org"
+  },
+  "author_date": "2025-10-27T12:31:08+01:00",
+  "commit_date": "2025-10-29T23:23:01-04:00",
+  "subject": "scsi: ufs: dt-bindings: qcom: Drop redundant \"reg\" constraints",
+  "body": "The \"reg\" in top-level has maxItems:2, thus repeating this in \"if:then:\"\nblocks is redundant.  Similarly number of items cannot be less than 1.\n\nSigned-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>\nAcked-by: Rob Herring (Arm) <robh@kernel.org>\nLink: https://patch.msgid.link/20251027113107.75835-2-krzysztof.kozlowski@linaro.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "acked_by": [
+    "Rob Herring (Arm) <robh@kernel.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251027113107.75835-2-krzysztof.kozlowski@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251027113107.75835-2-krzysztof.kozlowski@linaro.org",
+  "series_id": "20251027113107.75835-krzysztof.kozlowski@linaro.org",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/qcom,ufs.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 3,
+    "area": "bindings",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/525a411f9a5f.diff",
+  "patch_bytes": 846
+ },
+ {
+  "sha": "480ca7954664e7ac458b573728024039f62709a1",
+  "release": "v6.19",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2025-10-31T20:19:12+08:00",
+  "commit_date": "2025-11-02T21:51:22-05:00",
+  "subject": "scsi: ufs: dt-bindings: mediatek,ufs: Update maintainer information in mediatek,ufs.yaml",
+  "body": "Replace Stanley Chu with me and Chaotian in the maintainers field since\nStanley's email address is no longer active.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nAcked-by: Conor Dooley <conor.dooley@microchip.com>\nLink: https://patch.msgid.link/20251031122008.1517549-1-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "acked_by": [
+    "Conor Dooley <conor.dooley@microchip.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031122008.1517549-1-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031122008.1517549-1-peter.wang@mediatek.com",
+  "series_id": "20251031122008.1517549-peter.wang@mediatek.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/mediatek,ufs.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 1,
+    "area": "bindings",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/480ca7954664.diff",
+  "patch_bytes": 599
+ },
+ {
+  "sha": "d92ebadda5e30085e5294935e7c1c35801752cbd",
+  "release": "v6.19",
+  "author": {
+   "name": "Neeraj Soni",
+   "email": "neeraj.soni@oss.qualcomm.com"
+  },
+  "author_date": "2025-10-30T21:40:12+05:30",
+  "commit_date": "2025-11-03T18:21:56-06:00",
+  "subject": "soc: qcom: ice: Add HWKM v1 support for wrapped keys",
+  "body": "HWKM v1 and v2 differ slightly in wrapped key size and the bit fields for\ncertain status registers and operating mode (legacy or standard).\n\nAdd support to select HWKM version based on the major and minor revisions.\nUse this HWKM version to select wrapped key size and to configure the bit\nfields in registers for operating modes and hardware status.\n\nSupport for SCM calls for wrapped keys is being added in the TrustZone for\nfew SoCs with HWKM v1. Existing check of qcom_scm_has_wrapped_key_support()\nAPI ensures that HWKM is used only if these SCM calls are supported in\nTrustZone for that SoC.\n\nSigned-off-by: Neeraj Soni <neeraj.soni@oss.qualcomm.com>\nReviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>\nLink: https://lore.kernel.org/r/20251030161012.3391239-1-neeraj.soni@oss.qualcomm.com\nSigned-off-by: Bjorn Andersson <andersson@kernel.org>",
+  "trailers": {
+   "signed_off_by": [
+    "Neeraj Soni <neeraj.soni@oss.qualcomm.com>",
+    "Bjorn Andersson <andersson@kernel.org>"
+   ],
+   "reviewed_by": [
+    "Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20251030161012.3391239-1-neeraj.soni@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251030161012.3391239-1-neeraj.soni@oss.qualcomm.com",
+  "series_id": "20251030161012.3391239-neeraj.soni@oss.qualcomm.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/soc/qcom/ice.c",
+    "status": "M",
+    "in_track": true,
+    "added": 58,
+    "deleted": 23,
+    "area": "crypto",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "crypto",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d92ebadda5e3.diff",
+  "patch_bytes": 7671
+ },
+ {
+  "sha": "02880c083c13143ecf7c624808eda7980f843368",
+  "release": "v6.19",
+  "author": {
+   "name": "Thomas Richard (TI.com)",
+   "email": "thomas.richard@bootlin.com"
+  },
+  "author_date": "2025-11-06T15:21:54+01:00",
+  "commit_date": "2025-11-08T12:58:07-05:00",
+  "subject": "scsi: ufs: ti-j721e: Add suspend-resume support",
+  "body": "Restore the ctrl register to resume the TI UFS wrapper.\n\nSigned-off-by: Thomas Richard (TI.com) <thomas.richard@bootlin.com>\nLink: https://patch.msgid.link/20251106-scsi-ufs-ti-j721e-suspend-resume-support-v1-1-6f395f51219e@bootlin.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Thomas Richard (TI.com) <thomas.richard@bootlin.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251106-scsi-ufs-ti-j721e-suspend-resume-support-v1-1-6f395f51219e@bootlin.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251106-scsi-ufs-ti-j721e-suspend-resume-support-v1-1-6f395f51219e@bootlin.com",
+  "series_id": "20251106-scsi-ufs-ti-j721e-suspend-resume-support-v1-6f395f51219e@bootlin.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ti-j721e-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 29,
+    "deleted": 8,
+    "area": "host",
+    "vendor": "ti"
+   }
+  ],
+  "area": "host",
+  "vendor": "ti",
+  "vendors": [
+   "ti"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/02880c083c13.diff",
+  "patch_bytes": 2241
+ },
+ {
+  "sha": "0d9a7085ec24983b5b8a4971c0eb6c756c75f1bf",
+  "release": "v6.19",
+  "author": {
+   "name": "Bean Huo",
+   "email": "beanhuo@micron.com"
+  },
+  "author_date": "2025-11-08T00:05:16+01:00",
+  "commit_date": "2025-11-10T12:36:19-05:00",
+  "subject": "scsi: ufs: core: Convert string descriptor format macros to enum",
+  "body": "Convert SD_ASCII_STD and SD_RAW from boolean macros to enum values for\nimproved code readability. This makes ufshcd_read_string_desc() calls\nself-documenting by using explicit enum values instead of true/false.\n\nMove the ufshcd_read_string_desc() declaration from include/ufs/ufshcd.h\nto drivers/ufs/core/ufshcd-priv.h since this function is not exported.\n\nCo-developed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nSuggested-by: Avri Altman <Avri.Altman@sandisk.com>\nSigned-off-by: Bean Huo <beanhuo@micron.com>\nLink: https://patch.msgid.link/20251107230518.4060231-2-beanhuo@iokpp.de\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "co_developed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Bean Huo <beanhuo@micron.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "suggested_by": [
+    "Avri Altman <Avri.Altman@sandisk.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251107230518.4060231-2-beanhuo@iokpp.de"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251107230518.4060231-2-beanhuo@iokpp.de",
+  "series_id": "20251107230518.4060231-beanhuo@iokpp.de",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 10,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 5,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/0d9a7085ec24.diff",
+  "patch_bytes": 2776
+ },
+ {
+  "sha": "d794b499f948801f54d67ddbc34a6eac5a6d150a",
+  "release": "v6.19",
+  "author": {
+   "name": "Bean Huo",
+   "email": "beanhuo@micron.com"
+  },
+  "author_date": "2025-11-08T00:05:17+01:00",
+  "commit_date": "2025-11-10T12:36:19-05:00",
+  "subject": "scsi: ufs: core: fix incorrect buffer duplication in ufshcd_read_string_desc()",
+  "body": "The function ufshcd_read_string_desc() was duplicating memory starting\nfrom the beginning of struct uc_string_id, which included the length and\ntype fields. As a result, the allocated buffer contained unwanted\nmetadata in addition to the string itself.\n\nThe correct behavior is to duplicate only the Unicode character array in\nthe structure. Update the code so that only the actual string content is\ncopied into the new buffer.\n\nFixes: 5f57704dbcfe (\"scsi: ufs: Use kmemdup in ufshcd_read_string_desc()\")\nReviewed-by: Avri Altman <avri.altman@sandisk.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Bean Huo <beanhuo@micron.com>\nLink: https://patch.msgid.link/20251107230518.4060231-3-beanhuo@iokpp.de\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "5f57704dbcfe (\"scsi: ufs: Use kmemdup in ufshcd_read_string_desc()\")"
+   ],
+   "reviewed_by": [
+    "Avri Altman <avri.altman@sandisk.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251107230518.4060231-3-beanhuo@iokpp.de"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "5f57704dbcfe",
+    "subject": "scsi: ufs: Use kmemdup in ufshcd_read_string_desc()",
+    "sha": "5f57704dbcfe8ed718fc7cef0b1699c3aad7739c",
+    "introduced_in": "v5.4"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20251107230518.4060231-3-beanhuo@iokpp.de",
+  "series_id": "20251107230518.4060231-beanhuo@iokpp.de",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d794b499f948.diff",
+  "patch_bytes": 462
+ },
+ {
+  "sha": "b06b8c421485e0e96d7fd6aa614fb0b6f2778a03",
+  "release": "v6.19",
+  "author": {
+   "name": "Bean Huo",
+   "email": "beanhuo@micron.com"
+  },
+  "author_date": "2025-11-08T00:05:18+01:00",
+  "commit_date": "2025-11-10T12:49:43-05:00",
+  "subject": "scsi: ufs: core: Add OP-TEE based RPMB driver for UFS devices",
+  "body": "Add OP-TEE based RPMB support for UFS devices. This enables secure RPMB\noperations on UFS devices through OP-TEE, providing the same\nfunctionality available for eMMC devices and extending kernel-based\nsecure storage support to UFS-based systems.\n\nBenefits of OP-TEE based RPMB implementation:\n\n - Eliminates dependency on userspace supplicant for RPMB access\n\n - Enables early boot secure storage access (e.g., fTPM, secure UEFI\n   variables)\n\n - Provides kernel-level RPMB access as soon as UFS driver is\n   initialized\n\n - Removes complex initramfs dependencies and boot ordering requirements\n\n - Ensures reliable and deterministic secure storage operations\n\n - Supports both built-in and modular fTPM configurations\n\n[mkp: make this build as a module]\n\nCo-developed-by: Can Guo <can.guo@oss.qualcomm.com>\nSigned-off-by: Can Guo <can.guo@oss.qualcomm.com>\nReviewed-by: Avri Altman <avri.altman@sandisk.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Bean Huo <beanhuo@micron.com>\nLink: https://patch.msgid.link/20251107230518.4060231-4-beanhuo@iokpp.de\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "co_developed_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>",
+    "Bean Huo <beanhuo@micron.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Avri Altman <avri.altman@sandisk.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251107230518.4060231-4-beanhuo@iokpp.de"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251107230518.4060231-4-beanhuo@iokpp.de",
+  "series_id": "20251107230518.4060231-beanhuo@iokpp.de",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "drivers/misc/Kconfig",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ufs/core/Makefile",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufs-rpmb.c",
+    "status": "A",
+    "in_track": true,
+    "added": 254,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 13,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 82,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufs.h",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b06b8c421485.diff",
+  "patch_bytes": 14886
+ },
+ {
+  "sha": "dd4299af9b049c0dcb28699327ebc1386aab4b2a",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:16-07:00",
+  "commit_date": "2025-11-12T17:02:31-05:00",
+  "subject": "scsi: ufs: core: Move an assignment in ufshcd_mcq_process_cqe()",
+  "body": "Since 'tag' is only used inside the if-statement, move the 'tag'\nassignment into the if-statement. This patch prepares for introducing a\nWARN_ON_ONCE() call in ufshcd_mcq_get_tag() if the tag lookup fails.\n\nReviewed-by: Avri Altman <avri.altman@sandisk.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-9-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Avri Altman <avri.altman@sandisk.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-9-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-9-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 9,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/dd4299af9b04.diff",
+  "patch_bytes": 604
+ },
+ {
+  "sha": "9f8e09230f532c806ed088417f1ad794dd19a10f",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:17-07:00",
+  "commit_date": "2025-11-12T17:02:31-05:00",
+  "subject": "scsi: ufs: core: Change the type of one ufshcd_add_cmd_upiu_trace() argument",
+  "body": "Change the 'tag' argument into an LRB pointer. This patch prepares for the\nremoval of the hba->lrb[] array.\n\nReviewed-by: Avri Altman <avri.altman@sandisk.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-10-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Avri Altman <avri.altman@sandisk.com>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-10-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-10-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 10,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/9f8e09230f53.diff",
+  "patch_bytes": 1278
+ },
+ {
+  "sha": "60a1f6a8ad334475372a128a6856e893a910302e",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:18-07:00",
+  "commit_date": "2025-11-12T17:02:32-05:00",
+  "subject": "scsi: ufs: core: Only call ufshcd_add_command_trace() for SCSI commands",
+  "body": "Instead of checking inside ufshcd_add_command_trace() whether 'cmd'\npoints at a SCSI command, let the caller perform that check. This patch\nprepares for removing the lrbp->cmd pointer.\n\nReviewed-by: Avri Altman <avri.altman@sandisk.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-11-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Avri Altman <avri.altman@sandisk.com>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-11-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-11-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 11,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 5,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/60a1f6a8ad33.diff",
+  "patch_bytes": 945
+ },
+ {
+  "sha": "ffa5d8c15300a3047c9a445dce81515cd3cde86e",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:19-07:00",
+  "commit_date": "2025-11-12T17:02:32-05:00",
+  "subject": "scsi: ufs: core: Change the type of one ufshcd_add_command_trace() argument",
+  "body": "Change the 'tag' argument into a SCSI command pointer. This patch\nprepares for the removal of the hba->lrb[] array.\n\nReviewed-by: Avri Altman <avri.altman@sandisk.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-12-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Avri Altman <avri.altman@sandisk.com>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-12-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-12-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 12,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 6,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/ffa5d8c15300.diff",
+  "patch_bytes": 2123
+ },
+ {
+  "sha": "3e7fff3fee5b7fa1538b2cef023733cf10366a4a",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:20-07:00",
+  "commit_date": "2025-11-12T17:02:32-05:00",
+  "subject": "scsi: ufs: core: Change the type of one ufshcd_send_command() argument",
+  "body": "Change the 'task_tag' argument into an LRB pointer. This patch prepares\nfor the removal of the hba->lrb[] array.\n\nReviewed-by: Avri Altman <avri.altman@sandisk.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-13-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Avri Altman <avri.altman@sandisk.com>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-13-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-13-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 13,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 7,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/3e7fff3fee5b.diff",
+  "patch_bytes": 1591
+ },
+ {
+  "sha": "ae7bf255b10e4c8382faec06f527ba832c18be24",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:21-07:00",
+  "commit_date": "2025-11-12T17:02:32-05:00",
+  "subject": "scsi: ufs: core: Only call ufshcd_should_inform_monitor() for SCSI commands",
+  "body": "ufshcd_should_inform_monitor() only returns 'true' for SCSI commands.\nInstead of checking inside ufshcd_should_inform_monitor() whether its\nsecond argument represents a SCSI command, only call this function for\nSCSI commands. This patch prepares for removing the lrbp->cmd member.\n\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-14-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-14-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-14-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 14,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/ae7bf255b10e.diff",
+  "patch_bytes": 1157
+ },
+ {
+  "sha": "f59568f4e27af9ba3b0e89909c6fb2cab38700c5",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:22-07:00",
+  "commit_date": "2025-11-12T17:02:32-05:00",
+  "subject": "scsi: ufs: core: Change the monitor function argument types",
+  "body": "Pass a SCSI command pointer instead of a struct ufshcd_lrb pointer. This\npatch prepares for combining the SCSI command and ufshcd_lrb data\nstructures into a single data structure.\n\nReviewed-by: Avri Altman <avri.altman@sandisk.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-15-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Avri Altman <avri.altman@sandisk.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-15-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-15-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 15,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 22,
+    "deleted": 22,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/f59568f4e27a.diff",
+  "patch_bytes": 4186
+ },
+ {
+  "sha": "63a5b959c854c33f280533eedd27bd3489e2b704",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:23-07:00",
+  "commit_date": "2025-11-12T17:02:32-05:00",
+  "subject": "scsi: ufs: core: Rework ufshcd_mcq_compl_pending_transfer()",
+  "body": "Replace a tag loop with blk_mq_tagset_busy_iter(). This patch prepares\nfor removing the hba->lrb[] array.\n\nReviewed-by: Avri Altman <avri.altman@sandisk.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-16-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Avri Altman <avri.altman@sandisk.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-16-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-16-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 16,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 46,
+    "deleted": 34,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/63a5b959c854.diff",
+  "patch_bytes": 2811
+ },
+ {
+  "sha": "f18fac1e2b729d3bdeb41b946d90b57f3515f438",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:24-07:00",
+  "commit_date": "2025-11-12T17:02:32-05:00",
+  "subject": "scsi: ufs: core: Rework ufshcd_eh_device_reset_handler()",
+  "body": "Merge the MCQ mode and legacy mode loops into a single loop. This patch\nprepares for optimizing the hot path by removing the direct hba->lrb[]\naccesses from ufshcd_eh_device_reset_handler().\n\nReviewed-by: Avri Altman <avri.altman@sandisk.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-17-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Avri Altman <avri.altman@sandisk.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-17-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-17-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 17,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 38,
+    "deleted": 46,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/f18fac1e2b72.diff",
+  "patch_bytes": 3446
+ },
+ {
+  "sha": "e8ea985a8314e0170124476e0fa5a5da868a7a40",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:25-07:00",
+  "commit_date": "2025-11-12T17:02:33-05:00",
+  "subject": "scsi: ufs: core: Rework the SCSI host queue depth calculation code",
+  "body": "Prepare for allocating the SCSI host earlier by making the SCSI host\nqueue depth independent of the queue depth supported by the UFS device.\nThis patch may increase the queue depth of the UFS SCSI host.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-18-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-18-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-18-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 18,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 19,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 15,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/e8ea985a8314.diff",
+  "patch_bytes": 3765
+ },
+ {
+  "sha": "f46b9a595fa95c82e3279b687869cac249838e96",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:26-07:00",
+  "commit_date": "2025-11-12T17:02:33-05:00",
+  "subject": "scsi: ufs: core: Allocate the SCSI host earlier",
+  "body": "Call ufshcd_add_scsi_host() before any UPIU commands are sent to the UFS\ndevice. This patch prepares for letting ufshcd_add_scsi_host() allocate\nmemory for both SCSI and UPIU commands.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-19-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-19-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-19-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 19,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 12,
+    "deleted": 5,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/f46b9a595fa9.diff",
+  "patch_bytes": 1477
+ },
+ {
+  "sha": "45e636ea129486c4cf7bb342b0d59c186ae2fabb",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:27-07:00",
+  "commit_date": "2025-11-12T17:02:33-05:00",
+  "subject": "scsi: ufs: core: Call ufshcd_init_lrb() later",
+  "body": "Call ufshcd_init_lrb() from inside ufshcd_setup_dev_cmd() instead of\nufshcd_host_memory_configure(). This patch prepares for calling\nufshcd_host_memory_configure() before the information is available that\nis required to call ufshcd_setup_dev_cmd().\n\nReviewed-by: Avri Altman <avri.altman@sandisk.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-20-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Avri Altman <avri.altman@sandisk.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-20-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-20-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 20,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 27,
+    "deleted": 26,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/45e636ea1294.diff",
+  "patch_bytes": 3845
+ },
+ {
+  "sha": "d3fd0fd7768681eaeb03742c9e8ae846c505f564",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:28-07:00",
+  "commit_date": "2025-11-12T17:02:33-05:00",
+  "subject": "scsi: ufs: core: Use hba->reserved_slot",
+  "body": "Use hba->reserved_slot instead of open-coding it. This patch prepares\nfor changing the value of hba->reserved_slot.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-21-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-21-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-21-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 21,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d3fd0fd77686.diff",
+  "patch_bytes": 513
+ },
+ {
+  "sha": "1d0af94ffb5d4c9b99d38646521b6d3e4119d044",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:29-07:00",
+  "commit_date": "2025-11-12T17:02:33-05:00",
+  "subject": "scsi: ufs: core: Make the reserved slot a reserved request",
+  "body": "Instead of letting the SCSI core allocate hba->nutrs - 1 commands, let\nthe SCSI core allocate hba->nutrs commands, set the number of reserved\ntags to 1 and use the reserved tag for device management commands. This\npatch changes the 'reserved slot' from hba->nutrs - 1 into 0 because the\nblock layer reserves the smallest tags for reserved commands.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-22-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-22-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-22-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 22,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/1d0af94ffb5d.diff",
+  "patch_bytes": 1123
+ },
+ {
+  "sha": "e5f9cc2af9a82700e989ac08be3c85c25046a6f6",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:30-07:00",
+  "commit_date": "2025-11-12T17:02:33-05:00",
+  "subject": "scsi: ufs: core: Do not clear driver-private command data",
+  "body": "Tell the SCSI core to skip the memset() call that clears driver-private\ndata because __ufshcd_setup_cmd() performs all necessary initialization.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-23-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-23-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-23-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 23,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 10,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/e5f9cc2af9a8.diff",
+  "patch_bytes": 901
+ },
+ {
+  "sha": "22089c218037ca7cd50d4fa20e8b5bd746a9b397",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:31-07:00",
+  "commit_date": "2025-11-12T17:02:34-05:00",
+  "subject": "scsi: ufs: core: Optimize the hot path",
+  "body": "Set .cmd_size in the SCSI host template such that the SCSI core makes\nstruct scsi_cmnd and struct ufshcd_lrb adjacent. Convert the cmd->lrbp\nand lrbp->cmd memory loads into pointer offset calculations. Remove the\ndata structure members that became superfluous, namely ufshcd_lrb.cmd\nand ufs_hba.lrb. Since ufshcd_lrb.cmd is removed, this pointer cannot be\nused anymore to test whether or not a command is a SCSI command.\nIntroduce a new function for this purpose, namely ufshcd_is_scsi_cmd().\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-24-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-24-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-24-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 24,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-crypto.h",
+    "status": "M",
+    "in_track": true,
+    "added": 11,
+    "deleted": 7,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 39,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 124,
+    "deleted": 111,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 5,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/22089c218037.diff",
+  "patch_bytes": 32106
+ },
+ {
+  "sha": "176b93004c3475cfc0c939a4aeec846f6bf2b9a0",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:32-07:00",
+  "commit_date": "2025-11-12T17:02:34-05:00",
+  "subject": "scsi: ufs: core: Pass a SCSI pointer instead of an LRB pointer",
+  "body": "Pass a pointer to a SCSI command between functions instead of an LRB\npointer. This change prepares for removing the ufshcd_lrb task_tag\nmember.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-25-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-25-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-25-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 25,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 11,
+    "deleted": 10,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/176b93004c34.diff",
+  "patch_bytes": 2706
+ },
+ {
+  "sha": "9a2c9500921d5ebbe96f7531adc73d9205c76485",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:33-07:00",
+  "commit_date": "2025-11-12T17:02:34-05:00",
+  "subject": "scsi: ufs: core: Remove the ufshcd_lrb task_tag member",
+  "body": "Remove the ufshcd_lrb task_tag member and use scsi_cmd_to_rq(cmd)->tag\ninstead. Use rq->tag instead of lrbp->task_tag. This patch reduces the\nsize of struct ufshcd_lrb.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-26-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-26-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-26-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 26,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 30,
+    "deleted": 32,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/9a2c9500921d.diff",
+  "patch_bytes": 8257
+ },
+ {
+  "sha": "4b6c0d9cca359d1d2f666e14c42482befe5c4829",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:34-07:00",
+  "commit_date": "2025-11-12T17:02:34-05:00",
+  "subject": "scsi: ufs: core: Make blk_mq_tagset_busy_iter() skip reserved requests",
+  "body": "A later patch will convert hba->reserved_slot into a reserved tag. Make\nblk_mq_tagset_busy_iter() skip reserved requests such that device\nmanagement commands are skipped.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-27-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-27-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-27-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 27,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 8,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/4b6c0d9cca35.diff",
+  "patch_bytes": 1795
+ },
+ {
+  "sha": "a11c015c8a4fff99cf91a5cbc9789cc7a72b3ccf",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:35-07:00",
+  "commit_date": "2025-11-12T17:02:34-05:00",
+  "subject": "scsi: ufs: core: Move code out of ufshcd_wait_for_dev_cmd()",
+  "body": "The ufshcd_dev_cmd_completion() call is useful for some but not for all\nufshcd_wait_for_dev_cmd() callers. Hence, remove the\nufshcd_dev_cmd_completion() call from ufshcd_wait_for_dev_cmd() and move\nit past the ufshcd_issue_dev_cmd() calls where appropriate. This makes\nit easier to detect timeout errors for UPIU frames submitted through the\nBSG interface.\n\nReviewed-by: Avri Altman <avri.altman@sandisk.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-28-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Avri Altman <avri.altman@sandisk.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-28-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-28-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 28,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 12,
+    "deleted": 9,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/a11c015c8a4f.diff",
+  "patch_bytes": 2043
+ },
+ {
+  "sha": "08b12cda6c44dc015bcc152613c35ee0ae8f37b9",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-10-31T13:39:36-07:00",
+  "commit_date": "2025-11-12T17:02:34-05:00",
+  "subject": "scsi: ufs: core: Switch to scsi_get_internal_cmd()",
+  "body": "Instead of storing the tag of the reserved command in hba->reserved_slot,\nuse scsi_get_internal_cmd() and scsi_put_internal_cmd() to allocate the\ntag for the reserved command dynamically. Add\nufshcd_queue_reserved_command() for submitting reserved commands. Add\nsupport in ufshcd_abort() for device management commands. Use\nblk_execute_rq() for submitting reserved commands. Remove the code and\ndata structures that became superfluous. This includes\nufshcd_wait_for_dev_cmd(), hba->reserved_slot and ufs_dev_cmd.complete.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251031204029.2883185-29-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251031204029.2883185-29-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251031204029.2883185-29-bvanassche@acm.org",
+  "series_id": "20251031204029.2883185-bvanassche@acm.org",
+  "series_index": 29,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 7,
+    "deleted": 12,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 24,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 108,
+    "deleted": 117,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 6,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/08b12cda6c44.diff",
+  "patch_bytes": 16900
+ },
+ {
+  "sha": "18987143d4b1945a1bfcb3963ae1961ca29b27dd",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-11-11T10:47:59-08:00",
+  "commit_date": "2025-11-12T20:58:28-05:00",
+  "subject": "scsi: ufs: core: Remove an unnecessary NULL pointer check",
+  "body": "The !payload check tests the address of a member of a data structure. We\nknow that the start address of this data structure (job) is not NULL\nsince the 'job' pointer has already been dereferenced. Hence, the\n!payload check is superfluous. Remove this test. This was reported by\nthe CodeSonar static analyzer.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251111184802.125111-1-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251111184802.125111-1-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251111184802.125111-1-bvanassche@acm.org",
+  "series_id": "20251111184802.125111-bvanassche@acm.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs_bsg.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/18987143d4b1.diff",
+  "patch_bytes": 556
+ },
+ {
+  "sha": "a1af5d2be169ecec92cb4d85c811450d68164aec",
+  "release": "v6.19",
+  "author": {
+   "name": "Peter Griffin",
+   "email": "peter.griffin@linaro.org"
+  },
+  "author_date": "2025-11-12T16:27:07Z",
+  "commit_date": "2025-11-18T22:26:02+05:30",
+  "subject": "phy: samsung: gs101-ufs: Add .notify_phystate() & hibern8 enter/exit values",
+  "body": "Implement the .notify_phystate() callback and provide the gs101 specific\nphy values that need to be programmed when entering and exiting the hibern8\nstate.\n\nSigned-off-by: Peter Griffin <peter.griffin@linaro.org>\nReviewed-by: Neil Armstrong <neil.armstrong@linaro.org>\nLink: https://patch.msgid.link/20251112-phy-notify-pmstate-v5-2-39df622d8fcb@linaro.org\nSigned-off-by: Vinod Koul <vkoul@kernel.org>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Griffin <peter.griffin@linaro.org>",
+    "Vinod Koul <vkoul@kernel.org>"
+   ],
+   "reviewed_by": [
+    "Neil Armstrong <neil.armstrong@linaro.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251112-phy-notify-pmstate-v5-2-39df622d8fcb@linaro.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251112-phy-notify-pmstate-v5-2-39df622d8fcb@linaro.org",
+  "series_id": "20251112-phy-notify-pmstate-v5-39df622d8fcb@linaro.org",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/phy/samsung/phy-gs101-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 28,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/phy/samsung/phy-samsung-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 40,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/phy/samsung/phy-samsung-ufs.h",
+    "status": "M",
+    "in_track": true,
+    "added": 7,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "exynos"
+   }
+  ],
+  "area": "phy",
+  "vendor": "exynos",
+  "vendors": [
+   "exynos"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/a1af5d2be169.diff",
+  "patch_bytes": 4984
+ },
+ {
+  "sha": "02b5822d2fea1e89009ff167fed5aea2f1e1de85",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-11-14T11:34:03-08:00",
+  "commit_date": "2025-11-19T12:02:22-05:00",
+  "subject": "scsi: ufs: core: Fix single doorbell mode support",
+  "body": "Commit 22089c218037 (\"scsi: ufs: core: Optimize the hot path\")\naccidentally broke support for the legacy single doorbell mode.  The\ntag_set.shared_tags pointer is only != NULL if shared tag support is\nenabled. The UFS driver only enables shared tag support in MCQ mode.\n\nFix this by handling legacy and MCQ modes differently in\nufshcd_tag_to_cmd().\n\nReported-by: Marek Szyprowski <m.szyprowski@samsung.com>\nCloses: https://lore.kernel.org/linux-scsi/c988a6dd-588d-4dbc-ab83-bbee17f2a686@samsung.com/\nReported-by: André Draszik <andre.draszik@linaro.org>\nCloses: https://lore.kernel.org/linux-scsi/83ffbceb9e66b2a3b6096231551d969034ed8a74.camel@linaro.org/\nTested-by: Marek Szyprowski <m.szyprowski@samsung.com>\nFixes: 22089c218037 (\"scsi: ufs: core: Optimize the hot path\")\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nTested-by: André Draszik <andre.draszik@linaro.org>\nLink: https://patch.msgid.link/20251114193406.3097237-1-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reported_by": [
+    "Marek Szyprowski <m.szyprowski@samsung.com>",
+    "André Draszik <andre.draszik@linaro.org>"
+   ],
+   "closes": [
+    "https://lore.kernel.org/linux-scsi/c988a6dd-588d-4dbc-ab83-bbee17f2a686@samsung.com/",
+    "https://lore.kernel.org/linux-scsi/83ffbceb9e66b2a3b6096231551d969034ed8a74.camel@linaro.org/"
+   ],
+   "tested_by": [
+    "Marek Szyprowski <m.szyprowski@samsung.com>",
+    "André Draszik <andre.draszik@linaro.org>"
+   ],
+   "fixes": [
+    "22089c218037 (\"scsi: ufs: core: Optimize the hot path\")"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251114193406.3097237-1-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "22089c218037",
+    "subject": "scsi: ufs: core: Optimize the hot path",
+    "sha": "22089c218037ca7cd50d4fa20e8b5bd746a9b397",
+    "introduced_in": "v6.19"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20251114193406.3097237-1-bvanassche@acm.org",
+  "series_id": "20251114193406.3097237-bvanassche@acm.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/02b5822d2fea.diff",
+  "patch_bytes": 742
+ },
+ {
+  "sha": "31e6e7e54b294f1015681ca284c28d37e94a48eb",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-11-13T15:52:43-08:00",
+  "commit_date": "2025-11-19T12:06:00-05:00",
+  "subject": "scsi: ufs: core: Use scsi_device_busy()",
+  "body": "Use scsi_device_busy() instead of open-coding it. This patch prepares\nfor skipping the SCSI device budget map initialization in certain cases.\n\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251113235252.2015185-1-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251113235252.2015185-1-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251113235252.2015185-1-bvanassche@acm.org",
+  "series_id": "20251113235252.2015185-bvanassche@acm.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/31e6e7e54b29.diff",
+  "patch_bytes": 684
+ },
+ {
+  "sha": "b0ee72db9132bd19b1b80152b35e0cf6a6cbd9f2",
+  "release": "v6.19",
+  "author": {
+   "name": "Shawn Lin",
+   "email": "shawn.lin@rock-chips.com"
+  },
+  "author_date": "2025-11-13T12:52:55+08:00",
+  "commit_date": "2025-11-19T22:33:36-05:00",
+  "subject": "scsi: ufs: rockchip: Reset controller on PRE_CHANGE of hce enable notify",
+  "body": "This fixes the dme-reset failed when doing recovery. Because device\nreset is not enough, we could occasionally see the error below:\n\nufshcd-rockchip 2a2d0000.ufs: uic cmd 0x14 with arg3 0x0 completion timeout\nufshcd-rockchip 2a2d0000.ufs: dme-reset: error code -110\nufshcd-rockchip 2a2d0000.ufs: DME_RESET failed\nufshcd-rockchip 2a2d0000.ufs: ufshcd_host_reset_and_restore: Host init failed -110\n\nFix this by resetting the controller on PRE_CHANGE stage of hce enable\nnotify.\n\nFixes: d3cbe455d6eb (\"scsi: ufs: rockchip: Initial support for UFS\")\nSigned-off-by: Shawn Lin <shawn.lin@rock-chips.com>\nLink: https://patch.msgid.link/1763009575-237552-1-git-send-email-shawn.lin@rock-chips.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "d3cbe455d6eb (\"scsi: ufs: rockchip: Initial support for UFS\")"
+   ],
+   "signed_off_by": [
+    "Shawn Lin <shawn.lin@rock-chips.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/1763009575-237552-1-git-send-email-shawn.lin@rock-chips.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "d3cbe455d6eb",
+    "subject": "scsi: ufs: rockchip: Initial support for UFS",
+    "sha": "d3cbe455d6eb600dee27bf5294f6fe8c2bb06b5f",
+    "introduced_in": "v6.15"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "1763009575-237552-1-git-send-email-shawn.lin@rock-chips.com",
+  "series_id": "1763009575-237552-1-git-send-email-shawn.lin@rock-chips.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-rockchip.c",
+    "status": "M",
+    "in_track": true,
+    "added": 13,
+    "deleted": 6,
+    "area": "host",
+    "vendor": "rockchip"
+   }
+  ],
+  "area": "host",
+  "vendor": "rockchip",
+  "vendors": [
+   "rockchip"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b0ee72db9132.diff",
+  "patch_bytes": 1521
+ },
+ {
+  "sha": "cda5f23eed84cdca374d60734bf0190138788608",
+  "release": "v6.19",
+  "author": {
+   "name": "Shawn Lin",
+   "email": "shawn.lin@rock-chips.com"
+  },
+  "author_date": "2025-11-13T13:18:11+08:00",
+  "commit_date": "2025-11-19T22:34:41-05:00",
+  "subject": "scsi: ufs: rockchip: Fix compile error without CONFIG_GPIOLIB",
+  "body": "drivers/ufs/host/ufs-rockchip.c:168:19: error: implicit declaration of function\n'devm_gpiod_get'; did you mean 'em_pd_get'? [-Werror=implicit-function-declaration]\n\ndrivers/ufs/host/ufs-rockchip.c:214:2: error: implicit declaration of function\n'gpiod_set_value_cansleep'; did you mean 'gpio_set_value_cansleep'?\n[-Werror=implicit-function-declaration]\n\nReported-by: kernel test robot <lkp@intel.com>\nCloses: https://lore.kernel.org/oe-kbuild-all/202511130238.LlA0MKxW-lkp@intel.com/\nSigned-off-by: Shawn Lin <shawn.lin@rock-chips.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/1763011091-243727-1-git-send-email-shawn.lin@rock-chips.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reported_by": [
+    "kernel test robot <lkp@intel.com>"
+   ],
+   "closes": [
+    "https://lore.kernel.org/oe-kbuild-all/202511130238.LlA0MKxW-lkp@intel.com/"
+   ],
+   "signed_off_by": [
+    "Shawn Lin <shawn.lin@rock-chips.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/1763011091-243727-1-git-send-email-shawn.lin@rock-chips.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "1763011091-243727-1-git-send-email-shawn.lin@rock-chips.com",
+  "series_id": "1763011091-243727-1-git-send-email-shawn.lin@rock-chips.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-rockchip.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "rockchip"
+   }
+  ],
+  "area": "host",
+  "vendor": "rockchip",
+  "vendors": [
+   "rockchip"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/cda5f23eed84.diff",
+  "patch_bytes": 385
+ },
+ {
+  "sha": "b4bb6daf4ac4d4560044ecdd81e93aa2f6acbb06",
+  "release": "v6.19",
+  "author": {
+   "name": "Brian Kao",
+   "email": "powenkao@google.com"
+  },
+  "author_date": "2025-11-12T06:32:02Z",
+  "commit_date": "2025-11-29T14:58:38-05:00",
+  "subject": "scsi: ufs: core: Fix EH failure after W-LUN resume error",
+  "body": "When a W-LUN resume fails, its parent devices in the SCSI hierarchy,\nincluding the scsi_target, may be runtime suspended. Subsequently, the\nerror handler in ufshcd_recover_pm_error() fails to set the W-LUN device\nback to active because the parent target is not active.  This results in\nthe following errors:\n\n  google-ufshcd 3c2d0000.ufs: ufshcd_err_handler started; HBA state eh_fatal; ...\n  ufs_device_wlun 0:0:0:49488: START_STOP failed for power mode: 1, result 40000\n  ufs_device_wlun 0:0:0:49488: ufshcd_wl_runtime_resume failed: -5\n  ...\n  ufs_device_wlun 0:0:0:49488: runtime PM trying to activate child device 0:0:0:49488 but parent (target0:0:0) is not active\n\nAddress this by:\n\n 1. Ensuring the W-LUN's parent scsi_target is runtime resumed before\n    attempting to set the W-LUN to active within\n    ufshcd_recover_pm_error().\n\n 2. Explicitly checking for power.runtime_error on the HBA and W-LUN\n    devices before calling pm_runtime_set_active() to clear the error\n    state.\n\n 3. Adding pm_runtime_get_sync(hba->dev) in\n    ufshcd_err_handling_prepare() to ensure the HBA itself is active\n    during error recovery, even if a child device resume failed.\n\nThese changes ensure the device power states are managed correctly\nduring error recovery.\n\nSigned-off-by: Brian Kao <powenkao@google.com>\nTested-by: Brian Kao <powenkao@google.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251112063214.1195761-1-powenkao@google.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Brian Kao <powenkao@google.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "tested_by": [
+    "Brian Kao <powenkao@google.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251112063214.1195761-1-powenkao@google.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251112063214.1195761-1-powenkao@google.com",
+  "series_id": "20251112063214.1195761-powenkao@google.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 28,
+    "deleted": 8,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b4bb6daf4ac4.diff",
+  "patch_bytes": 2792
+ },
+ {
+  "sha": "d98b4d52bff02d15ea73b1790d7610a2f4f023ab",
+  "release": "v6.19",
+  "author": {
+   "name": "Bean Huo",
+   "email": "beanhuo@micron.com"
+  },
+  "author_date": "2025-12-02T16:51:38+01:00",
+  "commit_date": "2025-12-03T01:33:10-05:00",
+  "subject": "scsi: ufs: core: Fix RPMB link error by reversing Kconfig dependencies",
+  "body": "When CONFIG_SCSI_UFSHCD=y and CONFIG_RPMB=m, the kernel fails to link\nwith undefined references to ufs_rpmb_probe() and ufs_rpmb_remove():\n\n  ld: drivers/ufs/core/ufshcd.c:8950: undefined reference to `ufs_rpmb_probe'\n  ld: drivers/ufs/core/ufshcd.c:10505: undefined reference to `ufs_rpmb_remove'\n\nThe issue is that RPMB depends on its consumers (MMC, UFS) in Kconfig,\nwhich is backwards. This prevents proper module dependency handling when\nthe library is modular but consumers are built-in.\n\nFix by reversing the dependency:\n\n - Remove 'depends on MMC || SCSI_UFSHCD' from RPMB Kconfig\n\n - Add 'depends on RPMB || !RPMB' to SCSI_UFSHCD Kconfig\n\nThis allows RPMB to be an independent library while ensuring correct\nlinking in all module/built-in combinations.\n\nFixes: b06b8c421485 (\"scsi: ufs: core: Add OP-TEE based RPMB driver for UFS devices\")\nReported-by: kernel test robot <lkp@intel.com>\nCloses: https://lore.kernel.org/oe-kbuild-all/202511300443.h7sotuL0-lkp@intel.com/\nSuggested-by: Arnd Bergmann <arnd@arndb.de>\nCc: Bart Van Assche <bvanassche@acm.org>\nCc: Jens Wiklander <jens.wiklander@linaro.org>\nCc: Ulf Hansson <ulf.hansson@linaro.org>\nSigned-off-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Arnd Bergmann <arnd@arndb.de>\nReviewed-by: Jens Wiklander <jens.wiklander@linaro.org>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20251202155138.2607210-1-beanhuo@iokpp.de\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "b06b8c421485 (\"scsi: ufs: core: Add OP-TEE based RPMB driver for UFS devices\")"
+   ],
+   "reported_by": [
+    "kernel test robot <lkp@intel.com>"
+   ],
+   "closes": [
+    "https://lore.kernel.org/oe-kbuild-all/202511300443.h7sotuL0-lkp@intel.com/"
+   ],
+   "suggested_by": [
+    "Arnd Bergmann <arnd@arndb.de>"
+   ],
+   "cc": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Jens Wiklander <jens.wiklander@linaro.org>",
+    "Ulf Hansson <ulf.hansson@linaro.org>"
+   ],
+   "signed_off_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Arnd Bergmann <arnd@arndb.de>",
+    "Jens Wiklander <jens.wiklander@linaro.org>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251202155138.2607210-1-beanhuo@iokpp.de"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "b06b8c421485",
+    "subject": "scsi: ufs: core: Add OP-TEE based RPMB driver for UFS devices",
+    "sha": "b06b8c421485e0e96d7fd6aa614fb0b6f2778a03",
+    "introduced_in": "v6.19"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20251202155138.2607210-1-beanhuo@iokpp.de",
+  "series_id": "20251202155138.2607210-beanhuo@iokpp.de",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/misc/Kconfig",
+    "status": "M",
+    "in_track": false
+   },
+   {
+    "path": "drivers/ufs/Kconfig",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d98b4d52bff0.diff",
+  "patch_bytes": 361
+ },
+ {
+  "sha": "14be351e5cd07349377010e457a58fac99201832",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-12-04T07:04:52-10:00",
+  "commit_date": "2025-12-08T21:56:33-05:00",
+  "subject": "scsi: ufs: core: Fix an error handler crash",
+  "body": "The UFS error handler may be activated before SCSI scanning has started\nand hence before hba->ufs_device_wlun has been set. Check the\nhba->ufs_device_wlun pointer before using it.\n\nCc: Peter Wang <peter.wang@mediatek.com>\nCc: Nitin Rawat <nitin.rawat@oss.qualcomm.com>\nFixes: e23ef4f22db3 (\"scsi: ufs: core: Fix error handler host_sem issue\")\nFixes: f966e02ae521 (\"scsi: ufs: core: Fix runtime suspend error deadlock\")\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Nitin Rawat <nitin.rawat@oss.qualcomm.com>\nTested-by: Nitin Rawat <nitin.rawat@oss.qualcomm.com> #SM8750\nLink: https://patch.msgid.link/20251204170457.994851-1-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "cc": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Nitin Rawat <nitin.rawat@oss.qualcomm.com>"
+   ],
+   "fixes": [
+    "e23ef4f22db3 (\"scsi: ufs: core: Fix error handler host_sem issue\")",
+    "f966e02ae521 (\"scsi: ufs: core: Fix runtime suspend error deadlock\")"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Nitin Rawat <nitin.rawat@oss.qualcomm.com>"
+   ],
+   "tested_by": [
+    "Nitin Rawat <nitin.rawat@oss.qualcomm.com> #SM8750"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251204170457.994851-1-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "e23ef4f22db3",
+    "subject": "scsi: ufs: core: Fix error handler host_sem issue",
+    "sha": "e23ef4f22db30a1e49c8b060e4ebc9dc9ca99c49",
+    "introduced_in": "v6.18"
+   },
+   {
+    "abbrev": "f966e02ae521",
+    "subject": "scsi: ufs: core: Fix runtime suspend error deadlock",
+    "sha": "f966e02ae52192928d544262ee7a68611e333031",
+    "introduced_in": "v6.18"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20251204170457.994851-1-bvanassche@acm.org",
+  "series_id": "20251204170457.994851-bvanassche@acm.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 14,
+    "deleted": 11,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/14be351e5cd0.diff",
+  "patch_bytes": 1351
+ },
+ {
+  "sha": "d2875b812b141d0c449541976d92c8d89b94ec72",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-12-04T08:15:43-10:00",
+  "commit_date": "2025-12-08T21:58:28-05:00",
+  "subject": "scsi: ufs: core: Fix a deadlock in the frequency scaling code",
+  "body": "Commit 08b12cda6c44 (\"scsi: ufs: core: Switch to scsi_get_internal_cmd()\")\naccidentally introduced a deadlock in the frequency scaling code.\nufshcd_clock_scaling_unprepare() may submit a device management command\nwhile SCSI command processing is blocked. The deadlock was introduced by\nusing the SCSI core for submitting device management commands\n(scsi_get_internal_cmd() + blk_execute_rq()). Fix this deadlock by calling\nblk_mq_unquiesce_tagset() before any device management commands are\nsubmitted by ufshcd_clock_scaling_unprepare().\n\nFixes: 08b12cda6c44 (\"scsi: ufs: core: Switch to scsi_get_internal_cmd()\")\nReported-by: Manivannan Sadhasivam <mani@kernel.org>\nReported-by: Roger Shimizu <rosh@debian.org>\nCloses: https://lore.kernel.org/linux-scsi/ehorjaflathzab5oekx2nae2zss5vi2r36yqkqsfjb2fgsifz2@yk3us5g3igow/\nTested-by: Roger Shimizu <rosh@debian.org>\nCc: Nitin Rawat <nitin.rawat@oss.qualcomm.com>\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Nitin Rawat <nitin.rawat@oss.qualcomm.com>\nTested-by: Alexey Klimov <alexey.klimov@linaro.org> # RB5 board\nLink: https://patch.msgid.link/20251204181548.1006696-1-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "08b12cda6c44 (\"scsi: ufs: core: Switch to scsi_get_internal_cmd()\")"
+   ],
+   "reported_by": [
+    "Manivannan Sadhasivam <mani@kernel.org>",
+    "Roger Shimizu <rosh@debian.org>"
+   ],
+   "closes": [
+    "https://lore.kernel.org/linux-scsi/ehorjaflathzab5oekx2nae2zss5vi2r36yqkqsfjb2fgsifz2@yk3us5g3igow/"
+   ],
+   "tested_by": [
+    "Roger Shimizu <rosh@debian.org>",
+    "Alexey Klimov <alexey.klimov@linaro.org> # RB5 board"
+   ],
+   "cc": [
+    "Nitin Rawat <nitin.rawat@oss.qualcomm.com>"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Nitin Rawat <nitin.rawat@oss.qualcomm.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251204181548.1006696-1-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "08b12cda6c44",
+    "subject": "scsi: ufs: core: Switch to scsi_get_internal_cmd()",
+    "sha": "08b12cda6c44dc015bcc152613c35ee0ae8f37b9",
+    "introduced_in": "v6.19"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20251204181548.1006696-1-bvanassche@acm.org",
+  "series_id": "20251204181548.1006696-bvanassche@acm.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d2875b812b14.diff",
+  "patch_bytes": 787
+ },
+ {
+  "sha": "946574434aa9cfe175c3e8234734a3822410ff53",
+  "release": "v6.19",
+  "author": {
+   "name": "Krzysztof Kozlowski",
+   "email": "krzysztof.kozlowski@oss.qualcomm.com"
+  },
+  "author_date": "2025-12-08T03:08:08+01:00",
+  "commit_date": "2025-12-08T22:11:00-05:00",
+  "subject": "scsi: ufs: qcom: Fix confusing cleanup.h syntax",
+  "body": "Initializing automatic __free variables to NULL without need (e.g.\nbranches with different allocations), followed by actual allocation is\nin contrary to explicit coding rules guiding cleanup.h:\n\n\"Given that the \"__free(...) = NULL\" pattern for variables defined at\nthe top of the function poses this potential interdependency problem the\nrecommendation is to always define and assign variables in one statement\nand not group variable definitions at the top of the function when\n__free() is used.\"\n\nCode does not have a bug, but is less readable and uses discouraged\ncoding practice, so fix that by moving declaration to the place of\nassignment.\n\nSigned-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>\nReviewed-by: Manivannan Sadhasivam <mani@kernel.org>\nLink: https://patch.msgid.link/20251208020807.5043-2-krzysztof.kozlowski@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Manivannan Sadhasivam <mani@kernel.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251208020807.5043-2-krzysztof.kozlowski@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251208020807.5043-2-krzysztof.kozlowski@oss.qualcomm.com",
+  "series_id": "20251208020807.5043-krzysztof.kozlowski@oss.qualcomm.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 4,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/946574434aa9.diff",
+  "patch_bytes": 1017
+ },
+ {
+  "sha": "c9f36f04a8a2725172cdf2b5e32363e4addcb14c",
+  "release": "v6.19",
+  "author": {
+   "name": "Seunghwan Baek",
+   "email": "sh8267.baek@samsung.com"
+  },
+  "author_date": "2025-12-10T15:38:54+09:00",
+  "commit_date": "2025-12-16T22:24:36-05:00",
+  "subject": "scsi: ufs: core: Add ufshcd_update_evt_hist() for UFS suspend error",
+  "body": "If UFS resume fails, the event history is updated in ufshcd_resume(), but\nthere is no code anywhere to record UFS suspend. Therefore, add code to\nrecord UFS suspend error event history.\n\nFixes: dd11376b9f1b (\"scsi: ufs: Split the drivers/scsi/ufs directory\")\nCc: stable@vger.kernel.org\nSigned-off-by: Seunghwan Baek <sh8267.baek@samsung.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20251210063854.1483899-2-sh8267.baek@samsung.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "dd11376b9f1b (\"scsi: ufs: Split the drivers/scsi/ufs directory\")"
+   ],
+   "cc": [
+    "stable@vger.kernel.org"
+   ],
+   "signed_off_by": [
+    "Seunghwan Baek <sh8267.baek@samsung.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251210063854.1483899-2-sh8267.baek@samsung.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "dd11376b9f1b",
+    "subject": "scsi: ufs: Split the drivers/scsi/ufs directory",
+    "sha": "dd11376b9f1b73aca3f8c6eb541486bbb6996f05",
+    "introduced_in": "v5.19"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "20251210063854.1483899-2-sh8267.baek@samsung.com",
+  "series_id": "20251210063854.1483899-sh8267.baek@samsung.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/c9f36f04a8a2.diff",
+  "patch_bytes": 733
+ },
+ {
+  "sha": "be4b7e584a0cc6715fbb14dfb2a9a39bf07cfbab",
+  "release": "v6.19",
+  "author": {
+   "name": "Zhaoming Luo",
+   "email": "zhml@posteo.com"
+  },
+  "author_date": "2025-12-17T22:03:38+08:00",
+  "commit_date": "2026-01-04T15:09:34-05:00",
+  "subject": "scsi: ufs: dt-bindings: Fix several grammar errors",
+  "body": "Fix several grammar errors.\n\nSigned-off-by: Zhaoming Luo <zhml@posteo.com>\nReviewed-by: Rob Herring (Arm) <robh@kernel.org>\nLink: https://patch.msgid.link/20251217-fix-minor-grammar-err-v3-1-9be220cdd56a@posteo.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Zhaoming Luo <zhml@posteo.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Rob Herring (Arm) <robh@kernel.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251217-fix-minor-grammar-err-v3-1-9be220cdd56a@posteo.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251217-fix-minor-grammar-err-v3-1-9be220cdd56a@posteo.com",
+  "series_id": "20251217-fix-minor-grammar-err-v3-9be220cdd56a@posteo.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/ufs-common.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 2,
+    "area": "bindings",
+    "vendor": null
+   }
+  ],
+  "area": "bindings",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/be4b7e584a0c.diff",
+  "patch_bytes": 683
+ },
+ {
+  "sha": "ee229e7c256ab5d7b277abf8d48a732c10571750",
+  "release": "v6.19",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2025-12-18T15:07:37-08:00",
+  "commit_date": "2026-01-04T15:17:53-05:00",
+  "subject": "scsi: ufs: core: Configure MCQ after link startup",
+  "body": "Commit f46b9a595fa9 (\"scsi: ufs: core: Allocate the SCSI host earlier\")\ndid not only cause scsi_add_host() to be called earlier. It also swapped\nthe order of link startup and enabling and configuring MCQ mode. Before\nthat commit, the call chains for link startup and enabling MCQ were as\nfollows:\n\nufshcd_init()\n  ufshcd_link_startup()\n  ufshcd_add_scsi_host()\n    ufshcd_mcq_enable()\n\nApparently this change causes link startup to fail. Fix this by configuring\nMCQ after link startup has completed.\n\nReported-by: Nitin Rawat <nitin.rawat@oss.qualcomm.com>\nFixes: f46b9a595fa9 (\"scsi: ufs: core: Allocate the SCSI host earlier\")\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20251218230741.2661049-1-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reported_by": [
+    "Nitin Rawat <nitin.rawat@oss.qualcomm.com>"
+   ],
+   "fixes": [
+    "f46b9a595fa9 (\"scsi: ufs: core: Allocate the SCSI host earlier\")"
+   ],
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251218230741.2661049-1-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "f46b9a595fa9",
+    "subject": "scsi: ufs: core: Allocate the SCSI host earlier",
+    "sha": "f46b9a595fa95c82e3279b687869cac249838e96",
+    "introduced_in": "v6.19"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20251218230741.2661049-1-bvanassche@acm.org",
+  "series_id": "20251218230741.2661049-bvanassche@acm.org",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/ee229e7c256a.diff",
+  "patch_bytes": 764
+ },
+ {
+  "sha": "309a29b5965a0b2f36b3e245213eb43300a89ac2",
+  "release": "v6.19",
+  "author": {
+   "name": "Colin Ian King",
+   "email": "colin.i.king@gmail.com"
+  },
+  "author_date": "2025-12-19T21:44:28Z",
+  "commit_date": "2026-01-04T15:48:50-05:00",
+  "subject": "scsi: ufs: host: mediatek: Make read-only array scale_us static const",
+  "body": "Don't populate the read-only array scale_us on the stack at run time,\ninstead make it static const.\n\nSigned-off-by: Colin Ian King <colin.i.king@gmail.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20251219214428.492744-1-colin.i.king@gmail.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Colin Ian King <colin.i.king@gmail.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251219214428.492744-1-colin.i.king@gmail.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20251219214428.492744-1-colin.i.king@gmail.com",
+  "series_id": "20251219214428.492744-colin.i.king@gmail.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/309a29b5965a.diff",
+  "patch_bytes": 567
+ },
+ {
+  "sha": "0444568edbf87c1da76b61c798ce0f1c1e478467",
+  "release": "v6.19",
+  "author": {
+   "name": "Ajay Neeli",
+   "email": "ajay.neeli@amd.com"
+  },
+  "author_date": "2025-12-24T11:09:50+05:30",
+  "commit_date": "2026-01-23T22:43:44-05:00",
+  "subject": "scsi: ufs: amd-versal2: Fix PHY initialization in HCE enable notify",
+  "body": "Move the PHY initialization from PRE_CHANGE to POST_CHANGE in the\nufs_versal2_hce_enable_notify() callback. This ensures that the PHY is\ninitialized after the host controller enable sequence is complete, rather\nthan before it starts.\n\nThe PHY initialization requires the UFS host controller to be in a stable\nenabled state to properly configure the MPHY registers. Moving this to\nPOST_CHANGE aligns with the expected initialization order and prevents\npotential timing issues during controller startup.\n\nFixes: 769b8b2ffded (\"scsi: ufs: amd-versal2: Add UFS support for AMD Versal Gen 2 SoC\")\nSigned-off-by: Ajay Neeli <ajay.neeli@amd.com>\nLink: https://patch.msgid.link/20251224053950.54213-1-ajay.neeli@amd.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "769b8b2ffded (\"scsi: ufs: amd-versal2: Add UFS support for AMD Versal Gen 2 SoC\")"
+   ],
+   "signed_off_by": [
+    "Ajay Neeli <ajay.neeli@amd.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20251224053950.54213-1-ajay.neeli@amd.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "769b8b2ffded",
+    "subject": "scsi: ufs: amd-versal2: Add UFS support for AMD Versal Gen 2 SoC",
+    "sha": "769b8b2ffded4cd880669edd83e2952efeeb27f7",
+    "introduced_in": "v6.19"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20251224053950.54213-1-ajay.neeli@amd.com",
+  "series_id": "20251224053950.54213-ajay.neeli@amd.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-amd-versal2.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "amd"
+   }
+  ],
+  "area": "host",
+  "vendor": "amd",
+  "vendors": [
+   "amd"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/0444568edbf8.diff",
+  "patch_bytes": 471
+ }
+]

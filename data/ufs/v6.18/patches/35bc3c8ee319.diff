@@ -1,0 +1,13 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 498c0c8c0a6b..9ca27de4767a 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -4999,7 +4999,7 @@ EXPORT_SYMBOL_GPL(ufshcd_hba_enable);
+ 
+ static int ufshcd_disable_tx_lcc(struct ufs_hba *hba, bool peer)
+ {
+-	int tx_lanes = 0, i, err = 0;
++	int tx_lanes, i, err = 0;
+ 
+ 	if (!peer)
+ 		ufshcd_dme_get(hba, UIC_ARG_MIB(PA_CONNECTEDTXDATALANES),

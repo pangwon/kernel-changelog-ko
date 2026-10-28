@@ -1,0 +1,66 @@
+diff --git a/drivers/ufs/core/ufshcd-priv.h b/drivers/ufs/core/ufshcd-priv.h
+index 4c008230e8d6..45904e5746b2 100644
+--- a/drivers/ufs/core/ufshcd-priv.h
++++ b/drivers/ufs/core/ufshcd-priv.h
+@@ -78,6 +78,8 @@ int ufshcd_mcq_sq_cleanup(struct ufs_hba *hba, int task_tag);
+ int ufshcd_mcq_abort(struct scsi_cmnd *cmd);
+ int ufshcd_try_to_abort_task(struct ufs_hba *hba, int tag);
+ void ufshcd_release_scsi_cmd(struct ufs_hba *hba, struct scsi_cmnd *cmd);
++int ufshcd_pause_command_processing(struct ufs_hba *hba, u64 timeout_us);
++void ufshcd_resume_command_processing(struct ufs_hba *hba);
+ 
+ /**
+  * enum ufs_descr_fmt - UFS string descriptor format
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index d78723dea951..39e6d12e347a 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -1363,6 +1363,48 @@ out:
+ 	return ret;
+ }
+ 
++/**
++ * ufshcd_pause_command_processing - Pause command processing
++ * @hba: per-adapter instance
++ * @timeout_us: timeout in microseconds to wait for pending commands to finish
++ *
++ * This function stops new command submissions and waits for existing commands
++ * to complete.
++ *
++ * Return: 0 on success, %-EBUSY if commands did not finish within @timeout_us.
++ * On failure, all acquired locks are released and the tagset is unquiesced.
++ */
++int ufshcd_pause_command_processing(struct ufs_hba *hba, u64 timeout_us)
++{
++	int ret = 0;
++
++	mutex_lock(&hba->host->scan_mutex);
++	blk_mq_quiesce_tagset(&hba->host->tag_set);
++	down_write(&hba->clk_scaling_lock);
++
++	if (ufshcd_wait_for_pending_cmds(hba, timeout_us)) {
++		ret = -EBUSY;
++		up_write(&hba->clk_scaling_lock);
++		blk_mq_unquiesce_tagset(&hba->host->tag_set);
++		mutex_unlock(&hba->host->scan_mutex);
++	}
++
++	return ret;
++}
++
++/**
++ * ufshcd_resume_command_processing - Resume command processing
++ * @hba: per-adapter instance
++ *
++ * This function resumes command submissions.
++ */
++void ufshcd_resume_command_processing(struct ufs_hba *hba)
++{
++	up_write(&hba->clk_scaling_lock);
++	blk_mq_unquiesce_tagset(&hba->host->tag_set);
++	mutex_unlock(&hba->host->scan_mutex);
++}
++
+ /**
+  * ufshcd_scale_gear - scale up/down UFS gear
+  * @hba: per adapter instance

@@ -1,0 +1,59 @@
+diff --git a/include/uapi/scsi/scsi_bsg_ufs.h b/include/uapi/scsi/scsi_bsg_ufs.h
+index 8c29e498ef98..06f88d1b1876 100644
+--- a/include/uapi/scsi/scsi_bsg_ufs.h
++++ b/include/uapi/scsi/scsi_bsg_ufs.h
+@@ -94,16 +94,15 @@ struct utp_upiu_header {
+ };
+ 
+ /**
+- * struct utp_upiu_query - upiu request buffer structure for
+- * query request.
+- * @opcode: command to perform B-0
+- * @idn: a value that indicates the particular type of data B-1
+- * @index: Index to further identify data B-2
+- * @selector: Index to further identify data B-3
++ * struct utp_upiu_query - QUERY REQUEST UPIU structure.
++ * @opcode: query function to perform B-0
++ * @idn: descriptor or attribute identification number B-1
++ * @index: Index that further identifies which data to access B-2
++ * @selector: Index that further identifies which data to access B-3
+  * @reserved_osf: spec reserved field B-4,5
+- * @length: number of descriptor bytes to read/write B-6,7
+- * @value: Attribute value to be written DW-5
+- * @reserved: spec reserved DW-6,7
++ * @length: number of descriptor bytes to read or write B-6,7
++ * @value: if @opcode == UPIU_QUERY_OPCODE_WRITE_ATTR, the value to be written B-6,7
++ * @reserved: reserved for future use DW-6,7
+  */
+ struct utp_upiu_query {
+ 	__u8 opcode;
+diff --git a/include/ufs/ufs.h b/include/ufs/ufs.h
+index ab8f6c07b5a2..602aa34c9822 100644
+--- a/include/ufs/ufs.h
++++ b/include/ufs/ufs.h
+@@ -21,6 +21,7 @@
+  * in this header file of the size of struct utp_upiu_header.
+  */
+ static_assert(sizeof(struct utp_upiu_header) == 12);
++static_assert(sizeof(struct utp_upiu_query) == 20);
+ 
+ #define GENERAL_UPIU_REQUEST_SIZE (sizeof(struct utp_upiu_req))
+ #define QUERY_DESC_MAX_SIZE       255
+@@ -561,7 +562,7 @@ enum ufs_dev_pwr_mode {
+ #define UFS_WB_BUF_REMAIN_PERCENT(val) ((val) / 10)
+ 
+ /**
+- * struct utp_cmd_rsp - Response UPIU structure
++ * struct utp_cmd_rsp - RESPONSE UPIU structure
+  * @residual_transfer_count: Residual transfer count DW-3
+  * @reserved: Reserved double words DW-4 to DW-7
+  * @sense_data_len: Sense data length DW-8 U16
+@@ -574,6 +575,8 @@ struct utp_cmd_rsp {
+ 	u8 sense_data[UFS_SENSE_SIZE];
+ };
+ 
++static_assert(sizeof(struct utp_cmd_rsp) == 40);
++
+ /**
+  * struct utp_upiu_rsp - general upiu response structure
+  * @header: UPIU header structure DW-0 to DW-2

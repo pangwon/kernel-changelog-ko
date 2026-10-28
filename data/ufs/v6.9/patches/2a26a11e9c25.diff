@@ -1,0 +1,15 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 292b06f361a2..a0f8e930167d 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -3217,7 +3217,9 @@ retry:
+ 
+ 		/* MCQ mode */
+ 		if (is_mcq_enabled(hba)) {
+-			err = ufshcd_clear_cmd(hba, lrbp->task_tag);
++			/* successfully cleared the command, retry if needed */
++			if (ufshcd_clear_cmd(hba, lrbp->task_tag) == 0)
++				err = -EAGAIN;
+ 			hba->dev_cmd.complete = NULL;
+ 			return err;
+ 		}

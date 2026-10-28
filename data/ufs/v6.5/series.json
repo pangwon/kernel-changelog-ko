@@ -1,0 +1,478 @@
+[
+ {
+  "id": "20230427094420epcms2p1043333a3e0c0cf58e66164e0b83b3b02@epcms2p1",
+  "title": "scsi: ufs: core: Change the module parameter macro of use_mcq_mode",
+  "commits": [
+   "9a4327fd8864ff78d97e9a3c3c3c992353d06fee"
+  ],
+  "authors": [
+   "Keoseong Park"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "68fce64f-4970-45f1-807e-6c0eecdfcdc2@kili.mountain",
+  "title": "scsi: ufs: ufs-mediatek: Delete some dead code",
+  "commits": [
+   "19c9322e36a0c8726b901d6c8adb7c9d785da393"
+  ],
+  "authors": [
+   "Dan Carpenter"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230511175204.281038-krzysztof.kozlowski@linaro.org",
+  "title": "scsi: ufs: hwmon: Constify pointers to hwmon_channel_info",
+  "commits": [
+   "7e79881d92e8d52c45992ed4d669985c167fa0ad"
+  ],
+  "authors": [
+   "Krzysztof Kozlowski"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230503104630epcms2p8b82734102ffb920531e9264604086372@epcms2p8",
+  "title": "scsi: ufs: core: Return earlier if ufshcd_hba_init_crypto_capabilities() fails",
+  "commits": [
+   "a1f871f9f30124669d7afbdb8754f0826f49b564"
+  ],
+  "authors": [
+   "Keoseong Park"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230529202640.11883-bvanassche@acm.org",
+  "title": "scsi: ufs: Conditionally enable the BLK_MQ_F_BLOCKING flag",
+  "commits": [
+   "6c03c8e9b729a1ca2131a187233f8836a66a277b",
+   "4b68b7f9c46d90c541d39c8b397a86ac0ca4c765",
+   "078f4f4b34d6c2dadabb363d3fc6c84b32927dea"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230531070009.4593-avri.altman@wdc.com",
+  "title": "scsi: ufs: core: Do not open code SZ_x",
+  "commits": [
+   "23caa33d36e7e6f75597b333634d9e54fb40001b"
+  ],
+  "authors": [
+   "Avri Altman"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230411130446.401440-brgl@bgdev.pl",
+  "title": "scsi: dt-bindings: ufs: qcom: Add compatible for sa8775p",
+  "commits": [
+   "8f0c17bf6bf33b1dc4b9ebf33650f7e60b7d5c55"
+  ],
+  "authors": [
+   "Bartosz Golaszewski"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230530164131.987213-azeemshaikh38@gmail.com",
+  "title": "scsi: ufs: Replace all non-returning strlcpy() with strscpy()",
+  "commits": [
+   "2516cb882295694623811f2a1b2d33aa5fc9139c"
+  ],
+  "authors": [
+   "Azeem Shaikh"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "4e6f7f5a15000cdae77c3014b477264f57bf572c.1685396241.git.quic_nguyenb@quicinc.com",
+  "title": "scsi: ufs: core: Combine 32-bit command_desc_base_addr_lo/hi",
+  "commits": [
+   "a8f9a36e46344ea5bdc301c2fde0389a463bf0a3"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "8411fb5363acc90519bced30ea2c2ac582ff2340.1685396241.git.quic_nguyenb@quicinc.com",
+  "title": "scsi: ufs: core: Update the ufshcd_clear_cmds() functionality",
+  "commits": [
+   "7aa12d2fe89d7b95ad01ca38a291c7ec3efe7599"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "d452c5ad62dc863cc067ec82daa0885ec98bd508.1685396241.git.quic_nguyenb@quicinc.com",
+  "title": "scsi: ufs: mcq: Add supporting functions for MCQ abort",
+  "commits": [
+   "8d7290348992f27242dd6a696fa2eede709f0b14"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "dc6d30b3ee55e2072c162b2c08504ba349b87139.1685396241.git.quic_nguyenb@quicinc.com",
+  "title": "scsi: ufs: mcq: Add support for cleaning up MCQ resources",
+  "commits": [
+   "adf452611677d048203398f489e2175a9068f9f7"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "c80c0adadf09ac1d909ed53b36d54737f62c2332.1685396241.git.quic_nguyenb@quicinc.com",
+  "title": "scsi: ufs: mcq: Added ufshcd_mcq_abort()",
+  "commits": [
+   "f1304d4420777f82a1d844c606db3d9eca841765"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "6ae727ad2a4040469b8f0632b55e0577d80da11b.1685396241.git.quic_nguyenb@quicinc.com",
+  "title": "scsi: ufs: mcq: Use ufshcd_mcq_poll_cqe_lock() in MCQ mode",
+  "commits": [
+   "57d6ef4601c0b7975aab5144c7c3760846362e1c"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "f0d923ee1f009f171a55c258d044e814ec0917ab.1685396241.git.quic_nguyenb@quicinc.com",
+  "title": "scsi: ufs: core: Add error handling for MCQ mode",
+  "commits": [
+   "ab248643d3d68b30f95ee9c238a5a20a06891204"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230524203659.1394307-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Increase the START STOP UNIT timeout from one to ten seconds",
+  "commits": [
+   "fe8637f7708c16765ecf4035813efbfdd2c9be10",
+   "549e91a9bbaa0ee480f59357868421a61d369770",
+   "b251f6c5fe3b57898896df06a5cf90865596ee5e",
+   "0818a6903c8081a17da4b1f50ff156537f99b02f"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230531224050.25554-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Remove a ufshcd_add_command_trace() call",
+  "commits": [
+   "72554035b9797e00e68cd866e6cefa7f0b2c6f76"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230601124613.1446-zhanghui31@xiaomi.com",
+  "title": "scsi: ufs: core: Fix ufshcd_inc_sq_tail() function bug",
+  "commits": [
+   "e01d05bbf6348ccd9f5a057280310d78ea9e7b52"
+  ],
+  "authors": [
+   "zhanghui"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230601225048.12228-stanley.chu@mediatek.com",
+  "title": "scsi: ufs: core: Combine ufshcd_mq_poll_cqe functions",
+  "commits": [
+   "9c24f90f6a5f3ec0d782813ac5f211d411e4f542"
+  ],
+  "authors": [
+   "Stanley Chu"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230609140651.64488-krzysztof.kozlowski@linaro.org",
+  "title": "scsi: ufs: dt-bindings: samsung,exynos: Drop unneeded quotes",
+  "commits": [
+   "e246514ae698813ab1eadb1600aeea0a0c959769"
+  ],
+  "authors": [
+   "Krzysztof Kozlowski"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230610021553.1213-powen.kao@mediatek.com",
+  "title": "scsi: ufs: core: mcq: Fix the incorrect OCS value for the device command",
+  "commits": [
+   "0fef6bb730c490fcdc4347dbd21646d3ffe62cf5",
+   "ccb23dc3435a0d9dbc07c5156a530a4aae6c851a"
+  ],
+  "authors": [
+   "Po-Wen Kao",
+   "Stanley Chu"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230612085817.12275-powen.kao@mediatek.com",
+  "title": "scsi: ufs: core: Add host quirk UFSHCD_QUIRK_MCQ_BROKEN_INTR",
+  "commits": [
+   "c4ad4f2e6646dcd29a1ff7ff682bf650a67b0335",
+   "aa9d5d0015a8b73aa557ab45933efe9cb68a3784",
+   "95cd364ccc975e05881012832dc121c19049d405",
+   "3c9b49be666679d64191b05c6f3e3fcc9259040d"
+  ],
+  "authors": [
+   "Po-Wen Kao"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230612192847.1599416-abel.vesa@linaro.org",
+  "title": "scsi: ufs: dt-bindings: qcom: Add ICE phandle",
+  "commits": [
+   "29a6d1215b7cd5fdff9c3c31ea26076a694ee0a3",
+   "56541c7c4468a9de26d82ba6e8c10ace286f8fdd"
+  ],
+  "authors": [
+   "Abel Vesa"
+  ],
+  "areas": [
+   "bindings",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230613022240.16595-luhongfei@vivo.com",
+  "title": "scsi: ufs: wb: Add explicit flush_threshold sysfs attribute",
+  "commits": [
+   "e3d55626cff32cf7defff7f2053672adc4a712da"
+  ],
+  "authors": [
+   "Lu Hongfei"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230613170327.61186-adrian.hunter@intel.com",
+  "title": "scsi: ufs: ufs-pci: Add support for Intel Arrow Lake",
+  "commits": [
+   "51031cc3f903e202cb79a27766e10227b9cace97"
+  ],
+  "authors": [
+   "Adrian Hunter"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230623113009.2512206-abel.vesa@linaro.org",
+  "title": "scsi: dt-bindings: ufs: qcom: Fix ICE phandle",
+  "commits": [
+   "9b7c13b83c1dedb79a746eae9dfabc10a2673049"
+  ],
+  "authors": [
+   "Abel Vesa"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230627012931epcms2p76f458e0b2ce8a591b56bbcc6a2f1a3bb@epcms2p7",
+  "title": "scsi: ufs: core: Remove unused function declaration",
+  "commits": [
+   "24033d71cc36ae8af02b56ec22c7490779a9e39f"
+  ],
+  "authors": [
+   "Keoseong Park"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230630003913.3713155-quic_cang@quicinc.com",
+  "title": "scsi: ufs: core: Update contact email for monitor sysfs nodes",
+  "commits": [
+   "ef470b862dc7e5e169167301b9862bed54d7f969"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "docs"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230701052348.28046-rdunlap@infradead.org",
+  "title": "scsi: ufs: ufs-mediatek: Add dependency for RESET_CONTROLLER",
+  "commits": [
+   "89f7ef7f2b23b2a7b8ce346c23161916eae5b15c"
+  ],
+  "authors": [
+   "Randy Dunlap"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230626103320.8737-arthur.simchaev@wdc.com",
+  "title": "scsi: ufs: core: Add support for qTimestamp attribute",
+  "commits": [
+   "24befa92ed47ed2af25868412a1275602ca8f4ea"
+  ],
+  "authors": [
+   "Arthur Simchaev"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230803081812.1446282-yoshihiro.shimoda.uh@renesas.com",
+  "title": "scsi: ufs: renesas: Fix private allocation",
+  "commits": [
+   "b6d128f89a85771433a004e8656090ccbe1fb969"
+  ],
+  "authors": [
+   "Yoshihiro Shimoda"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "ff49c15be205135ed3ec186f3086694c02867dbd.1692149603.git.quic_nguyenb@quicinc.com",
+  "title": "scsi: ufs: mcq: Fix the search/wrap around logic",
+  "commits": [
+   "d0c89af3130eb4ff962266bb7597690a696f1cbc"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230821-topic-sm8x50-upstream-ufs-major-5-plus-v2-f42a4b712e58@linaro.org",
+  "title": "scsi: ufs: ufs-qcom: Clear qunipro_g4_sel for HW major version > 5",
+  "commits": [
+   "c422fbd5cb58c9a078172ae1e9750971b738a197"
+  ],
+  "authors": [
+   "Neil Armstrong"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ }
+]

@@ -1,0 +1,356 @@
+[
+ {
+  "id": "20251211133227.4159394-vamshigajjela@google.com",
+  "title": "scsi: ufs: core: mcq: Use ufshcd_rmwl() instead of open-coding it",
+  "commits": [
+   "e642331c942003f58dba6e33c8ee93402211b7b6"
+  ],
+  "authors": [
+   "vamshi gajjela"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "2781685.BddDVKsqQX@rafael.j.wysocki",
+  "title": "scsi: ufs: core: Discard pm_runtime_put() return values",
+  "commits": [
+   "bf91b35a46ceef08a1e64c54b0e611fcae531e7a"
+  ],
+  "authors": [
+   "Rafael J. Wysocki"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "ac17fdea58e384cb514c639306d48ce0005820b0.1766133330.git.u.kleine-koenig@baylibre.com",
+  "title": "scsi: core: Pass a struct scsi_driver to scsi_{,un}register_driver()",
+  "commits": [
+   "7d42bcea57ae139e2ed754425cc5fc44e260c890"
+  ],
+  "authors": [
+   "Uwe Kleine-König"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "69f17c7d4f8f587e2a56e3ea268d441d98a6a895.1766133330.git.u.kleine-koenig@baylibre.com",
+  "title": "scsi: ufs: core: Convert to SCSI bus methods",
+  "commits": [
+   "44859905375ff4d739cca2113408336a90ed227d"
+  ],
+  "authors": [
+   "Uwe Kleine-König"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260106190017.2527978-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Improve the documentation of UFS data frames",
+  "commits": [
+   "309b23a1553acdc6b8534682ee1782c9598e0e2e"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260109205104.496478-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Only call scsi_host_busy() after the SCSI host has been added",
+  "commits": [
+   "202d5dadd3a0fada6aa756c9fdeb2062aad89f79"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260112-milos-ufs-v2-d3ce4f61f030@fairphone.com",
+  "title": "phy: qcom-qmp-ufs: Add Milos support",
+  "commits": [
+   "3554ded4f02aa8e95af66911aa666b2cd192022d"
+  ],
+  "authors": [
+   "Luca Weiss"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260109-ufs-exynos-phy_notify_pmstate-v3-7eb692e271af@linaro.org",
+  "title": "scsi: ufs: exynos: Call phy_notify_state() from hibern8 callbacks",
+  "commits": [
+   "07959ef517b853e834eadd0647d3860252af8f99"
+  ],
+  "authors": [
+   "Peter Griffin"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251226042825epcms2p6f02ba12fa97ff4a69c00f6fb9ff55603@epcms2p6",
+  "title": "scsi: ufs: core: Handle sentinel value for dHIDAvailableSize",
+  "commits": [
+   "695df7ea6099aadc11fac8d510e4b7c5839508e3"
+  ],
+  "authors": [
+   "Keoseong Park"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "24c776355f4097316a763005434ffff716aa21a8",
+  "title": "kernel.h: drop hex.h and update all hex.h users",
+  "commits": [
+   "24c776355f4097316a763005434ffff716aa21a8"
+  ],
+  "authors": [
+   "Randy Dunlap"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260115210357.2501991-bvanassche@acm.org",
+  "title": "scsi: Change the return type of the .queuecommand() callback",
+  "commits": [
+   "0db3f51839fe703173966f34a4327e3a0c7cc089"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260113080046.284089-ram.dwivedi@oss.qualcomm.com",
+  "title": "scsi: ufs: dt-bindings: Document bindings for SA8255P UFS Host Controller",
+  "commits": [
+   "e2725ed2a7fb5f5f468020a52bd9ffc54caa7c8c",
+   "26c06d0baeb7999e44cf6717fc12d58a359eba99",
+   "ad44cf1b2845303285fec8bb25a02d0d0f103a82"
+  ],
+  "authors": [
+   "Ram Kumar Dwivedi"
+  ],
+  "areas": [
+   "bindings",
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260116180800.3085233-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Use a host-wide tagset in SDB mode",
+  "commits": [
+   "4d0538dd5d7e21b4615fbc81424b0fae0b12a9fb"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260129165156.956601-thomasyen@google.com",
+  "title": "scsi: ufs: core: Flush exception handling work when RPM level is zero",
+  "commits": [
+   "f8ef441811ec413717f188f63d99182f30f0f08e"
+  ],
+  "authors": [
+   "Thomas Yen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260202024526.122515-keita.morisaki@tier4.jp",
+  "title": "scsi: ufs: mediatek: Fix page faults in ufs_mtk_clk_scale() trace event",
+  "commits": [
+   "9672ed3de7d772ceddd713c769c05e832fc69bae"
+  ],
+  "authors": [
+   "Keita Morisaki"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260202095052.1232703-arnd@kernel.org",
+  "title": "scsi: ufs: host: mediatek: Require CONFIG_PM",
+  "commits": [
+   "bbb8d98fb4536594cb104fd630ea0f7dce3771d6"
+  ],
+  "authors": [
+   "Arnd Bergmann"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260209-ufs-rpmb-v3-b1804e71bd38@flipper.net",
+  "title": "scsi: ufs: core: Fix RPMB region size detection for UFS 2.2",
+  "commits": [
+   "2e6b5cd6a4b37a95b78cf8c39a979b58c915c8ed"
+  ],
+  "authors": [
+   "Alexey Charkov"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1891546521.01770806581968.JavaMail.epsvc@epcpadp2new",
+  "title": "scsi: ufs: core: Reset urgent_bkops_lvl to allow runtime PM power mode",
+  "commits": [
+   "5b313760059c9df7d60aba7832279bcb81b4aec0"
+  ],
+  "authors": [
+   "Won Jung"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "69050f8d6d075dc01af7a5f2f550a8067510366f",
+  "title": "treewide: Replace kmalloc with kmalloc_obj for non-scalar types",
+  "commits": [
+   "69050f8d6d075dc01af7a5f2f550a8067510366f"
+  ],
+  "authors": [
+   "Kees Cook"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "bf4afc53b77aeaa48b5409da5c8da6bb4eff7f43",
+  "title": "Convert 'alloc_obj' family to use the new default GFP_KERNEL argument",
+  "commits": [
+   "bf4afc53b77aeaa48b5409da5c8da6bb4eff7f43"
+  ],
+  "authors": [
+   "Linus Torvalds"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260223065657.2432447-peter.wang@mediatek.com",
+  "title": "scsi: ufs: core: Fix possible NULL pointer dereference in ufshcd_add_command_trace()",
+  "commits": [
+   "30df81f2228d65bddf492db3929d9fcaffd38fc5"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260223103906.2533654-peter.wang@mediatek.com",
+  "title": "scsi: ufs: core: Move link recovery for hibern8 exit failure to wl_resume",
+  "commits": [
+   "62c015373e1cdb1cdca824bd2dbce2dac0819467"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260224063228.50112-wangshuaiwei1@xiaomi.com",
+  "title": "scsi: ufs: core: Fix shift out of bounds when MAXQ=32",
+  "commits": [
+   "2f38fd99c0004676d835ae96ac4f3b54edc02c82"
+  ],
+  "authors": [
+   "wangshuaiwei"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260219-phy-qcom-qmp-ufs-fix-sm8650-pcs-g4-table-v1-f136505b57f6@oss.qualcomm.com",
+  "title": "phy: qcom: qmp-ufs: Fix SM8650 PCS table for Gear 4",
+  "commits": [
+   "81af9e40e2e4e1aa95f09fb34811760be6742c58"
+  ],
+  "authors": [
+   "Abel Vesa"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260307035128.3419687-wangshuaiwei1@xiaomi.com",
+  "title": "scsi: ufs: core: Fix SError in ufshcd_rtc_work() during UFS suspend",
+  "commits": [
+   "b0bd84c39289ef6a6c3827dd52c875659291970a"
+  ],
+  "authors": [
+   "Wang Shuaiwei"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ }
+]

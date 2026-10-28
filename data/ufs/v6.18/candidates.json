@@ -1,0 +1,130 @@
+[
+ {
+  "sha": "a0b7780602b1b196f47e527fec82166a7e67c4d0",
+  "subject": "scsi: core: Fix a regression triggered by scsi_host_busy()",
+  "files": [
+   "drivers/scsi/hosts.c"
+  ]
+ },
+ {
+  "sha": "7e8242405b94ceac6db820de7d4fd9318cbc1219",
+  "subject": "rpmb: move rpmb_frame struct and constants to common header",
+  "files": [
+   "drivers/mmc/core/block.c",
+   "include/linux/rpmb.h"
+  ]
+ },
+ {
+  "sha": "7c3321f3d279eda7f7d622312ffdbb889f3bec97",
+  "subject": "scsi: ufs: phy: dt-bindings: Add QMP UFS PHY compatible for Kaanapali",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "8ea304cff08f0605b425a3fb494ad47175214ea3",
+  "subject": "dt-bindings: clock: ast2700: modify soc0/1 clock define",
+  "files": [
+   "include/dt-bindings/clock/aspeed,ast2700-scu.h"
+  ]
+ },
+ {
+  "sha": "a74d5e835a9ff3ac56c01e6235e3122b0208ad30",
+  "subject": "clk: mediatek: Add MT8196 ufssys clock support",
+  "files": [
+   "drivers/clk/mediatek/Kconfig",
+   "drivers/clk/mediatek/Makefile",
+   "drivers/clk/mediatek/clk-mt8196-ufs_ao.c"
+  ]
+ },
+ {
+  "sha": "dd240e95f1bee671f58148dea25e3be7cb39b50d",
+  "subject": "dt-bindings: clock: mediatek: Describe MT8196 clock controllers",
+  "files": [
+   "Documentation/devicetree/bindings/clock/mediatek,mt8196-clock.yaml",
+   "Documentation/devicetree/bindings/clock/mediatek,mt8196-sys-clock.yaml",
+   "include/dt-bindings/clock/mediatek,mt8196-clock.h",
+   "include/dt-bindings/reset/mediatek,mt8196-resets.h"
+  ]
+ },
+ {
+  "sha": "a319cf4a4b09a1dd3b2652fc96f4f08c0647ae64",
+  "subject": "arm64: dts: qcom: qcm6490: Introduce the Particle Tachyon",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/qcm6490-particle-tachyon.dts"
+  ]
+ },
+ {
+  "sha": "af7bf2a2bf8fe01b6e2f68af19517a4eec48bdbb",
+  "subject": "arm64: dts: qcom: add initial support for Samsung Galaxy S20",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/sm8250-samsung-x1q.dts"
+  ]
+ },
+ {
+  "sha": "194c7636faf8bab8deea3800e168b23319a9c198",
+  "subject": "arm64: dts: qcom: sm8250-samsung-r8q: Move common parts to dtsi",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8250-samsung-common.dtsi",
+   "arch/arm64/boot/dts/qcom/sm8250-samsung-r8q.dts"
+  ]
+ },
+ {
+  "sha": "d22e9b8c96452ae0fead5e26651be66fe298100e",
+  "subject": "arm64: dts: mediatek: mt8395-nio-12l: Enable UFS",
+  "files": [
+   "arch/arm64/boot/dts/mediatek/mt8395-radxa-nio-12l.dts"
+  ]
+ },
+ {
+  "sha": "117d6bc9326b1ff38591289f9677e273a9a467ae",
+  "subject": "arm64: dts: qcom: qcs8300: Add Monaco EVK board",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/monaco-evk.dts"
+  ]
+ },
+ {
+  "sha": "2c1d6ce4f3da622773a7a6be570e4dfbf2cefbb7",
+  "subject": "clk: qcom: Add TCSR clock driver for Glymur SoC",
+  "files": [
+   "drivers/clk/qcom/Kconfig",
+   "drivers/clk/qcom/Makefile",
+   "drivers/clk/qcom/tcsrcc-glymur.c"
+  ]
+ },
+ {
+  "sha": "00798cd24f014fe55cbcdfeac4bab19ad6cd2bcb",
+  "subject": "f2fs: Add bggc_io_aware to adjust the priority of BG_GC when issuing IO",
+  "files": [
+   "Documentation/ABI/testing/sysfs-fs-f2fs",
+   "fs/f2fs/f2fs.h",
+   "fs/f2fs/super.c",
+   "fs/f2fs/sysfs.c"
+  ]
+ },
+ {
+  "sha": "fba47ba8c8a8ffa9d8ad1836396837a998bb5153",
+  "subject": "arm64: dts: qcom: qcs615: Set LDO12A regulator to HPM to avoid boot hang",
+  "files": [
+   "arch/arm64/boot/dts/qcom/qcs615-ride.dts"
+  ]
+ },
+ {
+  "sha": "6294d0590d5f65725e505b89978895bd04b55650",
+  "subject": "arm64: dts: rockchip: Enable eMMC on rk3576-evb1-v10",
+  "files": [
+   "arch/arm64/boot/dts/rockchip/rk3576-evb1-v10.dts"
+  ]
+ },
+ {
+  "sha": "99ea5a0d6bc820b15727cea006561ede7339bb79",
+  "subject": "arm64: dts: qcom: Add lemans evaluation kit (EVK) initial board support",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/lemans-evk.dts"
+  ]
+ }
+]

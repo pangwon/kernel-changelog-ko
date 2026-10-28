@@ -1,0 +1,13 @@
+diff --git a/drivers/ufs/host/ufshcd-pltfrm.c b/drivers/ufs/host/ufshcd-pltfrm.c
+index 0c9b303ccfa0..1f4f30d6cb42 100644
+--- a/drivers/ufs/host/ufshcd-pltfrm.c
++++ b/drivers/ufs/host/ufshcd-pltfrm.c
+@@ -31,7 +31,7 @@ static int ufshcd_parse_clock_info(struct ufs_hba *hba)
+ 	const char *name;
+ 	u32 *clkfreq = NULL;
+ 	struct ufs_clk_info *clki;
+-	size_t sz = 0;
++	ssize_t sz = 0;
+ 
+ 	if (!np)
+ 		goto out;

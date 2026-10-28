@@ -1,0 +1,100 @@
+diff --git a/drivers/ufs/host/ufs-mediatek-sip.h b/drivers/ufs/host/ufs-mediatek-sip.h
+index c26513aedee3..caeb70a6ae83 100644
+--- a/drivers/ufs/host/ufs-mediatek-sip.h
++++ b/drivers/ufs/host/ufs-mediatek-sip.h
+@@ -19,7 +19,7 @@
+ #define UFS_MTK_SIP_SRAM_PWR_CTRL         BIT(5)
+ #define UFS_MTK_SIP_GET_VCC_NUM           BIT(6)
+ #define UFS_MTK_SIP_DEVICE_PWR_CTRL       BIT(7)
+-
++#define UFS_MTK_SIP_MPHY_CTRL             BIT(8)
+ 
+ /*
+  * Multi-VCC by Numbering
+@@ -31,6 +31,10 @@ enum ufs_mtk_vcc_num {
+ 	UFS_VCC_MAX
+ };
+ 
++enum ufs_mtk_mphy_op {
++	UFS_MPHY_BACKUP = 0,
++	UFS_MPHY_RESTORE
++};
+ 
+ /*
+  * SMC call wrapper function
+@@ -80,4 +84,7 @@ static inline void _ufs_mtk_smc(struct ufs_mtk_smc_arg s)
+ #define ufs_mtk_device_pwr_ctrl(on, ufs_version, res) \
+ 	ufs_mtk_smc(UFS_MTK_SIP_DEVICE_PWR_CTRL, &(res), on, ufs_version)
+ 
++#define ufs_mtk_mphy_ctrl(op, res) \
++	ufs_mtk_smc(UFS_MTK_SIP_MPHY_CTRL, &(res), op)
++
+ #endif /* !_UFS_MEDIATEK_SIP_H */
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index 06a13a333212..5709489157ac 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -184,16 +184,23 @@ static void ufs_mtk_crypto_enable(struct ufs_hba *hba)
+ static void ufs_mtk_host_reset(struct ufs_hba *hba)
+ {
+ 	struct ufs_mtk_host *host = ufshcd_get_variant(hba);
++	struct arm_smccc_res res;
+ 
+ 	reset_control_assert(host->hci_reset);
+ 	reset_control_assert(host->crypto_reset);
+ 	reset_control_assert(host->unipro_reset);
++	reset_control_assert(host->mphy_reset);
+ 
+ 	usleep_range(100, 110);
+ 
+ 	reset_control_deassert(host->unipro_reset);
+ 	reset_control_deassert(host->crypto_reset);
+ 	reset_control_deassert(host->hci_reset);
++	reset_control_deassert(host->mphy_reset);
++
++	/* restore mphy setting aftre mphy reset */
++	if (host->mphy_reset)
++		ufs_mtk_mphy_ctrl(UFS_MPHY_RESTORE, res);
+ }
+ 
+ static void ufs_mtk_init_reset_control(struct ufs_hba *hba,
+@@ -218,6 +225,8 @@ static void ufs_mtk_init_reset(struct ufs_hba *hba)
+ 				   "unipro_rst");
+ 	ufs_mtk_init_reset_control(hba, &host->crypto_reset,
+ 				   "crypto_rst");
++	ufs_mtk_init_reset_control(hba, &host->mphy_reset,
++				   "mphy_rst");
+ }
+ 
+ static int ufs_mtk_hce_enable_notify(struct ufs_hba *hba,
+@@ -947,6 +956,7 @@ static int ufs_mtk_init(struct ufs_hba *hba)
+ 	struct ufs_mtk_host *host;
+ 	struct Scsi_Host *shost = hba->host;
+ 	int err = 0;
++	struct arm_smccc_res res;
+ 
+ 	host = devm_kzalloc(dev, sizeof(*host), GFP_KERNEL);
+ 	if (!host) {
+@@ -975,6 +985,10 @@ static int ufs_mtk_init(struct ufs_hba *hba)
+ 
+ 	ufs_mtk_init_reset(hba);
+ 
++	/* backup mphy setting if mphy can reset */
++	if (host->mphy_reset)
++		ufs_mtk_mphy_ctrl(UFS_MPHY_BACKUP, res);
++
+ 	/* Enable runtime autosuspend */
+ 	hba->caps |= UFSHCD_CAP_RPM_AUTOSUSPEND;
+ 
+diff --git a/drivers/ufs/host/ufs-mediatek.h b/drivers/ufs/host/ufs-mediatek.h
+index 4764a104e8d2..5b6676056b92 100644
+--- a/drivers/ufs/host/ufs-mediatek.h
++++ b/drivers/ufs/host/ufs-mediatek.h
+@@ -165,6 +165,7 @@ struct ufs_mtk_host {
+ 	struct reset_control *hci_reset;
+ 	struct reset_control *unipro_reset;
+ 	struct reset_control *crypto_reset;
++	struct reset_control *mphy_reset;
+ 	struct ufs_hba *hba;
+ 	struct ufs_mtk_crypt_cfg *crypt;
+ 	struct ufs_mtk_clk mclk;

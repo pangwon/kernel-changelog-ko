@@ -1,0 +1,59 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index acae4e194ec4..03c47f9a2750 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -1269,7 +1269,7 @@ static int ufshcd_scale_gear(struct ufs_hba *hba, bool scale_up)
+ 	struct ufs_pa_layer_attr new_pwr_info;
+ 
+ 	if (scale_up) {
+-		memcpy(&new_pwr_info, &hba->clk_scaling.saved_pwr_info.info,
++		memcpy(&new_pwr_info, &hba->clk_scaling.saved_pwr_info,
+ 		       sizeof(struct ufs_pa_layer_attr));
+ 	} else {
+ 		memcpy(&new_pwr_info, &hba->pwr_info,
+@@ -1278,7 +1278,7 @@ static int ufshcd_scale_gear(struct ufs_hba *hba, bool scale_up)
+ 		if (hba->pwr_info.gear_tx > hba->clk_scaling.min_gear ||
+ 		    hba->pwr_info.gear_rx > hba->clk_scaling.min_gear) {
+ 			/* save the current power mode */
+-			memcpy(&hba->clk_scaling.saved_pwr_info.info,
++			memcpy(&hba->clk_scaling.saved_pwr_info,
+ 				&hba->pwr_info,
+ 				sizeof(struct ufs_pa_layer_attr));
+ 
+@@ -10349,10 +10349,9 @@ int ufshcd_init(struct ufs_hba *hba, void __iomem *mmio_base, unsigned int irq)
+ 
+ 	/* Initialize devfreq */
+ 	if (ufshcd_is_clkscaling_supported(hba)) {
+-		memcpy(&hba->clk_scaling.saved_pwr_info.info,
++		memcpy(&hba->clk_scaling.saved_pwr_info,
+ 			&hba->pwr_info,
+ 			sizeof(struct ufs_pa_layer_attr));
+-		hba->clk_scaling.saved_pwr_info.is_valid = true;
+ 		hba->clk_scaling.is_allowed = true;
+ 
+ 		err = ufshcd_devfreq_init(hba);
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 25aab8ec4f86..8b1046c21960 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -394,11 +394,6 @@ struct ufs_clk_gating {
+ 	struct workqueue_struct *clk_gating_workq;
+ };
+ 
+-struct ufs_saved_pwr_info {
+-	struct ufs_pa_layer_attr info;
+-	bool is_valid;
+-};
+-
+ /**
+  * struct ufs_clk_scaling - UFS clock scaling related data
+  * @active_reqs: number of requests that are pending. If this is zero when
+@@ -428,7 +423,7 @@ struct ufs_clk_scaling {
+ 	ktime_t window_start_t;
+ 	ktime_t busy_start_t;
+ 	struct device_attribute enable_attr;
+-	struct ufs_saved_pwr_info saved_pwr_info;
++	struct ufs_pa_layer_attr saved_pwr_info;
+ 	struct workqueue_struct *workq;
+ 	struct work_struct suspend_work;
+ 	struct work_struct resume_work;

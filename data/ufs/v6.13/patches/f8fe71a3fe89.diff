@@ -1,0 +1,22 @@
+diff --git a/drivers/ufs/host/ufs-exynos.c b/drivers/ufs/host/ufs-exynos.c
+index e477ab86e3c1..378c16d905c1 100644
+--- a/drivers/ufs/host/ufs-exynos.c
++++ b/drivers/ufs/host/ufs-exynos.c
+@@ -200,8 +200,6 @@ static inline void exynos_ufs_ungate_clks(struct exynos_ufs *ufs)
+ 
+ static int exynosauto_ufs_drv_init(struct exynos_ufs *ufs)
+ {
+-	struct exynos_ufs_uic_attr *attr = ufs->drv_data->uic_attr;
+-
+ 	/* IO Coherency setting */
+ 	if (ufs->sysreg) {
+ 		return regmap_update_bits(ufs->sysreg,
+@@ -209,8 +207,6 @@ static int exynosauto_ufs_drv_init(struct exynos_ufs *ufs)
+ 					  UFS_SHARABLE, UFS_SHARABLE);
+ 	}
+ 
+-	attr->tx_dif_p_nsec = 3200000;
+-
+ 	return 0;
+ }
+ 

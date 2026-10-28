@@ -1,0 +1,24 @@
+diff --git a/drivers/ufs/core/ufs-sysfs.c b/drivers/ufs/core/ufs-sysfs.c
+index 265f21133b63..796e37a1d859 100644
+--- a/drivers/ufs/core/ufs-sysfs.c
++++ b/drivers/ufs/core/ufs-sysfs.c
+@@ -670,6 +670,9 @@ static ssize_t read_req_latency_avg_show(struct device *dev,
+ 	struct ufs_hba *hba = dev_get_drvdata(dev);
+ 	struct ufs_hba_monitor *m = &hba->monitor;
+ 
++	if (!m->nr_req[READ])
++		return sysfs_emit(buf, "0\n");
++
+ 	return sysfs_emit(buf, "%llu\n", div_u64(ktime_to_us(m->lat_sum[READ]),
+ 						 m->nr_req[READ]));
+ }
+@@ -737,6 +740,9 @@ static ssize_t write_req_latency_avg_show(struct device *dev,
+ 	struct ufs_hba *hba = dev_get_drvdata(dev);
+ 	struct ufs_hba_monitor *m = &hba->monitor;
+ 
++	if (!m->nr_req[WRITE])
++		return sysfs_emit(buf, "0\n");
++
+ 	return sysfs_emit(buf, "%llu\n", div_u64(ktime_to_us(m->lat_sum[WRITE]),
+ 						 m->nr_req[WRITE]));
+ }

@@ -1,0 +1,105 @@
+diff --git a/drivers/ufs/core/ufs-mcq.c b/drivers/ufs/core/ufs-mcq.c
+index bae35d0f99c5..00b043b54419 100644
+--- a/drivers/ufs/core/ufs-mcq.c
++++ b/drivers/ufs/core/ufs-mcq.c
+@@ -134,17 +134,15 @@ unsigned int ufshcd_mcq_queue_cfg_addr(struct ufs_hba *hba)
+ EXPORT_SYMBOL_GPL(ufshcd_mcq_queue_cfg_addr);
+ 
+ /**
+- * ufshcd_mcq_decide_queue_depth - decide the queue depth
++ * ufshcd_get_hba_mac - Maximum number of commands supported by the host
++ *	controller.
+  * @hba: per adapter instance
+  *
+- * Return: queue-depth on success, non-zero on error
++ * Return: queue depth on success; negative upon error.
+  *
+- * MAC - Max. Active Command of the Host Controller (HC)
+- * HC wouldn't send more than this commands to the device.
+- * Calculates and adjusts the queue depth based on the depth
+- * supported by the HC and ufs device.
++ * MAC = Maximum number of Active Commands supported by the Host Controller.
+  */
+-int ufshcd_mcq_decide_queue_depth(struct ufs_hba *hba)
++int ufshcd_get_hba_mac(struct ufs_hba *hba)
+ {
+ 	int mac;
+ 
+@@ -162,18 +160,7 @@ int ufshcd_mcq_decide_queue_depth(struct ufs_hba *hba)
+ 		mac = hba->vops->get_hba_mac(hba);
+ 	}
+ 	if (mac < 0)
+-		goto err;
+-
+-	WARN_ON_ONCE(!hba->dev_info.bqueuedepth);
+-	/*
+-	 * max. value of bqueuedepth = 256, mac is host dependent.
+-	 * It is mandatory for UFS device to define bQueueDepth if
+-	 * shared queuing architecture is enabled.
+-	 */
+-	return min_t(int, mac, hba->dev_info.bqueuedepth);
+-
+-err:
+-	dev_err(hba->dev, "Failed to get mac, err=%d\n", mac);
++		dev_err(hba->dev, "Failed to get mac, err=%d\n", mac);
+ 	return mac;
+ }
+ 
+diff --git a/drivers/ufs/core/ufshcd-priv.h b/drivers/ufs/core/ufshcd-priv.h
+index 1f0d38aa37f9..749c0ab2a4ca 100644
+--- a/drivers/ufs/core/ufshcd-priv.h
++++ b/drivers/ufs/core/ufshcd-priv.h
+@@ -67,7 +67,7 @@ void ufshcd_compl_one_cqe(struct ufs_hba *hba, int task_tag,
+ 			  struct cq_entry *cqe);
+ int ufshcd_mcq_init(struct ufs_hba *hba);
+ void ufshcd_mcq_disable(struct ufs_hba *hba);
+-int ufshcd_mcq_decide_queue_depth(struct ufs_hba *hba);
++int ufshcd_get_hba_mac(struct ufs_hba *hba);
+ int ufshcd_mcq_memory_alloc(struct ufs_hba *hba);
+ struct ufs_hw_queue *ufshcd_mcq_req_to_hwq(struct ufs_hba *hba,
+ 					   struct request *req);
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index f64192c672e2..93f2853ff5df 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -8466,10 +8466,11 @@ static void ufs_init_rtc(struct ufs_hba *hba, u8 *desc_buf)
+ 
+ static int ufs_get_device_desc(struct ufs_hba *hba)
+ {
++	struct ufs_dev_info *dev_info = &hba->dev_info;
++	struct Scsi_Host *shost = hba->host;
+ 	int err;
+ 	u8 model_index;
+ 	u8 *desc_buf;
+-	struct ufs_dev_info *dev_info = &hba->dev_info;
+ 
+ 	desc_buf = kzalloc(QUERY_DESC_MAX_SIZE, GFP_KERNEL);
+ 	if (!desc_buf) {
+@@ -8497,6 +8498,18 @@ static int ufs_get_device_desc(struct ufs_hba *hba)
+ 				      desc_buf[DEVICE_DESC_PARAM_SPEC_VER + 1];
+ 	dev_info->bqueuedepth = desc_buf[DEVICE_DESC_PARAM_Q_DPTH];
+ 
++	/*
++	 * According to the UFS standard, the UFS device queue depth
++	 * (bQueueDepth) must be in the range 1..255 if the shared queueing
++	 * architecture is supported. bQueueDepth is zero if the shared queueing
++	 * architecture is not supported.
++	 */
++	if (dev_info->bqueuedepth)
++		shost->cmd_per_lun = min(hba->nutrs, dev_info->bqueuedepth) -
++				     UFSHCD_NUM_RESERVED;
++	else
++		shost->cmd_per_lun = shost->can_queue;
++
+ 	dev_info->rtt_cap = desc_buf[DEVICE_DESC_PARAM_RTT_CAP];
+ 
+ 	dev_info->hid_sup = get_unaligned_be32(desc_buf +
+@@ -8905,7 +8918,7 @@ static int ufshcd_alloc_mcq(struct ufs_hba *hba)
+ 	int ret;
+ 	int old_nutrs = hba->nutrs;
+ 
+-	ret = ufshcd_mcq_decide_queue_depth(hba);
++	ret = ufshcd_get_hba_mac(hba);
+ 	if (ret < 0)
+ 		return ret;
+ 

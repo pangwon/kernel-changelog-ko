@@ -1,0 +1,187 @@
+[
+ {
+  "sha": "0193e3966ceeeef69e235975918b287ab093082b",
+  "subject": "dm verity: don't perform FEC for failed readahead IO",
+  "files": [
+   "drivers/md/dm-verity-target.c"
+  ]
+ },
+ {
+  "sha": "8b3bd6ffbc6475a7dc92c6d6021d49b555301c01",
+  "subject": "PM / devfreq: Switch to dev_pm_opp_find_freq_{ceil/floor}_indexed() APIs",
+  "files": [
+   "drivers/devfreq/devfreq.c"
+  ]
+ },
+ {
+  "sha": "4b0d9c8f8f55562ed5346723e66eec64f22887f4",
+  "subject": "platform/x86/intel-uncore-freq: Ignore minor version change",
+  "files": [
+   "drivers/platform/x86/intel/uncore-frequency/uncore-frequency-tpmi.c"
+  ]
+ },
+ {
+  "sha": "5b11888471806edf699316d4dcb9b426caebbef2",
+  "subject": "fscrypt: support crypto data unit size less than filesystem block size",
+  "files": [
+   "Documentation/filesystems/fscrypt.rst",
+   "fs/crypto/bio.c",
+   "fs/crypto/crypto.c",
+   "fs/crypto/fscrypt_private.h",
+   "fs/crypto/inline_crypt.c",
+   "fs/crypto/keysetup.c",
+   "fs/crypto/policy.c",
+   "fs/ext4/crypto.c",
+   "fs/f2fs/super.c",
+   "include/linux/fscrypt.h",
+   "include/uapi/linux/fscrypt.h"
+  ]
+ },
+ {
+  "sha": "79eeac2e262545077be482b1a1700669e0c7d90c",
+  "subject": "dt-bindings: phy: Add QMP UFS PHY comptible for SC7280",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "96272ba7103d4518e2d0f17daf6fe0008fc6e12c",
+  "subject": "arm64: dts: qcom: sa8775p: enable the inline crypto engine",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sa8775p.dtsi"
+  ]
+ },
+ {
+  "sha": "a46e3a82aeb0282f80d6b512f8670da4ed12b973",
+  "subject": "arm64: dts: qcom: sm4250-billie2: correct UFS pad supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm4250-oneplus-billie2.dts"
+  ]
+ },
+ {
+  "sha": "c50e34f09a437623fc98b5545b7a097cc9ca53dc",
+  "subject": "arm64: dts: qcom: msm8998-sagit: correct UFS pad supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/msm8998-xiaomi-sagit.dts"
+  ]
+ },
+ {
+  "sha": "39a123c50f12589949c8ec8b824bb61b94175cc0",
+  "subject": "arm64: dts: qcom: msm8998-oneplus: correct UFS pad supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/msm8998-oneplus-common.dtsi"
+  ]
+ },
+ {
+  "sha": "e699305f858e1e18c90001065e156dd9d4646dcc",
+  "subject": "arm64: dts: qcom: msm8998-mtp: correct UFS pad supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/msm8998-mtp.dts"
+  ]
+ },
+ {
+  "sha": "304e5c53649f79418cb0e2c5e738a4e1f61729b8",
+  "subject": "arm64: dts: qcom: msm8998-pro1: correct UFS pad supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/msm8998-fxtec-pro1.dts"
+  ]
+ },
+ {
+  "sha": "38f6ac152fa641dc4a92a9d5f563ed2794f45b12",
+  "subject": "arm64: dts: qcom: msm8996-gemini: correct UFS pad supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/msm8996-xiaomi-common.dtsi"
+  ]
+ },
+ {
+  "sha": "dfee6788a02c44bbe82a02c58db846ea6edfc630",
+  "subject": "arm64: dts: qcom: msm8996-oneplus: correct UFS pad supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/msm8996-oneplus-common.dtsi"
+  ]
+ },
+ {
+  "sha": "6dd6ba6cb3a75fd45e4a48502c184a9659728136",
+  "subject": "arm64: dts: qcom: apq8096-db820c: correct UFS pad supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/apq8096-db820c.dts"
+  ]
+ },
+ {
+  "sha": "131b820c8dedf9516b39f74d82a43c5a0a858583",
+  "subject": "arm64: dts: qcom: sm6115p-j606f: correct UFS pad supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm6115p-lenovo-j606f.dts"
+  ]
+ },
+ {
+  "sha": "69a9275aeb9adeb223884c9754a8269fe33b0b88",
+  "subject": "arm64: dts: qcom: sm6115-pro1x: correct UFS pad supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm6115-fxtec-pro1x.dts"
+  ]
+ },
+ {
+  "sha": "08231f1fe620465890554b107032be330d1c66c7",
+  "subject": "arm64: dts: qcom: sm6125-sprout: correct UFS pad supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm6125-xiaomi-laurel-sprout.dts"
+  ]
+ },
+ {
+  "sha": "11bdfe69fb40ca6afdf6bd82946b8197fd7f6c70",
+  "subject": "arm64: dts: qcom: sm6125-sprout: drop incorrect UFS phy max current",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm6125-xiaomi-laurel-sprout.dts"
+  ]
+ },
+ {
+  "sha": "916b5916f228a9f83a22ad91ad8c5bf788a456d7",
+  "subject": "arm64: dts: qcom: sc8180x: switch UFS QMP PHY to new style of bindings",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sc8180x.dtsi"
+  ]
+ },
+ {
+  "sha": "201cd8541673f9b553508c2f11dadfab7874addd",
+  "subject": "arm64: dts: qcom: sm8350-mtp: add UFS host controller supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8350-mtp.dts"
+  ]
+ },
+ {
+  "sha": "2c20c75d850574c727e07e615ed55e3d5c2b42db",
+  "subject": "arm64: dts: qcom: sm8350-hdk: add UFS host controller supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8350-hdk.dts"
+  ]
+ },
+ {
+  "sha": "ebad126daf0c70a054b358e276cef453b2fcdc7f",
+  "subject": "arm64: dts: qcom: sm8450-qrd: add UFS host controller supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8450-qrd.dts"
+  ]
+ },
+ {
+  "sha": "f5688b4914fa5c5b9a0fca1692b82d25ae6cee33",
+  "subject": "arm64: dts: qcom: sm8450-hdk: add UFS host controller supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8450-hdk.dts"
+  ]
+ },
+ {
+  "sha": "e485c6e19ae888761d9fc65353722afa0235bbb4",
+  "subject": "arm64: dts: qcom: sm8550-qrd: use correct UFS supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8550-qrd.dts"
+  ]
+ },
+ {
+  "sha": "5c72cb3a9a96a5103cba49a1c8f2a2c71b158ab6",
+  "subject": "arm64: dts: qcom: sm8550-mtp: use correct UFS supply",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8550-mtp.dts"
+  ]
+ }
+]

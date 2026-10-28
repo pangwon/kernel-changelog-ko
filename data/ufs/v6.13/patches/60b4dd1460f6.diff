@@ -1,0 +1,72 @@
+diff --git a/drivers/ufs/core/ufs_bsg.c b/drivers/ufs/core/ufs_bsg.c
+index 433d0480391e..6c09d97ae006 100644
+--- a/drivers/ufs/core/ufs_bsg.c
++++ b/drivers/ufs/core/ufs_bsg.c
+@@ -170,7 +170,7 @@ static int ufs_bsg_request(struct bsg_job *job)
+ 		break;
+ 	case UPIU_TRANSACTION_UIC_CMD:
+ 		memcpy(&uc, &bsg_request->upiu_req.uc, UIC_CMD_SIZE);
+-		ret = ufshcd_send_uic_cmd(hba, &uc);
++		ret = ufshcd_send_bsg_uic_cmd(hba, &uc);
+ 		if (ret)
+ 			dev_err(hba->dev, "send uic cmd: error code %d\n", ret);
+ 
+diff --git a/drivers/ufs/core/ufshcd-priv.h b/drivers/ufs/core/ufshcd-priv.h
+index 7aea8fbaeee8..9ffd94ddf8c7 100644
+--- a/drivers/ufs/core/ufshcd-priv.h
++++ b/drivers/ufs/core/ufshcd-priv.h
+@@ -84,6 +84,7 @@ int ufshcd_read_string_desc(struct ufs_hba *hba, u8 desc_index,
+ 			    u8 **buf, bool ascii);
+ 
+ int ufshcd_send_uic_cmd(struct ufs_hba *hba, struct uic_command *uic_cmd);
++int ufshcd_send_bsg_uic_cmd(struct ufs_hba *hba, struct uic_command *uic_cmd);
+ 
+ int ufshcd_exec_raw_upiu_cmd(struct ufs_hba *hba,
+ 			     struct utp_upiu_req *req_upiu,
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 8135a6dad7c6..dd31aa7c6785 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -4319,6 +4319,42 @@ out_unlock:
+ 	return ret;
+ }
+ 
++/**
++ * ufshcd_send_bsg_uic_cmd - Send UIC commands requested via BSG layer and retrieve the result
++ * @hba: per adapter instance
++ * @uic_cmd: UIC command
++ *
++ * Return: 0 only if success.
++ */
++int ufshcd_send_bsg_uic_cmd(struct ufs_hba *hba, struct uic_command *uic_cmd)
++{
++	int ret;
++
++	if (hba->quirks & UFSHCD_QUIRK_BROKEN_UIC_CMD)
++		return 0;
++
++	ufshcd_hold(hba);
++
++	if (uic_cmd->argument1 == UIC_ARG_MIB(PA_PWRMODE) &&
++	    uic_cmd->command == UIC_CMD_DME_SET) {
++		ret = ufshcd_uic_pwr_ctrl(hba, uic_cmd);
++		goto out;
++	}
++
++	mutex_lock(&hba->uic_cmd_mutex);
++	ufshcd_add_delay_before_dme_cmd(hba);
++
++	ret = __ufshcd_send_uic_cmd(hba, uic_cmd);
++	if (!ret)
++		ret = ufshcd_wait_for_uic_cmd(hba, uic_cmd);
++
++	mutex_unlock(&hba->uic_cmd_mutex);
++
++out:
++	ufshcd_release(hba);
++	return ret;
++}
++
+ /**
+  * ufshcd_uic_change_pwr_mode - Perform the UIC power mode chage
+  *				using DME_SET primitives.

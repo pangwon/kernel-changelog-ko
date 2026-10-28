@@ -1,0 +1,75 @@
+diff --git a/drivers/ufs/core/ufs-sysfs.c b/drivers/ufs/core/ufs-sysfs.c
+index 0a088b47d557..7f41f2a69b04 100644
+--- a/drivers/ufs/core/ufs-sysfs.c
++++ b/drivers/ufs/core/ufs-sysfs.c
+@@ -225,7 +225,8 @@ static ssize_t wb_on_store(struct device *dev, struct device_attribute *attr,
+ 	unsigned int wb_enable;
+ 	ssize_t res;
+ 
+-	if (!ufshcd_is_wb_allowed(hba) || ufshcd_is_clkscaling_supported(hba)) {
++	if (!ufshcd_is_wb_allowed(hba) || (ufshcd_is_clkscaling_supported(hba)
++		&& ufshcd_enable_wb_if_scaling_up(hba))) {
+ 		/*
+ 		 * If the platform supports UFSHCD_CAP_CLK_SCALING, turn WB
+ 		 * on/off will be done while clock scaling up/down.
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 0391b66ed632..285e099385cd 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -1299,9 +1299,11 @@ static int ufshcd_devfreq_scale(struct ufs_hba *hba, bool scale_up)
+ 	}
+ 
+ 	/* Enable Write Booster if we have scaled up else disable it */
+-	downgrade_write(&hba->clk_scaling_lock);
+-	is_writelock = false;
+-	ufshcd_wb_toggle(hba, scale_up);
++	if (ufshcd_enable_wb_if_scaling_up(hba)) {
++		downgrade_write(&hba->clk_scaling_lock);
++		is_writelock = false;
++		ufshcd_wb_toggle(hba, scale_up);
++	}
+ 
+ out_unprepare:
+ 	ufshcd_clock_scaling_unprepare(hba, is_writelock);
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 473fad83701e..8ad1415e10b6 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -846,7 +846,7 @@ static void ufs_qcom_set_caps(struct ufs_hba *hba)
+ 	struct ufs_qcom_host *host = ufshcd_get_variant(hba);
+ 
+ 	hba->caps |= UFSHCD_CAP_CLK_GATING | UFSHCD_CAP_HIBERN8_WITH_CLK_GATING;
+-	hba->caps |= UFSHCD_CAP_CLK_SCALING;
++	hba->caps |= UFSHCD_CAP_CLK_SCALING | UFSHCD_CAP_WB_WITH_CLK_SCALING;
+ 	hba->caps |= UFSHCD_CAP_AUTO_BKOPS_SUSPEND;
+ 	hba->caps |= UFSHCD_CAP_WB_EN;
+ 	hba->caps |= UFSHCD_CAP_CRYPTO;
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index d81e9a5da59e..bd411f04d856 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -664,6 +664,12 @@ enum ufshcd_caps {
+ 	 * notification if it is supported by the UFS device.
+ 	 */
+ 	UFSHCD_CAP_TEMP_NOTIF				= 1 << 11,
++
++	/*
++	 * Enable WriteBooster when scaling up the clock and disable
++	 * WriteBooster when scaling the clock down.
++	 */
++	UFSHCD_CAP_WB_WITH_CLK_SCALING			= 1 << 12,
+ };
+ 
+ struct ufs_hba_variant_params {
+@@ -1021,6 +1027,11 @@ static inline bool ufshcd_is_wb_allowed(struct ufs_hba *hba)
+ 	return hba->caps & UFSHCD_CAP_WB_EN;
+ }
+ 
++static inline bool ufshcd_enable_wb_if_scaling_up(struct ufs_hba *hba)
++{
++	return hba->caps & UFSHCD_CAP_WB_WITH_CLK_SCALING;
++}
++
+ #define ufshcd_writel(hba, val, reg)	\
+ 	writel((val), (hba)->mmio_base + (reg))
+ #define ufshcd_readl(hba, reg)	\

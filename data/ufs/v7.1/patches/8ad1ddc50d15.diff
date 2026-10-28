@@ -1,0 +1,12 @@
+diff --git a/drivers/ufs/host/ufs-rockchip.c b/drivers/ufs/host/ufs-rockchip.c
+index 7fff34513a60..bac68f238e1c 100644
+--- a/drivers/ufs/host/ufs-rockchip.c
++++ b/drivers/ufs/host/ufs-rockchip.c
+@@ -6,7 +6,6 @@
+  */
+ 
+ #include <linux/clk.h>
+-#include <linux/gpio.h>
+ #include <linux/gpio/consumer.h>
+ #include <linux/mfd/syscon.h>
+ #include <linux/of.h>

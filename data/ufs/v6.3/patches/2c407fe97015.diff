@@ -1,0 +1,28 @@
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 3370fa4364f0..5e7ba3b6a59d 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -282,6 +282,8 @@ static u32 ufs_qcom_get_hs_gear(struct ufs_hba *hba)
+ 		 * Hence downgrade the maximum supported gear to HS-G2.
+ 		 */
+ 		return UFS_HS_G2;
++	} else if (host->hw_ver.major >= 0x4) {
++		return UFS_QCOM_MAX_GEAR(ufshcd_readl(hba, REG_UFS_PARAM0));
+ 	}
+ 
+ 	/* Default is HS-G3 */
+diff --git a/drivers/ufs/host/ufs-qcom.h b/drivers/ufs/host/ufs-qcom.h
+index 6cb970530060..f744a9e62002 100644
+--- a/drivers/ufs/host/ufs-qcom.h
++++ b/drivers/ufs/host/ufs-qcom.h
+@@ -94,6 +94,10 @@ enum {
+ #define TMRLUT_HW_CGC_EN	BIT(6)
+ #define OCSC_HW_CGC_EN		BIT(7)
+ 
++/* bit definitions for REG_UFS_PARAM0 */
++#define MAX_HS_GEAR_MASK	GENMASK(6, 4)
++#define UFS_QCOM_MAX_GEAR(x)	FIELD_GET(MAX_HS_GEAR_MASK, (x))
++
+ /* bit definition for UFS_UFS_TEST_BUS_CTRL_n */
+ #define TEST_BUS_SUB_SEL_MASK	GENMASK(4, 0)  /* All XXX_SEL fields are 5 bits wide */
+ 

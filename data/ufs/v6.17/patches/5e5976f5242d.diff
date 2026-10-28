@@ -1,0 +1,125 @@
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index a0c53d796a60..91a2f3428b9f 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -953,9 +953,23 @@ static void ufs_mtk_init_clocks(struct ufs_hba *hba)
+ 			host->mclk.ufs_sel_min_clki = clki;
+ 			clk_disable_unprepare(clki->clk);
+ 			list_del(&clki->list);
++		} else if (!strcmp(clki->name, "ufs_fde")) {
++			host->mclk.ufs_fde_clki = clki;
++		} else if (!strcmp(clki->name, "ufs_fde_max_src")) {
++			host->mclk.ufs_fde_max_clki = clki;
++			clk_disable_unprepare(clki->clk);
++			list_del(&clki->list);
++		} else if (!strcmp(clki->name, "ufs_fde_min_src")) {
++			host->mclk.ufs_fde_min_clki = clki;
++			clk_disable_unprepare(clki->clk);
++			list_del(&clki->list);
+ 		}
+ 	}
+ 
++	list_for_each_entry(clki, head, list) {
++		dev_info(hba->dev, "clk \"%s\" present", clki->name);
++	}
++
+ 	if (!ufs_mtk_is_clk_scale_ready(hba)) {
+ 		hba->caps &= ~UFSHCD_CAP_CLK_SCALING;
+ 		dev_info(hba->dev,
+@@ -1758,14 +1772,16 @@ static void _ufs_mtk_clk_scale(struct ufs_hba *hba, bool scale_up)
+ 	struct ufs_mtk_host *host = ufshcd_get_variant(hba);
+ 	struct ufs_mtk_clk *mclk = &host->mclk;
+ 	struct ufs_clk_info *clki = mclk->ufs_sel_clki;
++	struct ufs_clk_info *fde_clki = mclk->ufs_fde_clki;
+ 	struct regulator *reg;
+ 	int volt, ret = 0;
+ 	bool clk_bind_vcore = false;
++	bool clk_fde_scale = false;
+ 
+ 	if (!hba->clk_scaling.is_initialized)
+ 		return;
+ 
+-	if (!clki)
++	if (!clki || !fde_clki)
+ 		return;
+ 
+ 	reg = host->mclk.reg_vcore;
+@@ -1773,6 +1789,9 @@ static void _ufs_mtk_clk_scale(struct ufs_hba *hba, bool scale_up)
+ 	if (reg && volt != 0)
+ 		clk_bind_vcore = true;
+ 
++	if (mclk->ufs_fde_max_clki && mclk->ufs_fde_min_clki)
++		clk_fde_scale = true;
++
+ 	ret = clk_prepare_enable(clki->clk);
+ 	if (ret) {
+ 		dev_info(hba->dev,
+@@ -1780,6 +1799,15 @@ static void _ufs_mtk_clk_scale(struct ufs_hba *hba, bool scale_up)
+ 		return;
+ 	}
+ 
++	if (clk_fde_scale) {
++		ret = clk_prepare_enable(fde_clki->clk);
++		if (ret) {
++			dev_info(hba->dev,
++				 "fde clk_prepare_enable() fail, ret: %d\n", ret);
++			return;
++		}
++	}
++
+ 	if (scale_up) {
+ 		if (clk_bind_vcore) {
+ 			ret = regulator_set_voltage(reg, volt, INT_MAX);
+@@ -1795,7 +1823,28 @@ static void _ufs_mtk_clk_scale(struct ufs_hba *hba, bool scale_up)
+ 			dev_info(hba->dev, "Failed to set clk mux, ret = %d\n",
+ 				ret);
+ 		}
++
++		if (clk_fde_scale) {
++			ret = clk_set_parent(fde_clki->clk,
++				mclk->ufs_fde_max_clki->clk);
++			if (ret) {
++				dev_info(hba->dev,
++					"Failed to set fde clk mux, ret = %d\n",
++					ret);
++			}
++		}
+ 	} else {
++		if (clk_fde_scale) {
++			ret = clk_set_parent(fde_clki->clk,
++				mclk->ufs_fde_min_clki->clk);
++			if (ret) {
++				dev_info(hba->dev,
++					"Failed to set fde clk mux, ret = %d\n",
++					ret);
++				goto out;
++			}
++		}
++
+ 		ret = clk_set_parent(clki->clk, mclk->ufs_sel_min_clki->clk);
+ 		if (ret) {
+ 			dev_info(hba->dev, "Failed to set clk mux, ret = %d\n",
+@@ -1814,6 +1863,9 @@ static void _ufs_mtk_clk_scale(struct ufs_hba *hba, bool scale_up)
+ 
+ out:
+ 	clk_disable_unprepare(clki->clk);
++
++	if (clk_fde_scale)
++		clk_disable_unprepare(fde_clki->clk);
+ }
+ 
+ /**
+diff --git a/drivers/ufs/host/ufs-mediatek.h b/drivers/ufs/host/ufs-mediatek.h
+index 0b25ce5aa836..e46dc5fa209d 100644
+--- a/drivers/ufs/host/ufs-mediatek.h
++++ b/drivers/ufs/host/ufs-mediatek.h
+@@ -149,6 +149,9 @@ struct ufs_mtk_clk {
+ 	struct ufs_clk_info *ufs_sel_clki; /* Mux */
+ 	struct ufs_clk_info *ufs_sel_max_clki; /* Max src */
+ 	struct ufs_clk_info *ufs_sel_min_clki; /* Min src */
++	struct ufs_clk_info *ufs_fde_clki; /* Mux */
++	struct ufs_clk_info *ufs_fde_max_clki; /* Max src */
++	struct ufs_clk_info *ufs_fde_min_clki; /* Min src */
+ 	struct regulator *reg_vcore;
+ 	int vcore_volt;
+ };

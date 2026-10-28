@@ -1,0 +1,12 @@
+diff --git a/drivers/ufs/core/ufs-sysfs.c b/drivers/ufs/core/ufs-sysfs.c
+index d9dc4cc3452e..63e670d1a9d9 100644
+--- a/drivers/ufs/core/ufs-sysfs.c
++++ b/drivers/ufs/core/ufs-sysfs.c
+@@ -54,6 +54,7 @@ static const char *ufs_hs_gear_to_string(enum ufs_hs_gear_tag gear)
+ 	case UFS_HS_G3:	return "HS_GEAR3";
+ 	case UFS_HS_G4:	return "HS_GEAR4";
+ 	case UFS_HS_G5:	return "HS_GEAR5";
++	case UFS_HS_G6:	return "HS_GEAR6";
+ 	default:	return "UNKNOWN";
+ 	}
+ }

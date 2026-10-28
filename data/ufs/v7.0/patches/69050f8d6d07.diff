@@ -1,0 +1,13 @@
+diff --git a/drivers/ufs/core/ufs-hwmon.c b/drivers/ufs/core/ufs-hwmon.c
+index 34194064367f..1ca027b4caa5 100644
+--- a/drivers/ufs/core/ufs-hwmon.c
++++ b/drivers/ufs/core/ufs-hwmon.c
+@@ -169,7 +169,7 @@ void ufs_hwmon_probe(struct ufs_hba *hba, u8 mask)
+ 	struct ufs_hwmon_data *data;
+ 	struct device *hwmon;
+ 
+-	data = kzalloc(sizeof(*data), GFP_KERNEL);
++	data = kzalloc_obj(*data, GFP_KERNEL);
+ 	if (!data)
+ 		return;
+ 

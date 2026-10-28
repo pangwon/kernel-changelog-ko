@@ -1,0 +1,62 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index e59ce8e5509e..35a5e2842b5b 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -1398,13 +1398,13 @@ out:
+ 	return ret;
+ }
+ 
+-static void ufshcd_clock_scaling_unprepare(struct ufs_hba *hba, int err, bool scale_up)
++static void ufshcd_clock_scaling_unprepare(struct ufs_hba *hba, int err)
+ {
+ 	up_write(&hba->clk_scaling_lock);
+ 
+-	/* Enable Write Booster if we have scaled up else disable it */
++	/* Enable Write Booster if current gear requires it else disable it */
+ 	if (ufshcd_enable_wb_if_scaling_up(hba) && !err)
+-		ufshcd_wb_toggle(hba, scale_up);
++		ufshcd_wb_toggle(hba, hba->pwr_info.gear_rx >= hba->clk_scaling.wb_gear);
+ 
+ 	mutex_unlock(&hba->wb_mutex);
+ 
+@@ -1459,7 +1459,7 @@ static int ufshcd_devfreq_scale(struct ufs_hba *hba, unsigned long freq,
+ 	}
+ 
+ out_unprepare:
+-	ufshcd_clock_scaling_unprepare(hba, ret, scale_up);
++	ufshcd_clock_scaling_unprepare(hba, ret);
+ 	return ret;
+ }
+ 
+@@ -1811,6 +1811,10 @@ static void ufshcd_init_clk_scaling(struct ufs_hba *hba)
+ 	if (!hba->clk_scaling.min_gear)
+ 		hba->clk_scaling.min_gear = UFS_HS_G1;
+ 
++	if (!hba->clk_scaling.wb_gear)
++		/* Use intermediate gear speed HS_G3 as the default wb_gear */
++		hba->clk_scaling.wb_gear = UFS_HS_G3;
++
+ 	INIT_WORK(&hba->clk_scaling.suspend_work,
+ 		  ufshcd_clk_scaling_suspend_work);
+ 	INIT_WORK(&hba->clk_scaling.resume_work,
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 199c2cec29d0..1b9f72ea4c1c 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -450,6 +450,8 @@ struct ufs_clk_gating {
+  * one keeps track of previous power mode.
+  * @target_freq: frequency requested by devfreq framework
+  * @min_gear: lowest HS gear to scale down to
++ * @wb_gear: enable Write Booster when HS gear scales above or equal to it, else
++ *		disable Write Booster
+  * @is_enabled: tracks if scaling is currently enabled or not, controlled by
+  *		clkscale_enable sysfs node
+  * @is_allowed: tracks if scaling is currently allowed or not, used to block
+@@ -473,6 +475,7 @@ struct ufs_clk_scaling {
+ 	struct ufs_pa_layer_attr saved_pwr_info;
+ 	unsigned long target_freq;
+ 	u32 min_gear;
++	u32 wb_gear;
+ 	bool is_enabled;
+ 	bool is_allowed;
+ 	bool is_initialized;

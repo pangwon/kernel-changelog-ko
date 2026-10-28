@@ -1,0 +1,55 @@
+diff --git a/drivers/ufs/core/ufshcd-priv.h b/drivers/ufs/core/ufshcd-priv.h
+index 9b630907c4dc..529f8507a5e4 100644
+--- a/drivers/ufs/core/ufshcd-priv.h
++++ b/drivers/ufs/core/ufshcd-priv.h
+@@ -279,6 +279,14 @@ static inline int ufshcd_vops_get_outstanding_cqs(struct ufs_hba *hba,
+ 	return -EOPNOTSUPP;
+ }
+ 
++static inline int ufshcd_mcq_vops_config_esi(struct ufs_hba *hba)
++{
++	if (hba->vops && hba->vops->config_esi)
++		return hba->vops->config_esi(hba);
++
++	return -EOPNOTSUPP;
++}
++
+ extern const struct ufs_pm_lvl_states ufs_pm_lvl_states[];
+ 
+ /**
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 54717c497518..064a6d8605c1 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -8449,6 +8449,11 @@ err:
+ 
+ static void ufshcd_config_mcq(struct ufs_hba *hba)
+ {
++	int ret;
++
++	ret = ufshcd_mcq_vops_config_esi(hba);
++	dev_info(hba->dev, "ESI %sconfigured\n", ret ? "is not " : "");
++
+ 	ufshcd_enable_intr(hba, UFSHCD_ENABLE_MCQ_INTRS);
+ 	ufshcd_mcq_make_queues_operational(hba);
+ 	ufshcd_mcq_config_mac(hba, hba->nutrs);
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 33973e9f6d6a..1285787e2628 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -305,6 +305,7 @@ struct ufs_pwr_mode_info {
+  * @get_hba_mac: called to get vendor specific mac value, mandatory for mcq mode
+  * @op_runtime_config: called to config Operation and runtime regs Pointers
+  * @get_outstanding_cqs: called to get outstanding completion queues
++ * @config_esi: called to config Event Specific Interrupt
+  */
+ struct ufs_hba_variant_ops {
+ 	const char *name;
+@@ -349,6 +350,7 @@ struct ufs_hba_variant_ops {
+ 	int	(*op_runtime_config)(struct ufs_hba *hba);
+ 	int	(*get_outstanding_cqs)(struct ufs_hba *hba,
+ 				       unsigned long *ocqs);
++	int	(*config_esi)(struct ufs_hba *hba);
+ };
+ 
+ /* clock gating state  */

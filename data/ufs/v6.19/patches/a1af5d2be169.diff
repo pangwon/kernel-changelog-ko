@@ -1,0 +1,149 @@
+diff --git a/drivers/phy/samsung/phy-gs101-ufs.c b/drivers/phy/samsung/phy-gs101-ufs.c
+index 17b798da5b57..a15e1f453f7f 100644
+--- a/drivers/phy/samsung/phy-gs101-ufs.c
++++ b/drivers/phy/samsung/phy-gs101-ufs.c
+@@ -108,12 +108,39 @@ static const struct samsung_ufs_phy_cfg tensor_gs101_post_pwr_hs_config[] = {
+ 	END_UFS_PHY_CFG,
+ };
+ 
++static const struct samsung_ufs_phy_cfg tensor_gs101_post_h8_enter[] = {
++	PHY_TRSV_REG_CFG_GS101(0x262, 0x08, PWR_MODE_ANY),
++	PHY_TRSV_REG_CFG_GS101(0x265, 0x0A, PWR_MODE_ANY),
++	PHY_COMN_REG_CFG(0x1, 0x8,  PWR_MODE_ANY),
++	PHY_COMN_REG_CFG(0x0, 0x86,  PWR_MODE_ANY),
++	PHY_COMN_REG_CFG(0x8, 0x60,  PWR_MODE_HS_ANY),
++	PHY_TRSV_REG_CFG_GS101(0x222, 0x08, PWR_MODE_HS_ANY),
++	PHY_TRSV_REG_CFG_GS101(0x246, 0x01, PWR_MODE_HS_ANY),
++	END_UFS_PHY_CFG,
++};
++
++static const struct samsung_ufs_phy_cfg tensor_gs101_pre_h8_exit[] = {
++	PHY_COMN_REG_CFG(0x0, 0xC6,  PWR_MODE_ANY),
++	PHY_COMN_REG_CFG(0x1, 0x0C,  PWR_MODE_ANY),
++	PHY_TRSV_REG_CFG_GS101(0x262, 0x00, PWR_MODE_ANY),
++	PHY_TRSV_REG_CFG_GS101(0x265, 0x00, PWR_MODE_ANY),
++	PHY_COMN_REG_CFG(0x8, 0xE0,  PWR_MODE_HS_ANY),
++	PHY_TRSV_REG_CFG_GS101(0x246, 0x03, PWR_MODE_HS_ANY),
++	PHY_TRSV_REG_CFG_GS101(0x222, 0x18, PWR_MODE_HS_ANY),
++	END_UFS_PHY_CFG,
++};
++
+ static const struct samsung_ufs_phy_cfg *tensor_gs101_ufs_phy_cfgs[CFG_TAG_MAX] = {
+ 	[CFG_PRE_INIT]		= tensor_gs101_pre_init_cfg,
+ 	[CFG_PRE_PWR_HS]	= tensor_gs101_pre_pwr_hs_config,
+ 	[CFG_POST_PWR_HS]	= tensor_gs101_post_pwr_hs_config,
+ };
+ 
++static const struct samsung_ufs_phy_cfg *tensor_gs101_hibern8_cfgs[] = {
++	[CFG_POST_HIBERN8_ENTER]	= tensor_gs101_post_h8_enter,
++	[CFG_PRE_HIBERN8_EXIT]		= tensor_gs101_pre_h8_exit,
++};
++
+ static const char * const tensor_gs101_ufs_phy_clks[] = {
+ 	"ref_clk",
+ };
+@@ -170,6 +197,7 @@ static int gs101_phy_wait_for_cdr_lock(struct phy *phy, u8 lane)
+ 
+ const struct samsung_ufs_phy_drvdata tensor_gs101_ufs_phy = {
+ 	.cfgs = tensor_gs101_ufs_phy_cfgs,
++	.cfgs_hibern8 = tensor_gs101_hibern8_cfgs,
+ 	.isol = {
+ 		.offset = TENSOR_GS101_PHY_CTRL,
+ 		.mask = TENSOR_GS101_PHY_CTRL_MASK,
+diff --git a/drivers/phy/samsung/phy-samsung-ufs.c b/drivers/phy/samsung/phy-samsung-ufs.c
+index f3cbe6b17b23..ee665f26c236 100644
+--- a/drivers/phy/samsung/phy-samsung-ufs.c
++++ b/drivers/phy/samsung/phy-samsung-ufs.c
+@@ -217,6 +217,44 @@ static int samsung_ufs_phy_set_mode(struct phy *generic_phy,
+ 	return 0;
+ }
+ 
++static int samsung_ufs_phy_notify_state(struct phy *phy,
++					union phy_notify state)
++{
++	struct samsung_ufs_phy *ufs_phy = get_samsung_ufs_phy(phy);
++	const struct samsung_ufs_phy_cfg *cfg;
++	int i, err = -EINVAL;
++
++	if (!ufs_phy->cfgs_hibern8)
++		return 0;
++
++	if (state.ufs_state == PHY_UFS_HIBERN8_ENTER)
++		cfg = ufs_phy->cfgs_hibern8[CFG_POST_HIBERN8_ENTER];
++	else if (state.ufs_state == PHY_UFS_HIBERN8_EXIT)
++		cfg = ufs_phy->cfgs_hibern8[CFG_PRE_HIBERN8_EXIT];
++	else
++		goto err_out;
++
++	for_each_phy_cfg(cfg) {
++		for_each_phy_lane(ufs_phy, i) {
++			samsung_ufs_phy_config(ufs_phy, cfg, i);
++		}
++	}
++
++	if (state.ufs_state == PHY_UFS_HIBERN8_EXIT) {
++		for_each_phy_lane(ufs_phy, i) {
++			if (ufs_phy->drvdata->wait_for_cdr) {
++				err = ufs_phy->drvdata->wait_for_cdr(phy, i);
++				if (err)
++					goto err_out;
++			}
++		}
++	}
++
++	return 0;
++err_out:
++	return err;
++}
++
+ static int samsung_ufs_phy_exit(struct phy *phy)
+ {
+ 	struct samsung_ufs_phy *ss_phy = get_samsung_ufs_phy(phy);
+@@ -233,6 +271,7 @@ static const struct phy_ops samsung_ufs_phy_ops = {
+ 	.power_off	= samsung_ufs_phy_power_off,
+ 	.calibrate	= samsung_ufs_phy_calibrate,
+ 	.set_mode	= samsung_ufs_phy_set_mode,
++	.notify_phystate = samsung_ufs_phy_notify_state,
+ 	.owner          = THIS_MODULE,
+ };
+ 
+@@ -287,6 +326,7 @@ static int samsung_ufs_phy_probe(struct platform_device *pdev)
+ 	phy->dev = dev;
+ 	phy->drvdata = drvdata;
+ 	phy->cfgs = drvdata->cfgs;
++	phy->cfgs_hibern8 = drvdata->cfgs_hibern8;
+ 	memcpy(&phy->isol, &drvdata->isol, sizeof(phy->isol));
+ 
+ 	if (!of_property_read_u32_index(dev->of_node, "samsung,pmu-syscon", 1,
+diff --git a/drivers/phy/samsung/phy-samsung-ufs.h b/drivers/phy/samsung/phy-samsung-ufs.h
+index a28f148081d1..f2c2e744e5ba 100644
+--- a/drivers/phy/samsung/phy-samsung-ufs.h
++++ b/drivers/phy/samsung/phy-samsung-ufs.h
+@@ -92,6 +92,11 @@ enum {
+ 	CFG_TAG_MAX,
+ };
+ 
++enum {
++	CFG_POST_HIBERN8_ENTER,
++	CFG_PRE_HIBERN8_EXIT,
++};
++
+ struct samsung_ufs_phy_cfg {
+ 	u32 off_0;
+ 	u32 off_1;
+@@ -108,6 +113,7 @@ struct samsung_ufs_phy_pmu_isol {
+ 
+ struct samsung_ufs_phy_drvdata {
+ 	const struct samsung_ufs_phy_cfg **cfgs;
++	const struct samsung_ufs_phy_cfg **cfgs_hibern8;
+ 	struct samsung_ufs_phy_pmu_isol isol;
+ 	const char * const *clk_list;
+ 	int num_clks;
+@@ -124,6 +130,7 @@ struct samsung_ufs_phy {
+ 	struct clk_bulk_data *clks;
+ 	const struct samsung_ufs_phy_drvdata *drvdata;
+ 	const struct samsung_ufs_phy_cfg * const *cfgs;
++	const struct samsung_ufs_phy_cfg * const *cfgs_hibern8;
+ 	struct samsung_ufs_phy_pmu_isol isol;
+ 	u8 lane_cnt;
+ 	int ufs_phy_state;

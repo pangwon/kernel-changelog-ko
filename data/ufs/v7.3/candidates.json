@@ -1,0 +1,129 @@
+[
+ {
+  "sha": "8dc2615d5702059b2b71fca6f93c0d7d10ae54cb",
+  "subject": "arm64: dts: renesas: r8a779f0: Set UFS lane count",
+  "files": [
+   "arch/arm64/boot/dts/renesas/r8a779f0.dtsi"
+  ]
+ },
+ {
+  "sha": "24d886d9344c7973e202a7f275ff8280b742446c",
+  "subject": "dt-bindings: phy: qcom,sc8280xp-qmp-ufs-phy: Add Hawi UFS PHY compatible",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "d7066cfc418714e536d78a1b7b93da2a7f12d9c9",
+  "subject": "cxl/Documentation: Spell out globbed sysfs attribute names",
+  "files": [
+   "Documentation/ABI/testing/sysfs-bus-cxl"
+  ]
+ },
+ {
+  "sha": "3b50c16faa8452fd7ff021919c669c7b38227ca4",
+  "subject": "arm64: dts: qcom: sa8155p-adp: Fix swapped USB and UFS QMP PHY vdda-phy/vdda-pll supplies",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sa8155p-adp.dts"
+  ]
+ },
+ {
+  "sha": "6b1195eeb204b455973fb05e10563a63bdd71c57",
+  "subject": "arm64: dts: qcom: eliza-mtp: Fix swapped USB QMP PHY vdda-phy/vdda-pll supplies",
+  "files": [
+   "arch/arm64/boot/dts/qcom/eliza-mtp.dts"
+  ]
+ },
+ {
+  "sha": "932113c3c77814b4001ad37ea4383b93bc385284",
+  "subject": "arm64: dts: qcom: lemans: Fix swapped USB QMP PHY vdda-phy/vdda-pll supplies",
+  "files": [
+   "arch/arm64/boot/dts/qcom/lemans-evk.dts",
+   "arch/arm64/boot/dts/qcom/lemans-ride-common.dtsi"
+  ]
+ },
+ {
+  "sha": "a5c2859ffe9c8e033e2df1ef62357fa5692008f1",
+  "subject": "clk: qcom: negcc-nord: use clk_regmap_phy_mux for USB3 pipe clock srcs",
+  "files": [
+   "drivers/clk/qcom/negcc-nord.c"
+  ]
+ },
+ {
+  "sha": "e4bb1e8370378203ae77c02955226a96101fb240",
+  "subject": "arm64: dts: qcom: qcs6490: Add Vicharak Axon Mini",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/qcs6490-vicharak-axon-mini.dts"
+  ]
+ },
+ {
+  "sha": "21b15fa5f8f4c2515c67b53cf9641dc19cf0c94b",
+  "subject": "arm64: dts: qcom: Add HONOR MagicBook Art 14 device tree",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/x1e80100-honor-magicbook-art-14.dts"
+  ]
+ },
+ {
+  "sha": "8abba78dc0ee4ffa7c4e0e05b93c58bd94ff11c0",
+  "subject": "clk: spacemit: k3: Add UFS refclk clock",
+  "files": [
+   "drivers/clk/spacemit/ccu-k3.c"
+  ]
+ },
+ {
+  "sha": "4fc567e1bacdb5da85628de8dd1d1e3328060798",
+  "subject": "dt-bindings: soc: spacemit: k3: Add clock ID for UFS refclk",
+  "files": [
+   "include/dt-bindings/clock/spacemit,k3-clocks.h"
+  ]
+ },
+ {
+  "sha": "7a588b62679c51abd08171d31df6e44589f0097d",
+  "subject": "clk: spacemit: k3: fix parent clock of UFS aclk",
+  "files": [
+   "drivers/clk/spacemit/ccu-k3.c"
+  ]
+ },
+ {
+  "sha": "447f8053b1849b22bbf6f71a2cbb1a81fb931d48",
+  "subject": "arm64: dts: qcom: purwa: Add Microsoft Surface Pro 12in",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/x1p42100-microsoft-sp12in.dts"
+  ]
+ },
+ {
+  "sha": "28705df5d0df5f8ba34c7ca3fcc5b46e7799b7c2",
+  "subject": "arm64: dts: qcom: sm7325: Add Xiaomi 12 Lite 5G (taoyao) DTS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/sm7325-xiaomi-taoyao.dts"
+  ]
+ },
+ {
+  "sha": "12975c0f09c58ccf305b1383131790ea3cf6cedb",
+  "subject": "arm64: dts: qcom: sm7325: Add Motorola Edge 30 (dubai) DTS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/sm7325-motorola-dubai-common.dtsi",
+   "arch/arm64/boot/dts/qcom/sm7325-motorola-dubai-csot.dts",
+   "arch/arm64/boot/dts/qcom/sm7325-motorola-dubai-tianma.dts"
+  ]
+ },
+ {
+  "sha": "ac456227d22952b656ad291ebd2d3d3e498e3d95",
+  "subject": "arm64: dts: qcom: sm8750: wire UFS to ice instance",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8750.dtsi"
+  ]
+ },
+ {
+  "sha": "e95f2b212c4a8ec422b1627e36e951e778809965",
+  "subject": "dt-bindings: pinctrl: qcom: Describe Maili TLMM block",
+  "files": [
+   "Documentation/devicetree/bindings/pinctrl/qcom,maili-tlmm.yaml"
+  ]
+ }
+]

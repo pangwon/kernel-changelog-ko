@@ -1,0 +1,54 @@
+diff --git a/drivers/ufs/core/ufs-sysfs.c b/drivers/ufs/core/ufs-sysfs.c
+index e4ddea6ea780..e2cf49dcc17a 100644
+--- a/drivers/ufs/core/ufs-sysfs.c
++++ b/drivers/ufs/core/ufs-sysfs.c
+@@ -272,8 +272,7 @@ static ssize_t enable_wb_buf_flush_store(struct device *dev,
+ 	unsigned int enable_wb_buf_flush;
+ 	ssize_t res;
+ 
+-	if (!ufshcd_is_wb_allowed(hba) ||
+-	    (hba->quirks & UFSHCI_QUIRK_SKIP_MANUAL_WB_FLUSH_CTRL)) {
++	if (!ufshcd_is_wb_buf_flush_allowed(hba)) {
+ 		dev_warn(dev, "It is not allowed to configure WB buf flushing!\n");
+ 		return -EOPNOTSUPP;
+ 	}
+diff --git a/drivers/ufs/core/ufshcd-priv.h b/drivers/ufs/core/ufshcd-priv.h
+index 8f67db202d7b..d00dba17297d 100644
+--- a/drivers/ufs/core/ufshcd-priv.h
++++ b/drivers/ufs/core/ufshcd-priv.h
+@@ -26,6 +26,12 @@ static inline u8 ufshcd_wb_get_query_index(struct ufs_hba *hba)
+ 	return 0;
+ }
+ 
++static inline bool ufshcd_is_wb_buf_flush_allowed(struct ufs_hba *hba)
++{
++	return ufshcd_is_wb_allowed(hba) &&
++		!(hba->quirks & UFSHCI_QUIRK_SKIP_MANUAL_WB_FLUSH_CTRL);
++}
++
+ #ifdef CONFIG_SCSI_UFS_HWMON
+ void ufs_hwmon_probe(struct ufs_hba *hba, u8 mask);
+ void ufs_hwmon_remove(struct ufs_hba *hba);
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index abe06616ddc8..e7c55d50a2e6 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -295,7 +295,8 @@ static void ufshcd_configure_wb(struct ufs_hba *hba)
+ 	ufshcd_wb_toggle(hba, true);
+ 
+ 	ufshcd_wb_toggle_buf_flush_during_h8(hba, true);
+-	if (!(hba->quirks & UFSHCI_QUIRK_SKIP_MANUAL_WB_FLUSH_CTRL))
++
++	if (ufshcd_is_wb_buf_flush_allowed(hba))
+ 		ufshcd_wb_toggle_buf_flush(hba, true);
+ }
+ 
+@@ -5843,7 +5844,7 @@ static bool ufshcd_wb_presrv_usrspc_keep_vcc_on(struct ufs_hba *hba,
+ 
+ static void ufshcd_wb_force_disable(struct ufs_hba *hba)
+ {
+-	if (!(hba->quirks & UFSHCI_QUIRK_SKIP_MANUAL_WB_FLUSH_CTRL))
++	if (ufshcd_is_wb_buf_flush_allowed(hba))
+ 		ufshcd_wb_toggle_buf_flush(hba, false);
+ 
+ 	ufshcd_wb_toggle_buf_flush_during_h8(hba, false);

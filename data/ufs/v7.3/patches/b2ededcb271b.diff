@@ -1,0 +1,13 @@
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 8893ea7e4d84..b31c04b5461e 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -2291,7 +2291,7 @@ static void ufs_qcom_config_scaling_param(struct ufs_hba *hba,
+ 	p->polling_ms = 60;
+ 	p->timer = DEVFREQ_TIMER_DELAYED;
+ 	d->upthreshold = 70;
+-	d->downdifferential = 5;
++	d->downdifferential = 65;
+ 
+ 	hba->clk_scaling.suspend_on_no_request = true;
+ }

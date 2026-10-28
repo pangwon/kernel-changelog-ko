@@ -1,0 +1,24 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index bfcfbfb648d1..aed6b7acfcc9 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -8678,6 +8678,9 @@ static int ufshcd_alloc_mcq(struct ufs_hba *hba)
+ 	if (ret)
+ 		goto err;
+ 
++	hba->host->can_queue = hba->nutrs - UFSHCD_NUM_RESERVED;
++	hba->reserved_slot = hba->nutrs - UFSHCD_NUM_RESERVED;
++
+ 	return 0;
+ err:
+ 	hba->nutrs = old_nutrs;
+@@ -8699,9 +8702,6 @@ static void ufshcd_config_mcq(struct ufs_hba *hba)
+ 	ufshcd_mcq_make_queues_operational(hba);
+ 	ufshcd_mcq_config_mac(hba, hba->nutrs);
+ 
+-	hba->host->can_queue = hba->nutrs - UFSHCD_NUM_RESERVED;
+-	hba->reserved_slot = hba->nutrs - UFSHCD_NUM_RESERVED;
+-
+ 	ufshcd_mcq_enable(hba);
+ 	hba->mcq_enabled = true;
+ 

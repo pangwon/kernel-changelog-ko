@@ -1,0 +1,29 @@
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index 58701ca95edd..814c1b7343b9 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -2276,10 +2276,8 @@ static int ufs_mtk_config_mcq_irq(struct ufs_hba *hba)
+ 
+ 		dev_dbg(hba->dev, "request irq %d intr %s\n", irq, ret ? "failed" : "");
+ 
+-		if (ret) {
+-			dev_err(hba->dev, "Cannot request irq %d\n", ret);
++		if (ret)
+ 			return ret;
+-		}
+ 	}
+ 	host->is_mcq_intr_enabled = true;
+ 
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 0500320545c4..62396212a0a7 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -2431,8 +2431,6 @@ static int ufs_qcom_config_esi(struct ufs_hba *hba)
+ 		ret = devm_request_irq(hba->dev, qi[idx].irq, ufs_qcom_mcq_esi_handler,
+ 				       IRQF_SHARED, "qcom-mcq-esi", qi + idx);
+ 		if (ret) {
+-			dev_err(hba->dev, "%s: Failed to request IRQ for %d, err = %d\n",
+-				__func__, qi[idx].irq, ret);
+ 			/* Free previously allocated IRQs */
+ 			for (int j = 0; j < idx; j++)
+ 				devm_free_irq(hba->dev, qi[j].irq, qi + j);

@@ -1,0 +1,41 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 4ca652c02ac2..516e9e06d3c3 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -9777,7 +9777,8 @@ static void ufshcd_vreg_set_lpm(struct ufs_hba *hba)
+ 	 * All UFS devices require delay after VCC power rail is turned-off.
+ 	 */
+ 	if (vcc_off && hba->vreg_info.vcc && !hba->vreg_info.vcc->always_on)
+-		usleep_range(5000, 5100);
++		usleep_range(hba->vcc_off_delay_us,
++			     hba->vcc_off_delay_us + 100);
+ }
+ 
+ #ifdef CONFIG_PM
+@@ -10704,6 +10705,13 @@ int ufshcd_init(struct ufs_hba *hba, void __iomem *mmio_base, unsigned int irq)
+ 						UFS_SLEEP_PWR_MODE,
+ 						UIC_LINK_HIBERN8_STATE);
+ 
++	/*
++	 * Most ufs devices require 1ms delay after vcc is powered off before
++	 * it can be powered on again. Set the default to 2ms. The platform
++	 * drivers can override this setting as needed.
++	 */
++	hba->vcc_off_delay_us = 2000;
++
+ 	init_completion(&hba->dev_cmd.complete);
+ 
+ 	err = ufshcd_hba_init(hba);
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 9425cfd9d00e..752640a3e25f 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -1117,6 +1117,8 @@ struct ufs_hba {
+ 	int critical_health_count;
+ 	atomic_t dev_lvl_exception_count;
+ 	u64 dev_lvl_exception_id;
++
++	u32 vcc_off_delay_us;
+ };
+ 
+ /**

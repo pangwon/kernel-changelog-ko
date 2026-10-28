@@ -1,0 +1,12 @@
+diff --git a/drivers/ufs/host/ufshcd-pci.c b/drivers/ufs/host/ufshcd-pci.c
+index b39239f641f2..b87e03777395 100644
+--- a/drivers/ufs/host/ufshcd-pci.c
++++ b/drivers/ufs/host/ufshcd-pci.c
+@@ -630,6 +630,7 @@ static const struct pci_device_id ufshcd_pci_tbl[] = {
+ 	{ PCI_VDEVICE(INTEL, 0xA847), (kernel_ulong_t)&ufs_intel_mtl_hba_vops },
+ 	{ PCI_VDEVICE(INTEL, 0x7747), (kernel_ulong_t)&ufs_intel_mtl_hba_vops },
+ 	{ PCI_VDEVICE(INTEL, 0xE447), (kernel_ulong_t)&ufs_intel_mtl_hba_vops },
++	{ PCI_VDEVICE(INTEL, 0x4D47), (kernel_ulong_t)&ufs_intel_mtl_hba_vops },
+ 	{ }	/* terminate list */
+ };
+ 

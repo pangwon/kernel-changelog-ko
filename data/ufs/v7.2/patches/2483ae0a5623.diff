@@ -1,0 +1,13 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 9b6cb6b569bc..3441e874eacc 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -5716,7 +5716,7 @@ static inline int ufshcd_transfer_rsp_status(struct ufs_hba *hba,
+ 		default:
+ 			dev_err(hba->dev,
+ 				"Unexpected request response code = %x\n",
+-				result);
++				ufshcd_get_req_rsp(lrbp->ucd_rsp_ptr));
+ 			result = DID_ERROR << 16;
+ 			break;
+ 		}

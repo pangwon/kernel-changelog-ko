@@ -1,0 +1,102 @@
+[
+ {
+  "sha": "c99fab6e80b76422741d34aafc2f930a482afbdd",
+  "subject": "erofs: fix atomic context detection when !CONFIG_DEBUG_LOCK_ALLOC",
+  "files": [
+   "fs/erofs/zdata.c"
+  ]
+ },
+ {
+  "sha": "a28f98103890403717008a3a016744721f87b03e",
+  "subject": "scsi: arm64: dts: mediatek: mt8195: Add UFSHCI node",
+  "files": [
+   "arch/arm64/boot/dts/mediatek/mt8195.dtsi"
+  ]
+ },
+ {
+  "sha": "08a7efc5b02a0620ae16aa9584060e980a69cb55",
+  "subject": "f2fs: vm_unmap_ram() may be called from an invalid context",
+  "files": [
+   "fs/f2fs/data.c"
+  ]
+ },
+ {
+  "sha": "687d974a218a719f7e729bef9c498ec36f18115e",
+  "subject": "dt-bindings: soc: samsung: exynos-sysreg: add hsi2 for ExynosAutov920",
+  "files": [
+   "Documentation/devicetree/bindings/soc/samsung/samsung,exynos-sysreg.yaml"
+  ]
+ },
+ {
+  "sha": "00abee2b18342d6c2f6f37225682fa7ca0d33142",
+  "subject": "arm64: dts: rockchip: Add UFS support on the ROCK 4D",
+  "files": [
+   "arch/arm64/boot/dts/rockchip/rk3576-rock-4d.dts"
+  ]
+ },
+ {
+  "sha": "4292564c71cffd8094abcc52dd4840870d05cd30",
+  "subject": "arm64: dts: exynos: gs101: ufs: add dma-coherent property",
+  "files": [
+   "arch/arm64/boot/dts/exynos/google/gs101.dtsi"
+  ]
+ },
+ {
+  "sha": "66bf410e72348691cfbc222afae4414ed1cc657c",
+  "subject": "arm64: dts: qcom: sm8750: Add UFS nodes for SM8750 QRD board",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8750-qrd.dts"
+  ]
+ },
+ {
+  "sha": "a95d8e3f40756d87c35b1c5b4318297005ddc7ce",
+  "subject": "arm64: dts: qcom: sm8750: Add UFS nodes for SM8750 MTP",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8750-mtp.dts"
+  ]
+ },
+ {
+  "sha": "d288abc3a70efd23a3882de9d2a5effb890f8e40",
+  "subject": "arm64: dts: qcom: sm8750: Add UFS nodes for SM8750 SoC",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8750.dtsi"
+  ]
+ },
+ {
+  "sha": "951ea2f4844c22833f8c3201103c7ed817e7e377",
+  "subject": "fs: convert simple use of generic_file_*_mmap() to .mmap_prepare()",
+  "files": [
+   "fs/9p/vfs_file.c",
+   "fs/adfs/file.c",
+   "fs/affs/file.c",
+   "fs/bfs/file.c",
+   "fs/fat/file.c",
+   "fs/hfs/inode.c",
+   "fs/hfsplus/inode.c",
+   "fs/hostfs/hostfs_kern.c",
+   "fs/hpfs/file.c",
+   "fs/jffs2/file.c",
+   "fs/jfs/file.c",
+   "fs/minix/file.c",
+   "fs/omfs/file.c",
+   "fs/ramfs/file-mmu.c",
+   "fs/read_write.c",
+   "fs/ufs/file.c"
+  ]
+ },
+ {
+  "sha": "e2016763590f571cdc3912d6a7ec848d2b61e6c2",
+  "subject": "arm64: dts: exynosautov920: add CMU_HSI2 clock DT nodes",
+  "files": [
+   "arch/arm64/boot/dts/exynos/exynosautov920.dtsi"
+  ]
+ },
+ {
+  "sha": "5430fd9e0794a21b08ccdc01ddc942b09830c1be",
+  "subject": "arm64: dts: exynos: add initial support for Samsung Galaxy S22+",
+  "files": [
+   "arch/arm64/boot/dts/exynos/Makefile",
+   "arch/arm64/boot/dts/exynos/exynos2200-g0s.dts"
+  ]
+ }
+]

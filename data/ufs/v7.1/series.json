@@ -1,0 +1,317 @@
+[
+ {
+  "id": "20260210070837.1820710-peter.wang@mediatek.com",
+  "title": "scsi: ufs: core: Add debug log for UIC command timeout",
+  "commits": [
+   "01517654bc258efb2610e53e99fa4ef641d134b9",
+   "3abe4113e784b4a1135fe0e89828afecbfebf862"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260210071834.1837878-peter.wang@mediatek.com",
+  "title": "scsi: ufs: core: Support UFSHCI 4.1 CQ entry tag",
+  "commits": [
+   "f707860ebc84dd07148c3855e2f0fa9f41a3ed4a"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260112-milos-ufs-v2-d3ce4f61f030@fairphone.com",
+  "title": "scsi: ufs: qcom,sc7180-ufshc: dt-bindings: Document the Milos UFS Controller",
+  "commits": [
+   "cf44b6369b8350e46e66bb69ef975c5aa22cec5e"
+  ],
+  "authors": [
+   "Luca Weiss"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260211132926.3716716-pradeep.pragallapati@oss.qualcomm.com",
+  "title": "scsi: ufs: qcom,sc7180-ufshc: dt-bindings: Add UFSHC compatible for x1e80100",
+  "commits": [
+   "690d41fae92f0f255b1059d586bf064c63b5bfc3"
+  ],
+  "authors": [
+   "Pradeep P V K"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260305110856.959211-can.guo@oss.qualcomm.com",
+  "title": "scsi: ufs: core: Add support to notify userspace of UniPro QoS events",
+  "commits": [
+   "b5e21a29fe9459aef1e6b20b9315e8f3690f8f31"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260306054419.3816557-peter.wang@mediatek.com",
+  "title": "scsi: ufs: core: Avoid IRQ thread wakeup during active UIC command",
+  "commits": [
+   "6475cfb81fc4f6175b6d15d1c205a5168dc10b46"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260309085815.55216-adrian.hunter@intel.com",
+  "title": "scsi: ufs: ufs-pci: Add support for Intel Nova Lake",
+  "commits": [
+   "096cd6b7adf21791827a045d464242d93a6fd54e"
+  ],
+  "authors": [
+   "Adrian Hunter"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260310005230.4001904-ed.tsai@mediatek.com",
+  "title": "scsi: ufs: core: Add quirks for VCC ramp-up delay",
+  "commits": [
+   "6ab94d0194ddca662da69cf42b98dcf74690ed92",
+   "20ca5460e5f95163b85dda555625a27d1c120ebf"
+  ],
+  "authors": [
+   "Ed Tsai"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260311-eliza-bindings-ufs-v3-498b26864182@oss.qualcomm.com",
+  "title": "scsi: ufs: qcom: dt-bindings: Document the Eliza UFS controller",
+  "commits": [
+   "134b898ccb68f705dff100f097886e6fe53a9566"
+  ],
+  "authors": [
+   "Abel Vesa"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1773368467-109650-1-git-send-email-shawn.lin@rock-chips.com",
+  "title": "scsi: ufs: rockchip,rk3576-ufshc: dt-bindings: Add new mphy reset item",
+  "commits": [
+   "bdce3a69c578090dd5e3c77bcdaaca10c3a41e34"
+  ],
+  "authors": [
+   "Shawn Lin"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260310190308.2474956-vamshigajjela@google.com",
+  "title": "scsi: ufs: core: Handle MCQ IAG events",
+  "commits": [
+   "98eff361647ecba893aadce8808729672604a102"
+  ],
+  "authors": [
+   "vamshi gajjela"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260320215606.3236516-andriy.shevchenko@linux.intel.com",
+  "title": "scsi: ufs: rockchip: Drop unused include",
+  "commits": [
+   "8ad1ddc50d15e35c4b38a207a6856eddfa731194"
+  ],
+  "authors": [
+   "Andy Shevchenko"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260325152154.1604082-can.guo@oss.qualcomm.com",
+  "title": "scsi: ufs: core: Introduce a new ufshcd vops negotiate_pwr_mode()",
+  "commits": [
+   "d3eba21c71708746672587f1de2cc33e6a10d61a",
+   "c91c83671642d6140b703e999e2aff2d7ad57c74",
+   "6669ab18c2238299a685ada1acea1c7d4f1da1d5",
+   "03e5d38e2f985d8d0b0a60508c0b422f664808e3",
+   "10c40143f369a601cc54dd39777843e000b730a6",
+   "dc5dcac5327832bffc1971b1445553823bdebc08",
+   "adbabdcf0db0f929e642f95d7528dce0f6bd3a11",
+   "53c94067efa252e20f813c6eb714dc1cddf06aaa",
+   "385b95893e799885ec54a4ec2e240b1d814205be",
+   "26605db7604deb18cf004cf3ad51e72e5d9b7add",
+   "16cbdc8308776270d76340cd52ac63ac4fbf9968",
+   "57b7943fd87f086a3497ecbecc502b7418ed4ab8"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260331153049.1344957-colin.i.king@gmail.com",
+  "title": "scsi: ufs: ufs-qcom: Fix spelling mistake \"retore\" -> \"restore\"",
+  "commits": [
+   "23c29ca113e3838e9c8473c65dbc147bd058d757"
+  ],
+  "authors": [
+   "Colin Ian King"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260401202506.1445324-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Add a comment block above ufshcd_mcq_compl_all_cqes_lock()",
+  "commits": [
+   "1373df88d53594a32534fd8960c51d1d09be8ecb",
+   "efa1f6a9d7ce9246cb98c85335bba6a797e17584",
+   "6daa8dd037459a1d1b105bd1008fa2a32f8708e5"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260403-thgjfjt0e25baip-no-timestamp-v1-1ddb34225133@gmail.com",
+  "title": "scsi: ufs: core: Disable timestamp for Kioxia THGJFJT0E25BAIP",
+  "commits": [
+   "e423f1c7195645e18945fba0bd8f0a32e39286e7"
+  ],
+  "authors": [
+   "Aaron Kling"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260414033718.1459540-wangshuaiwei1@xiaomi.com",
+  "title": "scsi: ufs: core: Fix bRefClkFreq write failure in HS-LSS mode",
+  "commits": [
+   "b06cf63d83d3b3744d3aefdd2f3ced25e99d7ec1"
+  ],
+  "authors": [
+   "Wang Shuaiwei"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260415104851.2763238-nitin.rawat@oss.qualcomm.com",
+  "title": "phy: qcom-qmp-ufs: Fix kaanapali PHY PLL lock failure after SM8650 G4 fix",
+  "commits": [
+   "80305760d7a55b884fb9023c490b75568d1ea0b1"
+  ],
+  "authors": [
+   "Nitin Rawat"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260416-qcom_ice_power_and_clk_vote-v5-5ccf5d7e2846@oss.qualcomm.com",
+  "title": "soc: qcom: ice: Allow explicit votes on 'iface' clock for ICE",
+  "commits": [
+   "0d5dc5818191b55e4364d04b1b898a14a2ccac38"
+  ],
+  "authors": [
+   "Harshal Dev"
+  ],
+  "areas": [
+   "crypto"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260518-qcom-ice-fix-v7-2a595382185b@oss.qualcomm.com",
+  "title": "soc: qcom: ice: Fix race between qcom_ice_probe() and of_qcom_ice_get()",
+  "commits": [
+   "d922113ef91e6e7e8065e9070f349365341ba32e",
+   "5a4dc805a80e6fe303d6a4748cd451ea15987ffd",
+   "b9ab7217dd7d567c50311afa94d6d6746cb77e04",
+   "4ac19b36bf4108706238cbc4f300b17dba8b881e"
+  ],
+  "authors": [
+   "Manivannan Sadhasivam"
+  ],
+  "areas": [
+   "crypto",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260520155704.130803-manivannan.sadhasivam@oss.qualcomm.com",
+  "title": "soc: qcom: ice: Fix the error code when 'qcom,ice' property is not found",
+  "commits": [
+   "462a85f9f887a4fef36550bb76c7f7d7a0fa296c"
+  ],
+  "authors": [
+   "Manivannan Sadhasivam"
+  ],
+  "areas": [
+   "crypto"
+  ],
+  "summary_ko": null
+ }
+]

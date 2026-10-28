@@ -1,0 +1,24 @@
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index bc037db46624..9c0973a7ffc3 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -177,14 +177,14 @@ static int ufs_qcom_ice_init(struct ufs_qcom_host *host)
+ 	int i;
+ 
+ 	ice = devm_of_qcom_ice_get(dev);
+-	if (ice == ERR_PTR(-EOPNOTSUPP)) {
++	if (IS_ERR(ice)) {
++		if (ice != ERR_PTR(-EOPNOTSUPP))
++			return PTR_ERR(ice);
++
+ 		dev_warn(dev, "Disabling inline encryption support\n");
+-		ice = NULL;
++		return 0;
+ 	}
+ 
+-	if (IS_ERR_OR_NULL(ice))
+-		return PTR_ERR_OR_ZERO(ice);
+-
+ 	host->ice = ice;
+ 
+ 	/* Initialize the blk_crypto_profile */

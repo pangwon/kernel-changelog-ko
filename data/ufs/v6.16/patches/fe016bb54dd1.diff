@@ -1,0 +1,40 @@
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 1b37449fbffc..f5181773c0e5 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -1573,6 +1573,15 @@ static void ufs_qcom_dump_dbg_regs(struct ufs_hba *hba)
+ 
+ 	host = ufshcd_get_variant(hba);
+ 
++	dev_err(hba->dev, "HW_H8_ENTER_CNT=%d\n", ufshcd_readl(hba, REG_UFS_HW_H8_ENTER_CNT));
++	dev_err(hba->dev, "HW_H8_EXIT_CNT=%d\n", ufshcd_readl(hba, REG_UFS_HW_H8_EXIT_CNT));
++
++	dev_err(hba->dev, "SW_H8_ENTER_CNT=%d\n", ufshcd_readl(hba, REG_UFS_SW_H8_ENTER_CNT));
++	dev_err(hba->dev, "SW_H8_EXIT_CNT=%d\n", ufshcd_readl(hba, REG_UFS_SW_H8_EXIT_CNT));
++
++	dev_err(hba->dev, "SW_AFTER_HW_H8_ENTER_CNT=%d\n",
++			ufshcd_readl(hba, REG_UFS_SW_AFTER_HW_H8_ENTER_CNT));
++
+ 	ufshcd_dump_regs(hba, REG_UFS_SYS1CLK_1US, 16 * 4,
+ 			 "HCI Vendor Specific Registers ");
+ 
+diff --git a/drivers/ufs/host/ufs-qcom.h b/drivers/ufs/host/ufs-qcom.h
+index d0e6ec9128e7..792a68c2ca95 100644
+--- a/drivers/ufs/host/ufs-qcom.h
++++ b/drivers/ufs/host/ufs-qcom.h
+@@ -75,6 +75,15 @@ enum {
+ 	UFS_UFS_DBG_RD_EDTL_RAM			= 0x1900,
+ };
+ 
++/* QCOM UFS HC vendor specific Hibern8 count registers */
++enum {
++	REG_UFS_HW_H8_ENTER_CNT			= 0x2700,
++	REG_UFS_SW_H8_ENTER_CNT			= 0x2704,
++	REG_UFS_SW_AFTER_HW_H8_ENTER_CNT	= 0x2708,
++	REG_UFS_HW_H8_EXIT_CNT			= 0x270C,
++	REG_UFS_SW_H8_EXIT_CNT			= 0x2710,
++};
++
+ enum {
+ 	UFS_MEM_CQIS_VS		= 0x8,
+ };

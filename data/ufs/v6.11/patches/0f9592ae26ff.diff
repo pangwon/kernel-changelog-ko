@@ -1,0 +1,14 @@
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index 02c9064284e1..9a5919434c4e 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -1026,6 +1026,9 @@ static int ufs_mtk_init(struct ufs_hba *hba)
+ 	if (host->caps & UFS_MTK_CAP_DISABLE_AH8)
+ 		hba->caps |= UFSHCD_CAP_HIBERN8_WITH_CLK_GATING;
+ 
++	if (host->caps & UFS_MTK_CAP_DISABLE_MCQ)
++		hba->quirks |= UFSHCD_QUIRK_BROKEN_LSDBS_CAP;
++
+ 	ufs_mtk_init_clocks(hba);
+ 
+ 	/*

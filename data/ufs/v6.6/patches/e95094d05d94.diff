@@ -1,0 +1,11 @@
+diff --git a/Documentation/devicetree/bindings/ufs/qcom,ufs.yaml b/Documentation/devicetree/bindings/ufs/qcom,ufs.yaml
+index 2b0831622cf0..462ead5a1cec 100644
+--- a/Documentation/devicetree/bindings/ufs/qcom,ufs.yaml
++++ b/Documentation/devicetree/bindings/ufs/qcom,ufs.yaml
+@@ -317,5 +317,6 @@ examples:
+                             <0 0>,
+                             <0 0>,
+                             <0 0>;
++            qcom,ice = <&ice>;
+         };
+     };

@@ -1,0 +1,12 @@
+diff --git a/drivers/ufs/core/ufshcd-crypto.h b/drivers/ufs/core/ufshcd-crypto.h
+index c148a5194378..8f66db94e179 100644
+--- a/drivers/ufs/core/ufshcd-crypto.h
++++ b/drivers/ufs/core/ufshcd-crypto.h
+@@ -8,7 +8,6 @@
+ 
+ #include <scsi/scsi_cmnd.h>
+ #include <ufs/ufshcd.h>
+-#include "ufshcd-priv.h"
+ #include <ufs/ufshci.h>
+ 
+ #ifdef CONFIG_SCSI_UFS_CRYPTO

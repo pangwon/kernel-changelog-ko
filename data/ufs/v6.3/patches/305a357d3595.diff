@@ -1,0 +1,64 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 6ba05976c139..64e04619326f 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -92,6 +92,28 @@
+ /* Polling time to wait for fDeviceInit */
+ #define FDEVICEINIT_COMPL_TIMEOUT 1500 /* millisecs */
+ 
++/* UFSHC 4.0 compliant HC support this mode, refer param_set_mcq_mode() */
++static bool use_mcq_mode = true;
++
++static int param_set_mcq_mode(const char *val, const struct kernel_param *kp)
++{
++	int ret;
++
++	ret = param_set_bool(val, kp);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++static const struct kernel_param_ops mcq_mode_ops = {
++	.set = param_set_mcq_mode,
++	.get = param_get_bool,
++};
++
++module_param_cb(use_mcq_mode, &mcq_mode_ops, &use_mcq_mode, 0644);
++MODULE_PARM_DESC(use_mcq_mode, "Control MCQ mode for controllers starting from UFSHCI 4.0. 1 - enable MCQ, 0 - disable MCQ. MCQ is enabled by default");
++
+ #define ufshcd_toggle_vreg(_dev, _vreg, _on)				\
+ 	({                                                              \
+ 		int _ret;                                               \
+@@ -2261,6 +2283,10 @@ static inline int ufshcd_hba_capabilities(struct ufs_hba *hba)
+ 	if (err)
+ 		dev_err(hba->dev, "crypto setup failed\n");
+ 
++	hba->mcq_sup = FIELD_GET(MASK_MCQ_SUPPORT, hba->capabilities);
++	if (!hba->mcq_sup)
++		return err;
++
+ 	hba->mcq_capabilities = ufshcd_readl(hba, REG_MCQCAP);
+ 	hba->ext_iid_sup = FIELD_GET(MASK_EXT_IID_SUPPORT,
+ 				     hba->mcq_capabilities);
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 8f2080f9fdb5..514687d2de54 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -843,6 +843,7 @@ struct ufs_hba_monitor {
+  * @complete_put: whether or not to call ufshcd_rpm_put() from inside
+  *	ufshcd_resume_complete()
+  * @ext_iid_sup: is EXT_IID is supported by UFSHC
++ * @mcq_sup: is mcq supported by UFSHC
+  */
+ struct ufs_hba {
+ 	void __iomem *mmio_base;
+@@ -995,6 +996,7 @@ struct ufs_hba {
+ 	u32 luns_avail;
+ 	bool complete_put;
+ 	bool ext_iid_sup;
++	bool mcq_sup;
+ };
+ 
+ #ifdef CONFIG_SCSI_UFS_VARIABLE_SG_ENTRY_SIZE

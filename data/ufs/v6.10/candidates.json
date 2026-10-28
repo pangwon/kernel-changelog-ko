@@ -1,0 +1,151 @@
+[
+ {
+  "sha": "b164316808ec5de391c3e7b0148ec937d32d280d",
+  "subject": "null_blk: Do not allow runt zone with zone capacity smaller then zone size",
+  "files": [
+   "drivers/block/null_blk/zoned.c"
+  ]
+ },
+ {
+  "sha": "aa4074e8fec4d2e686daee627fcafb3503efe365",
+  "subject": "f2fs: fix block migration when section is not aligned to pow2",
+  "files": [
+   "fs/f2fs/data.c"
+  ]
+ },
+ {
+  "sha": "59e377a124dc9039d9554d823b1cb4942bcee9a0",
+  "subject": "dt-bindings: phy: qcom,sc8280xp-qmp-ufs-phy: fix msm899[68] power-domains",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "5ed79863fae5c06eb33f5cd6b6bdf22dd7089392",
+  "subject": "pinctrl: qcom: pinctrl-sm7150: Fix sdc1 and ufs special pins regs",
+  "files": [
+   "drivers/pinctrl/qcom/pinctrl-sm7150.c"
+  ]
+ },
+ {
+  "sha": "aaafb21e8190cd2bc8cadf3e0f017bc5c11bb109",
+  "subject": "arm64: dts: exynos: gs101: enable ufs, phy on oriole & define ufs regulator",
+  "files": [
+   "arch/arm64/boot/dts/exynos/google/gs101-oriole.dts"
+  ]
+ },
+ {
+  "sha": "4c65d7054b4ce8ceb30ba2b8aed90ceff6158d73",
+  "subject": "arm64: dts: exynos: gs101: Add ufs and ufs-phy dt nodes",
+  "files": [
+   "arch/arm64/boot/dts/exynos/google/gs101.dtsi"
+  ]
+ },
+ {
+  "sha": "b5f5fe4b317c0fbda725a44d9c92d97930ad68e9",
+  "subject": "arm64: dts: exynos: gs101: Add the hsi2 sysreg node",
+  "files": [
+   "arch/arm64/boot/dts/exynos/google/gs101.dtsi"
+  ]
+ },
+ {
+  "sha": "86124c76683e31033180f1d31e7543863ce6d850",
+  "subject": "arm64: dts: exynos: gs101: enable cmu-hsi2 clock controller",
+  "files": [
+   "arch/arm64/boot/dts/exynos/google/gs101.dtsi"
+  ]
+ },
+ {
+  "sha": "093c290084a494844f1650e70755b8912292ee14",
+  "subject": "clk: samsung: gs101: add support for cmu_hsi2",
+  "files": [
+   "drivers/clk/samsung/clk-gs101.c"
+  ]
+ },
+ {
+  "sha": "01aea123b11c7ebbdd64b2df3a4a5a7ad86a460d",
+  "subject": "dt-bindings: clock: google,gs101-clock: add HSI2 clock management unit",
+  "files": [
+   "Documentation/devicetree/bindings/clock/google,gs101-clock.yaml",
+   "include/dt-bindings/clock/google,gs101.h"
+  ]
+ },
+ {
+  "sha": "ecfe43b11b02ffeb24c203af7d3947417d412cf7",
+  "subject": "block: Remember zone capacity when revalidating zones",
+  "files": [
+   "block/blk-zoned.c",
+   "include/linux/blkdev.h"
+  ]
+ },
+ {
+  "sha": "6c747d0fe72a85157ec9b95a3100fb98c81ad456",
+  "subject": "arm64: dts: qcom: sc7180: Fix UFS PHY clocks",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sc7180.dtsi"
+  ]
+ },
+ {
+  "sha": "0338e1d2f933a4ec7ae96ed1f40c39b899e357d7",
+  "subject": "MAINTAINERS: Add phy-gs101-ufs file to Tensor GS101.",
+  "files": [
+   "MAINTAINERS"
+  ]
+ },
+ {
+  "sha": "724e4fc053fe217d0ed477517ae68db11feab1f5",
+  "subject": "dt-bindings: phy: samsung,ufs-phy: Add dedicated gs101-ufs-phy compatible",
+  "files": [
+   "Documentation/devicetree/bindings/phy/samsung,ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "7c1f42967b75bdcd0640c52d37d58d8dd122989b",
+  "subject": "dt-bindings: phy: qmp-ufs: Fix PHY clocks for SC7180",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "58dc9622d5de6ce0b80969b136e8e09a7645eca5",
+  "subject": "arm64: dts: qcom: qcs6490-rb3gen2: Enable UFS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts"
+  ]
+ },
+ {
+  "sha": "dfd5ee7b34bb7611d4d2f4f3cb37152baeaae96d",
+  "subject": "arm64: dts: qcom: sc7280: Add inline crypto engine",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sc7280.dtsi"
+  ]
+ },
+ {
+  "sha": "cb06e2b406279f65890233af103c638d3752d328",
+  "subject": "arm64: dts: qcom: sm8350: Add interconnects to UFS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8350.dtsi"
+  ]
+ },
+ {
+  "sha": "5787731c7467faeb1bcbe5a64e1a86fb7987bbaa",
+  "subject": "dt-bindings: phy: Add QMP UFS PHY comptible for SM8475",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "42ee55cb2e27d8bf3d26b8c4199727df029a5878",
+  "subject": "arm64: dts: qcom: sc8180x-lenovo-flex-5g: Allow UFS regulators load/mode setting",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sc8180x-lenovo-flex-5g.dts"
+  ]
+ },
+ {
+  "sha": "2b621971554a94094cf489314dc1c2b65401965c",
+  "subject": "arm64: dts: qcom: sc8280xp: add missing PCIe minimum OPP",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sc8280xp.dtsi"
+  ]
+ }
+]

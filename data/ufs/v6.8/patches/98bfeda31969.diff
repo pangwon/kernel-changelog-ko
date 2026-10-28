@@ -1,0 +1,20 @@
+diff --git a/Documentation/devicetree/bindings/ufs/qcom,ufs.yaml b/Documentation/devicetree/bindings/ufs/qcom,ufs.yaml
+index 462ead5a1cec..802640efa956 100644
+--- a/Documentation/devicetree/bindings/ufs/qcom,ufs.yaml
++++ b/Documentation/devicetree/bindings/ufs/qcom,ufs.yaml
+@@ -27,6 +27,7 @@ properties:
+           - qcom,msm8996-ufshc
+           - qcom,msm8998-ufshc
+           - qcom,sa8775p-ufshc
++          - qcom,sc7280-ufshc
+           - qcom,sc8280xp-ufshc
+           - qcom,sdm845-ufshc
+           - qcom,sm6115-ufshc
+@@ -117,6 +118,7 @@ allOf:
+             enum:
+               - qcom,msm8998-ufshc
+               - qcom,sa8775p-ufshc
++              - qcom,sc7280-ufshc
+               - qcom,sc8280xp-ufshc
+               - qcom,sm8250-ufshc
+               - qcom,sm8350-ufshc

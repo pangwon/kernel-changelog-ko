@@ -1,0 +1,365 @@
+[
+ {
+  "id": "20260427070048.18017-krzysztof.kozlowski@oss.qualcomm.com",
+  "title": "scsi: ufs: qcom: Unify user-visible \"Qualcomm\" name",
+  "commits": [
+   "0bdf7d7ee75da076eabcfa9b5fadd0ed0524df43"
+  ],
+  "authors": [
+   "Krzysztof Kozlowski"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260427013115.231731-shengchao.guo@oss.qualcomm.com",
+  "title": "scsi: ufs: dt-bindings: Add compatible for Nord UFS Host Controller",
+  "commits": [
+   "c9ee94c7e2fb65a433b505d7bcf4c2b6ee81b86c",
+   "7030e16247dc9fb044371141c513581067c8e574"
+  ],
+  "authors": [
+   "Deepti Jaggi",
+   "Shawn Guo"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260417121452.827054-alim.akhtar@samsung.com",
+  "title": "scsi: ufs: exynos: dt-bindings: Add ExynosAutov920 compatible string",
+  "commits": [
+   "45c9dee6d6531bf1d0e0dbf577fb59850e34f6d0",
+   "50349bd5d0ab6d6f7e106a6cb1cdbf2bcfb75e08"
+  ],
+  "authors": [
+   "Sowon Na"
+  ],
+  "areas": [
+   "bindings",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260424151420.111675-can.guo@oss.qualcomm.com",
+  "title": "scsi: ufs: core: Introduce function ufshcd_query_attr_qword()",
+  "commits": [
+   "f2cb7c01f48caffb38e12481949dea4f9beb65dc",
+   "949af038b6d2a41c54502179c5a8ddfb3d57dd17"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260314051325.198137-shengchao.guo@oss.qualcomm.com",
+  "title": "phy: qcom-qmp: Use explicit QSERDES COM v2 register definitions",
+  "commits": [
+   "764f409b840ab400253215e765a72b903feb6afd",
+   "c7cd4798fafa84581502094d0be282072851c9b7"
+  ],
+  "authors": [
+   "Shawn Guo"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "ff015bf46ad395702f40c85c8359fd24957e7224.1777968942.git.u.kleine-koenig@baylibre.com",
+  "title": "scsi: ufs: tc-dwc-g210-pci: Simplify initialization of pci_device_id array",
+  "commits": [
+   "2a18c57560f454e2e63373ecf00e4a6fb0265600"
+  ],
+  "authors": [
+   "Uwe Kleine-König (The Capable Hub)"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "6cac1c22381f7026edad9854d70833381d14929a.1777968942.git.u.kleine-koenig@baylibre.com",
+  "title": "scsi: ufs: ufshcd-pci: Use PCI_VDEVICE and named initializers for pci array",
+  "commits": [
+   "8ef4c72dbbfda41b8f83a9b5a275feaf4a30ea21"
+  ],
+  "authors": [
+   "Uwe Kleine-König (The Capable Hub)"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260423102023.3779489-palash.kambar@oss.qualcomm.com",
+  "title": "scsi: ufs: core: Configure only active lanes during link",
+  "commits": [
+   "e72323f3b09f9c890fa93a74197bbc290d39d981",
+   "76417038c4d61fc3d407625c0b9332942f13e142"
+  ],
+  "authors": [
+   "Palash Kambar"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260501131641.826258-can.guo@oss.qualcomm.com",
+  "title": "scsi: ufs: core: Add a quirk for extended TX EQTR Adapt L0L1L2L3 length",
+  "commits": [
+   "8933fa6695aaea6559d3469581139a4c1f427369",
+   "0f51fd84684316375d5c191a1ec5e18743fb1601"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260519212135.3130556-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Inline two functions related to UIC commands",
+  "commits": [
+   "727e78887e62e16be30ec7ecf62017f0a86d53bd",
+   "9fb4c793223b618da6bee50840746522a7da226e",
+   "f8380c57dcff5ac3b32393a05ff6a6ff0108bf3e"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260520070009epcms2p6542f3abb7660839e9d8140b3f2f145c3@epcms2p6",
+  "title": "scsi: ufs: core: Skip link param validation when lanes_per_direction is unset",
+  "commits": [
+   "06a34d9c1f47b923bb554de25406a5251b047379"
+  ],
+  "authors": [
+   "Daejun Park"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260529010739.295391-cw9316.lee@samsung.com",
+  "title": "scsi: ufs: core: Fix NULL pointer dereference in scsi_cmd_priv() calls",
+  "commits": [
+   "4cf752f6b99ab63506cde5a611d4219e97adbd84"
+  ],
+  "authors": [
+   "Chanwoo Lee"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260527092134.275887-cw9316.lee@samsung.com",
+  "title": "scsi: ufs: Fix wrong value printed in unexpected UPIU response case",
+  "commits": [
+   "2483ae0a56231a915c706411421c6c002a2bf83e"
+  ],
+  "authors": [
+   "Chanwoo Lee"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260529061503.301182-cw9316.lee@samsung.com",
+  "title": "scsi: ufs: Remove unnecessary return in void vops wrappers",
+  "commits": [
+   "6bfc4bfd041d7ddeab9791f0592284585e960be4"
+  ],
+  "authors": [
+   "Chanwoo Lee"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260529061623.301291-cw9316.lee@samsung.com",
+  "title": "scsi: ufs: Remove redundant vops NULL check and trivial wrapper",
+  "commits": [
+   "0600eec09ad6cc5ba3ca78aceb6fa8dcbad010bb"
+  ],
+  "authors": [
+   "Chanwoo Lee"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260526090956.2340262-palash.kambar@oss.qualcomm.com",
+  "title": "scsi: ufs: qcom: dt-bindings: Document the Hawi UFS controller",
+  "commits": [
+   "63977ab3c6a07e5f50c95d0c8fd83d37d56812a8"
+  ],
+  "authors": [
+   "Palash Kambar"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260605112034.3802540-hongjiefang@asrmicro.com",
+  "title": "scsi: ufs: core: Handle PM commands timeout before SCSI EH",
+  "commits": [
+   "01d5e237b33931b970dd190dd6a19c5ef32c105d"
+  ],
+  "authors": [
+   "Hongjie Fang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260602095931.2869516-Rajeshkumar.Sambandham@amd.com",
+  "title": "scsi: ufs: ufs-pci: Add AMD device ID support",
+  "commits": [
+   "9d87e0db00e9a2d281d11ae226eaf4d9b47376e2"
+  ],
+  "authors": [
+   "Rajeshkumar Sambandham"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1a3f2007c5c5dcf555c09a4035ce3ae8ef1b6c49.1782808461.git.u.kleine-koenig@baylibre.com",
+  "title": "Replace <linux/mod_devicetable.h> by more specific <linux/device-id/*.h> (c files)",
+  "commits": [
+   "995832b2cebe6969d1b42635db698803ee31294d"
+  ],
+  "authors": [
+   "Uwe Kleine-König (The Capable Hub)"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260630185412.283c26c5@gandalf.local.home",
+  "title": "ufs: core: tracing: Do not dereference pointers in TP_printk()",
+  "commits": [
+   "535fcf4b8a261fbb8cc4f91e4597343c135a90f2",
+   "46aea2c64e110ed1878fa5363f86ddc8fd79c9c4"
+  ],
+  "authors": [
+   "Steven Rostedt"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260720023552.2667237-shengchao.guo@oss.qualcomm.com",
+  "title": "scsi: ufs: dt-bindings: Add missing mcq reg for qcom,sa8255p-ufshc",
+  "commits": [
+   "4d5282c06ca198319c2de41b10511ddcb8068f42"
+  ],
+  "authors": [
+   "Shawn Guo"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260714172726.1736967-lgs201920130244@gmail.com",
+  "title": "scsi: ufs: core: Cancel RTC work in active-active suspend",
+  "commits": [
+   "f71b4a30983b846b4075bf544e835121e70e6a43"
+  ],
+  "authors": [
+   "Guangshuo Li"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "b70eb60a01f971bed68c42c5b555929db5f835df.1784135511.git.bvanassche@acm.org",
+  "title": "scsi: ufs: core: Revert \"Delegate the interrupt service routine to a threaded IRQ handler\"",
+  "commits": [
+   "8a309036f557d3ff4efb2beea5132ba91172d934"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260723034440.217-ao.sun@transsion.com",
+  "title": "scsi: ufs: core: Initialize hba->rpmbs list in ufshcd",
+  "commits": [
+   "0279fd451a9971c0d5b959fc59f3e11b55e1694e"
+  ],
+  "authors": [
+   "Ao Sun"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20260729111614.2407559-hongjiefang@asrmicro.com",
+  "title": "scsi: core: pair EH runtime PM get and put",
+  "commits": [
+   "872f486259ae0bc6b73ca4735a15d013241f73e9"
+  ],
+  "authors": [
+   "Hongjie Fang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ }
+]

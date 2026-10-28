@@ -1,0 +1,228 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index f84af598af33..00f730671f4b 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -9950,9 +9950,7 @@ EXPORT_SYMBOL(ufshcd_runtime_resume);
+ static void ufshcd_wl_shutdown(struct device *dev)
+ {
+ 	struct scsi_device *sdev = to_scsi_device(dev);
+-	struct ufs_hba *hba;
+-
+-	hba = shost_priv(sdev->host);
++	struct ufs_hba *hba = shost_priv(sdev->host);
+ 
+ 	down(&hba->host_sem);
+ 	hba->shutting_down = true;
+@@ -9967,27 +9965,16 @@ static void ufshcd_wl_shutdown(struct device *dev)
+ 		scsi_device_quiesce(sdev);
+ 	}
+ 	__ufshcd_wl_suspend(hba, UFS_SHUTDOWN_PM);
+-}
+ 
+-/**
+- * ufshcd_shutdown - shutdown routine
+- * @hba: per adapter instance
+- *
+- * This function would turn off both UFS device and UFS hba
+- * regulators. It would also disable clocks.
+- *
+- * Returns 0 always to allow force shutdown even in case of errors.
+- */
+-int ufshcd_shutdown(struct ufs_hba *hba)
+-{
++	/*
++	 * Next, turn off the UFS controller and the UFS regulators. Disable
++	 * clocks.
++	 */
+ 	if (ufshcd_is_ufs_dev_poweroff(hba) && ufshcd_is_link_off(hba))
+ 		ufshcd_suspend(hba);
+ 
+ 	hba->is_powered = false;
+-	/* allow force shutdown even in case of errors */
+-	return 0;
+ }
+-EXPORT_SYMBOL(ufshcd_shutdown);
+ 
+ /**
+  * ufshcd_remove - de-allocate SCSI host and host memory space
+diff --git a/drivers/ufs/host/cdns-pltfrm.c b/drivers/ufs/host/cdns-pltfrm.c
+index e05c0ae64eea..26761425a76c 100644
+--- a/drivers/ufs/host/cdns-pltfrm.c
++++ b/drivers/ufs/host/cdns-pltfrm.c
+@@ -328,7 +328,6 @@ static const struct dev_pm_ops cdns_ufs_dev_pm_ops = {
+ static struct platform_driver cdns_ufs_pltfrm_driver = {
+ 	.probe	= cdns_ufs_pltfrm_probe,
+ 	.remove	= cdns_ufs_pltfrm_remove,
+-	.shutdown = ufshcd_pltfrm_shutdown,
+ 	.driver	= {
+ 		.name   = "cdns-ufshcd",
+ 		.pm     = &cdns_ufs_dev_pm_ops,
+diff --git a/drivers/ufs/host/tc-dwc-g210-pci.c b/drivers/ufs/host/tc-dwc-g210-pci.c
+index 92b8ad4b58fe..f96fe5855841 100644
+--- a/drivers/ufs/host/tc-dwc-g210-pci.c
++++ b/drivers/ufs/host/tc-dwc-g210-pci.c
+@@ -32,15 +32,6 @@ static struct ufs_hba_variant_ops tc_dwc_g210_pci_hba_vops = {
+ 	.link_startup_notify	= ufshcd_dwc_link_startup_notify,
+ };
+ 
+-/**
+- * tc_dwc_g210_pci_shutdown - main function to put the controller in reset state
+- * @pdev: pointer to PCI device handle
+- */
+-static void tc_dwc_g210_pci_shutdown(struct pci_dev *pdev)
+-{
+-	ufshcd_shutdown((struct ufs_hba *)pci_get_drvdata(pdev));
+-}
+-
+ /**
+  * tc_dwc_g210_pci_remove - de-allocate PCI/SCSI host and host memory space
+  *		data structure memory
+@@ -137,7 +128,6 @@ static struct pci_driver tc_dwc_g210_pci_driver = {
+ 	.id_table = tc_dwc_g210_pci_tbl,
+ 	.probe = tc_dwc_g210_pci_probe,
+ 	.remove = tc_dwc_g210_pci_remove,
+-	.shutdown = tc_dwc_g210_pci_shutdown,
+ 	.driver = {
+ 		.pm = &tc_dwc_g210_pci_pm_ops
+ 	},
+diff --git a/drivers/ufs/host/tc-dwc-g210-pltfrm.c b/drivers/ufs/host/tc-dwc-g210-pltfrm.c
+index f15a84d0c176..4d5389dd9585 100644
+--- a/drivers/ufs/host/tc-dwc-g210-pltfrm.c
++++ b/drivers/ufs/host/tc-dwc-g210-pltfrm.c
+@@ -92,7 +92,6 @@ static const struct dev_pm_ops tc_dwc_g210_pltfm_pm_ops = {
+ static struct platform_driver tc_dwc_g210_pltfm_driver = {
+ 	.probe		= tc_dwc_g210_pltfm_probe,
+ 	.remove		= tc_dwc_g210_pltfm_remove,
+-	.shutdown = ufshcd_pltfrm_shutdown,
+ 	.driver		= {
+ 		.name	= "tc-dwc-g210-pltfm",
+ 		.pm	= &tc_dwc_g210_pltfm_pm_ops,
+diff --git a/drivers/ufs/host/ufs-exynos.c b/drivers/ufs/host/ufs-exynos.c
+index 0bf5390739e1..f41056f57fd7 100644
+--- a/drivers/ufs/host/ufs-exynos.c
++++ b/drivers/ufs/host/ufs-exynos.c
+@@ -1757,7 +1757,6 @@ static const struct dev_pm_ops exynos_ufs_pm_ops = {
+ static struct platform_driver exynos_ufs_pltform = {
+ 	.probe	= exynos_ufs_probe,
+ 	.remove	= exynos_ufs_remove,
+-	.shutdown = ufshcd_pltfrm_shutdown,
+ 	.driver	= {
+ 		.name	= "exynos-ufshc",
+ 		.pm	= &exynos_ufs_pm_ops,
+diff --git a/drivers/ufs/host/ufs-hisi.c b/drivers/ufs/host/ufs-hisi.c
+index 4c423eba8aa9..18b72e2e68c1 100644
+--- a/drivers/ufs/host/ufs-hisi.c
++++ b/drivers/ufs/host/ufs-hisi.c
+@@ -593,7 +593,6 @@ static const struct dev_pm_ops ufs_hisi_pm_ops = {
+ static struct platform_driver ufs_hisi_pltform = {
+ 	.probe	= ufs_hisi_probe,
+ 	.remove	= ufs_hisi_remove,
+-	.shutdown = ufshcd_pltfrm_shutdown,
+ 	.driver	= {
+ 		.name	= "ufshcd-hisi",
+ 		.pm	= &ufs_hisi_pm_ops,
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index 73e217260390..e89b625d3c5a 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -1650,7 +1650,6 @@ static const struct dev_pm_ops ufs_mtk_pm_ops = {
+ static struct platform_driver ufs_mtk_pltform = {
+ 	.probe      = ufs_mtk_probe,
+ 	.remove     = ufs_mtk_remove,
+-	.shutdown   = ufshcd_pltfrm_shutdown,
+ 	.driver = {
+ 		.name   = "ufshcd-mtk",
+ 		.pm     = &ufs_mtk_pm_ops,
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 82d02e7f3b4f..059de74dfea3 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -1723,7 +1723,6 @@ static const struct dev_pm_ops ufs_qcom_pm_ops = {
+ static struct platform_driver ufs_qcom_pltform = {
+ 	.probe	= ufs_qcom_probe,
+ 	.remove	= ufs_qcom_remove,
+-	.shutdown = ufshcd_pltfrm_shutdown,
+ 	.driver	= {
+ 		.name	= "ufshcd-qcom",
+ 		.pm	= &ufs_qcom_pm_ops,
+diff --git a/drivers/ufs/host/ufs-sprd.c b/drivers/ufs/host/ufs-sprd.c
+index 051f3f40d92c..2bad75dd6d58 100644
+--- a/drivers/ufs/host/ufs-sprd.c
++++ b/drivers/ufs/host/ufs-sprd.c
+@@ -444,7 +444,6 @@ static const struct dev_pm_ops ufs_sprd_pm_ops = {
+ static struct platform_driver ufs_sprd_pltform = {
+ 	.probe = ufs_sprd_probe,
+ 	.remove = ufs_sprd_remove,
+-	.shutdown = ufshcd_pltfrm_shutdown,
+ 	.driver = {
+ 		.name = "ufshcd-sprd",
+ 		.pm = &ufs_sprd_pm_ops,
+diff --git a/drivers/ufs/host/ufshcd-pci.c b/drivers/ufs/host/ufshcd-pci.c
+index 9c911787f84c..38276dac8e52 100644
+--- a/drivers/ufs/host/ufshcd-pci.c
++++ b/drivers/ufs/host/ufshcd-pci.c
+@@ -504,15 +504,6 @@ static int ufshcd_pci_restore(struct device *dev)
+ }
+ #endif
+ 
+-/**
+- * ufshcd_pci_shutdown - main function to put the controller in reset state
+- * @pdev: pointer to PCI device handle
+- */
+-static void ufshcd_pci_shutdown(struct pci_dev *pdev)
+-{
+-	ufshcd_shutdown((struct ufs_hba *)pci_get_drvdata(pdev));
+-}
+-
+ /**
+  * ufshcd_pci_remove - de-allocate PCI/SCSI host and host memory space
+  *		data structure memory
+@@ -618,7 +609,6 @@ static struct pci_driver ufshcd_pci_driver = {
+ 	.id_table = ufshcd_pci_tbl,
+ 	.probe = ufshcd_pci_probe,
+ 	.remove = ufshcd_pci_remove,
+-	.shutdown = ufshcd_pci_shutdown,
+ 	.driver = {
+ 		.pm = &ufshcd_pci_pm_ops
+ 	},
+diff --git a/drivers/ufs/host/ufshcd-pltfrm.c b/drivers/ufs/host/ufshcd-pltfrm.c
+index 5739ff007828..0b7430033047 100644
+--- a/drivers/ufs/host/ufshcd-pltfrm.c
++++ b/drivers/ufs/host/ufshcd-pltfrm.c
+@@ -190,12 +190,6 @@ out:
+ 	return err;
+ }
+ 
+-void ufshcd_pltfrm_shutdown(struct platform_device *pdev)
+-{
+-	ufshcd_shutdown((struct ufs_hba *)platform_get_drvdata(pdev));
+-}
+-EXPORT_SYMBOL_GPL(ufshcd_pltfrm_shutdown);
+-
+ static void ufshcd_init_lanes_per_dir(struct ufs_hba *hba)
+ {
+ 	struct device *dev = hba->dev;
+diff --git a/drivers/ufs/host/ufshcd-pltfrm.h b/drivers/ufs/host/ufshcd-pltfrm.h
+index 2e4ba2bfbcad..2df108f4ac13 100644
+--- a/drivers/ufs/host/ufshcd-pltfrm.h
++++ b/drivers/ufs/host/ufshcd-pltfrm.h
+@@ -31,7 +31,6 @@ int ufshcd_get_pwr_dev_param(const struct ufs_dev_params *dev_param,
+ void ufshcd_init_pwr_dev_param(struct ufs_dev_params *dev_param);
+ int ufshcd_pltfrm_init(struct platform_device *pdev,
+ 		       const struct ufs_hba_variant_ops *vops);
+-void ufshcd_pltfrm_shutdown(struct platform_device *pdev);
+ int ufshcd_populate_vreg(struct device *dev, const char *name,
+ 			 struct ufs_vreg **out_vreg);
+ 
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index f7553293ba98..db2e669985d5 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -1277,7 +1277,6 @@ extern int ufshcd_system_freeze(struct device *dev);
+ extern int ufshcd_system_thaw(struct device *dev);
+ extern int ufshcd_system_restore(struct device *dev);
+ #endif
+-extern int ufshcd_shutdown(struct ufs_hba *hba);
+ 
+ extern int ufshcd_dme_configure_adapt(struct ufs_hba *hba,
+ 				      int agreed_gear,

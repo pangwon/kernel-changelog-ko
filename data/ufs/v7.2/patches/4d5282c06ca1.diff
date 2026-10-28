@@ -1,0 +1,20 @@
+diff --git a/Documentation/devicetree/bindings/ufs/qcom,sa8255p-ufshc.yaml b/Documentation/devicetree/bindings/ufs/qcom,sa8255p-ufshc.yaml
+index db165a235cb6..66d73e9025d6 100644
+--- a/Documentation/devicetree/bindings/ufs/qcom,sa8255p-ufshc.yaml
++++ b/Documentation/devicetree/bindings/ufs/qcom,sa8255p-ufshc.yaml
+@@ -18,7 +18,14 @@ properties:
+           - const: qcom,sa8255p-ufshc
+ 
+   reg:
+-    maxItems: 1
++    minItems: 1
++    maxItems: 2
++
++  reg-names:
++    minItems: 1
++    items:
++      - const: std
++      - const: mcq
+ 
+   interrupts:
+     maxItems: 1

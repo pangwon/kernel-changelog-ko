@@ -1,0 +1,117 @@
+diff --git a/drivers/ufs/core/ufs-mcq.c b/drivers/ufs/core/ufs-mcq.c
+index 52210c4c20dc..46faa54aea94 100644
+--- a/drivers/ufs/core/ufs-mcq.c
++++ b/drivers/ufs/core/ufs-mcq.c
+@@ -18,6 +18,7 @@
+ #include <linux/iopoll.h>
+ 
+ #define MAX_QUEUE_SUP GENMASK(7, 0)
++#define QCFGPTR GENMASK(23, 16)
+ #define UFS_MCQ_MIN_RW_QUEUES 2
+ #define UFS_MCQ_MIN_READ_QUEUES 0
+ #define UFS_MCQ_MIN_POLL_QUEUES 0
+@@ -116,6 +117,19 @@ struct ufs_hw_queue *ufshcd_mcq_req_to_hwq(struct ufs_hba *hba,
+ 	return &hba->uhq[hwq];
+ }
+ 
++/**
++ * ufshcd_mcq_queue_cfg_addr - get an start address of the MCQ Queue Config
++ * Registers.
++ * @hba: per adapter instance
++ *
++ * Return: Start address of MCQ Queue Config Registers in HCI
++ */
++unsigned int ufshcd_mcq_queue_cfg_addr(struct ufs_hba *hba)
++{
++	return FIELD_GET(QCFGPTR, hba->mcq_capabilities) * 0x200;
++}
++EXPORT_SYMBOL_GPL(ufshcd_mcq_queue_cfg_addr);
++
+ /**
+  * ufshcd_mcq_decide_queue_depth - decide the queue depth
+  * @hba: per adapter instance
+diff --git a/drivers/ufs/host/ufshcd-pci.c b/drivers/ufs/host/ufshcd-pci.c
+index 0aca666d2199..ba8af9c0e77f 100644
+--- a/drivers/ufs/host/ufshcd-pci.c
++++ b/drivers/ufs/host/ufshcd-pci.c
+@@ -20,6 +20,8 @@
+ #include <linux/acpi.h>
+ #include <linux/gpio/consumer.h>
+ 
++#define MAX_SUPP_MAC 64
++
+ struct ufs_host {
+ 	void (*late_init)(struct ufs_hba *hba);
+ };
+@@ -446,6 +448,49 @@ static int ufs_intel_mtl_init(struct ufs_hba *hba)
+ 	return ufs_intel_common_init(hba);
+ }
+ 
++static int ufs_qemu_get_hba_mac(struct ufs_hba *hba)
++{
++	return MAX_SUPP_MAC;
++}
++
++static int ufs_qemu_mcq_config_resource(struct ufs_hba *hba)
++{
++	hba->mcq_base = hba->mmio_base + ufshcd_mcq_queue_cfg_addr(hba);
++
++	return 0;
++}
++
++static int ufs_qemu_op_runtime_config(struct ufs_hba *hba)
++{
++	struct ufshcd_mcq_opr_info_t *opr;
++	int i;
++
++	u32 sqdao = ufsmcq_readl(hba, ufshcd_mcq_cfg_offset(REG_SQDAO, 0));
++	u32 sqisao = ufsmcq_readl(hba, ufshcd_mcq_cfg_offset(REG_SQISAO, 0));
++	u32 cqdao = ufsmcq_readl(hba, ufshcd_mcq_cfg_offset(REG_CQDAO, 0));
++	u32 cqisao = ufsmcq_readl(hba, ufshcd_mcq_cfg_offset(REG_CQISAO, 0));
++
++	hba->mcq_opr[OPR_SQD].offset = sqdao;
++	hba->mcq_opr[OPR_SQIS].offset = sqisao;
++	hba->mcq_opr[OPR_CQD].offset = cqdao;
++	hba->mcq_opr[OPR_CQIS].offset = cqisao;
++
++	for (i = 0; i < OPR_MAX; i++) {
++		opr = &hba->mcq_opr[i];
++		opr->stride = 48;
++		opr->base = hba->mmio_base + opr->offset;
++	}
++
++	return 0;
++}
++
++static struct ufs_hba_variant_ops ufs_qemu_hba_vops = {
++	.name                   = "qemu-pci",
++	.get_hba_mac		= ufs_qemu_get_hba_mac,
++	.mcq_config_resource	= ufs_qemu_mcq_config_resource,
++	.op_runtime_config	= ufs_qemu_op_runtime_config,
++};
++
+ static struct ufs_hba_variant_ops ufs_intel_cnl_hba_vops = {
+ 	.name                   = "intel-pci",
+ 	.init			= ufs_intel_common_init,
+@@ -591,7 +636,8 @@ static const struct dev_pm_ops ufshcd_pci_pm_ops = {
+ };
+ 
+ static const struct pci_device_id ufshcd_pci_tbl[] = {
+-	{ PCI_VENDOR_ID_REDHAT, 0x0013, PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0 },
++	{ PCI_VENDOR_ID_REDHAT, 0x0013, PCI_ANY_ID, PCI_ANY_ID, 0, 0,
++		(kernel_ulong_t)&ufs_qemu_hba_vops },
+ 	{ PCI_VENDOR_ID_SAMSUNG, 0xC00C, PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0 },
+ 	{ PCI_VDEVICE(INTEL, 0x9DFA), (kernel_ulong_t)&ufs_intel_cnl_hba_vops },
+ 	{ PCI_VDEVICE(INTEL, 0x4B41), (kernel_ulong_t)&ufs_intel_ehl_hba_vops },
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index df68fb1d4f3f..9e0581115b34 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -1278,6 +1278,7 @@ void ufshcd_update_evt_hist(struct ufs_hba *hba, u32 id, u32 val);
+ void ufshcd_hba_stop(struct ufs_hba *hba);
+ void ufshcd_schedule_eh_work(struct ufs_hba *hba);
+ void ufshcd_mcq_config_mac(struct ufs_hba *hba, u32 max_active_cmds);
++unsigned int ufshcd_mcq_queue_cfg_addr(struct ufs_hba *hba);
+ u32 ufshcd_mcq_read_cqis(struct ufs_hba *hba, int i);
+ void ufshcd_mcq_write_cqis(struct ufs_hba *hba, u32 val, int i);
+ unsigned long ufshcd_mcq_poll_cqe_lock(struct ufs_hba *hba,

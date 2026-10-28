@@ -1,0 +1,27 @@
+diff --git a/drivers/ufs/core/ufs-debugfs.h b/drivers/ufs/core/ufs-debugfs.h
+index 97548a3f90eb..e5bba9671862 100644
+--- a/drivers/ufs/core/ufs-debugfs.h
++++ b/drivers/ufs/core/ufs-debugfs.h
+@@ -5,6 +5,9 @@
+ #ifndef __UFS_DEBUGFS_H__
+ #define __UFS_DEBUGFS_H__
+ 
++#include <linux/init.h>
++#include <linux/types.h>
++
+ struct ufs_hba;
+ 
+ #ifdef CONFIG_DEBUG_FS
+diff --git a/drivers/ufs/core/ufs-fault-injection.h b/drivers/ufs/core/ufs-fault-injection.h
+index 996a35769781..d0c870e19f0e 100644
+--- a/drivers/ufs/core/ufs-fault-injection.h
++++ b/drivers/ufs/core/ufs-fault-injection.h
+@@ -6,6 +6,8 @@
+ #include <linux/kconfig.h>
+ #include <linux/types.h>
+ 
++struct ufs_hba;
++
+ #ifdef CONFIG_SCSI_UFS_FAULT_INJECTION
+ void ufs_fault_inject_hba_init(struct ufs_hba *hba);
+ bool ufs_trigger_eh(struct ufs_hba *hba);

@@ -1,0 +1,118 @@
+diff --git a/drivers/ufs/core/Makefile b/drivers/ufs/core/Makefile
+index ce7d16d2cf35..67ab9ffbdf5d 100644
+--- a/drivers/ufs/core/Makefile
++++ b/drivers/ufs/core/Makefile
+@@ -1,5 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0
+ 
++CONTEXT_ANALYSIS := y
++
+ obj-$(CONFIG_SCSI_UFSHCD)		+= ufshcd-core.o
+ ufshcd-core-y				+= ufshcd.o ufs-sysfs.o ufs-mcq.o ufs-txeq.o
+ ufshcd-core-$(CONFIG_RPMB)		+= ufs-rpmb.o
+diff --git a/drivers/ufs/core/ufs-debugfs.c b/drivers/ufs/core/ufs-debugfs.c
+index be527209540d..ed1de70e2ec1 100644
+--- a/drivers/ufs/core/ufs-debugfs.c
++++ b/drivers/ufs/core/ufs-debugfs.c
+@@ -65,8 +65,10 @@ static int ee_usr_mask_get(void *data, u64 *val)
+ 	return 0;
+ }
+ 
++token_context_lock(ufs_debugfs);
++
+ static int ufs_debugfs_get_user_access(struct ufs_hba *hba)
+-__acquires(&hba->host_sem)
++	__cond_acquires(0, ufs_debugfs)
+ {
+ 	down(&hba->host_sem);
+ 	if (!ufshcd_is_user_access_allowed(hba)) {
+@@ -74,14 +76,16 @@ __acquires(&hba->host_sem)
+ 		return -EBUSY;
+ 	}
+ 	ufshcd_rpm_get_sync(hba);
++	__acquire(ufs_debugfs);
+ 	return 0;
+ }
+ 
+ static void ufs_debugfs_put_user_access(struct ufs_hba *hba)
+-__releases(&hba->host_sem)
++	__releases(ufs_debugfs)
+ {
+ 	ufshcd_rpm_put_sync(hba);
+ 	up(&hba->host_sem);
++	__release(ufs_debugfs);
+ }
+ 
+ static int ee_usr_mask_set(void *data, u64 val)
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 2c5d8e0e696e..67745d2796d0 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -1354,6 +1354,8 @@ out:
+  * On failure, all acquired locks are released and the tagset is unquiesced.
+  */
+ int ufshcd_pause_command_processing(struct ufs_hba *hba, u64 timeout_us)
++	__cond_acquires(0, &hba->host->scan_mutex)
++	__cond_acquires(0, &hba->clk_scaling_lock)
+ {
+ 	int ret = 0;
+ 
+@@ -1378,6 +1380,8 @@ int ufshcd_pause_command_processing(struct ufs_hba *hba, u64 timeout_us)
+  * This function resumes command submissions.
+  */
+ void ufshcd_resume_command_processing(struct ufs_hba *hba)
++	__releases(&hba->clk_scaling_lock)
++	__releases(&hba->host->scan_mutex)
+ {
+ 	up_write(&hba->clk_scaling_lock);
+ 	blk_mq_unquiesce_tagset(&hba->host->tag_set);
+@@ -1447,6 +1451,9 @@ config_pwr_mode:
+  * Return: 0 upon success; -EBUSY upon timeout.
+  */
+ static int ufshcd_clock_scaling_prepare(struct ufs_hba *hba, u64 timeout_us)
++	__cond_acquires(0, &hba->host->scan_mutex)
++	__cond_acquires(0, &hba->wb_mutex)
++	__cond_acquires(0, &hba->clk_scaling_lock)
+ {
+ 	int ret = 0;
+ 	/*
+@@ -1476,6 +1483,9 @@ out:
+ }
+ 
+ static void ufshcd_clock_scaling_unprepare(struct ufs_hba *hba, int err)
++	__releases(&hba->clk_scaling_lock)
++	__releases(&hba->wb_mutex)
++	__releases(&hba->host->scan_mutex)
+ {
+ 	up_write(&hba->clk_scaling_lock);
+ 	mutex_unlock(&hba->wb_mutex);
+@@ -3305,6 +3315,8 @@ ufshcd_dev_cmd_completion(struct ufs_hba *hba, struct ufshcd_lrb *lrbp)
+ }
+ 
+ static void ufshcd_dev_man_lock(struct ufs_hba *hba)
++	__acquires(&hba->dev_cmd.lock)
++	__acquires_shared(&hba->clk_scaling_lock)
+ {
+ 	ufshcd_hold(hba);
+ 	mutex_lock(&hba->dev_cmd.lock);
+@@ -3312,6 +3324,8 @@ static void ufshcd_dev_man_lock(struct ufs_hba *hba)
+ }
+ 
+ static void ufshcd_dev_man_unlock(struct ufs_hba *hba)
++	__releases_shared(&hba->clk_scaling_lock)
++	__releases(&hba->dev_cmd.lock)
+ {
+ 	up_read(&hba->clk_scaling_lock);
+ 	mutex_unlock(&hba->dev_cmd.lock);
+diff --git a/drivers/ufs/host/Makefile b/drivers/ufs/host/Makefile
+index 65d8bb23ab7b..7d8db67eb23c 100644
+--- a/drivers/ufs/host/Makefile
++++ b/drivers/ufs/host/Makefile
+@@ -1,5 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0
+ 
++CONTEXT_ANALYSIS := y
++
+ obj-$(CONFIG_SCSI_UFS_DWC_TC_PCI) += tc-dwc-g210-pci.o ufshcd-dwc.o tc-dwc-g210.o
+ obj-$(CONFIG_SCSI_UFS_DWC_TC_PLATFORM) += tc-dwc-g210-pltfrm.o ufshcd-dwc.o tc-dwc-g210.o
+ obj-$(CONFIG_SCSI_UFS_CDNS_PLATFORM) += cdns-pltfrm.o

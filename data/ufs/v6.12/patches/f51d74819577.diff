@@ -1,0 +1,106 @@
+diff --git a/Documentation/ABI/testing/sysfs-driver-ufs b/Documentation/ABI/testing/sysfs-driver-ufs
+index fe943ce76c60..5fa6655aee84 100644
+--- a/Documentation/ABI/testing/sysfs-driver-ufs
++++ b/Documentation/ABI/testing/sysfs-driver-ufs
+@@ -1532,3 +1532,30 @@ Contact:	Bean Huo <beanhuo@micron.com>
+ Description:
+ 		rtc_update_ms indicates how often the host should synchronize or update the
+ 		UFS RTC. If set to 0, this will disable UFS RTC periodic update.
++
++What:		/sys/devices/platform/.../ufshci_capabilities/version
++Date:		August 2024
++Contact:	Avri Altman <avri.altman@wdc.com>
++Description:
++		Host Capabilities register group: UFS version register.
++		Symbol - VER.  This file shows the UFSHCD version.
++		Example: Version 3.12 would be represented as 0000_0312h.
++		The file is read only.
++
++What:		/sys/devices/platform/.../ufshci_capabilities/product_id
++Date:		August 2024
++Contact:	Avri Altman <avri.altman@wdc.com>
++Description:
++		Host Capabilities register group: product ID register.
++		Symbol - HCPID.  This file shows the UFSHCD product id.
++		The content of this register is vendor specific.
++		The file is read only.
++
++What:		/sys/devices/platform/.../ufshci_capabilities/man_id
++Date:		August 2024
++Contact:	Avri Altman <avri.altman@wdc.com>
++Description:
++		Host Capabilities register group: manufacturer ID register.
++		Symbol - HCMID. This file shows the UFSHCD manufacturer id.
++		The Manufacturer ID is defined by JEDEC in JEDEC-JEP106.
++		The file is read only.
+diff --git a/drivers/ufs/core/ufs-sysfs.c b/drivers/ufs/core/ufs-sysfs.c
+index dec7746c98e0..fe313800aed0 100644
+--- a/drivers/ufs/core/ufs-sysfs.c
++++ b/drivers/ufs/core/ufs-sysfs.c
+@@ -525,6 +525,58 @@ static const struct attribute_group ufs_sysfs_capabilities_group = {
+ 	.attrs = ufs_sysfs_capabilities_attrs,
+ };
+ 
++static ssize_t version_show(struct device *dev,
++		struct device_attribute *attr, char *buf)
++{
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++
++	return sysfs_emit(buf, "0x%x\n", hba->ufs_version);
++}
++
++static ssize_t product_id_show(struct device *dev,
++		struct device_attribute *attr, char *buf)
++{
++	int ret;
++	u32 val;
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++
++	ret = ufshcd_read_hci_reg(hba, &val, REG_CONTROLLER_PID);
++	if (ret)
++		return ret;
++
++	return sysfs_emit(buf, "0x%x\n", val);
++}
++
++static ssize_t man_id_show(struct device *dev,
++		struct device_attribute *attr, char *buf)
++{
++	int ret;
++	u32 val;
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++
++	ret = ufshcd_read_hci_reg(hba, &val, REG_CONTROLLER_MID);
++	if (ret)
++		return ret;
++
++	return sysfs_emit(buf, "0x%x\n", val);
++}
++
++static DEVICE_ATTR_RO(version);
++static DEVICE_ATTR_RO(product_id);
++static DEVICE_ATTR_RO(man_id);
++
++static struct attribute *ufs_sysfs_ufshci_cap_attrs[] = {
++	&dev_attr_version.attr,
++	&dev_attr_product_id.attr,
++	&dev_attr_man_id.attr,
++	NULL
++};
++
++static const struct attribute_group ufs_sysfs_ufshci_group = {
++	.name = "ufshci_capabilities",
++	.attrs = ufs_sysfs_ufshci_cap_attrs,
++};
++
+ static ssize_t monitor_enable_show(struct device *dev,
+ 				   struct device_attribute *attr, char *buf)
+ {
+@@ -1508,6 +1560,7 @@ static const struct attribute_group ufs_sysfs_attributes_group = {
+ static const struct attribute_group *ufs_sysfs_groups[] = {
+ 	&ufs_sysfs_default_group,
+ 	&ufs_sysfs_capabilities_group,
++	&ufs_sysfs_ufshci_group,
+ 	&ufs_sysfs_monitor_group,
+ 	&ufs_sysfs_power_info_group,
+ 	&ufs_sysfs_device_descriptor_group,

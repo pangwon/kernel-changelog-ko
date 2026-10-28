@@ -1,0 +1,446 @@
+[
+ {
+  "id": "20251007-power-domains-scsi-ufs-dt-bindings-exynos-v1-1acfa81a887a@linaro.org",
+  "title": "scsi: ufs: dt-bindings: exynos: Add power-domains",
+  "commits": [
+   "79a2287c1df4896d4f930a24c0dc77571959d3b3"
+  ],
+  "authors": [
+   "André Draszik"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251016023507.1000664-peter.wang@mediatek.com",
+  "title": "scsi: ufs: core: Update CQ Entry to UFS 4.1 format",
+  "commits": [
+   "bfe0d22f12559f44bf27ae88b9c4a9f8fdae65d0",
+   "8627f322cb7b6f1f9f7a78bd9c79b82534fbc9c9"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "25f134d5a42e8b8365be64d512d1bb5fc2bce6ff.1760383740.git.quic_nguyenb@quicinc.com",
+  "title": "scsi: ufs: core: Remove UFS_DEVICE_QUIRK_DELAY_AFTER_LPM quirk",
+  "commits": [
+   "f8e82ae65eaf347fb8924a1d9c544da7bcb9f798"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "72fa649406a0bf02271575b7d58f22c968aa5d7e.1760383740.git.quic_nguyenb@quicinc.com",
+  "title": "scsi: ufs: core: Replace hard coded vcc-off delay with a variable",
+  "commits": [
+   "4760b639b43c107c8bfccd658478bbb3152fa56f"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250924094527.2992256-peter.wang@mediatek.com",
+  "title": "scsi: ufs: host: mediatek: Correct clock scaling with PM QoS flow",
+  "commits": [
+   "7162536410768ec6b219524c36d3a871ff97adf8",
+   "55ce691dc75a356e4b7c552505ce0a427c72f3af",
+   "16b42c4281ae536a6ceda97303d9820ac5741293",
+   "1fd05367d5b1a5edd3d14c966a5f510e5b8a0c5e",
+   "014de20bb36ba03e0e0b0a7e0a1406ab900c9fda",
+   "9b2b03b36168bcda298546b121d6ecc530d01d25",
+   "4fb4c835a92b6dfa3a461102ba0943b416ae7e55",
+   "9ce37e94c30090d26df26b1bbb2fa9c51ede7651"
+  ],
+  "authors": [
+   "Naomi Chu",
+   "Peter Wang"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251014200118.3390839-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Improve documentation in include/ufs/ufshci.h",
+  "commits": [
+   "7b2c4224faa7bc6cdaf1fb6106ec7b46c63a28cb",
+   "b3b0842bcb0696e25b1977238ce2907a4c02d8c4",
+   "a332735a53d6877f0d4fe28bc9263864da3dd470",
+   "b30006b5bec1dcba207bc42e7f7cd96a568acc27",
+   "047f190494a010d402b13f31bf37b2b16bf5720a",
+   "bfe5f5dacfbab96a6424c3bb376557bf0d8e4a20"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251021113003.13650-ajay.neeli@amd.com",
+  "title": "scsi: ufs: dt-bindings: amd-versal2: Add UFS Host Controller for AMD Versal Gen 2 SoC",
+  "commits": [
+   "754c6f539effa8ad332e305e34665849638fa40f",
+   "769b8b2ffded4cd880669edd83e2952efeeb27f7"
+  ],
+  "authors": [
+   "Sai Krishna Potthuri"
+  ],
+  "areas": [
+   "bindings",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251027113107.75835-krzysztof.kozlowski@linaro.org",
+  "title": "scsi: ufs: dt-bindings: qcom: Drop redundant \"reg\" constraints",
+  "commits": [
+   "525a411f9a5ff736bf017c36823aefda93eeae36"
+  ],
+  "authors": [
+   "Krzysztof Kozlowski"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251031122008.1517549-peter.wang@mediatek.com",
+  "title": "scsi: ufs: dt-bindings: mediatek,ufs: Update maintainer information in mediatek,ufs.yaml",
+  "commits": [
+   "480ca7954664e7ac458b573728024039f62709a1"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251030161012.3391239-neeraj.soni@oss.qualcomm.com",
+  "title": "soc: qcom: ice: Add HWKM v1 support for wrapped keys",
+  "commits": [
+   "d92ebadda5e30085e5294935e7c1c35801752cbd"
+  ],
+  "authors": [
+   "Neeraj Soni"
+  ],
+  "areas": [
+   "crypto"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251106-scsi-ufs-ti-j721e-suspend-resume-support-v1-6f395f51219e@bootlin.com",
+  "title": "scsi: ufs: ti-j721e: Add suspend-resume support",
+  "commits": [
+   "02880c083c13143ecf7c624808eda7980f843368"
+  ],
+  "authors": [
+   "Thomas Richard (TI.com)"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251107230518.4060231-beanhuo@iokpp.de",
+  "title": "scsi: ufs: core: Convert string descriptor format macros to enum",
+  "commits": [
+   "0d9a7085ec24983b5b8a4971c0eb6c756c75f1bf",
+   "d794b499f948801f54d67ddbc34a6eac5a6d150a",
+   "b06b8c421485e0e96d7fd6aa614fb0b6f2778a03"
+  ],
+  "authors": [
+   "Bean Huo"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251031204029.2883185-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Move an assignment in ufshcd_mcq_process_cqe()",
+  "commits": [
+   "dd4299af9b049c0dcb28699327ebc1386aab4b2a",
+   "9f8e09230f532c806ed088417f1ad794dd19a10f",
+   "60a1f6a8ad334475372a128a6856e893a910302e",
+   "ffa5d8c15300a3047c9a445dce81515cd3cde86e",
+   "3e7fff3fee5b7fa1538b2cef023733cf10366a4a",
+   "ae7bf255b10e4c8382faec06f527ba832c18be24",
+   "f59568f4e27af9ba3b0e89909c6fb2cab38700c5",
+   "63a5b959c854c33f280533eedd27bd3489e2b704",
+   "f18fac1e2b729d3bdeb41b946d90b57f3515f438",
+   "e8ea985a8314e0170124476e0fa5a5da868a7a40",
+   "f46b9a595fa95c82e3279b687869cac249838e96",
+   "45e636ea129486c4cf7bb342b0d59c186ae2fabb",
+   "d3fd0fd7768681eaeb03742c9e8ae846c505f564",
+   "1d0af94ffb5d4c9b99d38646521b6d3e4119d044",
+   "e5f9cc2af9a82700e989ac08be3c85c25046a6f6",
+   "22089c218037ca7cd50d4fa20e8b5bd746a9b397",
+   "176b93004c3475cfc0c939a4aeec846f6bf2b9a0",
+   "9a2c9500921d5ebbe96f7531adc73d9205c76485",
+   "4b6c0d9cca359d1d2f666e14c42482befe5c4829",
+   "a11c015c8a4fff99cf91a5cbc9789cc7a72b3ccf",
+   "08b12cda6c44dc015bcc152613c35ee0ae8f37b9"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251111184802.125111-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Remove an unnecessary NULL pointer check",
+  "commits": [
+   "18987143d4b1945a1bfcb3963ae1961ca29b27dd"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251112-phy-notify-pmstate-v5-39df622d8fcb@linaro.org",
+  "title": "phy: samsung: gs101-ufs: Add .notify_phystate() & hibern8 enter/exit values",
+  "commits": [
+   "a1af5d2be169ecec92cb4d85c811450d68164aec"
+  ],
+  "authors": [
+   "Peter Griffin"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251114193406.3097237-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Fix single doorbell mode support",
+  "commits": [
+   "02b5822d2fea1e89009ff167fed5aea2f1e1de85"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251113235252.2015185-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Use scsi_device_busy()",
+  "commits": [
+   "31e6e7e54b294f1015681ca284c28d37e94a48eb"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1763009575-237552-1-git-send-email-shawn.lin@rock-chips.com",
+  "title": "scsi: ufs: rockchip: Reset controller on PRE_CHANGE of hce enable notify",
+  "commits": [
+   "b0ee72db9132bd19b1b80152b35e0cf6a6cbd9f2"
+  ],
+  "authors": [
+   "Shawn Lin"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1763011091-243727-1-git-send-email-shawn.lin@rock-chips.com",
+  "title": "scsi: ufs: rockchip: Fix compile error without CONFIG_GPIOLIB",
+  "commits": [
+   "cda5f23eed84cdca374d60734bf0190138788608"
+  ],
+  "authors": [
+   "Shawn Lin"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251112063214.1195761-powenkao@google.com",
+  "title": "scsi: ufs: core: Fix EH failure after W-LUN resume error",
+  "commits": [
+   "b4bb6daf4ac4d4560044ecdd81e93aa2f6acbb06"
+  ],
+  "authors": [
+   "Brian Kao"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251202155138.2607210-beanhuo@iokpp.de",
+  "title": "scsi: ufs: core: Fix RPMB link error by reversing Kconfig dependencies",
+  "commits": [
+   "d98b4d52bff02d15ea73b1790d7610a2f4f023ab"
+  ],
+  "authors": [
+   "Bean Huo"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251204170457.994851-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Fix an error handler crash",
+  "commits": [
+   "14be351e5cd07349377010e457a58fac99201832"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251204181548.1006696-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Fix a deadlock in the frequency scaling code",
+  "commits": [
+   "d2875b812b141d0c449541976d92c8d89b94ec72"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251208020807.5043-krzysztof.kozlowski@oss.qualcomm.com",
+  "title": "scsi: ufs: qcom: Fix confusing cleanup.h syntax",
+  "commits": [
+   "946574434aa9cfe175c3e8234734a3822410ff53"
+  ],
+  "authors": [
+   "Krzysztof Kozlowski"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251210063854.1483899-sh8267.baek@samsung.com",
+  "title": "scsi: ufs: core: Add ufshcd_update_evt_hist() for UFS suspend error",
+  "commits": [
+   "c9f36f04a8a2725172cdf2b5e32363e4addcb14c"
+  ],
+  "authors": [
+   "Seunghwan Baek"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251217-fix-minor-grammar-err-v3-9be220cdd56a@posteo.com",
+  "title": "scsi: ufs: dt-bindings: Fix several grammar errors",
+  "commits": [
+   "be4b7e584a0cc6715fbb14dfb2a9a39bf07cfbab"
+  ],
+  "authors": [
+   "Zhaoming Luo"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251218230741.2661049-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Configure MCQ after link startup",
+  "commits": [
+   "ee229e7c256ab5d7b277abf8d48a732c10571750"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251219214428.492744-colin.i.king@gmail.com",
+  "title": "scsi: ufs: host: mediatek: Make read-only array scale_us static const",
+  "commits": [
+   "309a29b5965a0b2f36b3e245213eb43300a89ac2"
+  ],
+  "authors": [
+   "Colin Ian King"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251224053950.54213-ajay.neeli@amd.com",
+  "title": "scsi: ufs: amd-versal2: Fix PHY initialization in HCE enable notify",
+  "commits": [
+   "0444568edbf87c1da76b61c798ce0f1c1e478467"
+  ],
+  "authors": [
+   "Ajay Neeli"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ }
+]

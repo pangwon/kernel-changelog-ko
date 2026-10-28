@@ -1,0 +1,9 @@
+[project]
+name = "kclog"
+version = "0.1.0"
+description = "Linux kernel mainline changelog collector for kernel-changelog-ko"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+kclog = "kclog.cli:main"

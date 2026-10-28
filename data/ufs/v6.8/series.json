@@ -1,0 +1,386 @@
+[
+ {
+  "id": "1698890324-7374-1-git-send-email-quic_cang@quicinc.com",
+  "title": "scsi: ufs: ufs-sysfs: Expose UFS power info",
+  "commits": [
+   "4f6dd2a4bf378bc4d169296739ea7d6972c0d858"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20231030-topic-sm8650-upstream-phy-v2-a543a4c4b491@linaro.org",
+  "title": "phy: qcom: qmp-ufs: add QMP UFS PHY tables for SM8650",
+  "commits": [
+   "7c4bf8cb9d40a7222bb5d641979952b196707985"
+  ],
+  "authors": [
+   "Neil Armstrong"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20231118124443.1007116-akinobu.mita@gmail.com",
+  "title": "scsi: ufs: core: Make fault injection dynamically configurable per HBA",
+  "commits": [
+   "045da3077bc57e587d0ab4cfc8945b76af03d72d"
+  ],
+  "authors": [
+   "Akinobu Mita"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20231115193359.2262044-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Warn if the request tag is truncated",
+  "commits": [
+   "db80df77025ee0a5e6e089cc2f2b0c4b97867bea"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1701144469-1018-1-git-send-email-quic_ziqichen@quicinc.com",
+  "title": "scsi: ufs: dt-bindings: Add msi-parent for UFS MCQ",
+  "commits": [
+   "af85d689ae08860e4f9648f05e09f1de868091f4"
+  ],
+  "authors": [
+   "Ziqi Chen"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1701520577-31163-2-git-send-email-quic_cang@quicinc.com",
+  "title": "scsi: ufs: host: Rename structure ufs_dev_params to ufs_host_params",
+  "commits": [
+   "fa3dca8251c4fff88da9f64ba931942638ab0c00"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1701520577-31163-3-git-send-email-quic_cang@quicinc.com",
+  "title": "scsi: ufs: ufs-qcom: No need to set hs_rate after ufshcd_init_host_param()",
+  "commits": [
+   "dc604b4c9d6007c0a03ad90296e849bc38c0d2cc"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1701520577-31163-4-git-send-email-quic_cang@quicinc.com",
+  "title": "scsi: ufs: ufs-qcom: Setup host power mode during init",
+  "commits": [
+   "55820a7f2cb9b9a4b603cc22dcf0ca5331f86d25"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1701520577-31163-5-git-send-email-quic_cang@quicinc.com",
+  "title": "scsi: ufs: ufs-qcom: Allow the first init start with the maximum supported gear",
+  "commits": [
+   "743e1f596cccd371e7467fe585a1836773fbd922"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1701520577-31163-6-git-send-email-quic_cang@quicinc.com",
+  "title": "scsi: ufs: ufs-qcom: Limit HS-G5 Rate-A to hosts with HW version 5",
+  "commits": [
+   "9d8528a833fc0b4f47f7e43481c037390dd9ed71"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1701520577-31163-7-git-send-email-quic_cang@quicinc.com",
+  "title": "scsi: ufs: ufs-qcom: Set initial PHY gear to max HS gear for HW ver 4 and newer",
+  "commits": [
+   "0bd3cb895d195cdd44da9186bb5b3e0333f1d381"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1701520577-31163-8-git-send-email-quic_cang@quicinc.com",
+  "title": "scsi: ufs: ufs-qcom: Check return value of phy_set_mode_ext()",
+  "commits": [
+   "a68abdadfe13fa95a306363fa284b5cf0b79776d"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1701520577-31163-9-git-send-email-quic_cang@quicinc.com",
+  "title": "scsi: ufs: ufs-qcom: Add support for UFS device version detection",
+  "commits": [
+   "dc7c948d74e12ed9f40328696b301860243a1ae8"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20231205-sc7280-ufs-v6-ad6ca7796de7@fairphone.com",
+  "title": "scsi: ufs: qcom: dt-bindings: Add SC7280 compatible string",
+  "commits": [
+   "98bfeda319691c2f337b83774c067f5708b802f5"
+  ],
+  "authors": [
+   "Nitin Rawat"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20231208065902.11006-manivannan.sadhasivam@linaro.org",
+  "title": "scsi: ufs: qcom: Use clk_bulk APIs for managing lane clocks",
+  "commits": [
+   "9caef8568831c3e4bff77036d1515c7abb79eb92",
+   "3bf7ab4ac30c03beecf57c052e87d5a38fb8aed6",
+   "3a747c5cf9b6c36649783b28d2ef8f9c92b16a0f",
+   "1f165c87ec3ec9bd87860f2adef3f1333106f082",
+   "d42d368647dac42e8e91c10daf3f8261d7996380",
+   "0ae7a02726bca95ee9d17de0ccfcd1de0ff4e429",
+   "d11954711499f02fb57d1f6a7022f13b5380c046",
+   "e430c0e08957d111b068d5c0a3f4ddd1b8d790cb",
+   "8291652ed8a20b7c19a6fce0ad04cccbd629a620",
+   "c7afadacc180ae655aa98577aca8fb5fdfb4a761",
+   "e7458beab8094bc9b0e1feecaa2c7bef1718aa2f",
+   "be2e06c81a31cf4cf388d80af5ebc9bdc7a8430e",
+   "3b60f4564ff5b0e33d0d256b17594e223f0bcac8",
+   "6b481af25ec0edaff8d7b39b2fa17e2f645afc8d",
+   "104cd58d9af80f03993607ac86bcd88c10cfba3d",
+   "0e9f4375db1ce3fa231d8c7b27dbec9341a2e3ef",
+   "cac50d04fffe2ac546a406ea8f5759e0741b2c16"
+  ],
+  "authors": [
+   "Manivannan Sadhasivam"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20231212220825.85255-beanhuo@iokpp.de",
+  "title": "scsi: ufs: core: Add ufshcd_is_ufs_dev_busy()",
+  "commits": [
+   "9fa268875ca4ff5cad0c1b957388a0aef39920c3",
+   "6bf999e0eb41850d5c857102535d5c53b2ede224",
+   "838f595a567257e3ac0ac33cdb6bb644ca326cc1"
+  ],
+  "authors": [
+   "Bean Huo"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "24db9626baedf9520f13af58cc5c02756721ec04",
+  "title": "scsi: ufs: host: Fix kernel-doc warning",
+  "commits": [
+   "24db9626baedf9520f13af58cc5c02756721ec04"
+  ],
+  "authors": [
+   "Martin K. Petersen"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20231214125532.55109-manivannan.sadhasivam@linaro.org",
+  "title": "scsi: ufs: qcom: Fix ESI vector mask",
+  "commits": [
+   "26cdd6940c94cbd81cc524093bd689b061df58c4"
+  ],
+  "authors": [
+   "Manivannan Sadhasivam"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20231214192416.3638077-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Rename ufshcd_auto_hibern8_enable() and make it static",
+  "commits": [
+   "bdf5c0bb4dd9e7a8a4423643e6c73a7114bd58d8",
+   "45a2c87f28ad0ee8c286bb6dd5686bc54f5b7160"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1701520577-31163-10-git-send-email-quic_cang@quicinc.com",
+  "title": "phy: qualcomm: phy-qcom-qmp-ufs: Rectify SM8550 UFS HS-G4 PHY Settings",
+  "commits": [
+   "5301b7a04040b0a6191856c765146e0a9ab88ebc"
+  ],
+  "authors": [
+   "Can Guo"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20231218225229.2542156-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Simplify power management during async scan",
+  "commits": [
+   "daf7795406bf307997366f694888bd317ae5b5fa",
+   "ee36710912b2075c417100a8acc642c9c6496501"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20231219082740.27644-cw9316.lee@samsung.com",
+  "title": "scsi: ufs: qcom: Remove unnecessary goto statement from ufs_qcom_config_esi()",
+  "commits": [
+   "b08d86e6eb03566c5dc32e6ff10147f80aeb7511"
+  ],
+  "authors": [
+   "ChanWoo Lee"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240205104905.24929-alice.chao@mediatek.com",
+  "title": "scsi: ufs: core: Fix shift issue in ufshcd_clear_cmd()",
+  "commits": [
+   "b513d30d59bb383a6a5d6b533afcab2cee99a8f8"
+  ],
+  "authors": [
+   "Alice Chao"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240122083324.11797-hy50.seo@samsung.com",
+  "title": "scsi: ufs: core: Remove the ufshcd_release() in ufshcd_err_handling_prepare()",
+  "commits": [
+   "17e94b2585417e04dabc2f13bc03b4665ae687f3"
+  ],
+  "authors": [
+   "SEO HOYOUNG"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20240124190733.1554314-robh@kernel.org",
+  "title": "dt-bindings: ufs: samsung,exynos-ufs: Add size constraints on \"samsung,sysreg\"",
+  "commits": [
+   "4e06ec0774f5bebf10e27bc7a5ace4b48ae0fa56"
+  ],
+  "authors": [
+   "Rob Herring"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "c787d37f-1107-4512-bccf80e74a35@moroto.mountain",
+  "title": "scsi: ufs: Uninitialized variable in ufshcd_devfreq_target()",
+  "commits": [
+   "f2dced9d1992824d677593072bc20eccf66ac5d5"
+  ],
+  "authors": [
+   "Dan Carpenter"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ }
+]

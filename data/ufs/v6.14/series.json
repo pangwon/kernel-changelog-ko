@@ -1,0 +1,291 @@
+[
+ {
+  "id": "20241124070808.194860-avri.altman@wdc.com",
+  "title": "scsi: ufs: core: Introduce ufshcd_has_pending_tasks()",
+  "commits": [
+   "e738ba458e7539be1757dcdf85835a5c7b11fad4",
+   "7869c6521f5715688b3d1f1c897374a68544eef0",
+   "209f4e43b8068c24cde227f464111030430153fa",
+   "be769e5cf53b8a45eedcc7354bacf939ae16f72c"
+  ],
+  "authors": [
+   "Avri Altman"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20241022180839.2712439-bvanassche@acm.org",
+  "title": "scsi: Rename .slave_alloc() and .slave_destroy()",
+  "commits": [
+   "ed638918f4df39daa458435f0825b487c1f192c8",
+   "47c2e30afcec52968e50db01f92dda7d373042cb"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20241029192107.2344279-peter.griffin@linaro.org",
+  "title": "phy: samsung-ufs: switch back to syscon_regmap_lookup_by_phandle()",
+  "commits": [
+   "0d9fff6c57fee5cccba414a0c40d75812121bdd8"
+  ],
+  "authors": [
+   "Peter Griffin"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20241128072542.219170-avri.altman@wdc.com",
+  "title": "scsi: ufs: core: Do not hold any lock in ufshcd_hba_stop()",
+  "commits": [
+   "9db7a472423d3470fb4bd114d74d0bc0027995ae"
+  ],
+  "authors": [
+   "Avri Altman"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20241210030839.1118805-ebiggers@kernel.org",
+  "title": "scsi: ufs: qcom: Fix crypto key eviction",
+  "commits": [
+   "7a0905caf5665be41094a6ceb5e9d2524de4627a"
+  ],
+  "authors": [
+   "Eric Biggers"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20241213041958.202565-ebiggers@kernel.org",
+  "title": "scsi: ufs: crypto: Add ufs_hba_from_crypto_profile()",
+  "commits": [
+   "75d0c649eca47af21533d9636723574116fe6987",
+   "30b32c647cf309d8fc70ba068a2918033e3a1bc4",
+   "409f21010d92a9a5c3b66bacd3b853f4d71ca26c"
+  ],
+  "authors": [
+   "Eric Biggers"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250106083531.799976-hch@lst.de",
+  "title": "block: remove BLK_MQ_F_NO_SCHED",
+  "commits": [
+   "e7602bb4f3a1234df8b75728ac3260bcb8242612"
+  ],
+  "authors": [
+   "Christoph Hellwig"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250103080204.63951-avri.altman@wdc.com",
+  "title": "scsi: Revert \"scsi: ufs: core: Probe for EXT_IID support\"",
+  "commits": [
+   "815940bb7db7b37d058d76a575827287eebe39ce"
+  ],
+  "authors": [
+   "Avri Altman"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20241218014214.64533-kanie@linux.alibaba.com",
+  "title": "scsi: ufs: bsg: Delete bsg_dev when setting up bsg fails",
+  "commits": [
+   "fcf247deb3c3e1c6be5774e3fa03bbd018eff1a9",
+   "1e95c798d8a7f70965f0f88d4657b682ff0ec75f"
+  ],
+  "authors": [
+   "Guixin Liu"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20241216095439.531357-quic_liuxin@quicinc.com",
+  "title": "dt-bindings: ufs: qcom: Add UFS Host Controller for QCS615",
+  "commits": [
+   "1b093633a1381c02854c53baf8657f74a40da3e4"
+  ],
+  "authors": [
+   "Sayali Lokhande"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "69992b3e3e3434a5c7643be5a64de48be892ca46.1736793068.git.quic_nguyenb@quicinc.com",
+  "title": "scsi: ufs: core: Fix the HIGH/LOW_TEMP Bit Definitions",
+  "commits": [
+   "1b3e2d4ec0c5848776cc56d2624998aa5b2f0d27"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250114181205.153760-avri.altman@wdc.com",
+  "title": "scsi: ufs: core: Simplify temperature exception event handling",
+  "commits": [
+   "8c09f612b2937da109ed0df583ace3a29fc95a93"
+  ],
+  "authors": [
+   "Avri Altman"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250107131019.246517-krzysztof.kozlowski@linaro.org",
+  "title": "dt-bindings: ufs: Correct indentation and style in DTS example",
+  "commits": [
+   "54f6052f904c3a5d4a63af4d907b2e19ecfbbcd9"
+  ],
+  "authors": [
+   "Krzysztof Kozlowski"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250131120352.1315351-hch@lst.de",
+  "title": "block: force noio scope in blk_mq_freeze_queue",
+  "commits": [
+   "1e1a9cecfab3f22ebef0a976f849c87be8d03c1c"
+  ],
+  "authors": [
+   "Christoph Hellwig"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250128071207.75494-avri.altman@wdc.com",
+  "title": "scsi: ufs: core: Ensure clk_gating.lock is used only after initialization",
+  "commits": [
+   "3d4114a1d34413dfffa0094c2eb7b95e61087abd",
+   "839a74b5649c9f41d939a05059b5ca6b17156d03"
+  ],
+  "authors": [
+   "Avri Altman"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250124-ufshcd-fix-v4-c5d0144aae59@linaro.org",
+  "title": "scsi: ufs: core: Fix use-after free in init error and remove paths",
+  "commits": [
+   "f8fb2403ddebb5eea0033d90d9daae4c88749ada"
+  ],
+  "authors": [
+   "André Draszik"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250118023808.24726-sh043.lee@samsung.com",
+  "title": "scsi: ufs: core: Fix error return with query response",
+  "commits": [
+   "1a78a56ea65252bb089e0daace989167227f2d31"
+  ],
+  "authors": [
+   "Seunghui Lee"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250214224352.3025151-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Fix ufshcd_is_ufs_dev_busy() and ufshcd_eh_timed_out()",
+  "commits": [
+   "4fa382be430421e1445f9c95c4dc9b7e0949ae8a"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250219105047.49932-manivannan.sadhasivam@linaro.org",
+  "title": "scsi: ufs: core: Set default runtime/system PM levels before ufshcd_hba_init()",
+  "commits": [
+   "fe06b7c07f3fbcce2a2ca6f7b0d543b5699ea00f"
+  ],
+  "authors": [
+   "Manivannan Sadhasivam"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250220142039.250992-arthur.simchaev@sandisk.com",
+  "title": "scsi: ufs: core: bsg: Fix crash when arpmb command fails",
+  "commits": [
+   "f27a95845b01e86d67c8b014b4f41bd3327daa63"
+  ],
+  "authors": [
+   "Arthur Simchaev"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ }
+]

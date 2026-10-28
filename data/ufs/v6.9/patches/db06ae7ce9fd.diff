@@ -1,0 +1,12 @@
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index cb2afcebbdf5..a35e12f8e68b 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -328,6 +328,7 @@ struct ufs_pwr_mode_info {
+  * @op_runtime_config: called to config Operation and runtime regs Pointers
+  * @get_outstanding_cqs: called to get outstanding completion queues
+  * @config_esi: called to config Event Specific Interrupt
++ * @config_scsi_dev: called to configure SCSI device parameters
+  */
+ struct ufs_hba_variant_ops {
+ 	const char *name;

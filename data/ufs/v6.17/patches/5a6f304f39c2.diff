@@ -1,0 +1,57 @@
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 53301a2c27be..2a72e7c1d131 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -552,11 +552,32 @@ out_disable_phy:
+  */
+ static void ufs_qcom_enable_hw_clk_gating(struct ufs_hba *hba)
+ {
++	int err;
++
++	/* Enable UTP internal clock gating */
+ 	ufshcd_rmwl(hba, REG_UFS_CFG2_CGC_EN_ALL, REG_UFS_CFG2_CGC_EN_ALL,
+ 		    REG_UFS_CFG2);
+ 
+ 	/* Ensure that HW clock gating is enabled before next operations */
+ 	ufshcd_readl(hba, REG_UFS_CFG2);
++
++	/* Enable Unipro internal clock gating */
++	err = ufshcd_dme_rmw(hba, DL_VS_CLK_CFG_MASK,
++			     DL_VS_CLK_CFG_MASK, DL_VS_CLK_CFG);
++	if (err)
++		goto out;
++
++	err = ufshcd_dme_rmw(hba, PA_VS_CLK_CFG_REG_MASK,
++			     PA_VS_CLK_CFG_REG_MASK, PA_VS_CLK_CFG_REG);
++	if (err)
++		goto out;
++
++	err = ufshcd_dme_rmw(hba, DME_VS_CORE_CLK_CTRL_DME_HW_CGC_EN,
++			     DME_VS_CORE_CLK_CTRL_DME_HW_CGC_EN,
++			     DME_VS_CORE_CLK_CTRL);
++out:
++	if (err)
++		dev_err(hba->dev, "hw clk gating enabled failed\n");
+ }
+ 
+ static int ufs_qcom_hce_enable_notify(struct ufs_hba *hba,
+diff --git a/drivers/ufs/host/ufs-qcom.h b/drivers/ufs/host/ufs-qcom.h
+index 0a5cfc2dd4f7..e0e129af7c16 100644
+--- a/drivers/ufs/host/ufs-qcom.h
++++ b/drivers/ufs/host/ufs-qcom.h
+@@ -24,6 +24,15 @@
+ 
+ #define UFS_QCOM_LIMIT_HS_RATE		PA_HS_MODE_B
+ 
++/* bit and mask definitions for PA_VS_CLK_CFG_REG attribute */
++#define PA_VS_CLK_CFG_REG      0x9004
++#define PA_VS_CLK_CFG_REG_MASK GENMASK(8, 0)
++
++/* bit and mask definitions for DL_VS_CLK_CFG attribute */
++#define DL_VS_CLK_CFG          0xA00B
++#define DL_VS_CLK_CFG_MASK GENMASK(9, 0)
++#define DME_VS_CORE_CLK_CTRL_DME_HW_CGC_EN             BIT(9)
++
+ /* QCOM UFS host controller vendor specific registers */
+ enum {
+ 	REG_UFS_SYS1CLK_1US                 = 0xC0,

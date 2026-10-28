@@ -1,0 +1,22 @@
+diff --git a/drivers/ufs/core/ufs-sysfs.c b/drivers/ufs/core/ufs-sysfs.c
+index b33f8656edb5..1017dd3ae5d3 100644
+--- a/drivers/ufs/core/ufs-sysfs.c
++++ b/drivers/ufs/core/ufs-sysfs.c
+@@ -1847,6 +1847,7 @@ static ssize_t defrag_trigger_store(struct device *dev,
+ 
+ static DEVICE_ATTR_WO(defrag_trigger);
+ 
++#define UFS_HID_AVAILABLE_SIZE_INVALID 0xFFFFFFFFU
+ static ssize_t fragmented_size_show(struct device *dev,
+ 		struct device_attribute *attr, char *buf)
+ {
+@@ -1859,6 +1860,9 @@ static ssize_t fragmented_size_show(struct device *dev,
+ 	if (ret)
+ 		return ret;
+ 
++	if (value == UFS_HID_AVAILABLE_SIZE_INVALID)
++		return -ENODATA;
++
+ 	return sysfs_emit(buf, "%u\n", value);
+ }
+ 

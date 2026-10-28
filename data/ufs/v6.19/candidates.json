@@ -1,0 +1,135 @@
+[
+ {
+  "sha": "8bb3754909cde5df4f8c1012bde220b97d8ee3bc",
+  "subject": "arm64: dts: qcom: talos: Correct UFS clocks ordering",
+  "files": [
+   "arch/arm64/boot/dts/qcom/talos.dtsi"
+  ]
+ },
+ {
+  "sha": "38725491e7665640545c8155db53a7b21bcdf886",
+  "subject": "scsi: MAINTAINERS: Add the UFS include directory",
+  "files": [
+   "MAINTAINERS"
+  ]
+ },
+ {
+  "sha": "4edf654be5471659e3260be0a557eaa2ece668ab",
+  "subject": "phy: add new phy_notify_state() api",
+  "files": [
+   "drivers/phy/phy-core.c",
+   "include/linux/phy/phy.h"
+  ]
+ },
+ {
+  "sha": "0b822c59c826f47dc63d9470b4710bd251266cae",
+  "subject": "arm64: dts: rockchip: fixes regulator for 100ASK DshanPi A1",
+  "files": [
+   "arch/arm64/boot/dts/rockchip/rk3576-100ask-dshanpi-a1.dts"
+  ]
+ },
+ {
+  "sha": "ad4716ad48d4f1da4f991a1707f2230f4a97bff1",
+  "subject": "scsi: dt-bindings: phy: mediatek,ufs-phy: Update maintainer information in mediatek,ufs-phy.yaml",
+  "files": [
+   "Documentation/devicetree/bindings/phy/mediatek,ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "b0b9c7ccc1ef60a2c4a42795493797a35bbeb11b",
+  "subject": "scsi: ufs: mediatek: Add the maintainer for MediaTek UFS hooks",
+  "files": [
+   "MAINTAINERS"
+  ]
+ },
+ {
+  "sha": "5f37788adedd2da5475d6b1786295c07faf3d718",
+  "subject": "arm64: defconfig: Enable SCSI UFS Crypto and Block Inline encryption drivers",
+  "files": [
+   "arch/arm64/configs/defconfig"
+  ]
+ },
+ {
+  "sha": "0e4d26f79a74bc633846a27a9a20d52217c108dc",
+  "subject": "scsi: firmware: xilinx: Add APIs for UFS PHY initialization",
+  "files": [
+   "drivers/firmware/xilinx/Makefile",
+   "drivers/firmware/xilinx/zynqmp-ufs.c",
+   "include/linux/firmware/xlnx-zynqmp-ufs.h",
+   "include/linux/firmware/xlnx-zynqmp.h"
+  ]
+ },
+ {
+  "sha": "c1a45887a36ef7ded3fb4bac59d4a3445098b04b",
+  "subject": "arm64: dts: qcom: sm6350: Add interconnect support to UFS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm6350.dtsi"
+  ]
+ },
+ {
+  "sha": "06d262bcdb3bc86805739de1c484761f0a59a453",
+  "subject": "arm64: dts: qcom: sm6350: Add OPP table support to UFSHC",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm6350.dtsi"
+  ]
+ },
+ {
+  "sha": "ec9d588391761a08aab5eb4523a48ef3df2c910f",
+  "subject": "arm64: dts: qcom: sm6350: Fix wrong order of freq-table-hz for UFS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm6350.dtsi"
+  ]
+ },
+ {
+  "sha": "aab69794b55d7f60d94305961be264cd230112ba",
+  "subject": "arm64: dts: qcom: Add support for Huawei MateBook E 2019",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/sdm850-huawei-matebook-e-2019.dts"
+  ]
+ },
+ {
+  "sha": "c2703c90161b45bca5b65f362adbae02ed71fcc1",
+  "subject": "arm64: dts: qcom: sm8650: set ufs as dma coherent",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8650.dtsi"
+  ]
+ },
+ {
+  "sha": "e7db6f1528fd036cfade3222dac979dfbc24ddfb",
+  "subject": "dt-bindings: pinctrl: describe Kaanapali TLMM",
+  "files": [
+   "Documentation/devicetree/bindings/pinctrl/qcom,kaanapali-tlmm.yaml"
+  ]
+ },
+ {
+  "sha": "b59a508c1f5fdb3fdc690edebe815d59b04491d0",
+  "subject": "arm64: defconfig: Enable UFS support for MediaTek Genio 1200 EVK UFS board",
+  "files": [
+   "arch/arm64/configs/defconfig"
+  ]
+ },
+ {
+  "sha": "e6bd92bb204757a7b1f4b4dc263a82b3985fadd3",
+  "subject": "arm64: dts: mediatek: add device-tree for Genio 1200 EVK UFS board",
+  "files": [
+   "arch/arm64/boot/dts/mediatek/Makefile",
+   "arch/arm64/boot/dts/mediatek/mt8395-genio-1200-evk-ufs.dts"
+  ]
+ },
+ {
+  "sha": "6af8936fd74f1e4f8fd0087443111bb0348ef931",
+  "subject": "arm64: dts: mediatek: mt8395-genio-1200-evk: Move common parts to dtsi",
+  "files": [
+   "arch/arm64/boot/dts/mediatek/mt8395-genio-1200-evk.dts",
+   "arch/arm64/boot/dts/mediatek/mt8395-genio-common.dtsi"
+  ]
+ },
+ {
+  "sha": "3d37117ab43ff57577b922c53ef12260956a9330",
+  "subject": "dt-bindings: arm64: mediatek: add mt8395-evk-ufs board",
+  "files": [
+   "Documentation/devicetree/bindings/arm/mediatek.yaml"
+  ]
+ }
+]

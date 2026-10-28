@@ -1,0 +1,31 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 93417518c04d..a83fc6634b70 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -2822,8 +2822,6 @@ static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)
+ 	int err = 0;
+ 	struct ufs_hw_queue *hwq = NULL;
+ 
+-	WARN_ONCE(tag < 0 || tag >= hba->nutrs, "Invalid tag %d\n", tag);
+-
+ 	switch (hba->ufshcd_state) {
+ 	case UFSHCD_STATE_OPERATIONAL:
+ 		break;
+@@ -6923,8 +6921,6 @@ static int __ufshcd_issue_tm_cmd(struct ufs_hba *hba,
+ 	spin_lock_irqsave(host->host_lock, flags);
+ 
+ 	task_tag = req->tag;
+-	WARN_ONCE(task_tag < 0 || task_tag >= hba->nutmrs, "Invalid tag %d\n",
+-		  task_tag);
+ 	hba->tmf_rqs[req->tag] = req;
+ 	treq->upiu_req.req_header.task_tag = task_tag;
+ 
+@@ -7498,8 +7494,6 @@ static int ufshcd_abort(struct scsi_cmnd *cmd)
+ 	bool outstanding;
+ 	u32 reg;
+ 
+-	WARN_ONCE(tag < 0, "Invalid tag %d\n", tag);
+-
+ 	ufshcd_hold(hba);
+ 
+ 	if (!is_mcq_enabled(hba)) {

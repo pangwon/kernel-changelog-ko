@@ -1,0 +1,111 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 358b3240b6c5..e2812911e462 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -8520,6 +8520,41 @@ out:
+ 	return ret;
+ }
+ 
++static void ufshcd_set_timestamp_attr(struct ufs_hba *hba)
++{
++	int err;
++	struct ufs_query_req *request = NULL;
++	struct ufs_query_res *response = NULL;
++	struct ufs_dev_info *dev_info = &hba->dev_info;
++	struct utp_upiu_query_v4_0 *upiu_data;
++
++	if (dev_info->wspecversion < 0x400)
++		return;
++
++	ufshcd_hold(hba);
++
++	mutex_lock(&hba->dev_cmd.lock);
++
++	ufshcd_init_query(hba, &request, &response,
++			  UPIU_QUERY_OPCODE_WRITE_ATTR,
++			  QUERY_ATTR_IDN_TIMESTAMP, 0, 0);
++
++	request->query_func = UPIU_QUERY_FUNC_STANDARD_WRITE_REQUEST;
++
++	upiu_data = (struct utp_upiu_query_v4_0 *)&request->upiu_req;
++
++	put_unaligned_be64(ktime_get_real_ns(), &upiu_data->osf3);
++
++	err = ufshcd_exec_dev_cmd(hba, DEV_CMD_TYPE_QUERY, QUERY_REQ_TIMEOUT);
++
++	if (err)
++		dev_err(hba->dev, "%s: failed to set timestamp %d\n",
++			__func__, err);
++
++	mutex_unlock(&hba->dev_cmd.lock);
++	ufshcd_release(hba);
++}
++
+ /**
+  * ufshcd_add_lus - probe and add UFS logical units
+  * @hba: per-adapter instance
+@@ -8708,6 +8743,8 @@ static int ufshcd_device_init(struct ufs_hba *hba, bool init_dev_params)
+ 	ufshcd_set_ufs_dev_active(hba);
+ 	ufshcd_force_reset_auto_bkops(hba);
+ 
++	ufshcd_set_timestamp_attr(hba);
++
+ 	/* Gear up to HS gear if supported */
+ 	if (hba->max_pwr_info.is_valid) {
+ 		/*
+@@ -9741,6 +9778,7 @@ static int __ufshcd_wl_resume(struct ufs_hba *hba, enum ufs_pm_op pm_op)
+ 		ret = ufshcd_set_dev_pwr_mode(hba, UFS_ACTIVE_PWR_MODE);
+ 		if (ret)
+ 			goto set_old_link_state;
++		ufshcd_set_timestamp_attr(hba);
+ 	}
+ 
+ 	if (ufshcd_keep_autobkops_enabled_except_suspend(hba))
+diff --git a/include/uapi/scsi/scsi_bsg_ufs.h b/include/uapi/scsi/scsi_bsg_ufs.h
+index 2801b65299aa..fd3f9e5ee241 100644
+--- a/include/uapi/scsi/scsi_bsg_ufs.h
++++ b/include/uapi/scsi/scsi_bsg_ufs.h
+@@ -70,6 +70,31 @@ struct utp_upiu_query {
+ 	__be32 reserved[2];
+ };
+ 
++/**
++ * struct utp_upiu_query_v4_0 - upiu request buffer structure for
++ * query request >= UFS 4.0 spec.
++ * @opcode: command to perform B-0
++ * @idn: a value that indicates the particular type of data B-1
++ * @index: Index to further identify data B-2
++ * @selector: Index to further identify data B-3
++ * @osf4: spec field B-5
++ * @osf5: spec field B 6,7
++ * @osf6: spec field DW 8,9
++ * @osf7: spec field DW 10,11
++ */
++struct utp_upiu_query_v4_0 {
++	__u8 opcode;
++	__u8 idn;
++	__u8 index;
++	__u8 selector;
++	__u8 osf3;
++	__u8 osf4;
++	__be16 osf5;
++	__be32 osf6;
++	__be32 osf7;
++	__be32 reserved;
++};
++
+ /**
+  * struct utp_upiu_cmd - Command UPIU structure
+  * @data_transfer_len: Data Transfer Length DW-3
+diff --git a/include/ufs/ufs.h b/include/ufs/ufs.h
+index 4e8d6240e589..198cb391f9db 100644
+--- a/include/ufs/ufs.h
++++ b/include/ufs/ufs.h
+@@ -170,6 +170,7 @@ enum attr_idn {
+ 	QUERY_ATTR_IDN_WB_BUFF_LIFE_TIME_EST    = 0x1E,
+ 	QUERY_ATTR_IDN_CURR_WB_BUFF_SIZE        = 0x1F,
+ 	QUERY_ATTR_IDN_EXT_IID_EN		= 0x2A,
++	QUERY_ATTR_IDN_TIMESTAMP		= 0x30
+ };
+ 
+ /* Descriptor idn for Query requests */

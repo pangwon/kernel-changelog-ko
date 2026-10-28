@@ -1,0 +1,149 @@
+[
+ {
+  "sha": "b7c9047f851e80b580aba485b61785c7554b992c",
+  "subject": "arm64: dts: qcom: milos: Add power-domain and iface clk for ice node",
+  "files": [
+   "arch/arm64/boot/dts/qcom/milos.dtsi"
+  ]
+ },
+ {
+  "sha": "ec25710ce8c55295b92f3547a71f376350ad2048",
+  "subject": "dt-bindings: pinctrl: qcom: Describe Hawi TLMM block",
+  "files": [
+   "Documentation/devicetree/bindings/pinctrl/qcom,hawi-tlmm.yaml"
+  ]
+ },
+ {
+  "sha": "9d13c7bbee5f789738a645df5868b69da5ae3879",
+  "subject": "clk: qcom: Add TCSR clock driver for Nord SoC",
+  "files": [
+   "drivers/clk/qcom/Kconfig",
+   "drivers/clk/qcom/Makefile",
+   "drivers/clk/qcom/tcsrcc-nord.c"
+  ]
+ },
+ {
+  "sha": "31fcf6995e74117fe235a7a07a6e13077070b4a2",
+  "subject": "dt-bindings: clock: qcom: Document the Nord SoC TCSR Clock Controller",
+  "files": [
+   "Documentation/devicetree/bindings/clock/qcom,sm8550-tcsr.yaml",
+   "include/dt-bindings/clock/qcom,nord-tcsrcc.h"
+  ]
+ },
+ {
+  "sha": "7658e9b94849ca861ded82d641f52fcec303210d",
+  "subject": "arm64: dts: qcom: purwa-iot-evk: Enable UFS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/purwa-iot-evk.dts"
+  ]
+ },
+ {
+  "sha": "3006f7fbc7ef53bf8316b02d7f23f647b24c3eca",
+  "subject": "clk: qcom: gcc-eliza: Enable FORCE_MEM_CORE_ON for UFS AXI PHY clock",
+  "files": [
+   "drivers/clk/qcom/gcc-eliza.c"
+  ]
+ },
+ {
+  "sha": "6b25a72abaf0aaaecc3820b8253d809246fc7ed3",
+  "subject": "arm64: dts: qcom: eliza: Add missing msi-parent for UFS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/eliza.dtsi"
+  ]
+ },
+ {
+  "sha": "1b052060bde83bd53974c2da564f6cd4ee273121",
+  "subject": "arm64: dts: qcom: milos-fairphone-fp6: Enable UFS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts"
+  ]
+ },
+ {
+  "sha": "04bb37433330ef49e5939d78298ce8615744e076",
+  "subject": "arm64: dts: qcom: milos: Add UFS nodes",
+  "files": [
+   "arch/arm64/boot/dts/qcom/milos.dtsi"
+  ]
+ },
+ {
+  "sha": "94e223bf12fb12a07ab371a7fa5b4e50959b46df",
+  "subject": "arm64: dts: qcom: hamoa-iot-evk: Enable UFS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts"
+  ]
+ },
+ {
+  "sha": "9d405544da9147057175f468b3fe0d11e13eae51",
+  "subject": "arm64: dts: qcom: hamoa: Add UFS nodes for x1e80100 SoC",
+  "files": [
+   "arch/arm64/boot/dts/qcom/hamoa.dtsi"
+  ]
+ },
+ {
+  "sha": "2a5d4fc6f3f78554643e557adf95cdf1a75ae5b6",
+  "subject": "arm64: dts: qcom: eliza: Enable Eliza MTP board support",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/eliza-mtp.dts"
+  ]
+ },
+ {
+  "sha": "af20af39fc09b5255a3adc2fba4b6d5fe6257c5a",
+  "subject": "arm64: dts: qcom: Introduce Eliza Soc base dtsi",
+  "files": [
+   "arch/arm64/boot/dts/qcom/eliza.dtsi"
+  ]
+ },
+ {
+  "sha": "c0580b57a3d7607a59f60b18d96ea2608c326d8c",
+  "subject": "arm64: dts: qcom: sm6125-xiaomi-ginkgo: Fix volume up button",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi"
+  ]
+ },
+ {
+  "sha": "792c42da47fa199f90492784e3c57280acd57f22",
+  "subject": "arm64: dts: rockchip: Add mphy reset to ufshc node",
+  "files": [
+   "arch/arm64/boot/dts/rockchip/rk3576.dtsi"
+  ]
+ },
+ {
+  "sha": "a37cd9efe3d21b2d21c85b38001a367e2a50c2bf",
+  "subject": "arm64: defconfig: Enable Qualcomm Eliza basic resource providers",
+  "files": [
+   "arch/arm64/configs/defconfig"
+  ]
+ },
+ {
+  "sha": "1cde54c54b83b33b49b9fdf760a58a7e6689789c",
+  "subject": "arm64: dts: qcom: qcs6490: Add Thundercomm AI Mini PC G1 IoT",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/qcs6490-thundercomm-minipc-g1iot.dts"
+  ]
+ },
+ {
+  "sha": "c69a586344758f0d9cf0526d2a4b14fb56941b10",
+  "subject": "clk: qcom: Add TCSR clock driver for Eliza",
+  "files": [
+   "drivers/clk/qcom/Kconfig",
+   "drivers/clk/qcom/Makefile",
+   "drivers/clk/qcom/tcsrcc-eliza.c"
+  ]
+ },
+ {
+  "sha": "c2dd39323d497cad721097491aef59514d6cc9c1",
+  "subject": "arm64: dts: qcom: monaco-evk: Enable SDHC1 for eMMC",
+  "files": [
+   "arch/arm64/boot/dts/qcom/monaco-evk.dts"
+  ]
+ },
+ {
+  "sha": "caf08514bbee0736c31d8d4f406e3415cdf726bb",
+  "subject": "dt-bindings: phy: qcom,sc8280xp-qmp-ufs-phy: document the Eliza QMP UFS PHY",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ }
+]

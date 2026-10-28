@@ -1,0 +1,122 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 0cf07194bbe8..dda6d7e44436 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -102,6 +102,9 @@
+ /* Default RTC update every 10 seconds */
+ #define UFS_RTC_UPDATE_INTERVAL_MS (10 * MSEC_PER_SEC)
+ 
++/* bMaxNumOfRTT is equal to two after device manufacturing */
++#define DEFAULT_MAX_NUM_RTT 2
++
+ /* UFSHC 4.0 compliant HC support this mode. */
+ static bool use_mcq_mode = true;
+ 
+@@ -2405,6 +2408,8 @@ static inline int ufshcd_hba_capabilities(struct ufs_hba *hba)
+ 	((hba->capabilities & MASK_TASK_MANAGEMENT_REQUEST_SLOTS) >> 16) + 1;
+ 	hba->reserved_slot = hba->nutrs - 1;
+ 
++	hba->nortt = FIELD_GET(MASK_NUMBER_OUTSTANDING_RTT, hba->capabilities) + 1;
++
+ 	/* Read crypto capabilities */
+ 	err = ufshcd_hba_init_crypto_capabilities(hba);
+ 	if (err) {
+@@ -8121,6 +8126,35 @@ out:
+ 	dev_info->b_ext_iid_en = ext_iid_en;
+ }
+ 
++static void ufshcd_set_rtt(struct ufs_hba *hba)
++{
++	struct ufs_dev_info *dev_info = &hba->dev_info;
++	u32 rtt = 0;
++	u32 dev_rtt = 0;
++
++	/* RTT override makes sense only for UFS-4.0 and above */
++	if (dev_info->wspecversion < 0x400)
++		return;
++
++	if (ufshcd_query_attr_retry(hba, UPIU_QUERY_OPCODE_READ_ATTR,
++				    QUERY_ATTR_IDN_MAX_NUM_OF_RTT, 0, 0, &dev_rtt)) {
++		dev_err(hba->dev, "failed reading bMaxNumOfRTT\n");
++		return;
++	}
++
++	/* do not override if it was already written */
++	if (dev_rtt != DEFAULT_MAX_NUM_RTT)
++		return;
++
++	rtt = min_t(int, dev_info->rtt_cap, hba->nortt);
++	if (rtt == dev_rtt)
++		return;
++
++	if (ufshcd_query_attr_retry(hba, UPIU_QUERY_OPCODE_WRITE_ATTR,
++				    QUERY_ATTR_IDN_MAX_NUM_OF_RTT, 0, 0, &rtt))
++		dev_err(hba->dev, "failed writing bMaxNumOfRTT\n");
++}
++
+ void ufshcd_fixup_dev_quirks(struct ufs_hba *hba,
+ 			     const struct ufs_dev_quirk *fixups)
+ {
+@@ -8256,6 +8290,8 @@ static int ufs_get_device_desc(struct ufs_hba *hba)
+ 				      desc_buf[DEVICE_DESC_PARAM_SPEC_VER + 1];
+ 	dev_info->bqueuedepth = desc_buf[DEVICE_DESC_PARAM_Q_DPTH];
+ 
++	dev_info->rtt_cap = desc_buf[DEVICE_DESC_PARAM_RTT_CAP];
++
+ 	model_index = desc_buf[DEVICE_DESC_PARAM_PRDCT_NAME];
+ 
+ 	err = ufshcd_read_string_desc(hba, model_index,
+@@ -8508,6 +8544,8 @@ static int ufshcd_device_params_init(struct ufs_hba *hba)
+ 		goto out;
+ 	}
+ 
++	ufshcd_set_rtt(hba);
++
+ 	ufshcd_get_ref_clk_gating_wait(hba);
+ 
+ 	if (!ufshcd_query_flag_retry(hba, UPIU_QUERY_OPCODE_READ_FLAG,
+diff --git a/include/ufs/ufs.h b/include/ufs/ufs.h
+index b6003749bc83..853e95957c31 100644
+--- a/include/ufs/ufs.h
++++ b/include/ufs/ufs.h
+@@ -592,6 +592,8 @@ struct ufs_dev_info {
+ 	enum ufs_rtc_time rtc_type;
+ 	time64_t rtc_time_baseline;
+ 	u32 rtc_update_period;
++
++	u8 rtt_cap; /* bDeviceRTTCap */
+ };
+ 
+ /*
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index bad88bd91995..d74bd2d67b06 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -819,6 +819,7 @@ enum ufshcd_mcq_opr {
+  * @capabilities: UFS Controller Capabilities
+  * @mcq_capabilities: UFS Multi Circular Queue capabilities
+  * @nutrs: Transfer Request Queue depth supported by controller
++ * @nortt - Max outstanding RTTs supported by controller
+  * @nutmrs: Task Management Queue depth supported by controller
+  * @reserved_slot: Used to submit device commands. Protected by @dev_cmd.lock.
+  * @ufs_version: UFS Version to which controller complies
+@@ -957,6 +958,7 @@ struct ufs_hba {
+ 
+ 	u32 capabilities;
+ 	int nutrs;
++	int nortt;
+ 	u32 mcq_capabilities;
+ 	int nutmrs;
+ 	u32 reserved_slot;
+diff --git a/include/ufs/ufshci.h b/include/ufs/ufshci.h
+index 385e1c6b8d60..c50f92bf2e1d 100644
+--- a/include/ufs/ufshci.h
++++ b/include/ufs/ufshci.h
+@@ -68,6 +68,7 @@ enum {
+ /* Controller capability masks */
+ enum {
+ 	MASK_TRANSFER_REQUESTS_SLOTS		= 0x0000001F,
++	MASK_NUMBER_OUTSTANDING_RTT		= 0x0000FF00,
+ 	MASK_TASK_MANAGEMENT_REQUEST_SLOTS	= 0x00070000,
+ 	MASK_EHSLUTRD_SUPPORTED			= 0x00400000,
+ 	MASK_AUTO_HIBERN8_SUPPORT		= 0x00800000,

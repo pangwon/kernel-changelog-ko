@@ -1,0 +1,26 @@
+diff --git a/drivers/ufs/core/ufs-mcq.c b/drivers/ufs/core/ufs-mcq.c
+index 9ab91b4c05b0..64c234096e23 100644
+--- a/drivers/ufs/core/ufs-mcq.c
++++ b/drivers/ufs/core/ufs-mcq.c
+@@ -431,8 +431,7 @@ void ufshcd_mcq_disable(struct ufs_hba *hba)
+ 
+ void ufshcd_mcq_enable_esi(struct ufs_hba *hba)
+ {
+-	ufshcd_writel(hba, ufshcd_readl(hba, REG_UFS_MEM_CFG) | 0x2,
+-		      REG_UFS_MEM_CFG);
++	ufshcd_rmwl(hba, ESI_ENABLE, ESI_ENABLE, REG_UFS_MEM_CFG);
+ }
+ EXPORT_SYMBOL_GPL(ufshcd_mcq_enable_esi);
+ 
+diff --git a/include/ufs/ufshci.h b/include/ufs/ufshci.h
+index d36df24242a3..806fdaf52bd9 100644
+--- a/include/ufs/ufshci.h
++++ b/include/ufs/ufshci.h
+@@ -288,6 +288,7 @@ enum {
+ 
+ /* REG_UFS_MEM_CFG - Global Config Registers 300h */
+ #define MCQ_MODE_SELECT	BIT(0)
++#define ESI_ENABLE	BIT(1)
+ 
+ /* CQISy - CQ y Interrupt Status Register  */
+ #define UFSHCD_MCQ_CQIS_TAIL_ENT_PUSH_STS	0x1

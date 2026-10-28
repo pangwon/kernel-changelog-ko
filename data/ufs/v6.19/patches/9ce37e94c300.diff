@@ -1,0 +1,31 @@
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index 8498e95e263a..eee56f5aed30 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -289,6 +289,12 @@ static int ufs_mtk_hce_enable_notify(struct ufs_hba *hba,
+ 				0x453000, REG_UFS_MMIO_OPT_CTRL_0);
+ 		}
+ 
++		if (host->ip_ver >= IP_VER_MT6991_A0) {
++			/* Enable multi-rtt */
++			ufshcd_rmwl(hba, MRTT_EN, MRTT_EN, REG_UFS_MMIO_OPT_CTRL_0);
++			/* Enable random performance improvement */
++			ufshcd_rmwl(hba, RDN_PFM_IMPV_DIS, 0, REG_UFS_MMIO_OPT_CTRL_0);
++		}
+ 	}
+ 
+ 	return 0;
+diff --git a/drivers/ufs/host/ufs-mediatek.h b/drivers/ufs/host/ufs-mediatek.h
+index f96fd032371d..9747277f11e8 100644
+--- a/drivers/ufs/host/ufs-mediatek.h
++++ b/drivers/ufs/host/ufs-mediatek.h
+@@ -20,6 +20,9 @@
+ #define MCQ_MULTI_INTR_EN       BIT(2)
+ #define MCQ_CMB_INTR_EN         BIT(3)
+ #define MCQ_AH8                 BIT(4)
++#define MON_EN                  BIT(5)
++#define MRTT_EN                 BIT(25)
++#define RDN_PFM_IMPV_DIS        BIT(28)
+ 
+ #define MCQ_INTR_EN_MSK         (MCQ_MULTI_INTR_EN | MCQ_CMB_INTR_EN)
+ 

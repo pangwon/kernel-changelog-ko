@@ -1,0 +1,499 @@
+[
+ {
+  "id": "20250203112739.11425-quic_rdwivedi@quicinc.com",
+  "title": "scsi: ufs: qcom: Enable UFS Shared ICE Feature",
+  "commits": [
+   "640a6af5099ae8f6a858a8612bec70048a4aee69"
+  ],
+  "authors": [
+   "Ram Kumar Dwivedi"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250204060041.409950-ebiggers@kernel.org",
+  "title": "blk-crypto: add basic hardware-wrapped key support",
+  "commits": [
+   "ebc4176551cdd021d02f4d2ed734e7b65e44442a"
+  ],
+  "authors": [
+   "Eric Biggers"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250211065813.58091-avri.altman@wdc.com",
+  "title": "scsi: ufs: core: Critical health condition",
+  "commits": [
+   "edfaf868f3ae65099b41ec28724cb5241eeb9edf"
+  ],
+  "authors": [
+   "Avri Altman"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250212213838.1044917-bvanassche@acm.org",
+  "title": "scsi: ufs: Constify the third pwr_change_notify() argument",
+  "commits": [
+   "3bcd901e4257d88cd3fc0e5cfa7d2fb3a1a1af99"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20241226031142.1764652-sowon.na@samsung.com",
+  "title": "phy: samsung-ufs: support ExynosAutov920 ufs phy driver",
+  "commits": [
+   "d2317767723b63d28e3b93da92760b7934935536"
+  ],
+  "authors": [
+   "Sowon Na"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250117-qcom-ice-fix-dev-leak-v2-1ffa5b6884cb@linaro.org",
+  "title": "soc: qcom: ice: introduce devm_of_qcom_ice_get",
+  "commits": [
+   "1c13d6060d612601a61423f2e8fbf9e48126acca",
+   "ded40f32b55f7f2f4ed9627dd3c37a1fe89ed8c6",
+   "1e9e40fc6fb06d80fd9d834fab5eb5475f64787a"
+  ],
+  "authors": [
+   "Tudor Ambarus"
+  ],
+  "areas": [
+   "crypto",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250214083026.1177880-peter.wang@mediatek.com",
+  "title": "scsi: ufs: core: Add hba parameter to trace events",
+  "commits": [
+   "583e518e7100362e3937b583976f9470c39d1db2"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "547c484ce80fe3624ee746954b84cae28bd38a09.1739985266.git.quic_nguyenb@quicinc.com",
+  "title": "scsi: ufs: qcom: Remove dead code in ufs_qcom_cfg_timers()",
+  "commits": [
+   "476cda1949031a6102057eb2b4f73e9d901ffc4c"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250213080008.2984807-quic_ziqichen@quicinc.com",
+  "title": "scsi: ufs: core: Pass target_freq to clk_scale_notify() vop",
+  "commits": [
+   "5e011fcc7d16d050ff2ec3977890137cfd163d32",
+   "367a0f017c6145a7e7fc7df37a4535627f81356b",
+   "d7bead60b08e61abde46d63eae6cd72f44939358",
+   "c02fe9e222d16bed8c270608c42f77bc62562ac3",
+   "129b44c27c8a51cb74b2f68fde57f2a2e7f5696b",
+   "eff26ad4c34fc78303c14be749e10ca61c4d211f",
+   "2a25cbaa81d27f212439576fb5d406466055cfd0",
+   "6d7696b4d447028315038645f8a47f7539819be8"
+  ],
+  "authors": [
+   "Can Guo",
+   "Ziqi Chen"
+  ],
+  "areas": [
+   "core",
+   "docs",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1738736156-119203-2-git-send-email-shawn.lin@rock-chips.com",
+  "title": "scsi: ufs: dt-bindings: Document Rockchip UFS host controller",
+  "commits": [
+   "d90e9202377173f75bf7510d741b4bd1c76e5239"
+  ],
+  "authors": [
+   "Shawn Lin"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1738736156-119203-6-git-send-email-shawn.lin@rock-chips.com",
+  "title": "scsi: ufs: core: Export ufshcd_dme_reset() and ufshcd_dme_enable()",
+  "commits": [
+   "6b070711b702638622f4b7072e36328a47356576"
+  ],
+  "authors": [
+   "Shawn Lin"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1738736156-119203-7-git-send-email-shawn.lin@rock-chips.com",
+  "title": "scsi: ufs: rockchip: Initial support for UFS",
+  "commits": [
+   "d3cbe455d6eb600dee27bf5294f6fe8c2bb06b5f"
+  ],
+  "authors": [
+   "Shawn Lin"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250225101142.161474-colin.i.king@gmail.com",
+  "title": "scsi: ufs: rockchip: Fix spelling mistake 'susped' -> 'suspend'",
+  "commits": [
+   "24e81b821724395a466669bfe6ec3820bb8088b3"
+  ],
+  "authors": [
+   "Colin Ian King"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1740552733-182527-1-git-send-email-shawn.lin@rock-chips.com",
+  "title": "scsi: ufs: rockchip: Fix devm_clk_bulk_get_all_enabled() return value",
+  "commits": [
+   "4fffffd3b13439980d778c58b1f63439287b9fdc"
+  ],
+  "authors": [
+   "Shawn Lin"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250226021157.77934-jiapeng.chong@linux.alibaba.com",
+  "title": "scsi: ufs: rockchip: Simplify bool conversion",
+  "commits": [
+   "3d82569039340045faeaf14293956487c3498012"
+  ],
+  "authors": [
+   "Jiapeng Chong"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "2f337169f8183d48b7d94ee13565fea804aade84.1741179611.git.geert+renesas@glider.be",
+  "title": "scsi: ufs: dt-bindings: renesas,ufs: Add calibration data",
+  "commits": [
+   "67407b84e0ed3915d77bfd1d05e7bd51ddbf03ee"
+  ],
+  "authors": [
+   "Geert Uytterhoeven"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "3520e27ac7ff512de6508f630eee3c1689a7c73d.1741179611.git.geert+renesas@glider.be",
+  "title": "scsi: ufs: renesas: Replace init data by init code",
+  "commits": [
+   "c4e83573c3d01b3679f241ecf78080d67fec3159"
+  ],
+  "authors": [
+   "Yoshihiro Shimoda"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "9fa240a9dc0308d6675138f8434eccb77f051650.1741179611.git.geert+renesas@glider.be",
+  "title": "scsi: ufs: renesas: Add register read to remove save/set/restore",
+  "commits": [
+   "5129aa6275997eefb5313b2d16f07e2583e9e7be"
+  ],
+  "authors": [
+   "Yoshihiro Shimoda"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "69500e4c18be1ca1de360f9e797e282ffef04004.1741179611.git.geert+renesas@glider.be",
+  "title": "scsi: ufs: renesas: Remove register control helper function",
+  "commits": [
+   "855bde8ce5bc17e2f5a4126126c55e1970b23c4b"
+  ],
+  "authors": [
+   "Yoshihiro Shimoda"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "110eafd1ee24f9db0285a5e2bca224e35962268a.1741179611.git.geert+renesas@glider.be",
+  "title": "scsi: ufs: renesas: Refactor 0x10ad/0x10af PHY settings",
+  "commits": [
+   "cca2b807c2277f15049f12947b810446f2b41451"
+  ],
+  "authors": [
+   "Yoshihiro Shimoda"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "446d67b751a96645799de3aeefec539735aa78c8.1741179611.git.geert+renesas@glider.be",
+  "title": "scsi: ufs: renesas: Add reusable functions",
+  "commits": [
+   "44ca16f4970e9ddbc08851d3e3a08ec2a2123356"
+  ],
+  "authors": [
+   "Yoshihiro Shimoda"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "97d83709495c764b2456d4d25846f5f48197cad0.1741179611.git.geert+renesas@glider.be",
+  "title": "scsi: ufs: renesas: Add initialization code for R-Car S4-8 ES1.2",
+  "commits": [
+   "b3bb1762451a9b2e3374c35ce3f8745c3a68a1d3"
+  ],
+  "authors": [
+   "Yoshihiro Shimoda"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250310-sm8750_ufs_master-v2-0dfdd6823161@quicinc.com",
+  "title": "phy: qcom-qmp-ufs: Add PHY Configuration support for sm8750",
+  "commits": [
+   "b02cc9a176793b207e959701af1ec26222093b05"
+  ],
+  "authors": [
+   "Nitin Rawat"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250313130321.963504017@linutronix.de",
+  "title": "scsi: ufs: qcom: Remove the MSI descriptor abuse",
+  "commits": [
+   "fc87dd58d8f9374a703fb0bfae58336e62971db5"
+  ],
+  "authors": [
+   "Thomas Gleixner"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250314225206.1487838-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Fix a race condition related to device commands",
+  "commits": [
+   "20b97acc4cafa2be8ac91a777de135110e58a90b"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "112e43e9fd3b999513b1914e2bf523ae509f4c7d",
+  "title": "Revert \"Merge tag 'irq-msi-2025-03-23' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip\"",
+  "commits": [
+   "112e43e9fd3b999513b1914e2bf523ae509f4c7d"
+  ],
+  "authors": [
+   "Linus Torvalds"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250319-exynos-ufs-stability-fixes-v2-96722cc2ba1b@linaro.org",
+  "title": "scsi: ufs: exynos: Ensure pre_link() executes before exynos_ufs_phy_init()",
+  "commits": [
+   "3d101165e72316775947d71321d97194f03dfef3",
+   "68f5ef7eebf0f41df4d38ea55a54c2462af1e3d6",
+   "f92bb7436802f8eb7ee72dc911a33c8897fde366",
+   "7f05fd9a3b6fb3a9abc5a748307d11831c03175f",
+   "deac9ad496ec17e1ec06848964ecc635bdaca703",
+   "67e4085015c33bf2fb552af1f171c58b81ef0616",
+   "cd4c0025069f16fc666c6ffc56c49c9b1154841f"
+  ],
+  "authors": [
+   "Peter Griffin"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "02ae5e133f6ebf23b54d943e6d1d9de2544eb80e.1743192926.git.quic_nguyenb@quicinc.com",
+  "title": "scsi: ufs: core: Rename ufshcd_wb_presrv_usrspc_keep_vcc_on()",
+  "commits": [
+   "bdab40480b146e2f37f4c7164cb47f526e77ee6d"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "6278d7c125b2f0cf5056f4a647a4b9c1fdd24fc7.1743198325.git.quic_nguyenb@quicinc.com",
+  "title": "scsi: ufs: core: Add device level exception support",
+  "commits": [
+   "1fd2e77b889761d9bde0c580518689d1d8e83117"
+  ],
+  "authors": [
+   "Bao D. Nguyen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250407121008.22230-quic_nitirawa@quicinc.com",
+  "title": "phy: qcom-qmp-ufs: check for mode type for phy setting",
+  "commits": [
+   "d784552e76a23c4ffad0e383670cd1d86064a6be"
+  ],
+  "authors": [
+   "Nitin Rawat"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250410001320.2219341-chenyuan0y@gmail.com",
+  "title": "scsi: ufs: mcq: Add NULL check in ufshcd_mcq_abort()",
+  "commits": [
+   "4c324085062919d4e21c69e5e78456dcec0052fe"
+  ],
+  "authors": [
+   "Chenyuan Yang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250411121630.21330-quic_mapa@quicinc.com",
+  "title": "scsi: ufs: qcom: Add quirks for Samsung UFS devices",
+  "commits": [
+   "f8cba9a700cf38b181df7c1d809cd73c6e1b2df9",
+   "569330a34a31a52c904239439984a59972c11d28"
+  ],
+  "authors": [
+   "Manish Pandey"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250412195909.315418-chenyuan0y@gmail.com",
+  "title": "scsi: ufs: core: Add NULL check in ufshcd_mcq_compl_pending_transfer()",
+  "commits": [
+   "08a966a917fe3d92150fa3cc15793ad5e57051eb"
+  ],
+  "authors": [
+   "Chenyuan Yang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250425010605epcms2p67e89b351398832fe0fd547404d3afc65@epcms2p6",
+  "title": "scsi: ufs: core: Remove redundant query_complete trace",
+  "commits": [
+   "0e9693b97a0eee1df7bae33aec207c975fbcbdb8"
+  ],
+  "authors": [
+   "Keoseong Park"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ }
+]

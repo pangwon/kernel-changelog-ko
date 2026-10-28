@@ -1,0 +1,12 @@
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 3ee5ff905f9a..5728e94b6527 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -1649,7 +1649,6 @@ static irqreturn_t ufs_qcom_mcq_esi_handler(int irq, void *data)
+ 	struct msi_desc *desc = data;
+ 	struct device *dev = msi_desc_to_dev(desc);
+ 	struct ufs_hba *hba = dev_get_drvdata(dev);
+-	struct ufs_qcom_host *host = ufshcd_get_variant(hba);
+ 	u32 id = desc->msi_index;
+ 	struct ufs_hw_queue *hwq = &hba->uhq[id];
+ 

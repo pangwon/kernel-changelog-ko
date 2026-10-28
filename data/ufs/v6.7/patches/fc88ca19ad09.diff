@@ -1,0 +1,34 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 93417518c04d..96a5238a4b1c 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -8722,7 +8722,8 @@ static int ufshcd_probe_hba(struct ufs_hba *hba, bool init_dev_params)
+ 	if (ret)
+ 		goto out;
+ 
+-	if (hba->quirks & UFSHCD_QUIRK_REINIT_AFTER_MAX_GEAR_SWITCH) {
++	if (!hba->pm_op_in_progress &&
++	    (hba->quirks & UFSHCD_QUIRK_REINIT_AFTER_MAX_GEAR_SWITCH)) {
+ 		/* Reset the device and controller before doing reinit */
+ 		ufshcd_device_reset(hba);
+ 		ufshcd_hba_stop(hba);
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index dd549363fb2a..4eb0581578a1 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -923,8 +923,13 @@ static int ufs_qcom_pwr_change_notify(struct ufs_hba *hba,
+ 			return ret;
+ 		}
+ 
+-		/* Use the agreed gear */
+-		host->hs_gear = dev_req_params->gear_tx;
++		/*
++		 * Update hs_gear only when the gears are scaled to a higher value. This is because,
++		 * the PHY gear settings are backwards compatible and we only need to change the PHY
++		 * settings while scaling to higher gears.
++		 */
++		if (dev_req_params->gear_tx > host->hs_gear)
++			host->hs_gear = dev_req_params->gear_tx;
+ 
+ 		/* enable the device ref clock before changing to HS mode */
+ 		if (!ufshcd_is_hs_mode(&hba->pwr_info) &&

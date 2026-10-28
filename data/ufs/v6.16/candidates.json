@@ -1,0 +1,103 @@
+[
+ {
+  "sha": "93712205ce2f1fb047739494c0399a26ea4f0890",
+  "subject": "pinctrl: qcom: msm: mark certain pins as invalid for interrupts",
+  "files": [
+   "drivers/pinctrl/qcom/pinctrl-msm.c"
+  ]
+ },
+ {
+  "sha": "ea172f61f4fdb17aaaf8def980ee309a3b727eea",
+  "subject": "arm64: dts: qcom: qcs615: Fix up UFS clocks",
+  "files": [
+   "arch/arm64/boot/dts/qcom/qcs615.dtsi"
+  ]
+ },
+ {
+  "sha": "201bf08ba9e26eeb0a96ba3fd5c026f531b31aed",
+  "subject": "clk: qcom: gcc-x1e80100: Set FORCE MEM CORE for UFS clocks",
+  "files": [
+   "drivers/clk/qcom/gcc-x1e80100.c"
+  ]
+ },
+ {
+  "sha": "da94a81ea6c6f1cd2f389c5631e33c145ac7b35b",
+  "subject": "clk: qcom: gcc: Set FORCE_MEM_CORE_ON for gcc_ufs_axi_clk for 8650/8750",
+  "files": [
+   "drivers/clk/qcom/gcc-sm8650.c",
+   "drivers/clk/qcom/gcc-sm8750.c"
+  ]
+ },
+ {
+  "sha": "b98fa870fce2335433f20b2213e526b8d99e15dc",
+  "subject": "platform/x86/intel-uncore-freq: Add attributes to show agent types",
+  "files": [
+   "drivers/platform/x86/intel/uncore-frequency/uncore-frequency-common.c",
+   "drivers/platform/x86/intel/uncore-frequency/uncore-frequency-common.h",
+   "drivers/platform/x86/intel/uncore-frequency/uncore-frequency-tpmi.c"
+  ]
+ },
+ {
+  "sha": "32b5361a0d10627343b2ded76f05e5d591627fd6",
+  "subject": "pinctrl: qcom: correct the ngpios entry for QCS8300",
+  "files": [
+   "drivers/pinctrl/qcom/pinctrl-qcs8300.c"
+  ]
+ },
+ {
+  "sha": "d18cdb975ba8aad7046ff82df1a963fa21082a45",
+  "subject": "pinctrl: qcom: correct the ngpios entry for QCS615",
+  "files": [
+   "drivers/pinctrl/qcom/pinctrl-qcs615.c"
+  ]
+ },
+ {
+  "sha": "b4b6c80ed8d1cca0fb262117c575571c26633711",
+  "subject": "dt-bindings: pinctrl: qcom: correct gpio-ranges in examples for qcs8300",
+  "files": [
+   "Documentation/devicetree/bindings/pinctrl/qcom,qcs8300-tlmm.yaml"
+  ]
+ },
+ {
+  "sha": "2f87c9aa90e9f149a0c763dbd6ec662d2fbea977",
+  "subject": "dt-bindings: pinctrl: qcom: correct gpio-ranges in examples for qcs615",
+  "files": [
+   "Documentation/devicetree/bindings/pinctrl/qcom,qcs615-tlmm.yaml"
+  ]
+ },
+ {
+  "sha": "099f3401dc3b7f4b63f9fa8b2f44f244c5ab3e62",
+  "subject": "arm64: dts: qcom: sc7280: add UFS operating points",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sc7280.dtsi"
+  ]
+ },
+ {
+  "sha": "0dde247f5027fa5adf2b0d95147a2b1150040078",
+  "subject": "arm64: dts: renesas: r8a779f4: Add UFS tuning parameters in E-FUSE",
+  "files": [
+   "arch/arm64/boot/dts/renesas/r8a779f4.dtsi"
+  ]
+ },
+ {
+  "sha": "530f2bebc0918efe6deac1e2c92ce4a13e0c12e1",
+  "subject": "arm64: dts: rockchip: Enable ufshc on rk3576 evb1 board",
+  "files": [
+   "arch/arm64/boot/dts/rockchip/rk3576-evb1-v10.dts"
+  ]
+ },
+ {
+  "sha": "b1dac789c650a20a54d5089b23fbb800fb289b8b",
+  "subject": "arm64: dts: qcom: sm8750: Add ICE nodes",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8750.dtsi"
+  ]
+ },
+ {
+  "sha": "61dcbf45110bb3c3bfd7c92abaca9fffb84110e0",
+  "subject": "arm64: dts: qcom: sm8650: add UFS OPP table instead of freq-table-hz property",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8650.dtsi"
+  ]
+ }
+]

@@ -1,0 +1,14 @@
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 797230ad3939..2781739a66e0 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -1451,8 +1451,8 @@ static int ufs_qcom_mcq_config_resource(struct ufs_hba *hba)
+ 		if (IS_ERR(res->base)) {
+ 			dev_err(hba->dev, "Failed to map res %s, err=%d\n",
+ 					 res->name, (int)PTR_ERR(res->base));
+-			res->base = NULL;
+ 			ret = PTR_ERR(res->base);
++			res->base = NULL;
+ 			return ret;
+ 		}
+ 	}

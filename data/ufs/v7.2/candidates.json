@@ -1,0 +1,125 @@
+[
+ {
+  "sha": "b65b608eb8ff3507676491b28acaf496b1c347f2",
+  "subject": "scsi: mailmap: Update Avri Altman's email address",
+  "files": [
+   ".mailmap"
+  ]
+ },
+ {
+  "sha": "cfe5c91cb73c87f9021e446ec9d323c483851c46",
+  "subject": "riscv: dts: spacemit: k3: Initial support for CoM260-IFX board",
+  "files": [
+   "arch/riscv/boot/dts/spacemit/Makefile",
+   "arch/riscv/boot/dts/spacemit/k3-com260-ifx.dts",
+   "arch/riscv/boot/dts/spacemit/k3-com260.dtsi",
+   "arch/riscv/boot/dts/spacemit/k3-pinctrl.dtsi"
+  ]
+ },
+ {
+  "sha": "3abf3f5c84fd32a95132a403e0209c8010b227f8",
+  "subject": "dt-bindings: riscv: spacemit: Add K3 CoM260-IFX board",
+  "files": [
+   "Documentation/devicetree/bindings/riscv/spacemit.yaml"
+  ]
+ },
+ {
+  "sha": "4bd073e00fd79c0aead74ad64ade48c904221245",
+  "subject": "arm64: dts: qcom: lemans: Add eDP ref clock for eDP PHYs",
+  "files": [
+   "arch/arm64/boot/dts/qcom/lemans.dtsi"
+  ]
+ },
+ {
+  "sha": "3a5cb1ccbfb3141862b28f24cd5050083233aae7",
+  "subject": "arm64: dts: qcom: sm8450: Add power-domain and iface clk for ice node",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8450.dtsi"
+  ]
+ },
+ {
+  "sha": "7cd7271ac525e4eadd22734f418219f247638f43",
+  "subject": "arm64: dts: qcom: sc7180: Add power-domain and iface clk for ice node",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sc7180.dtsi"
+  ]
+ },
+ {
+  "sha": "ae326b14b2a5a5e426bea0210b984ee8dc5ed0bb",
+  "subject": "arm64: dts: exynosautov920: enable support for ufs controller",
+  "files": [
+   "arch/arm64/boot/dts/exynos/exynosautov920-sadk.dts",
+   "arch/arm64/boot/dts/exynos/exynosautov920.dtsi"
+  ]
+ },
+ {
+  "sha": "14b0c168c7038f1d9e50f27e47d8e285f52cd2a3",
+  "subject": "arm64: dts: exynosautov920: Add syscon hsi2 node",
+  "files": [
+   "arch/arm64/boot/dts/exynos/exynosautov920.dtsi"
+  ]
+ },
+ {
+  "sha": "24ba8ce4c9867e4224bb22ab3a50838d073fe13a",
+  "subject": "clk: qcom: Add Hawi TCSR clock controller driver",
+  "files": [
+   "drivers/clk/qcom/Kconfig",
+   "drivers/clk/qcom/Makefile",
+   "drivers/clk/qcom/tcsrcc-hawi.c"
+  ]
+ },
+ {
+  "sha": "7fb3d0512dacc0d09217eb45057357f00298203d",
+  "subject": "arm64: dts: qcom: sm8450: Fix ICE reg size",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8450.dtsi"
+  ]
+ },
+ {
+  "sha": "e7f57d2c47e265ef64e1dab84fc8f70dae2dd150",
+  "subject": "dm-inlinecrypt: add target for inline block device encryption",
+  "files": [
+   "drivers/md/Kconfig",
+   "drivers/md/Makefile",
+   "drivers/md/dm-inlinecrypt.c"
+  ]
+ },
+ {
+  "sha": "4a4b565268bc0f87a69474341102a684774b4e83",
+  "subject": "arm64: dts: mediatek: mt8395-genio-common: use MT6365 PMIC definitions",
+  "files": [
+   "arch/arm64/boot/dts/mediatek/mt8395-genio-common.dtsi"
+  ]
+ },
+ {
+  "sha": "0cc64561b03d755bba54cbd0cf05e9210ab40a13",
+  "subject": "dt-bindings: phy: qcom-edp: Add reference clock for sa8775p eDP PHY",
+  "files": [
+   "Documentation/devicetree/bindings/display/msm/qcom,sa8775p-mdss.yaml",
+   "Documentation/devicetree/bindings/phy/qcom,edp-phy.yaml"
+  ]
+ },
+ {
+  "sha": "6d6ff64e01ddeb579bf0078e5b6d50c04035541e",
+  "subject": "dt-bindings: phy: qcom,sc8280xp-qmp-ufs-phy: Document Nord QMP UFS PHY",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "dd1316efdbc5a998b901b1c5f27da73d45060795",
+  "subject": "arm64: dts: qcom: Add Motorola Edge 30 (dubai) DTS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/sm7325-motorola-dubai.dts"
+  ]
+ },
+ {
+  "sha": "448fedd56cdfa68c2e661b16a8dfc8f3c40a1bcf",
+  "subject": "riscv: dts: spacemit: add DeepComputing FML13V05 board device tree",
+  "files": [
+   "arch/riscv/boot/dts/spacemit/Makefile",
+   "arch/riscv/boot/dts/spacemit/k3-deepcomputing-fml13v05.dts"
+  ]
+ }
+]

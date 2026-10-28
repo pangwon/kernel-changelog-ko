@@ -1,0 +1,82 @@
+diff --git a/drivers/ufs/core/ufs-mcq.c b/drivers/ufs/core/ufs-mcq.c
+index cd10d59c77e0..e710d19d4c55 100644
+--- a/drivers/ufs/core/ufs-mcq.c
++++ b/drivers/ufs/core/ufs-mcq.c
+@@ -294,6 +294,18 @@ unsigned long ufshcd_mcq_poll_cqe_nolock(struct ufs_hba *hba,
+ 	return completed_reqs;
+ }
+ 
++unsigned long ufshcd_mcq_poll_cqe_lock(struct ufs_hba *hba,
++				       struct ufs_hw_queue *hwq)
++{
++	unsigned long completed_reqs;
++
++	spin_lock(&hwq->cq_lock);
++	completed_reqs = ufshcd_mcq_poll_cqe_nolock(hba, hwq);
++	spin_unlock(&hwq->cq_lock);
++
++	return completed_reqs;
++}
++
+ void ufshcd_mcq_make_queues_operational(struct ufs_hba *hba)
+ {
+ 	struct ufs_hw_queue *hwq;
+@@ -390,6 +402,7 @@ int ufshcd_mcq_init(struct ufs_hba *hba)
+ 		hwq = &hba->uhq[i];
+ 		hwq->max_entries = hba->nutrs;
+ 		spin_lock_init(&hwq->sq_lock);
++		spin_lock_init(&hwq->cq_lock);
+ 	}
+ 
+ 	/* The very first HW queue serves device commands */
+diff --git a/drivers/ufs/core/ufshcd-priv.h b/drivers/ufs/core/ufshcd-priv.h
+index 583fb862013e..9b630907c4dc 100644
+--- a/drivers/ufs/core/ufshcd-priv.h
++++ b/drivers/ufs/core/ufshcd-priv.h
+@@ -75,6 +75,8 @@ unsigned long ufshcd_mcq_poll_cqe_nolock(struct ufs_hba *hba,
+ 					 struct ufs_hw_queue *hwq);
+ struct ufs_hw_queue *ufshcd_mcq_req_to_hwq(struct ufs_hba *hba,
+ 					   struct request *req);
++unsigned long ufshcd_mcq_poll_cqe_lock(struct ufs_hba *hba,
++				       struct ufs_hw_queue *hwq);
+ 
+ #define UFSHCD_MCQ_IO_QUEUE_OFFSET	1
+ #define SD_ASCII_STD true
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 3afa07683ecf..cb1bca4d0c39 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -5461,6 +5461,13 @@ static int ufshcd_poll(struct Scsi_Host *shost, unsigned int queue_num)
+ 	struct ufs_hba *hba = shost_priv(shost);
+ 	unsigned long completed_reqs, flags;
+ 	u32 tr_doorbell;
++	struct ufs_hw_queue *hwq;
++
++	if (is_mcq_enabled(hba)) {
++		hwq = &hba->uhq[queue_num + UFSHCD_MCQ_IO_QUEUE_OFFSET];
++
++		return ufshcd_mcq_poll_cqe_lock(hba, hwq);
++	}
+ 
+ 	spin_lock_irqsave(&hba->outstanding_lock, flags);
+ 	tr_doorbell = ufshcd_readl(hba, REG_UTP_TRANSFER_REQ_DOOR_BELL);
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 0dcb104a6713..33973e9f6d6a 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -1086,6 +1086,7 @@ struct ufs_hba {
+  * @sq_lock: serialize submission queue access
+  * @cq_tail_slot: current slot to which CQ tail pointer is pointing
+  * @cq_head_slot: current slot to which CQ head pointer is pointing
++ * @cq_lock: Synchronize between multiple polling instances
+  */
+ struct ufs_hw_queue {
+ 	void __iomem *mcq_sq_head;
+@@ -1103,6 +1104,7 @@ struct ufs_hw_queue {
+ 	spinlock_t sq_lock;
+ 	u32 cq_tail_slot;
+ 	u32 cq_head_slot;
++	spinlock_t cq_lock;
+ };
+ 
+ static inline bool is_mcq_enabled(struct ufs_hba *hba)

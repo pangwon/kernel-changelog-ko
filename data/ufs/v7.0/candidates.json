@@ -1,0 +1,130 @@
+[
+ {
+  "sha": "4ab604b3f3aa8dcccc7505f5d310016682a99d5f",
+  "subject": "platform/x86/intel-uncore-freq: Handle autonomous UFS status bit",
+  "files": [
+   "drivers/platform/x86/intel/uncore-frequency/uncore-frequency-tpmi.c"
+  ]
+ },
+ {
+  "sha": "1638b8a34e1e2f89e923ca62ede78c1a4719d1da",
+  "subject": "docs: dt: submitting-patches: Document prefixes for SCSI and UFS",
+  "files": [
+   "Documentation/devicetree/bindings/submitting-patches.rst"
+  ]
+ },
+ {
+  "sha": "7f386b05f994fc08d4e73c0c91b76ab47da36250",
+  "subject": "scsi: MAINTAINERS: Broaden UFS Qualcomm binding file pattern",
+  "files": [
+   "MAINTAINERS"
+  ]
+ },
+ {
+  "sha": "79a3286e61829fc43abdd6e3beb31b24930c7af6",
+  "subject": "arm64: dts: rockchip: Explicitly request UFS reset pin on RK3576",
+  "files": [
+   "arch/arm64/boot/dts/rockchip/rk3576-pinctrl.dtsi",
+   "arch/arm64/boot/dts/rockchip/rk3576.dtsi"
+  ]
+ },
+ {
+  "sha": "be9d2cf10b46bc2c177aa9cb27b71d665d1e0e7e",
+  "subject": "dt-bindings: phy: qcom,sc8280xp-qmp-ufs-phy: Add QMP UFS PHY compatible",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "ed0a26aa453b6ec7faec32ddb4fb3d4360e1676c",
+  "subject": "dt-bindings: phy: qcom,sc8280xp-qmp-ufs-phy: document the Milos QMP UFS PHY",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "cd50298ffc5f98872ddf0ac05c51a014003a34b7",
+  "subject": "arm64: dts: rockchip: enable UFS controller on FriendlyElec NanoPi M5",
+  "files": [
+   "arch/arm64/boot/dts/rockchip/rk3576-nanopi-m5.dts"
+  ]
+ },
+ {
+  "sha": "a678adbf2d22edcb9078f8ad56706891a0ac9e80",
+  "subject": "arm64: dts: qcom: Add support for Pixel 3 and Pixel 3 XL",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/sdm845-google-blueline.dts",
+   "arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi",
+   "arch/arm64/boot/dts/qcom/sdm845-google-crosshatch.dts"
+  ]
+ },
+ {
+  "sha": "65b705cca009ffdf00ad7b649ac8a7e063373ddc",
+  "subject": "arm64: dts: qcom: hamoa: Extend the gcc input clock list",
+  "files": [
+   "arch/arm64/boot/dts/qcom/hamoa.dtsi"
+  ]
+ },
+ {
+  "sha": "bf94404bc7bf9904bfa9334d3115e95b764db12b",
+  "subject": "clk: qcom: gcc-x1e80100: Add missing UFS symbol mux clocks",
+  "files": [
+   "drivers/clk/qcom/gcc-x1e80100.c"
+  ]
+ },
+ {
+  "sha": "5fc25d64c43c1e25a1a0184a894ab0721c6a524b",
+  "subject": "dt-bindings: clock: qcom,x1e80100-gcc: Add missing UFS mux clocks",
+  "files": [
+   "Documentation/devicetree/bindings/clock/qcom,x1e80100-gcc.yaml",
+   "include/dt-bindings/clock/qcom,x1e80100-gcc.h"
+  ]
+ },
+ {
+  "sha": "652a5a9c3f5333fe9f0c43bfd562494464bbc74e",
+  "subject": "dt-bindings: phy: samsung,usb3-drd-phy: add power-domains",
+  "files": [
+   "Documentation/devicetree/bindings/phy/samsung,usb3-drd-phy.yaml"
+  ]
+ },
+ {
+  "sha": "14fd381b632881a8e33108614e71ec253048629b",
+  "subject": "dt-bindings: phy: samsung,ufs-phy: add power-domains",
+  "files": [
+   "Documentation/devicetree/bindings/phy/samsung,ufs-phy.yaml"
+  ]
+ },
+ {
+  "sha": "0e31dcfefd21ed76ff1b2d05647cd34336ab9772",
+  "subject": "arm64: dts: qcom: kaanapali: Add base QRD board",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/kaanapali-qrd.dts"
+  ]
+ },
+ {
+  "sha": "1cc3a0a0210697a25e96783cf21f93d28a09ebf7",
+  "subject": "arm64: dts: qcom: kaanapali: Add base MTP board",
+  "files": [
+   "arch/arm64/boot/dts/qcom/Makefile",
+   "arch/arm64/boot/dts/qcom/kaanapali-mtp.dts"
+  ]
+ },
+ {
+  "sha": "2eeb5767d53f457913d2b378a3bd9e2269a4098d",
+  "subject": "arm64: dts: qcom: Introduce Kaanapali SoC",
+  "files": [
+   "arch/arm64/boot/dts/qcom/kaanapali.dtsi"
+  ]
+ },
+ {
+  "sha": "e5682c953f5a9fbaad060ea000beff80f11c4048",
+  "subject": "clk: qcom: Add TCSR clock driver for Kaanapali",
+  "files": [
+   "drivers/clk/qcom/Kconfig",
+   "drivers/clk/qcom/Makefile",
+   "drivers/clk/qcom/tcsrcc-kaanapali.c"
+  ]
+ }
+]

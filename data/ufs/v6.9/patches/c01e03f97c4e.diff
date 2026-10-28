@@ -1,0 +1,18 @@
+diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c b/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c
+index 01a96c60c913..38c4a4cc670a 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c
++++ b/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c
+@@ -32,13 +32,6 @@
+ 
+ #include "phy-qcom-qmp-qserdes-txrx-ufs-v6.h"
+ 
+-/* QPHY_SW_RESET bit */
+-#define SW_RESET				BIT(0)
+-/* QPHY_POWER_DOWN_CONTROL */
+-#define SW_PWRDN				BIT(0)
+-/* QPHY_START_CONTROL bits */
+-#define SERDES_START				BIT(0)
+-#define PCS_START				BIT(1)
+ /* QPHY_PCS_READY_STATUS bit */
+ #define PCS_READY				BIT(0)
+ 

@@ -1,0 +1,228 @@
+diff --git a/drivers/ufs/core/ufs-mcq.c b/drivers/ufs/core/ufs-mcq.c
+index 6ed362547806..65c00373af0e 100644
+--- a/drivers/ufs/core/ufs-mcq.c
++++ b/drivers/ufs/core/ufs-mcq.c
+@@ -119,6 +119,9 @@ int ufshcd_mcq_init(struct ufs_hba *hba)
+ 	int ret;
+ 
+ 	ret = ufshcd_mcq_config_nr_queues(hba);
++	if (ret)
++		return ret;
+ 
++	ret = ufshcd_vops_mcq_config_resource(hba);
+ 	return ret;
+ }
+diff --git a/drivers/ufs/core/ufshcd-priv.h b/drivers/ufs/core/ufshcd-priv.h
+index 8d93ef675cea..e3bc4ce274e3 100644
+--- a/drivers/ufs/core/ufshcd-priv.h
++++ b/drivers/ufs/core/ufshcd-priv.h
+@@ -230,6 +230,14 @@ static inline void ufshcd_vops_reinit_notify(struct ufs_hba *hba)
+ 		hba->vops->reinit_notify(hba);
+ }
+ 
++static inline int ufshcd_vops_mcq_config_resource(struct ufs_hba *hba)
++{
++	if (hba->vops && hba->vops->mcq_config_resource)
++		return hba->vops->mcq_config_resource(hba);
++
++	return -EOPNOTSUPP;
++}
++
+ extern const struct ufs_pm_lvl_states ufs_pm_lvl_states[];
+ 
+ /**
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 5e7ba3b6a59d..2a1434ff0501 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -22,6 +22,12 @@
+ #include <ufs/ufshci.h>
+ #include <ufs/ufs_quirks.h>
+ 
++#define MCQ_QCFGPTR_MASK	GENMASK(7, 0)
++#define MCQ_QCFGPTR_UNIT	0x200
++#define MCQ_SQATTR_OFFSET(c) \
++	((((c) >> 16) & MCQ_QCFGPTR_MASK) * MCQ_QCFGPTR_UNIT)
++#define MCQ_QCFG_SIZE	0x40
++
+ enum {
+ 	TSTBUS_UAWM,
+ 	TSTBUS_UARM,
+@@ -1396,6 +1402,100 @@ static void ufs_qcom_reinit_notify(struct ufs_hba *hba)
+ 	phy_power_off(host->generic_phy);
+ }
+ 
++/* Resources */
++static const struct ufshcd_res_info ufs_res_info[RES_MAX] = {
++	{.name = "ufs_mem",},
++	{.name = "mcq",},
++	/* Submission Queue DAO */
++	{.name = "mcq_sqd",},
++	/* Submission Queue Interrupt Status */
++	{.name = "mcq_sqis",},
++	/* Completion Queue DAO */
++	{.name = "mcq_cqd",},
++	/* Completion Queue Interrupt Status */
++	{.name = "mcq_cqis",},
++	/* MCQ vendor specific */
++	{.name = "mcq_vs",},
++};
++
++static int ufs_qcom_mcq_config_resource(struct ufs_hba *hba)
++{
++	struct platform_device *pdev = to_platform_device(hba->dev);
++	struct ufshcd_res_info *res;
++	struct resource *res_mem, *res_mcq;
++	int i, ret = 0;
++
++	memcpy(hba->res, ufs_res_info, sizeof(ufs_res_info));
++
++	for (i = 0; i < RES_MAX; i++) {
++		res = &hba->res[i];
++		res->resource = platform_get_resource_byname(pdev,
++							     IORESOURCE_MEM,
++							     res->name);
++		if (!res->resource) {
++			dev_info(hba->dev, "Resource %s not provided\n", res->name);
++			if (i == RES_UFS)
++				return -ENOMEM;
++			continue;
++		} else if (i == RES_UFS) {
++			res_mem = res->resource;
++			res->base = hba->mmio_base;
++			continue;
++		}
++
++		res->base = devm_ioremap_resource(hba->dev, res->resource);
++		if (IS_ERR(res->base)) {
++			dev_err(hba->dev, "Failed to map res %s, err=%d\n",
++					 res->name, (int)PTR_ERR(res->base));
++			res->base = NULL;
++			ret = PTR_ERR(res->base);
++			return ret;
++		}
++	}
++
++	/* MCQ resource provided in DT */
++	res = &hba->res[RES_MCQ];
++	/* Bail if MCQ resource is provided */
++	if (res->base)
++		goto out;
++
++	/* Explicitly allocate MCQ resource from ufs_mem */
++	res_mcq = devm_kzalloc(hba->dev, sizeof(*res_mcq), GFP_KERNEL);
++	if (!res_mcq)
++		return ret;
++
++	res_mcq->start = res_mem->start +
++			 MCQ_SQATTR_OFFSET(hba->mcq_capabilities);
++	res_mcq->end = res_mcq->start + hba->nr_hw_queues * MCQ_QCFG_SIZE - 1;
++	res_mcq->flags = res_mem->flags;
++	res_mcq->name = "mcq";
++
++	ret = insert_resource(&iomem_resource, res_mcq);
++	if (ret) {
++		dev_err(hba->dev, "Failed to insert MCQ resource, err=%d\n",
++			ret);
++		goto insert_res_err;
++	}
++
++	res->base = devm_ioremap_resource(hba->dev, res_mcq);
++	if (IS_ERR(res->base)) {
++		dev_err(hba->dev, "MCQ registers mapping failed, err=%d\n",
++			(int)PTR_ERR(res->base));
++		ret = PTR_ERR(res->base);
++		goto ioremap_err;
++	}
++
++out:
++	hba->mcq_base = res->base;
++	return 0;
++ioremap_err:
++	res->base = NULL;
++	remove_resource(res_mcq);
++insert_res_err:
++	devm_kfree(hba->dev, res_mcq);
++	return ret;
++}
++
+ /*
+  * struct ufs_hba_qcom_vops - UFS QCOM specific variant operations
+  *
+@@ -1420,6 +1520,7 @@ static const struct ufs_hba_variant_ops ufs_hba_qcom_vops = {
+ 	.config_scaling_param = ufs_qcom_config_scaling_param,
+ 	.program_key		= ufs_qcom_ice_program_key,
+ 	.reinit_notify		= ufs_qcom_reinit_notify,
++	.mcq_config_resource	= ufs_qcom_mcq_config_resource,
+ };
+ 
+ /**
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 91ca724c0294..81c7494cecad 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -300,6 +300,7 @@ struct ufs_pwr_mode_info {
+  * @program_key: program or evict an inline encryption key
+  * @event_notify: called to notify important events
+  * @reinit_notify: called to notify reinit of UFSHCD during max gear switch
++ * @mcq_config_resource: called to configure MCQ platform resources
+  */
+ struct ufs_hba_variant_ops {
+ 	const char *name;
+@@ -339,6 +340,7 @@ struct ufs_hba_variant_ops {
+ 	void	(*event_notify)(struct ufs_hba *hba,
+ 				enum ufs_event_type evt, void *data);
+ 	void	(*reinit_notify)(struct ufs_hba *);
++	int	(*mcq_config_resource)(struct ufs_hba *hba);
+ };
+ 
+ /* clock gating state  */
+@@ -733,6 +735,30 @@ struct ufs_hba_monitor {
+ 	bool enabled;
+ };
+ 
++/**
++ * struct ufshcd_res_info_t - MCQ related resource regions
++ *
++ * @name: resource name
++ * @resource: pointer to resource region
++ * @base: register base address
++ */
++struct ufshcd_res_info {
++	const char *name;
++	struct resource *resource;
++	void __iomem *base;
++};
++
++enum ufshcd_res {
++	RES_UFS,
++	RES_MCQ,
++	RES_MCQ_SQD,
++	RES_MCQ_SQIS,
++	RES_MCQ_CQD,
++	RES_MCQ_CQIS,
++	RES_MCQ_VS,
++	RES_MAX,
++};
++
+ /**
+  * struct ufs_hba - per adapter private structure
+  * @mmio_base: UFSHCI base register address
+@@ -846,6 +872,8 @@ struct ufs_hba_monitor {
+  *	ufshcd_resume_complete()
+  * @ext_iid_sup: is EXT_IID is supported by UFSHC
+  * @mcq_sup: is mcq supported by UFSHC
++ * @res: array of resource info of MCQ registers
++ * @mcq_base: Multi circular queue registers base address
+  */
+ struct ufs_hba {
+ 	void __iomem *mmio_base;
+@@ -1002,6 +1030,8 @@ struct ufs_hba {
+ 	bool ext_iid_sup;
+ 	bool scsi_host_added;
+ 	bool mcq_sup;
++	struct ufshcd_res_info res[RES_MAX];
++	void __iomem *mcq_base;
+ };
+ 
+ #ifdef CONFIG_SCSI_UFS_VARIABLE_SG_ENTRY_SIZE

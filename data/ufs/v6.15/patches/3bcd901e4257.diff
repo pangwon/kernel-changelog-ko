@@ -1,0 +1,193 @@
+diff --git a/drivers/ufs/core/ufshcd-priv.h b/drivers/ufs/core/ufshcd-priv.h
+index 786f20ef2238..2cf500e74440 100644
+--- a/drivers/ufs/core/ufshcd-priv.h
++++ b/drivers/ufs/core/ufshcd-priv.h
+@@ -159,9 +159,9 @@ static inline int ufshcd_vops_link_startup_notify(struct ufs_hba *hba,
+ }
+ 
+ static inline int ufshcd_vops_pwr_change_notify(struct ufs_hba *hba,
+-				  enum ufs_notify_change_status status,
+-				  struct ufs_pa_layer_attr *dev_max_params,
+-				  struct ufs_pa_layer_attr *dev_req_params)
++				enum ufs_notify_change_status status,
++				const struct ufs_pa_layer_attr *dev_max_params,
++				struct ufs_pa_layer_attr *dev_req_params)
+ {
+ 	if (hba->vops && hba->vops->pwr_change_notify)
+ 		return hba->vops->pwr_change_notify(hba, status,
+diff --git a/drivers/ufs/host/ufs-exynos.c b/drivers/ufs/host/ufs-exynos.c
+index 13dd5dfc03eb..cab40d0cf1d5 100644
+--- a/drivers/ufs/host/ufs-exynos.c
++++ b/drivers/ufs/host/ufs-exynos.c
+@@ -321,7 +321,7 @@ static int exynosauto_ufs_pre_pwr_change(struct exynos_ufs *ufs,
+ }
+ 
+ static int exynosauto_ufs_post_pwr_change(struct exynos_ufs *ufs,
+-					  struct ufs_pa_layer_attr *pwr)
++					  const struct ufs_pa_layer_attr *pwr)
+ {
+ 	struct ufs_hba *hba = ufs->hba;
+ 	u32 enabled_vh;
+@@ -396,7 +396,7 @@ static int exynos7_ufs_pre_pwr_change(struct exynos_ufs *ufs,
+ }
+ 
+ static int exynos7_ufs_post_pwr_change(struct exynos_ufs *ufs,
+-						struct ufs_pa_layer_attr *pwr)
++				       const struct ufs_pa_layer_attr *pwr)
+ {
+ 	struct ufs_hba *hba = ufs->hba;
+ 	int lanes = max_t(u32, pwr->lane_rx, pwr->lane_tx);
+@@ -813,7 +813,7 @@ static u32 exynos_ufs_get_hs_gear(struct ufs_hba *hba)
+ }
+ 
+ static int exynos_ufs_pre_pwr_mode(struct ufs_hba *hba,
+-				struct ufs_pa_layer_attr *dev_max_params,
++				const struct ufs_pa_layer_attr *dev_max_params,
+ 				struct ufs_pa_layer_attr *dev_req_params)
+ {
+ 	struct exynos_ufs *ufs = ufshcd_get_variant(hba);
+@@ -865,7 +865,7 @@ out:
+ 
+ #define PWR_MODE_STR_LEN	64
+ static int exynos_ufs_post_pwr_mode(struct ufs_hba *hba,
+-				struct ufs_pa_layer_attr *pwr_req)
++				const struct ufs_pa_layer_attr *pwr_req)
+ {
+ 	struct exynos_ufs *ufs = ufshcd_get_variant(hba);
+ 	struct phy *generic_phy = ufs->phy;
+@@ -1634,7 +1634,7 @@ static int exynos_ufs_link_startup_notify(struct ufs_hba *hba,
+ 
+ static int exynos_ufs_pwr_change_notify(struct ufs_hba *hba,
+ 				enum ufs_notify_change_status status,
+-				struct ufs_pa_layer_attr *dev_max_params,
++				const struct ufs_pa_layer_attr *dev_max_params,
+ 				struct ufs_pa_layer_attr *dev_req_params)
+ {
+ 	int ret = 0;
+diff --git a/drivers/ufs/host/ufs-exynos.h b/drivers/ufs/host/ufs-exynos.h
+index 9670dc138d1e..aac517276189 100644
+--- a/drivers/ufs/host/ufs-exynos.h
++++ b/drivers/ufs/host/ufs-exynos.h
+@@ -188,7 +188,7 @@ struct exynos_ufs_drv_data {
+ 	int (*pre_pwr_change)(struct exynos_ufs *ufs,
+ 				struct ufs_pa_layer_attr *pwr);
+ 	int (*post_pwr_change)(struct exynos_ufs *ufs,
+-				struct ufs_pa_layer_attr *pwr);
++			       const struct ufs_pa_layer_attr *pwr);
+ 	int (*pre_hce_enable)(struct exynos_ufs *ufs);
+ 	int (*post_hce_enable)(struct exynos_ufs *ufs);
+ };
+diff --git a/drivers/ufs/host/ufs-hisi.c b/drivers/ufs/host/ufs-hisi.c
+index 6e6569de74d8..6f2e6bf31225 100644
+--- a/drivers/ufs/host/ufs-hisi.c
++++ b/drivers/ufs/host/ufs-hisi.c
+@@ -361,9 +361,9 @@ static void ufs_hisi_pwr_change_pre_change(struct ufs_hba *hba)
+ }
+ 
+ static int ufs_hisi_pwr_change_notify(struct ufs_hba *hba,
+-				       enum ufs_notify_change_status status,
+-				       struct ufs_pa_layer_attr *dev_max_params,
+-				       struct ufs_pa_layer_attr *dev_req_params)
++				enum ufs_notify_change_status status,
++				const struct ufs_pa_layer_attr *dev_max_params,
++				struct ufs_pa_layer_attr *dev_req_params)
+ {
+ 	struct ufs_host_params host_params;
+ 	int ret = 0;
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index 135cd78109e2..927c0bcdb9a9 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -1081,8 +1081,8 @@ static bool ufs_mtk_pmc_via_fastauto(struct ufs_hba *hba,
+ }
+ 
+ static int ufs_mtk_pre_pwr_change(struct ufs_hba *hba,
+-				  struct ufs_pa_layer_attr *dev_max_params,
+-				  struct ufs_pa_layer_attr *dev_req_params)
++				const struct ufs_pa_layer_attr *dev_max_params,
++				struct ufs_pa_layer_attr *dev_req_params)
+ {
+ 	struct ufs_mtk_host *host = ufshcd_get_variant(hba);
+ 	struct ufs_host_params host_params;
+@@ -1134,9 +1134,9 @@ static int ufs_mtk_pre_pwr_change(struct ufs_hba *hba,
+ }
+ 
+ static int ufs_mtk_pwr_change_notify(struct ufs_hba *hba,
+-				     enum ufs_notify_change_status stage,
+-				     struct ufs_pa_layer_attr *dev_max_params,
+-				     struct ufs_pa_layer_attr *dev_req_params)
++				enum ufs_notify_change_status stage,
++				const struct ufs_pa_layer_attr *dev_max_params,
++				struct ufs_pa_layer_attr *dev_req_params)
+ {
+ 	int ret = 0;
+ 
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index e69b792523e6..45eabccdfa31 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -807,7 +807,7 @@ static int ufs_qcom_icc_update_bw(struct ufs_qcom_host *host)
+ 
+ static int ufs_qcom_pwr_change_notify(struct ufs_hba *hba,
+ 				enum ufs_notify_change_status status,
+-				struct ufs_pa_layer_attr *dev_max_params,
++				const struct ufs_pa_layer_attr *dev_max_params,
+ 				struct ufs_pa_layer_attr *dev_req_params)
+ {
+ 	struct ufs_qcom_host *host = ufshcd_get_variant(hba);
+diff --git a/drivers/ufs/host/ufs-sprd.c b/drivers/ufs/host/ufs-sprd.c
+index b1d532363f9d..65bd8fb96b99 100644
+--- a/drivers/ufs/host/ufs-sprd.c
++++ b/drivers/ufs/host/ufs-sprd.c
+@@ -160,9 +160,9 @@ static int ufs_sprd_common_init(struct ufs_hba *hba)
+ }
+ 
+ static int sprd_ufs_pwr_change_notify(struct ufs_hba *hba,
+-				      enum ufs_notify_change_status status,
+-				      struct ufs_pa_layer_attr *dev_max_params,
+-				      struct ufs_pa_layer_attr *dev_req_params)
++				enum ufs_notify_change_status status,
++				const struct ufs_pa_layer_attr *dev_max_params,
++				struct ufs_pa_layer_attr *dev_req_params)
+ {
+ 	struct ufs_sprd_host *host = ufshcd_get_variant(hba);
+ 
+diff --git a/drivers/ufs/host/ufshcd-pci.c b/drivers/ufs/host/ufshcd-pci.c
+index ea39c5d5b8cf..2245397a9cc2 100644
+--- a/drivers/ufs/host/ufshcd-pci.c
++++ b/drivers/ufs/host/ufshcd-pci.c
+@@ -157,7 +157,7 @@ static int ufs_intel_set_lanes(struct ufs_hba *hba, u32 lanes)
+ 
+ static int ufs_intel_lkf_pwr_change_notify(struct ufs_hba *hba,
+ 				enum ufs_notify_change_status status,
+-				struct ufs_pa_layer_attr *dev_max_params,
++				const struct ufs_pa_layer_attr *dev_max_params,
+ 				struct ufs_pa_layer_attr *dev_req_params)
+ {
+ 	int err = 0;
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 5efa570de4c1..34221146410e 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -353,9 +353,9 @@ struct ufs_hba_variant_ops {
+ 	int	(*link_startup_notify)(struct ufs_hba *,
+ 				       enum ufs_notify_change_status);
+ 	int	(*pwr_change_notify)(struct ufs_hba *,
+-				enum ufs_notify_change_status status,
+-				struct ufs_pa_layer_attr *desired_pwr_mode,
+-				struct ufs_pa_layer_attr *final_params);
++			enum ufs_notify_change_status status,
++			const struct ufs_pa_layer_attr *desired_pwr_mode,
++			struct ufs_pa_layer_attr *final_params);
+ 	void	(*setup_xfer_req)(struct ufs_hba *hba, int tag,
+ 				  bool is_scsi_cmd);
+ 	void	(*setup_task_mgmt)(struct ufs_hba *, int, u8);
+@@ -1429,7 +1429,7 @@ static inline int ufshcd_dme_peer_get(struct ufs_hba *hba,
+ 	return ufshcd_dme_get_attr(hba, attr_sel, mib_val, DME_PEER);
+ }
+ 
+-static inline bool ufshcd_is_hs_mode(struct ufs_pa_layer_attr *pwr_info)
++static inline bool ufshcd_is_hs_mode(const struct ufs_pa_layer_attr *pwr_info)
+ {
+ 	return (pwr_info->pwr_rx == FAST_MODE ||
+ 		pwr_info->pwr_rx == FASTAUTO_MODE) &&

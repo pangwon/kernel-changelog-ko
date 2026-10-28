@@ -1,0 +1,83 @@
+id = "ufs"
+name = "UFS (Universal Flash Storage)"
+# 이 태그부터 수집 (vX.Y 정식 릴리스만, rc 제외)
+since = "v6.1"
+
+[paths]
+# git pathspec 문법. 디렉터리는 '/'로 끝내고, glob은 ':(glob)' 접두어를 붙인다.
+core = [
+  "drivers/ufs/",
+  "include/ufs/",
+]
+related = [
+  "include/trace/events/ufs.h",
+  "include/uapi/scsi/scsi_bsg_ufs.h",
+  "Documentation/devicetree/bindings/ufs/",
+  "Documentation/ABI/testing/sysfs-driver-ufs",
+  "Documentation/scsi/ufs.rst",
+  ":(glob)drivers/phy/**/*ufs*",
+  "drivers/soc/qcom/ice.c",
+  "include/soc/qcom/ice.h",
+]
+
+# 파일 → 영역. 위에서부터 차례로 검사해 처음 맞는 규칙을 적용한다.
+[[areas]]
+id = "host"
+prefixes = ["drivers/ufs/host/"]
+
+[[areas]]
+id = "bindings"
+prefixes = ["Documentation/devicetree/bindings/ufs/"]
+
+[[areas]]
+id = "phy"
+prefixes = ["drivers/phy/"]
+
+[[areas]]
+id = "crypto"
+prefixes = ["drivers/soc/qcom/ice.c", "include/soc/qcom/ice.h"]
+
+[[areas]]
+id = "docs"
+prefixes = ["Documentation/"]
+
+[[areas]]
+id = "core"
+prefixes = ["drivers/ufs/", "include/ufs/", "include/trace/events/ufs.h", "include/uapi/scsi/"]
+
+# 파일 → 벤더. 영역과 별개 축이라 "qcom 숨김" 같은 필터를 영역에 관계없이 걸 수 있다.
+# regex의 (?P<v>...) 그룹이 벤더 이름이 되고, vendor를 지정하면 그 값을 쓴다.
+[[vendors]]
+regex = '^drivers/ufs/host/ufs-(?P<v>[a-z0-9]+)'
+
+[[vendors]]
+regex = '^drivers/ufs/host/(?P<v>cdns|ti|tc-dwc|ufshcd-dwc|ufshcd-pci)'
+
+[[vendors]]
+regex = '^Documentation/devicetree/bindings/ufs/(?P<v>[a-z0-9]+),'
+
+[[vendors]]
+regex = '^drivers/phy/(?P<v>[a-z0-9]+)/'
+
+[[vendors]]
+regex = '^(drivers|include)/soc/qcom/ice\.[ch]$'
+vendor = "qcom"
+
+[vendor_aliases]
+qualcomm = "qcom"
+samsung = "exynos"
+mtk = "mediatek"
+hisilicon = "hisi"
+cadence = "cdns"
+"tc-dwc" = "snps"
+"ufshcd-dwc" = "snps"
+"ufshcd-pci" = "intel"
+
+# 벤더별 표시·생성 정책 (Phase 2/3에서 사용). 수집은 정책과 무관하게 항상 전부 한다.
+[policy.default]
+explain = true   # 상세 해설 생성 여부
+visible = true   # 사이트 기본 필터에서 보일지 여부
+
+# 예: qcom은 수집만 하고 기본으로 숨기려면
+# [policy.vendors.qcom]
+# visible = false

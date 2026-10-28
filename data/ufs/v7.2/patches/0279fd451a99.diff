@@ -1,0 +1,25 @@
+diff --git a/drivers/ufs/core/ufs-rpmb.c b/drivers/ufs/core/ufs-rpmb.c
+index ffad049872b9..62120dc2e9da 100644
+--- a/drivers/ufs/core/ufs-rpmb.c
++++ b/drivers/ufs/core/ufs-rpmb.c
+@@ -152,8 +152,6 @@ int ufs_rpmb_probe(struct ufs_hba *hba)
+ 		return -EINVAL;
+ 	}
+ 
+-	INIT_LIST_HEAD(&hba->rpmbs);
+-
+ 	struct rpmb_descr descr = {
+ 		.type = RPMB_TYPE_UFS,
+ 		.route_frames = ufs_rpmb_route_frames,
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 34228beb3f59..13e6357a8bbb 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -10958,6 +10958,7 @@ int ufshcd_alloc_host(struct device *dev, struct ufs_hba **hba_handle)
+ 	hba->nop_out_timeout = NOP_OUT_TIMEOUT;
+ 	ufshcd_set_sg_entry_size(hba, sizeof(struct ufshcd_sg_entry));
+ 	INIT_LIST_HEAD(&hba->clk_list_head);
++	INIT_LIST_HEAD(&hba->rpmbs);
+ 	spin_lock_init(&hba->outstanding_lock);
+ 
+ 	*hba_handle = hba;

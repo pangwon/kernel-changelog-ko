@@ -1,0 +1,35 @@
+diff --git a/drivers/ufs/core/ufs_bsg.c b/drivers/ufs/core/ufs_bsg.c
+index 34e423924e06..374e5aae4e7e 100644
+--- a/drivers/ufs/core/ufs_bsg.c
++++ b/drivers/ufs/core/ufs_bsg.c
+@@ -76,8 +76,7 @@ static int ufs_bsg_exec_advanced_rpmb_req(struct ufs_hba *hba, struct bsg_job *j
+ 	int ret;
+ 	int data_len;
+ 
+-	if (hba->ufs_version < ufshci_version(4, 0) || !hba->dev_info.b_advanced_rpmb_en ||
+-	    !(hba->capabilities & MASK_EHSLUTRD_SUPPORTED))
++	if (hba->ufs_version < ufshci_version(4, 0) || !hba->dev_info.b_advanced_rpmb_en)
+ 		return -EINVAL;
+ 
+ 	if (rpmb_request->ehs_req.length != 2 || rpmb_request->ehs_req.ehs_type != 1)
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index e4318171381b..f774169bf04f 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -7240,7 +7240,15 @@ int ufshcd_advanced_rpmb_req_handler(struct ufs_hba *hba, struct utp_upiu_req *r
+ 	/* Advanced RPMB starts from UFS 4.0, so its command type is UTP_CMD_TYPE_UFS_STORAGE */
+ 	lrbp->command_type = UTP_CMD_TYPE_UFS_STORAGE;
+ 
+-	ufshcd_prepare_req_desc_hdr(lrbp, &upiu_flags, dir, 2);
++	/*
++	 * According to UFSHCI 4.0 specification page 24, if EHSLUTRDS is 0, host controller takes
++	 * EHS length from CMD UPIU, and SW driver use EHS Length field in CMD UPIU. if it is 1,
++	 * HW controller takes EHS length from UTRD.
++	 */
++	if (hba->capabilities & MASK_EHSLUTRD_SUPPORTED)
++		ufshcd_prepare_req_desc_hdr(lrbp, &upiu_flags, dir, 2);
++	else
++		ufshcd_prepare_req_desc_hdr(lrbp, &upiu_flags, dir, 0);
+ 
+ 	/* update the task tag and LUN in the request upiu */
+ 	req_upiu->header.flags = upiu_flags;

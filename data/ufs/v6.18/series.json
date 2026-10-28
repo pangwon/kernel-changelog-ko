@@ -1,0 +1,595 @@
+[
+ {
+  "id": "20250731-dt-bindings-ufs-qcom-v2-53bb634bf95a@linaro.org",
+  "title": "scsi: ufs: qcom: dt-bindings: Split common part to qcom,ufs-common.yaml",
+  "commits": [
+   "7f224967aee7d5ad88b6db76ca161be622ae7b34",
+   "655c8f511926250e0da9e8b1a9b8f1cf2c173b41",
+   "149009f2dc6f781f490a13264eaa565281e4d490"
+  ],
+  "authors": [
+   "Krzysztof Kozlowski"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250811131423.3444014-peter.wang@mediatek.com",
+  "title": "scsi: ufs: host: mediatek: Simplify variable usage",
+  "commits": [
+   "6c00c493a344b65fb0a356cb3f328a647085687b",
+   "aa86602a483ba48f51044fbaefa1ebbf6da194a4",
+   "f91c6c70d103a619c58aa02bddf3c27c6433556a",
+   "86a678a25108705657e2f3bb00c42f9e5e5d692b",
+   "7212d624f8638f8ea8ad1ecbb80622c7987bc7a1",
+   "979feee0cf43b32d288931649d7c6d9a5524ea55",
+   "f1617ecf18aaf222482f683f44ab4b155976539d",
+   "bacb96ce06c05804fae4bfd38c4058b6d4c423b3",
+   "878ed88c50bfb14d972dd3b86a1c8188c58de4e5",
+   "5863638598f5e4f64d2f85b03f376383ca1f2ab7"
+  ],
+  "authors": [
+   "Alice Chao",
+   "Peter Wang"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250813171049.3399387-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Improve IOPS",
+  "commits": [
+   "dc60a408a1dc29974bc82239b07b70c5f7fcfd31"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250819153958.2255907-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Only collect timestamps if monitoring is enabled",
+  "commits": [
+   "cb7cc0cfb38cf50c902caadee0e0e87fc38490aa"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250819154356.2256952-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Reduce the size of struct ufshcd_lrb",
+  "commits": [
+   "b5940feda3dc7a12133c6589e463d2b3b6c7fe96"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250821053923.69411-bharat.uppal@samsung.com",
+  "title": "scsi: ufs: exynos: fsd: Gate ref_clk and put UFS device in reset on suspend",
+  "commits": [
+   "6d55af0f0740bf3d77943425fdafb77dc0fa6bb9"
+  ],
+  "authors": [
+   "Bharat Uppal"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250829153841.2201700-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Move the tracing enumeration types into a new file",
+  "commits": [
+   "b620462bba6655b47d127db70d18123c7af522d4"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20250830070353.2694-nitin.rawat@oss.qualcomm.com",
+  "title": "phy: qcom-qmp-ufs: Add regulator load voting for UFS QMP PHY",
+  "commits": [
+   "0c4916aadb8df892399eec99f775655c31049195",
+   "df4beac9da5f162770c8563d11cda327d748c20b"
+  ],
+  "authors": [
+   "Nitin Rawat"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "3126b5fd02270380cce833d06f973a3ffb33a69b",
+  "title": "scsi: ufs: ufs-qcom: Align programming sequence of Shared ICE for UFS controller v5",
+  "commits": [
+   "3126b5fd02270380cce833d06f973a3ffb33a69b"
+  ],
+  "authors": [
+   "Palash Kambar"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "faac32d4ece30609f1a0930ca0ae951cf6dc1786",
+  "title": "scsi: ufs: host: mediatek: Enhance recovery on hibernation exit failure",
+  "commits": [
+   "faac32d4ece30609f1a0930ca0ae951cf6dc1786"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "15ef3f5aa822f32524cba1463422a2c9372443f0",
+  "title": "scsi: ufs: host: mediatek: Enhance recovery on resume failure",
+  "commits": [
+   "15ef3f5aa822f32524cba1463422a2c9372443f0"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "77b96ef70b6ba46e3473e5e3a66095c4bc0e93a4",
+  "title": "scsi: ufs: host: mediatek: Correct system PM flow",
+  "commits": [
+   "77b96ef70b6ba46e3473e5e3a66095c4bc0e93a4"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "b2f8abadabea32c49b0d624232016347082b1aa9",
+  "title": "scsi: ufs: host: mediatek: Correct resume flow for LPM and MTCMOS",
+  "commits": [
+   "b2f8abadabea32c49b0d624232016347082b1aa9"
+  ],
+  "authors": [
+   "Alice Chao"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "c73cd5e298c5a86cb5cf7019f787dffe9b784294",
+  "title": "scsi: ufs: host: mediatek: Support UFS PHY runtime PM and correct sequence",
+  "commits": [
+   "c73cd5e298c5a86cb5cf7019f787dffe9b784294"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "f5ca8d0c7a6388abd5d8023cc682e1543728cc73",
+  "title": "scsi: ufs: host: mediatek: Disable auto-hibern8 during power mode changes",
+  "commits": [
+   "f5ca8d0c7a6388abd5d8023cc682e1543728cc73"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "f29ec85ac4fdd72469c0c5898f47301c7c95ead8",
+  "title": "scsi: ufs: host: mediatek: Return error directly on idle wait timeout",
+  "commits": [
+   "f29ec85ac4fdd72469c0c5898f47301c7c95ead8"
+  ],
+  "authors": [
+   "Sanjeev Y"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "d73836cb8535b3078e4d2a57913f301baec58a33",
+  "title": "scsi: ufs: host: mediatek: Fix adapt issue after PA_Init",
+  "commits": [
+   "d73836cb8535b3078e4d2a57913f301baec58a33"
+  ],
+  "authors": [
+   "Alice Chao"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "91cad911edd1612ed28f5cfb2d4c53a8824951a5",
+  "title": "scsi: ufs: host: mediatek: Fix unbalanced IRQ enable issue",
+  "commits": [
+   "91cad911edd1612ed28f5cfb2d4c53a8824951a5"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "2936049277ea3bfd38d12583755556290b9ea494",
+  "title": "scsi: ufs: host: mediatek: Fix device power control",
+  "commits": [
+   "2936049277ea3bfd38d12583755556290b9ea494"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "2b9887b17ebe942cbef7cffc4e19fa2aa5fed4c8",
+  "title": "scsi: ufs: ufs-qcom: Streamline UFS MCQ resource mapping",
+  "commits": [
+   "2b9887b17ebe942cbef7cffc4e19fa2aa5fed4c8"
+  ],
+  "authors": [
+   "Nitin Rawat"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "bc5dbf7739594b05c673ab3905471257be9921e7",
+  "title": "scsi: ufs: ufs-qcom: Refactor MCQ register dump logic",
+  "commits": [
+   "bc5dbf7739594b05c673ab3905471257be9921e7"
+  ],
+  "authors": [
+   "Nitin Rawat"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "0bd0e43776b6a0ff5f7aa3783f547849356ac899",
+  "title": "scsi: ufs: exynos: Correct sync pattern mask timing comment",
+  "commits": [
+   "0bd0e43776b6a0ff5f7aa3783f547849356ac899"
+  ],
+  "authors": [
+   "Alok Tiwari"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "c1553fc105dff28f79bef90fab207235f5f2d977",
+  "title": "scsi: ufs: ufs-qcom: Disable lane clocks during phy hibern8",
+  "commits": [
+   "c1553fc105dff28f79bef90fab207235f5f2d977"
+  ],
+  "authors": [
+   "Palash Kambar"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "fb1f4568346153d2f80fdb4ffcfa0cf4fb257d3c",
+  "title": "scsi: ufs: core: Disable timestamp functionality if not supported",
+  "commits": [
+   "fb1f4568346153d2f80fdb4ffcfa0cf4fb257d3c"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "253757797973c54ea967f8fd8f40d16e4a78e6d4",
+  "title": "scsi: ufs: core: Change MCQ interrupt enable flow",
+  "commits": [
+   "253757797973c54ea967f8fd8f40d16e4a78e6d4"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "79dde5f7dc7c038eec903745dc1550cd4139980e",
+  "title": "scsi: ufs: core: Fix data race in CPU latency PM QoS request handling",
+  "commits": [
+   "79dde5f7dc7c038eec903745dc1550cd4139980e"
+  ],
+  "authors": [
+   "Zhongqiu Han"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "91945660ac29341710b0914db200f6eacf251513",
+  "title": "scsi: ufs: dt-bindings: Document gear and rate limit properties",
+  "commits": [
+   "91945660ac29341710b0914db200f6eacf251513"
+  ],
+  "authors": [
+   "Ram Kumar Dwivedi"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "d471a075ae019118fa2e1bd251bad7e98d97b49e",
+  "title": "scsi: ufs: ufs-qcom: Remove redundant re-assignment to hs_rate",
+  "commits": [
+   "d471a075ae019118fa2e1bd251bad7e98d97b49e"
+  ],
+  "authors": [
+   "Ram Kumar Dwivedi"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1cc577e64d68ba0a720329e37aa955c0de297a77",
+  "title": "scsi: ufs: pltfrm: Add DT support to limit HS gear and gear rate",
+  "commits": [
+   "1cc577e64d68ba0a720329e37aa955c0de297a77"
+  ],
+  "authors": [
+   "Ram Kumar Dwivedi"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "88f4d3aa29c8b1944ad506ac92c948258cbc004b",
+  "title": "scsi: ufs: ufs-qcom: Add support for limiting HS gear and rate",
+  "commits": [
+   "88f4d3aa29c8b1944ad506ac92c948258cbc004b"
+  ],
+  "authors": [
+   "Ram Kumar Dwivedi"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "f966e02ae52192928d544262ee7a68611e333031",
+  "title": "scsi: ufs: core: Fix runtime suspend error deadlock",
+  "commits": [
+   "f966e02ae52192928d544262ee7a68611e333031"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "0ba7a254afd037cfc2b656f379c54b43c6e574e8",
+  "title": "scsi: ufs: core: Fix PM QoS mutex initialization",
+  "commits": [
+   "0ba7a254afd037cfc2b656f379c54b43c6e574e8"
+  ],
+  "authors": [
+   "Marek Szyprowski"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "bb7663dec67b691528f104894429b3859fb16c14",
+  "title": "scsi: ufs: sysfs: Make HID attributes visible",
+  "commits": [
+   "bb7663dec67b691528f104894429b3859fb16c14"
+  ],
+  "authors": [
+   "Daniel Lee"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "558ae4579810fa0fef011944230c65a6f3087f85",
+  "title": "scsi: ufs: core: Include UTP error in INT_FATAL_ERRORS",
+  "commits": [
+   "558ae4579810fa0fef011944230c65a6f3087f85"
+  ],
+  "authors": [
+   "Hoyoung Seo"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "6dfc353af575e33c94f5d740f7b0569fa9b784d9",
+  "title": "scsi: ufs: qcom: dt-bindings: Document the Kaanapali UFS controller",
+  "commits": [
+   "6dfc353af575e33c94f5d740f7b0569fa9b784d9"
+  ],
+  "authors": [
+   "Nitin Rawat"
+  ],
+  "areas": [
+   "bindings"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251008065651.1589614-peter.wang@mediatek.com",
+  "title": "scsi: ufs: core: Fix error handler host_sem issue",
+  "commits": [
+   "e23ef4f22db30a1e49c8b060e4ebc9dc9ca99c49"
+  ],
+  "authors": [
+   "Peter Wang"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251020061539.28661-wkon.kim@samsung.com",
+  "title": "scsi: ufs: core: Initialize value of an attribute returned by uic cmd",
+  "commits": [
+   "6fe4c679dde3075cb481beb3945269bb2ef8b19a",
+   "35bc3c8ee319083333b758355ffd739a96af5c00"
+  ],
+  "authors": [
+   "Wonkon Kim"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251012173828.9880-nitin.rawat@oss.qualcomm.com",
+  "title": "scsi: ufs: ufs-qcom: Fix UFS OCP issue during UFS power down (PC=3)",
+  "commits": [
+   "5127be409c6c3815c4a7d8f6d88043e44f9b9543"
+  ],
+  "authors": [
+   "Nitin Rawat"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251014200118.3390839-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Fix a race condition related to the \"hid\" attribute group",
+  "commits": [
+   "c74dc8ab47c1ec3927f63ca83b542c363249b3d8",
+   "c0e37ac6a5d4c4bc33b9c4408d22714fe370a1b0"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251028222433.1108299-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Revert \"Make HID attributes visible\"",
+  "commits": [
+   "f838d624fd1183e07db86f3138bcd05fd7630a1e"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20251024085918.31825-adrian.hunter@intel.com",
+  "title": "scsi: ufs: ufs-pci: Fix S0ix/S3 for Intel controllers",
+  "commits": [
+   "bb44826c3bdbf1fa3957008a04908f45e5666463",
+   "d34caa89a132cd69efc48361d4772251546fdb88",
+   "d968e99488c4b08259a324a89e4ed17bf36561a4",
+   "a2b32bc1d9e359a9f90d0de6af16699facb10935"
+  ],
+  "authors": [
+   "Adrian Hunter"
+  ],
+  "areas": [
+   "core",
+   "host"
+  ],
+  "summary_ko": null
+ }
+]

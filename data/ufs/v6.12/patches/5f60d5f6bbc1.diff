@@ -1,0 +1,52 @@
+diff --git a/drivers/ufs/core/ufs-mcq.c b/drivers/ufs/core/ufs-mcq.c
+index 5891cdacd0b3..8402151330fe 100644
+--- a/drivers/ufs/core/ufs-mcq.c
++++ b/drivers/ufs/core/ufs-mcq.c
+@@ -7,7 +7,7 @@
+  *	Can Guo <quic_cang@quicinc.com>
+  */
+ 
+-#include <asm/unaligned.h>
++#include <linux/unaligned.h>
+ #include <linux/dma-mapping.h>
+ #include <linux/module.h>
+ #include <linux/platform_device.h>
+diff --git a/drivers/ufs/core/ufs-sysfs.c b/drivers/ufs/core/ufs-sysfs.c
+index fe313800aed0..265f21133b63 100644
+--- a/drivers/ufs/core/ufs-sysfs.c
++++ b/drivers/ufs/core/ufs-sysfs.c
+@@ -4,7 +4,7 @@
+ #include <linux/err.h>
+ #include <linux/string.h>
+ #include <linux/bitfield.h>
+-#include <asm/unaligned.h>
++#include <linux/unaligned.h>
+ 
+ #include <ufs/ufs.h>
+ #include <ufs/unipro.h>
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 24a32e2fd75e..fc55fdab526b 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -36,7 +36,7 @@
+ #include "ufs-fault-injection.h"
+ #include "ufs_bsg.h"
+ #include "ufshcd-crypto.h"
+-#include <asm/unaligned.h>
++#include <linux/unaligned.h>
+ 
+ #define CREATE_TRACE_POINTS
+ #include "ufs_trace.h"
+diff --git a/drivers/ufs/host/ufs-exynos.c b/drivers/ufs/host/ufs-exynos.c
+index 9ec318ef52bf..5867e6338562 100644
+--- a/drivers/ufs/host/ufs-exynos.c
++++ b/drivers/ufs/host/ufs-exynos.c
+@@ -8,7 +8,7 @@
+  *
+  */
+ 
+-#include <asm/unaligned.h>
++#include <linux/unaligned.h>
+ #include <crypto/aes.h>
+ #include <linux/arm-smccc.h>
+ #include <linux/clk.h>

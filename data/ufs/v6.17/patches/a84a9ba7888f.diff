@@ -1,0 +1,39 @@
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index 744efcde1fff..90351fff501c 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -267,6 +267,13 @@ static int ufs_mtk_hce_enable_notify(struct ufs_hba *hba,
+ 		ufshcd_writel(hba,
+ 			      ufshcd_readl(hba, REG_UFS_XOUFS_CTRL) | 0x80,
+ 			      REG_UFS_XOUFS_CTRL);
++
++		/* DDR_EN setting */
++		if (host->ip_ver >= IP_VER_MT6989) {
++			ufshcd_rmwl(hba, UFS_MASK(0x7FFF, 8),
++				0x453000, REG_UFS_MMIO_OPT_CTRL_0);
++		}
++
+ 	}
+ 
+ 	return 0;
+diff --git a/drivers/ufs/host/ufs-mediatek.h b/drivers/ufs/host/ufs-mediatek.h
+index 05d76a6bd772..1082f761bb44 100644
+--- a/drivers/ufs/host/ufs-mediatek.h
++++ b/drivers/ufs/host/ufs-mediatek.h
+@@ -192,4 +192,16 @@ struct ufs_mtk_host {
+ /* MTK RTT support number */
+ #define MTK_MAX_NUM_RTT 2
+ 
++/* UFSHCI MTK ip version value */
++enum {
++	/* UFSHCI 3.1 */
++	IP_VER_MT6878    = 0x10420200,
++
++	/* UFSHCI 4.0 */
++	IP_VER_MT6897    = 0x10440000,
++	IP_VER_MT6989    = 0x10450000,
++
++	IP_VER_NONE      = 0xFFFFFFFF
++};
++
+ #endif /* !_UFS_MEDIATEK_H */

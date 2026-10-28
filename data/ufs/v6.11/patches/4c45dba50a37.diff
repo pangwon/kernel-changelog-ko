@@ -1,0 +1,66 @@
+diff --git a/drivers/ufs/core/ufshcd-crypto.h b/drivers/ufs/core/ufshcd-crypto.h
+index 3eb8df42e194..89bb97c14c15 100644
+--- a/drivers/ufs/core/ufshcd-crypto.h
++++ b/drivers/ufs/core/ufshcd-crypto.h
+@@ -50,6 +50,20 @@ static inline int ufshcd_crypto_fill_prdt(struct ufs_hba *hba,
+ 	return 0;
+ }
+ 
++static inline void ufshcd_crypto_clear_prdt(struct ufs_hba *hba,
++					    struct ufshcd_lrb *lrbp)
++{
++	if (!(hba->quirks & UFSHCD_QUIRK_KEYS_IN_PRDT))
++		return;
++
++	if (!(scsi_cmd_to_rq(lrbp->cmd)->crypt_ctx))
++		return;
++
++	/* Zeroize the PRDT because it can contain cryptographic keys. */
++	memzero_explicit(lrbp->ucd_prdt_ptr,
++			 ufshcd_sg_entry_size(hba) * scsi_sg_count(lrbp->cmd));
++}
++
+ bool ufshcd_crypto_enable(struct ufs_hba *hba);
+ 
+ int ufshcd_hba_init_crypto_capabilities(struct ufs_hba *hba);
+@@ -73,6 +87,9 @@ static inline int ufshcd_crypto_fill_prdt(struct ufs_hba *hba,
+ 	return 0;
+ }
+ 
++static inline void ufshcd_crypto_clear_prdt(struct ufs_hba *hba,
++					    struct ufshcd_lrb *lrbp) { }
++
+ static inline bool ufshcd_crypto_enable(struct ufs_hba *hba)
+ {
+ 	return false;
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 06619682087c..7c5ad68e49f2 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -5479,6 +5479,7 @@ void ufshcd_release_scsi_cmd(struct ufs_hba *hba,
+ 	struct scsi_cmnd *cmd = lrbp->cmd;
+ 
+ 	scsi_dma_unmap(cmd);
++	ufshcd_crypto_clear_prdt(hba, lrbp);
+ 	ufshcd_release(hba);
+ 	ufshcd_clk_scaling_update_busy(hba);
+ }
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index fb791d1a6d00..80accfbe48aa 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -665,6 +665,14 @@ enum ufshcd_quirks {
+ 	 * host controller initialization fails if that bit is set.
+ 	 */
+ 	UFSHCD_QUIRK_BROKEN_CRYPTO_ENABLE		= 1 << 23,
++
++	/*
++	 * This quirk needs to be enabled if the host controller driver copies
++	 * cryptographic keys into the PRDT in order to send them to hardware,
++	 * and therefore the PRDT should be zeroized after each request (as per
++	 * the standard best practice for managing keys).
++	 */
++	UFSHCD_QUIRK_KEYS_IN_PRDT			= 1 << 24,
+ };
+ 
+ enum ufshcd_caps {

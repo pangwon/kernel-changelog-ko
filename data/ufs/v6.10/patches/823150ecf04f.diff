@@ -1,0 +1,14 @@
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 7fce5ed3e6ee..1bc4d8bb9b1b 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -278,9 +278,6 @@ static void ufs_qcom_select_unipro_mode(struct ufs_qcom_host *host)
+ 
+ 	if (host->hw_ver.major >= 0x05)
+ 		ufshcd_rmwl(host->hba, QUNIPRO_G4_SEL, 0, REG_UFS_CFG0);
+-
+-	/* make sure above configuration is applied before we return */
+-	mb();
+ }
+ 
+ /*

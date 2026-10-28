@@ -1,0 +1,204 @@
+[
+ {
+  "sha": "85e985a4f46e462a37f1875cb74ed380e7c0c2e0",
+  "subject": "interconnect: qcom: sc8180x: Mark CO0 BCM keepalive",
+  "files": [
+   "drivers/interconnect/qcom/sc8180x.c"
+  ]
+ },
+ {
+  "sha": "aed5ed595960c6d301dcd4ed31aeaa7a8054c0c6",
+  "subject": "PM / devfreq: Synchronize devfreq_monitor_[start/stop]",
+  "files": [
+   "drivers/devfreq/devfreq.c"
+  ]
+ },
+ {
+  "sha": "b7b9a6aa7aea2bcba2d35d65e4ce2913115485a3",
+  "subject": "arm64: dts: qcom: sc8180x-primus: Allow UFS regulators load/mode setting",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sc8180x-primus.dts"
+  ]
+ },
+ {
+  "sha": "384ea2aa2066d27c20257550ba91418401b91199",
+  "subject": "arm64: dts: qcom: sc8180x: Add interconnects to UFS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sc8180x.dtsi"
+  ]
+ },
+ {
+  "sha": "2564209891a436f71c6c8a245d3b56cf4382d65d",
+  "subject": "arm64: dts: qcom: sc8180x: Add UFS GDSC",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sc8180x.dtsi"
+  ]
+ },
+ {
+  "sha": "75390b69d5df49d828d0af278c7f27ed74e33064",
+  "subject": "arm64: dts: qcom: sm8450: switch UFS QMP PHY to new style of bindings",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8450.dtsi"
+  ]
+ },
+ {
+  "sha": "002a13ed10136e4f59013adbf097b31d608caf67",
+  "subject": "arm64: dts: qcom: sm8350: switch UFS QMP PHY to new style of bindings",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8350.dtsi"
+  ]
+ },
+ {
+  "sha": "ba865bdcc688932980b8e5ec2154eaa33cd4a981",
+  "subject": "arm64: dts: qcom: sm8250: switch UFS QMP PHY to new style of bindings",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8250.dtsi"
+  ]
+ },
+ {
+  "sha": "935c76f7f85912962d72eceabdfa2c38c4c07f02",
+  "subject": "arm64: dts: qcom: sm8150: switch UFS QMP PHY to new style of bindings",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8150.dtsi"
+  ]
+ },
+ {
+  "sha": "8e89beb32e1f81807c17af8eb07bd681b9ae229b",
+  "subject": "arm64: dts: qcom: sm6350: switch UFS QMP PHY to new style of bindings",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm6350.dtsi"
+  ]
+ },
+ {
+  "sha": "f6874706e311a8743b678613b083e9bf0e1fd112",
+  "subject": "arm64: dts: qcom: sm6115: switch UFS QMP PHY to new style of bindings",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm6115.dtsi"
+  ]
+ },
+ {
+  "sha": "760baba5e79bae651c59df89d441fad2bd0be4a5",
+  "subject": "arm64: dts: qcom: sdm845: switch UFS QMP PHY to new style of bindings",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sdm845.dtsi"
+  ]
+ },
+ {
+  "sha": "963ff488afe100c8ee9fb80933e342719c6fa63d",
+  "subject": "arm64: dts: qcom: msm8998: switch UFS QMP PHY to new style of bindings",
+  "files": [
+   "arch/arm64/boot/dts/qcom/msm8998.dtsi"
+  ]
+ },
+ {
+  "sha": "f63ba6aa80f520678f35640b347e75c46bd49612",
+  "subject": "arm64: dts: qcom: msm8996: switch UFS QMP PHY to new style of bindings",
+  "files": [
+   "arch/arm64/boot/dts/qcom/msm8996.dtsi"
+  ]
+ },
+ {
+  "sha": "6cf96df77338c6a7e753229fe6d330ab60e28cda",
+  "subject": "pinctrl: samsung: add exynosautov920 pinctrl",
+  "files": [
+   "drivers/pinctrl/samsung/pinctrl-exynos-arm64.c",
+   "drivers/pinctrl/samsung/pinctrl-exynos.c",
+   "drivers/pinctrl/samsung/pinctrl-exynos.h",
+   "drivers/pinctrl/samsung/pinctrl-samsung.c",
+   "drivers/pinctrl/samsung/pinctrl-samsung.h"
+  ]
+ },
+ {
+  "sha": "57de428eaca2b9af1a35df96c7adcad4b5ea79f9",
+  "subject": "arm64: dts: exynos: add minimal support for exynosautov920 sadk board",
+  "files": [
+   "arch/arm64/boot/dts/exynos/Makefile",
+   "arch/arm64/boot/dts/exynos/exynosautov920-sadk.dts"
+  ]
+ },
+ {
+  "sha": "c96dab1993d247b7b05ba2fdef8f185cbbd5454e",
+  "subject": "arm64: dts: exynos: add initial support for exynosautov920 SoC",
+  "files": [
+   "arch/arm64/boot/dts/exynos/exynosautov920-pinctrl.dtsi",
+   "arch/arm64/boot/dts/exynos/exynosautov920.dtsi"
+  ]
+ },
+ {
+  "sha": "cad7c46ae2d75b42aa8f1e3f741b203ed796eee9",
+  "subject": "arm64: dts: qcom: qcm6490-fairphone-fp5: Enable UFS",
+  "files": [
+   "arch/arm64/boot/dts/qcom/qcm6490-fairphone-fp5.dts"
+  ]
+ },
+ {
+  "sha": "9b07340c55a8e918f2667fb911e9b2edc428793c",
+  "subject": "arm64: dts: qcom: sc7280: Add UFS nodes for sc7280 IDP board",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sc7280-idp.dtsi"
+  ]
+ },
+ {
+  "sha": "c8a074789d71c1e26920f9333125590fac84f8c7",
+  "subject": "arm64: dts: qcom: sc7280: Add UFS nodes for sc7280 soc",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sc7280.dtsi"
+  ]
+ },
+ {
+  "sha": "0c5b1016b5f30eb2313f942abef5bd7a7be12ae8",
+  "subject": "arm64: dts: qcom: sm8650-qrd: add interconnect dependent device nodes",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8650-qrd.dts"
+  ]
+ },
+ {
+  "sha": "deb63527ab248301adc302e21d79c0aae5a827db",
+  "subject": "arm64: dts: qcom: sm8650-mtp: add interconnect dependent device nodes",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8650-mtp.dts"
+  ]
+ },
+ {
+  "sha": "10e024671295184fe7556fcb427444b57d2e0ed5",
+  "subject": "arm64: dts: qcom: sm8650: add interconnect dependent device nodes",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8650.dtsi"
+  ]
+ },
+ {
+  "sha": "725be1d6318e4ea7e3947fd4242a14cf589cfebf",
+  "subject": "arm64: dts: qcom: sm8250: Add OPP table support to UFSHC",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sm8250.dtsi"
+  ]
+ },
+ {
+  "sha": "ec987b5efd59fdea4178d824d8ec4bbdf3019bdf",
+  "subject": "arm64: dts: qcom: sdm845: Add OPP table support to UFSHC",
+  "files": [
+   "arch/arm64/boot/dts/qcom/sdm845.dtsi"
+  ]
+ },
+ {
+  "sha": "edbc78a1b74c3d31dabaf3280bcee0356e744ca9",
+  "subject": "scsi: ufs: mediatek: Change the maintainer for MediaTek UFS hooks",
+  "files": [
+   "MAINTAINERS"
+  ]
+ },
+ {
+  "sha": "bbd3efed3383e332191c665786c61653826d2ac3",
+  "subject": "f2fs: skip adding a discard command if exists",
+  "files": [
+   "fs/f2fs/segment.c"
+  ]
+ },
+ {
+  "sha": "8c91ef9883bfb5a6315917a7104dd1e06c85b278",
+  "subject": "dt-bindings: phy: qcom,sc8280xp-qmp-ufs-phy: document the SM8650 QMP UFS PHY",
+  "files": [
+   "Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml"
+  ]
+ }
+]

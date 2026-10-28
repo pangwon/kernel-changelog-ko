@@ -1,0 +1,14 @@
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index 647b6eb05398..61c8fe135100 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -1629,6 +1629,9 @@ static void ufs_mtk_vccqx_set_lpm(struct ufs_hba *hba, bool lpm)
+ {
+ 	struct ufs_vreg *vccqx = NULL;
+ 
++	if (!hba->vreg_info.vccq && !hba->vreg_info.vccq2)
++		return;
++
+ 	if (hba->vreg_info.vccq)
+ 		vccqx = hba->vreg_info.vccq;
+ 	else

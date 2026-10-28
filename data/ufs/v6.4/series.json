@@ -1,0 +1,217 @@
+[
+ {
+  "id": "20230314205822.313447-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Disable the reset settle delay",
+  "commits": [
+   "fb5ea4f5202bcf2fd35c2ce49f73fe49fcbc6d41"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230314205844.313519-bvanassche@acm.org",
+  "title": "scsi: ufs: core: Set the residual byte count",
+  "commits": [
+   "cb38845d90fc4ad905aecd36ed85a75764d0b5fb"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1678865517-43139-1-git-send-email-quic_ziqichen@quicinc.com",
+  "title": "scsi: ufs: core: Print trs for pending requests in MCQ mode",
+  "commits": [
+   "127fd07da459379d39d5a048afbd3e51d00f3f60"
+  ],
+  "authors": [
+   "Ziqi Chen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "1678866271-49601-1-git-send-email-quic_ziqichen@quicinc.com",
+  "title": "scsi: ufs: core: Add trace event for MCQ",
+  "commits": [
+   "4a52338bf288c95a46f20af1f5df77b80b74c9ad"
+  ],
+  "authors": [
+   "Ziqi Chen"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230310214435.275127-krzysztof.kozlowski@linaro.org",
+  "title": "scsi: ufs: qcom: Add __maybe_unused to OF ID table",
+  "commits": [
+   "dd3f53301181dece3fb377173bff9902cdba0ba7",
+   "cd6a6893ac055dab9c21c39ef20293094d38045b",
+   "d43250ed0fec61a8026019b218953328f239ccd0"
+  ],
+  "authors": [
+   "Krzysztof Kozlowski"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230322195515.1267197-bvanassche@acm.org",
+  "title": "scsi: ufs: Declare SCSI host template const",
+  "commits": [
+   "f2e2fe3dec7f44fea4c0cd66ca5abf5cd080407c"
+  ],
+  "authors": [
+   "Bart Van Assche"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230311231733.141806-danila@jiaxyga.com",
+  "title": "phy: qcom-qmp-ufs: Add SM7150 support",
+  "commits": [
+   "868c2a6ceead022aa61b94b7173c177cf0169be2"
+  ],
+  "authors": [
+   "David Wronek"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230330012918.13748-stanley.chu@mediatek.com",
+  "title": "scsi: core: Clean up struct ufs_saved_pwr_info",
+  "commits": [
+   "543a827b1db3ef0a123dc7a48e8feb6585eae0a6"
+  ],
+  "authors": [
+   "Stanley Chu"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230328105832.3495-adrian.hunter@intel.com",
+  "title": "scsi: ufs: ufs-pci: Add support for Intel Lunar Lake",
+  "commits": [
+   "0a07d3c7a1d205b47d9f3608ff4e9d1065d63b6d"
+  ],
+  "authors": [
+   "Adrian Hunter"
+  ],
+  "areas": [
+   "host"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230407105029.2274111-abel.vesa@linaro.org",
+  "title": "soc: qcom: Make the Qualcomm UFS/SDCC ICE a dedicated driver",
+  "commits": [
+   "2afbf43a4aec6e31dac7835e65d52c867f2be400"
+  ],
+  "authors": [
+   "Abel Vesa"
+  ],
+  "areas": [
+   "crypto"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230329101303.18377-avri.altman@wdc.com",
+  "title": "scsi: ufs: mcq: Annotate ufshcd_inc_sq_tail() appropriately",
+  "commits": [
+   "4de243c40c0f6c701123eb12938a5d9caee08679",
+   "3c85f087faeca3ca9ec9e7b085e1eff370e3f0db"
+  ],
+  "authors": [
+   "Avri Altman"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230411130446.401440-brgl@bgdev.pl",
+  "title": "phy: qualcomm: phy-qcom-qmp-ufs: add definitions for sa8775p",
+  "commits": [
+   "607c101fe9f2f618ef8db9f9b589a365125c16ee"
+  ],
+  "authors": [
+   "Bartosz Golaszewski"
+  ],
+  "areas": [
+   "phy"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230424080400.8955-alice.chao@mediatek.com",
+  "title": "scsi: ufs: core: mcq: Fix &hwq->cq_lock deadlock issue",
+  "commits": [
+   "948afc69615167a3c82430f99bfd046332b89912"
+  ],
+  "authors": [
+   "Alice Chao"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230425031721epcms2p5d4de65616478c967d466626e20c42a3a@epcms2p5",
+  "title": "scsi: ufs: core: Fix I/O hang that occurs when BKOPS fails in W-LUN suspend",
+  "commits": [
+   "1a7edd041f2d252f251523ba3f2eaead076a8f8d"
+  ],
+  "authors": [
+   "Keoseong Park"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ },
+ {
+  "id": "20230504154454.26654-powen.kao@mediatek.com",
+  "title": "scsi: ufs: core: Fix MCQ tag calculation",
+  "commits": [
+   "5149452ca66289ef33d13897ee845a2f6f5b680f",
+   "06caeb536b2b21668efd2d6fa97c09461957b3a7",
+   "72a81bb0b6fc9b759ac0fdaca3ec5884a8b2f304"
+  ],
+  "authors": [
+   "Po-Wen Kao"
+  ],
+  "areas": [
+   "core"
+  ],
+  "summary_ko": null
+ }
+]

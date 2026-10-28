@@ -1,0 +1,31 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 03c47f9a2750..9434328ba323 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -2242,10 +2242,11 @@ void ufshcd_send_command(struct ufs_hba *hba, unsigned int task_tag,
+ 
+ 	if (is_mcq_enabled(hba)) {
+ 		int utrd_size = sizeof(struct utp_transfer_req_desc);
++		struct utp_transfer_req_desc *src = lrbp->utr_descriptor_ptr;
++		struct utp_transfer_req_desc *dest = hwq->sqe_base_addr + hwq->sq_tail_slot;
+ 
+ 		spin_lock(&hwq->sq_lock);
+-		memcpy(hwq->sqe_base_addr + (hwq->sq_tail_slot * utrd_size),
+-		       lrbp->utr_descriptor_ptr, utrd_size);
++		memcpy(dest, src, utrd_size);
+ 		ufshcd_inc_sq_tail(hwq);
+ 		spin_unlock(&hwq->sq_lock);
+ 	} else {
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index 8b1046c21960..721ae4cd3702 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -1095,7 +1095,7 @@ struct ufs_hw_queue {
+ 	void __iomem *mcq_cq_head;
+ 	void __iomem *mcq_cq_tail;
+ 
+-	void *sqe_base_addr;
++	struct utp_transfer_req_desc *sqe_base_addr;
+ 	dma_addr_t sqe_dma_addr;
+ 	struct cq_entry *cqe_base_addr;
+ 	dma_addr_t cqe_dma_addr;

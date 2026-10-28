@@ -1,0 +1,14 @@
+diff --git a/drivers/ufs/host/ufs-mediatek.c b/drivers/ufs/host/ufs-mediatek.c
+index 73e217260390..a054810e321d 100644
+--- a/drivers/ufs/host/ufs-mediatek.c
++++ b/drivers/ufs/host/ufs-mediatek.c
+@@ -410,9 +410,6 @@ static int ufs_mtk_wait_link_state(struct ufs_hba *hba, u32 state,
+ 		usleep_range(100, 200);
+ 	} while (ktime_before(time_checked, timeout));
+ 
+-	if (val == state)
+-		return 0;
+-
+ 	return -ETIMEDOUT;
+ }
+ 

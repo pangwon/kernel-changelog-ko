@@ -1,0 +1,39 @@
+diff --git a/include/ufs/ufs.h b/include/ufs/ufs.h
+index c789252b5fad..0fb733683953 100644
+--- a/include/ufs/ufs.h
++++ b/include/ufs/ufs.h
+@@ -11,7 +11,7 @@
+ #ifndef _UFS_H
+ #define _UFS_H
+ 
+-#include <linux/mutex.h>
++#include <linux/bitops.h>
+ #include <linux/types.h>
+ #include <uapi/scsi/scsi_bsg_ufs.h>
+ 
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index fc80de57a4c6..67bd089e70bc 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -20,6 +20,7 @@
+ #include <linux/pm_runtime.h>
+ #include <linux/dma-direction.h>
+ #include <scsi/scsi_device.h>
++#include <scsi/scsi_host.h>
+ #include <ufs/unipro.h>
+ #include <ufs/ufs.h>
+ #include <ufs/ufs_quirks.h>
+diff --git a/include/ufs/ufshci.h b/include/ufs/ufshci.h
+index 146fbea76d98..c48135554d5c 100644
+--- a/include/ufs/ufshci.h
++++ b/include/ufs/ufshci.h
+@@ -11,7 +11,8 @@
+ #ifndef _UFSHCI_H
+ #define _UFSHCI_H
+ 
+-#include <scsi/scsi_host.h>
++#include <linux/types.h>
++#include <ufs/ufs.h>
+ 
+ enum {
+ 	TASK_REQ_UPIU_SIZE_DWORDS	= 8,

@@ -1,0 +1,379 @@
+diff --git a/Documentation/ABI/testing/sysfs-driver-ufs b/Documentation/ABI/testing/sysfs-driver-ufs
+index d4140dc6c5ba..f3de8c521bbd 100644
+--- a/Documentation/ABI/testing/sysfs-driver-ufs
++++ b/Documentation/ABI/testing/sysfs-driver-ufs
+@@ -1685,3 +1685,86 @@ Description:
+ 		================  ========================================
+ 
+ 		The file is read only.
++
++What:		/sys/bus/platform/drivers/ufshcd/*/hid/analysis_trigger
++What:		/sys/bus/platform/devices/*.ufs/hid/analysis_trigger
++Date:		May 2025
++Contact:	Huan Tang <tanghuan@vivo.com>
++Description:
++		The host can enable or disable HID analysis operation.
++
++		=======  =========================================
++		disable   disable HID analysis operation
++		enable    enable HID analysis operation
++		=======  =========================================
++
++		The file is write only.
++
++What:		/sys/bus/platform/drivers/ufshcd/*/hid/defrag_trigger
++What:		/sys/bus/platform/devices/*.ufs/hid/defrag_trigger
++Date:		May 2025
++Contact:	Huan Tang <tanghuan@vivo.com>
++Description:
++		The host can enable or disable HID defragmentation operation.
++
++		=======  =========================================
++		disable   disable HID defragmentation operation
++		enable    enable HID defragmentation operation
++		=======  =========================================
++
++		The attribute is write only.
++
++What:		/sys/bus/platform/drivers/ufshcd/*/hid/fragmented_size
++What:		/sys/bus/platform/devices/*.ufs/hid/fragmented_size
++Date:		May 2025
++Contact:	Huan Tang <tanghuan@vivo.com>
++Description:
++		The total fragmented size in the device is reported through
++		this attribute.
++
++		The attribute is read only.
++
++What:		/sys/bus/platform/drivers/ufshcd/*/hid/defrag_size
++What:		/sys/bus/platform/devices/*.ufs/hid/defrag_size
++Date:		May 2025
++Contact:	Huan Tang <tanghuan@vivo.com>
++Description:
++		The host sets the size to be defragmented by an HID
++		defragmentation operation.
++
++		The attribute is read/write.
++
++What:		/sys/bus/platform/drivers/ufshcd/*/hid/progress_ratio
++What:		/sys/bus/platform/devices/*.ufs/hid/progress_ratio
++Date:		May 2025
++Contact:	Huan Tang <tanghuan@vivo.com>
++Description:
++		Defragmentation progress is reported by this attribute,
++		indicates the ratio of the completed defragmentation size
++		over the requested defragmentation size.
++
++		====  ============================================
++		1     1%
++		...
++		100   100%
++		====  ============================================
++
++		The attribute is read only.
++
++What:		/sys/bus/platform/drivers/ufshcd/*/hid/state
++What:		/sys/bus/platform/devices/*.ufs/hid/state
++Date:		May 2025
++Contact:	Huan Tang <tanghuan@vivo.com>
++Description:
++		The HID state is reported by this attribute.
++
++		====================   ===========================
++		idle			Idle (analysis required)
++		analysis_in_progress    Analysis in progress
++		defrag_required      	Defrag required
++		defrag_in_progress      Defrag in progress
++		defrag_completed      	Defrag completed
++		defrag_not_required     Defrag is not required
++		====================   ===========================
++
++		The attribute is read only.
+diff --git a/drivers/ufs/core/ufs-sysfs.c b/drivers/ufs/core/ufs-sysfs.c
+index de8b6acd4058..10006ae5ee35 100644
+--- a/drivers/ufs/core/ufs-sysfs.c
++++ b/drivers/ufs/core/ufs-sysfs.c
+@@ -87,6 +87,23 @@ static const char *ufs_wb_resize_status_to_string(enum wb_resize_status status)
+ 	}
+ }
+ 
++static const char * const ufs_hid_states[] = {
++	[HID_IDLE]		= "idle",
++	[ANALYSIS_IN_PROGRESS]	= "analysis_in_progress",
++	[DEFRAG_REQUIRED]	= "defrag_required",
++	[DEFRAG_IN_PROGRESS]	= "defrag_in_progress",
++	[DEFRAG_COMPLETED]	= "defrag_completed",
++	[DEFRAG_NOT_REQUIRED]	= "defrag_not_required",
++};
++
++static const char *ufs_hid_state_to_string(enum ufs_hid_state state)
++{
++	if (state < NUM_UFS_HID_STATES)
++		return ufs_hid_states[state];
++
++	return "unknown";
++}
++
+ static const char *ufshcd_uic_link_state_to_string(
+ 			enum uic_link_state state)
+ {
+@@ -1763,6 +1780,178 @@ static const struct attribute_group ufs_sysfs_attributes_group = {
+ 	.attrs = ufs_sysfs_attributes,
+ };
+ 
++static int hid_query_attr(struct ufs_hba *hba, enum query_opcode opcode,
++			enum attr_idn idn, u32 *attr_val)
++{
++	int ret;
++
++	down(&hba->host_sem);
++	if (!ufshcd_is_user_access_allowed(hba)) {
++		up(&hba->host_sem);
++		return -EBUSY;
++	}
++
++	ufshcd_rpm_get_sync(hba);
++	ret = ufshcd_query_attr(hba, opcode, idn, 0, 0, attr_val);
++	ufshcd_rpm_put_sync(hba);
++
++	up(&hba->host_sem);
++	return ret;
++}
++
++static ssize_t analysis_trigger_store(struct device *dev,
++		struct device_attribute *attr, const char *buf, size_t count)
++{
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++	int mode;
++	int ret;
++
++	if (sysfs_streq(buf, "enable"))
++		mode = HID_ANALYSIS_ENABLE;
++	else if (sysfs_streq(buf, "disable"))
++		mode = HID_ANALYSIS_AND_DEFRAG_DISABLE;
++	else
++		return -EINVAL;
++
++	ret = hid_query_attr(hba, UPIU_QUERY_OPCODE_WRITE_ATTR,
++			QUERY_ATTR_IDN_HID_DEFRAG_OPERATION, &mode);
++
++	return ret < 0 ? ret : count;
++}
++
++static DEVICE_ATTR_WO(analysis_trigger);
++
++static ssize_t defrag_trigger_store(struct device *dev,
++		struct device_attribute *attr, const char *buf, size_t count)
++{
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++	int mode;
++	int ret;
++
++	if (sysfs_streq(buf, "enable"))
++		mode = HID_ANALYSIS_AND_DEFRAG_ENABLE;
++	else if (sysfs_streq(buf, "disable"))
++		mode = HID_ANALYSIS_AND_DEFRAG_DISABLE;
++	else
++		return -EINVAL;
++
++	ret = hid_query_attr(hba, UPIU_QUERY_OPCODE_WRITE_ATTR,
++			QUERY_ATTR_IDN_HID_DEFRAG_OPERATION, &mode);
++
++	return ret < 0 ? ret : count;
++}
++
++static DEVICE_ATTR_WO(defrag_trigger);
++
++static ssize_t fragmented_size_show(struct device *dev,
++		struct device_attribute *attr, char *buf)
++{
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++	u32 value;
++	int ret;
++
++	ret = hid_query_attr(hba, UPIU_QUERY_OPCODE_READ_ATTR,
++			QUERY_ATTR_IDN_HID_AVAILABLE_SIZE, &value);
++	if (ret)
++		return ret;
++
++	return sysfs_emit(buf, "%u\n", value);
++}
++
++static DEVICE_ATTR_RO(fragmented_size);
++
++static ssize_t defrag_size_show(struct device *dev,
++		struct device_attribute *attr, char *buf)
++{
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++	u32 value;
++	int ret;
++
++	ret = hid_query_attr(hba, UPIU_QUERY_OPCODE_READ_ATTR,
++			QUERY_ATTR_IDN_HID_SIZE, &value);
++	if (ret)
++		return ret;
++
++	return sysfs_emit(buf, "%u\n", value);
++}
++
++static ssize_t defrag_size_store(struct device *dev,
++		struct device_attribute *attr, const char *buf, size_t count)
++{
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++	u32 value;
++	int ret;
++
++	if (kstrtou32(buf, 0, &value))
++		return -EINVAL;
++
++	ret = hid_query_attr(hba, UPIU_QUERY_OPCODE_WRITE_ATTR,
++			QUERY_ATTR_IDN_HID_SIZE, &value);
++
++	return ret < 0 ? ret : count;
++}
++
++static DEVICE_ATTR_RW(defrag_size);
++
++static ssize_t progress_ratio_show(struct device *dev,
++		struct device_attribute *attr, char *buf)
++{
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++	u32 value;
++	int ret;
++
++	ret = hid_query_attr(hba, UPIU_QUERY_OPCODE_READ_ATTR,
++			QUERY_ATTR_IDN_HID_PROGRESS_RATIO, &value);
++	if (ret)
++		return ret;
++
++	return sysfs_emit(buf, "%u\n", value);
++}
++
++static DEVICE_ATTR_RO(progress_ratio);
++
++static ssize_t state_show(struct device *dev,
++		struct device_attribute *attr, char *buf)
++{
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++	u32 value;
++	int ret;
++
++	ret = hid_query_attr(hba, UPIU_QUERY_OPCODE_READ_ATTR,
++			QUERY_ATTR_IDN_HID_STATE, &value);
++	if (ret)
++		return ret;
++
++	return sysfs_emit(buf, "%s\n", ufs_hid_state_to_string(value));
++}
++
++static DEVICE_ATTR_RO(state);
++
++static struct attribute *ufs_sysfs_hid[] = {
++	&dev_attr_analysis_trigger.attr,
++	&dev_attr_defrag_trigger.attr,
++	&dev_attr_fragmented_size.attr,
++	&dev_attr_defrag_size.attr,
++	&dev_attr_progress_ratio.attr,
++	&dev_attr_state.attr,
++	NULL,
++};
++
++static umode_t ufs_sysfs_hid_is_visible(struct kobject *kobj,
++		struct attribute *attr, int n)
++{
++	struct device *dev = container_of(kobj, struct device, kobj);
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++
++	return	hba->dev_info.hid_sup ? attr->mode : 0;
++}
++
++static const struct attribute_group ufs_sysfs_hid_group = {
++	.name = "hid",
++	.attrs = ufs_sysfs_hid,
++	.is_visible = ufs_sysfs_hid_is_visible,
++};
++
+ static const struct attribute_group *ufs_sysfs_groups[] = {
+ 	&ufs_sysfs_default_group,
+ 	&ufs_sysfs_capabilities_group,
+@@ -1777,6 +1966,7 @@ static const struct attribute_group *ufs_sysfs_groups[] = {
+ 	&ufs_sysfs_string_descriptors_group,
+ 	&ufs_sysfs_flags_group,
+ 	&ufs_sysfs_attributes_group,
++	&ufs_sysfs_hid_group,
+ 	NULL,
+ };
+ 
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index 4410e7d93b7d..0a702356a715 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -8414,6 +8414,10 @@ static int ufs_get_device_desc(struct ufs_hba *hba)
+ 
+ 	dev_info->rtt_cap = desc_buf[DEVICE_DESC_PARAM_RTT_CAP];
+ 
++	dev_info->hid_sup = get_unaligned_be32(desc_buf +
++				DEVICE_DESC_PARAM_EXT_UFS_FEATURE_SUP) &
++				UFS_DEV_HID_SUPPORT;
++
+ 	model_index = desc_buf[DEVICE_DESC_PARAM_PRDCT_NAME];
+ 
+ 	err = ufshcd_read_string_desc(hba, model_index,
+diff --git a/include/ufs/ufs.h b/include/ufs/ufs.h
+index c0c59a8f7256..72fd385037a6 100644
+--- a/include/ufs/ufs.h
++++ b/include/ufs/ufs.h
+@@ -182,6 +182,11 @@ enum attr_idn {
+ 	QUERY_ATTR_IDN_CURR_WB_BUFF_SIZE        = 0x1F,
+ 	QUERY_ATTR_IDN_TIMESTAMP		= 0x30,
+ 	QUERY_ATTR_IDN_DEV_LVL_EXCEPTION_ID     = 0x34,
++	QUERY_ATTR_IDN_HID_DEFRAG_OPERATION	= 0x35,
++	QUERY_ATTR_IDN_HID_AVAILABLE_SIZE	= 0x36,
++	QUERY_ATTR_IDN_HID_SIZE			= 0x37,
++	QUERY_ATTR_IDN_HID_PROGRESS_RATIO	= 0x38,
++	QUERY_ATTR_IDN_HID_STATE		= 0x39,
+ 	QUERY_ATTR_IDN_WB_BUF_RESIZE_HINT	= 0x3C,
+ 	QUERY_ATTR_IDN_WB_BUF_RESIZE_EN		= 0x3D,
+ 	QUERY_ATTR_IDN_WB_BUF_RESIZE_STATUS	= 0x3E,
+@@ -401,6 +406,7 @@ enum {
+ 	UFS_DEV_HPB_SUPPORT		= BIT(7),
+ 	UFS_DEV_WRITE_BOOSTER_SUP	= BIT(8),
+ 	UFS_DEV_LVL_EXCEPTION_SUP       = BIT(12),
++	UFS_DEV_HID_SUPPORT		= BIT(13),
+ };
+ #define UFS_DEV_HPB_SUPPORT_VERSION		0x310
+ 
+@@ -466,6 +472,24 @@ enum ufs_ref_clk_freq {
+ 	REF_CLK_FREQ_INVAL	= -1,
+ };
+ 
++/* bDefragOperation attribute values */
++enum ufs_hid_defrag_operation {
++	HID_ANALYSIS_AND_DEFRAG_DISABLE	= 0,
++	HID_ANALYSIS_ENABLE		= 1,
++	HID_ANALYSIS_AND_DEFRAG_ENABLE	= 2,
++};
++
++/* bHIDState attribute values */
++enum ufs_hid_state {
++	HID_IDLE		= 0,
++	ANALYSIS_IN_PROGRESS	= 1,
++	DEFRAG_REQUIRED		= 2,
++	DEFRAG_IN_PROGRESS	= 3,
++	DEFRAG_COMPLETED	= 4,
++	DEFRAG_NOT_REQUIRED	= 5,
++	NUM_UFS_HID_STATES	= 6,
++};
++
+ /* bWriteBoosterBufferResizeEn attribute */
+ enum wb_resize_en {
+ 	WB_RESIZE_EN_IDLE	= 0,
+@@ -625,6 +649,8 @@ struct ufs_dev_info {
+ 	u32 rtc_update_period;
+ 
+ 	u8 rtt_cap; /* bDeviceRTTCap */
++
++	bool hid_sup;
+ };
+ 
+ /*

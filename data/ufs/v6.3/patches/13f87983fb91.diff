@@ -1,0 +1,12 @@
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index e626810a9abb..89a78a0f794c 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -8724,7 +8724,6 @@ static struct scsi_host_template ufshcd_driver_template = {
+ 	.max_host_blocked	= 1,
+ 	.track_queue_depth	= 1,
+ 	.sdev_groups		= ufshcd_driver_groups,
+-	.dma_boundary		= PAGE_SIZE - 1,
+ 	.rpm_autosuspend_delay	= RPM_AUTOSUSPEND_DELAY_MS,
+ };
+ 

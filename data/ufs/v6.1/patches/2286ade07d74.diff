@@ -1,0 +1,101 @@
+diff --git a/Documentation/ABI/testing/sysfs-driver-ufs b/Documentation/ABI/testing/sysfs-driver-ufs
+index 91de786f9a71..228aa43e14ed 100644
+--- a/Documentation/ABI/testing/sysfs-driver-ufs
++++ b/Documentation/ABI/testing/sysfs-driver-ufs
+@@ -1600,6 +1600,43 @@ Description:	This entry shows the status of HPB.
+ 
+ 		The file is read only.
+ 
++Contact:	Daniil Lunev <dlunev@chromium.org>
++What:		/sys/bus/platform/drivers/ufshcd/*/capabilities/
++What:		/sys/bus/platform/devices/*.ufs/capabilities/
++Date:		August 2022
++Description:	The group represents the effective capabilities of the
++		host-device pair. i.e. the capabilities which are enabled in the
++		driver for the specific host controller, supported by the host
++		controller and are supported and/or have compatible
++		configuration on the device side.
++
++Contact:	Daniil Lunev <dlunev@chromium.org>
++What:		/sys/bus/platform/drivers/ufshcd/*/capabilities/clock_scaling
++What:		/sys/bus/platform/devices/*.ufs/capabilities/clock_scaling
++Date:		August 2022
++Contact:	Daniil Lunev <dlunev@chromium.org>
++Description:	Indicates status of clock scaling.
++
++		== ============================
++		0  Clock scaling is not supported.
++		1  Clock scaling is supported.
++		== ============================
++
++		The file is read only.
++
++What:		/sys/bus/platform/drivers/ufshcd/*/capabilities/write_booster
++What:		/sys/bus/platform/devices/*.ufs/capabilities/write_booster
++Date:		August 2022
++Contact:	Daniil Lunev <dlunev@chromium.org>
++Description:	Indicates status of Write Booster.
++
++		== ============================
++		0  Write Booster can not be enabled.
++		1  Write Booster can be enabled.
++		== ============================
++
++		The file is read only.
++
+ What:		/sys/class/scsi_device/*/device/hpb_param_sysfs/activation_thld
+ Date:		February 2021
+ Contact:	Avri Altman <avri.altman@wdc.com>
+diff --git a/drivers/ufs/core/ufs-sysfs.c b/drivers/ufs/core/ufs-sysfs.c
+index 600abcc535e3..53aea56d1de1 100644
+--- a/drivers/ufs/core/ufs-sysfs.c
++++ b/drivers/ufs/core/ufs-sysfs.c
+@@ -325,6 +325,40 @@ static const struct attribute_group ufs_sysfs_default_group = {
+ 	.attrs = ufs_sysfs_ufshcd_attrs,
+ };
+ 
++static ssize_t clock_scaling_show(struct device *dev, struct device_attribute *attr,
++				  char *buf)
++{
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++
++	return sysfs_emit(buf, "%d\n", ufshcd_is_clkscaling_supported(hba));
++}
++
++static ssize_t write_booster_show(struct device *dev, struct device_attribute *attr,
++				  char *buf)
++{
++	struct ufs_hba *hba = dev_get_drvdata(dev);
++
++	return sysfs_emit(buf, "%d\n", ufshcd_is_wb_allowed(hba));
++}
++
++static DEVICE_ATTR_RO(clock_scaling);
++static DEVICE_ATTR_RO(write_booster);
++
++/*
++ * See Documentation/ABI/testing/sysfs-driver-ufs for the semantics of this
++ * group.
++ */
++static struct attribute *ufs_sysfs_capabilities_attrs[] = {
++	&dev_attr_clock_scaling.attr,
++	&dev_attr_write_booster.attr,
++	NULL
++};
++
++static const struct attribute_group ufs_sysfs_capabilities_group = {
++	.name = "capabilities",
++	.attrs = ufs_sysfs_capabilities_attrs,
++};
++
+ static ssize_t monitor_enable_show(struct device *dev,
+ 				   struct device_attribute *attr, char *buf)
+ {
+@@ -1180,6 +1214,7 @@ static const struct attribute_group ufs_sysfs_attributes_group = {
+ 
+ static const struct attribute_group *ufs_sysfs_groups[] = {
+ 	&ufs_sysfs_default_group,
++	&ufs_sysfs_capabilities_group,
+ 	&ufs_sysfs_monitor_group,
+ 	&ufs_sysfs_device_descriptor_group,
+ 	&ufs_sysfs_interconnect_descriptor_group,

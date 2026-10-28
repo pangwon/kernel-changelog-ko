@@ -1,0 +1,154 @@
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 23b9f6efa047..e69b792523e6 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -15,6 +15,7 @@
+ #include <linux/platform_device.h>
+ #include <linux/reset-controller.h>
+ #include <linux/time.h>
++#include <linux/unaligned.h>
+ 
+ #include <soc/qcom/ice.h>
+ 
+@@ -105,6 +106,26 @@ static struct ufs_qcom_host *rcdev_to_ufs_host(struct reset_controller_dev *rcd)
+ }
+ 
+ #ifdef CONFIG_SCSI_UFS_CRYPTO
++/**
++ * ufs_qcom_config_ice_allocator() - ICE core allocator configuration
++ *
++ * @host: pointer to qcom specific variant structure.
++ */
++static void ufs_qcom_config_ice_allocator(struct ufs_qcom_host *host)
++{
++	struct ufs_hba *hba = host->hba;
++	static const uint8_t val[4] = { NUM_RX_R1W0, NUM_TX_R0W1, NUM_RX_R1W1, NUM_TX_R1W1 };
++	u32 config;
++
++	if (!(host->caps & UFS_QCOM_CAP_ICE_CONFIG) ||
++			!(host->hba->caps & UFSHCD_CAP_CRYPTO))
++		return;
++
++	config = get_unaligned_le32(val);
++
++	ufshcd_writel(hba, ICE_ALLOCATOR_TYPE, REG_UFS_MEM_ICE_CONFIG);
++	ufshcd_writel(hba, config, REG_UFS_MEM_ICE_NUM_CORE);
++}
+ 
+ static inline void ufs_qcom_ice_enable(struct ufs_qcom_host *host)
+ {
+@@ -248,6 +269,11 @@ static inline int ufs_qcom_ice_suspend(struct ufs_qcom_host *host)
+ {
+ 	return 0;
+ }
++
++static void ufs_qcom_config_ice_allocator(struct ufs_qcom_host *host)
++{
++}
++
+ #endif
+ 
+ static void ufs_qcom_disable_lane_clks(struct ufs_qcom_host *host)
+@@ -496,6 +522,7 @@ static int ufs_qcom_hce_enable_notify(struct ufs_hba *hba,
+ 		err = ufs_qcom_check_hibern8(hba);
+ 		ufs_qcom_enable_hw_clk_gating(hba);
+ 		ufs_qcom_ice_enable(host);
++		ufs_qcom_config_ice_allocator(host);
+ 		break;
+ 	default:
+ 		dev_err(hba->dev, "%s: invalid status %d\n", __func__, status);
+@@ -989,6 +1016,14 @@ static void ufs_qcom_set_host_params(struct ufs_hba *hba)
+ 	host_params->hs_tx_gear = host_params->hs_rx_gear = ufs_qcom_get_hs_gear(hba);
+ }
+ 
++static void ufs_qcom_set_host_caps(struct ufs_hba *hba)
++{
++	struct ufs_qcom_host *host = ufshcd_get_variant(hba);
++
++	if (host->hw_ver.major >= 0x5)
++		host->caps |= UFS_QCOM_CAP_ICE_CONFIG;
++}
++
+ static void ufs_qcom_set_caps(struct ufs_hba *hba)
+ {
+ 	hba->caps |= UFSHCD_CAP_CLK_GATING | UFSHCD_CAP_HIBERN8_WITH_CLK_GATING;
+@@ -997,6 +1032,8 @@ static void ufs_qcom_set_caps(struct ufs_hba *hba)
+ 	hba->caps |= UFSHCD_CAP_WB_EN;
+ 	hba->caps |= UFSHCD_CAP_AGGR_POWER_COLLAPSE;
+ 	hba->caps |= UFSHCD_CAP_RPM_AUTOSUSPEND;
++
++	ufs_qcom_set_host_caps(hba);
+ }
+ 
+ /**
+diff --git a/drivers/ufs/host/ufs-qcom.h b/drivers/ufs/host/ufs-qcom.h
+index 919f53682beb..d0e6ec9128e7 100644
+--- a/drivers/ufs/host/ufs-qcom.h
++++ b/drivers/ufs/host/ufs-qcom.h
+@@ -50,6 +50,9 @@ enum {
+ 	 */
+ 	UFS_AH8_CFG				= 0xFC,
+ 
++	REG_UFS_MEM_ICE_CONFIG			= 0x260C,
++	REG_UFS_MEM_ICE_NUM_CORE		= 0x2664,
++
+ 	REG_UFS_CFG3				= 0x271C,
+ 
+ 	REG_UFS_DEBUG_SPARE_CFG			= 0x284C,
+@@ -110,6 +113,9 @@ enum {
+ /* bit definition for UFS_UFS_TEST_BUS_CTRL_n */
+ #define TEST_BUS_SUB_SEL_MASK	GENMASK(4, 0)  /* All XXX_SEL fields are 5 bits wide */
+ 
++/* bit definition for UFS Shared ICE config */
++#define UFS_QCOM_CAP_ICE_CONFIG BIT(0)
++
+ #define REG_UFS_CFG2_CGC_EN_ALL (UAWM_HW_CGC_EN | UARM_HW_CGC_EN |\
+ 				 TXUC_HW_CGC_EN | RXUC_HW_CGC_EN |\
+ 				 DFC_HW_CGC_EN | TRLUT_HW_CGC_EN |\
+@@ -135,6 +141,37 @@ enum {
+ #define UNIPRO_CORE_CLK_FREQ_201_5_MHZ         202
+ #define UNIPRO_CORE_CLK_FREQ_403_MHZ           403
+ 
++/* ICE allocator type to share AES engines among TX stream and RX stream */
++#define ICE_ALLOCATOR_TYPE 2
++
++/*
++ * Number of cores allocated for RX stream when Read data block received and
++ * Write data block is not in progress
++ */
++#define NUM_RX_R1W0 28
++
++/*
++ * Number of cores allocated for TX stream when Device asked to send write
++ * data block and Read data block is not in progress
++ */
++#define NUM_TX_R0W1 28
++
++/*
++ * Number of cores allocated for RX stream when Read data block received and
++ * Write data block is in progress
++ * OR
++ * Device asked to send write data block and Read data block is in progress
++ */
++#define NUM_RX_R1W1 15
++
++/*
++ * Number of cores allocated for TX stream (UFS write) when Read data block
++ * received and Write data block is in progress
++ * OR
++ * Device asked to send write data block and Read data block is in progress
++ */
++#define NUM_TX_R1W1 13
++
+ static inline void
+ ufs_qcom_get_controller_revision(struct ufs_hba *hba,
+ 				 u8 *major, u16 *minor, u16 *step)
+@@ -196,7 +233,7 @@ struct ufs_qcom_host {
+ #ifdef CONFIG_SCSI_UFS_CRYPTO
+ 	struct qcom_ice *ice;
+ #endif
+-
++	u32 caps;
+ 	void __iomem *dev_ref_clk_ctrl_mmio;
+ 	bool is_dev_ref_clk_enabled;
+ 	struct ufs_hw_version hw_ver;

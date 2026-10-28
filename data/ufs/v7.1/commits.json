@@ -1,0 +1,2358 @@
+[
+ {
+  "sha": "01517654bc258efb2610e53e99fa4ef641d134b9",
+  "release": "v7.1",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2026-02-10T14:41:43+08:00",
+  "commit_date": "2026-02-24T13:40:01-05:00",
+  "subject": "scsi: ufs: core: Add debug log for UIC command timeout",
+  "body": "It is difficult to debug when a UIC command timeout occurs simultaneously\nwith a UIC command complete interrupt.  Currently, we only see the timeout\nlog without any debug information, making it unclear whether the UFS device\nfailed to respond or the host entered an incorrect state.  Add a one-line\nlog to cover this situation.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20260210070837.1820710-2-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260210070837.1820710-2-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260210070837.1820710-2-peter.wang@mediatek.com",
+  "series_id": "20260210070837.1820710-peter.wang@mediatek.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/01517654bc25.diff",
+  "patch_bytes": 594
+ },
+ {
+  "sha": "3abe4113e784b4a1135fe0e89828afecbfebf862",
+  "release": "v7.1",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2026-02-10T14:41:44+08:00",
+  "commit_date": "2026-02-24T13:40:01-05:00",
+  "subject": "scsi: ufs: core: Add debug log for MCQ command timeout",
+  "body": "It is difficult to debug situations where an MCQ command timeout occurs,\nthe corresponding CQ tag response is received, but the request is not\ncompleted.  Add a one-line log to indicate when the CQ entry is abnormal.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20260210070837.1820710-3-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260210070837.1820710-3-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260210070837.1820710-3-peter.wang@mediatek.com",
+  "series_id": "20260210070837.1820710-peter.wang@mediatek.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/3abe4113e784.diff",
+  "patch_bytes": 456
+ },
+ {
+  "sha": "f707860ebc84dd07148c3855e2f0fa9f41a3ed4a",
+  "release": "v7.1",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2026-02-10T15:17:30+08:00",
+  "commit_date": "2026-02-24T13:41:54-05:00",
+  "subject": "scsi: ufs: core: Support UFSHCI 4.1 CQ entry tag",
+  "body": "The UFSHCI 4.1 specification introduces a new completion queue (CQ) entry\nformat, allowing the tag to be obtained directly.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20260210071834.1837878-1-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260210071834.1837878-1-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260210071834.1837878-1-peter.wang@mediatek.com",
+  "series_id": "20260210071834.1837878-peter.wang@mediatek.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/f707860ebc84.diff",
+  "patch_bytes": 951
+ },
+ {
+  "sha": "cf44b6369b8350e46e66bb69ef975c5aa22cec5e",
+  "release": "v7.1",
+  "author": {
+   "name": "Luca Weiss",
+   "email": "luca.weiss@fairphone.com"
+  },
+  "author_date": "2026-01-12T14:53:15+01:00",
+  "commit_date": "2026-02-28T17:53:26-05:00",
+  "subject": "scsi: ufs: qcom,sc7180-ufshc: dt-bindings: Document the Milos UFS Controller",
+  "body": "Document the UFS Controller on the Milos SoC.\n\nReviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>\nSigned-off-by: Luca Weiss <luca.weiss@fairphone.com>\nLink: https://patch.msgid.link/20260112-milos-ufs-v2-2-d3ce4f61f030@fairphone.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>"
+   ],
+   "signed_off_by": [
+    "Luca Weiss <luca.weiss@fairphone.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260112-milos-ufs-v2-2-d3ce4f61f030@fairphone.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260112-milos-ufs-v2-2-d3ce4f61f030@fairphone.com",
+  "series_id": "20260112-milos-ufs-v2-d3ce4f61f030@fairphone.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/qcom,sc7180-ufshc.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "bindings",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/cf44b6369b83.diff",
+  "patch_bytes": 709
+ },
+ {
+  "sha": "690d41fae92f0f255b1059d586bf064c63b5bfc3",
+  "release": "v7.1",
+  "author": {
+   "name": "Pradeep P V K",
+   "email": "pradeep.pragallapati@oss.qualcomm.com"
+  },
+  "author_date": "2026-02-11T18:59:24+05:30",
+  "commit_date": "2026-02-28T17:54:46-05:00",
+  "subject": "scsi: ufs: qcom,sc7180-ufshc: dt-bindings: Add UFSHC compatible for x1e80100",
+  "body": "Add UFS Host Controller (UFSHC) compatible for x1e80100 SoC. Use SM8550\nas a fallback since x1e80100 is fully compatible with it.\n\nQualcomm UFSHC is no longer compatible with JEDEC UFS-2.0 binding.\nAvoid using the \"jedec,ufs-2.0\" string in the compatible property.\n\n[mkp: conflict resolution]\n\nAcked-by: Manivannan Sadhasivam <mani@kernel.org>\nReviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>\nSigned-off-by: Pradeep P V K <pradeep.pragallapati@oss.qualcomm.com>\nLink: https://patch.msgid.link/20260211132926.3716716-2-pradeep.pragallapati@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "acked_by": [
+    "Manivannan Sadhasivam <mani@kernel.org>"
+   ],
+   "reviewed_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>"
+   ],
+   "signed_off_by": [
+    "Pradeep P V K <pradeep.pragallapati@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260211132926.3716716-2-pradeep.pragallapati@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260211132926.3716716-2-pradeep.pragallapati@oss.qualcomm.com",
+  "series_id": "20260211132926.3716716-pradeep.pragallapati@oss.qualcomm.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/qcom,sc7180-ufshc.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 22,
+    "deleted": 16,
+    "area": "bindings",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/690d41fae92f.diff",
+  "patch_bytes": 1534
+ },
+ {
+  "sha": "b5e21a29fe9459aef1e6b20b9315e8f3690f8f31",
+  "release": "v7.1",
+  "author": {
+   "name": "Can Guo",
+   "email": "can.guo@oss.qualcomm.com"
+  },
+  "author_date": "2026-03-05T03:08:56-08:00",
+  "commit_date": "2026-03-07T11:04:35-05:00",
+  "subject": "scsi: ufs: core: Add support to notify userspace of UniPro QoS events",
+  "body": "The UniPro stack manages to repair many potential Link problems without the\nneed to notify the Application Layer. Repair mechanisms of the stack\ninclude L2 re-transmission and successful handling of PA_INIT.req.\nNevertheless, any successful repair sequence requires Link bandwidth that\nis no longer vailable for the Application. Therefore, it may be useful for\nan Application to understand how often such repair attempts are made.\n\nThe DME implements Quality of Service monitoring using a simple counting\nscheme, counting error events and comparing them against the number of\ncorrectly received or transmitted bytes. When the error counter exceeds a\nprogrammed threshold before the byte counter overflows, a DME_QoS.ind is\nissued to the Application and both counters are reset. When the byte\ncounter overflows before the error counter has reached the programmed\nthreshold, both counters are reset without triggering a DME_QoS.ind.\n\nThe DME provides Link quality monitoring for the following purposes:\n\n1. Detection of re-occurring repaired fatal error conditions on the Link\n   (PA_INIT loop). This kind of detection is useful if capabilities\n   exchanged between local and peer permit a potential operation at a\n   higher M-PHY Gear, but the physical interconnect between local and peer\n   Device does not, or, after Line quality degradation, no longer satisfies\n   channel characteristics.\n\n2. Detection of degraded inbound or outbound Link quality, to allow an\n   Application to issue an ADAPT sequence for a Link running in HS-G4 or\n   higher HS Gears. This kind of detection is used to monitor a slowly\n   degrading Link quality, e.g., one being affected by temperature and\n   voltage variations, against the expected M-PHY bit error rate.\n\nUserspace can configure and enable UniPro QoS via UniPro QoS Attributes\n(via UFS BSG) and get notified by dme_qos_notification without polling\nUniPro QoS Status attribute. The dme_qos_notification attribute is a\nbitfield with the following bit assignments:\n\n   Bit\tDescription\n   ===\t======================================\n   0\tDME QoS Monitor has been reset by host\n   1\tQoS from TX is detected\n   2\tQoS from RX is detected\n   3\tQoS from PA_INIT is detected\n\nSigned-off-by: Can Guo <can.guo@oss.qualcomm.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20260305110856.959211-2-can.guo@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260305110856.959211-2-can.guo@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260305110856.959211-2-can.guo@oss.qualcomm.com",
+  "series_id": "20260305110856.959211-can.guo@oss.qualcomm.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "Documentation/ABI/testing/sysfs-driver-ufs",
+    "status": "M",
+    "in_track": true,
+    "added": 23,
+    "deleted": 0,
+    "area": "docs",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufs-sysfs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 30,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 21,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 9,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshci.h",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b5e21a29fe94.diff",
+  "patch_bytes": 6278
+ },
+ {
+  "sha": "6475cfb81fc4f6175b6d15d1c205a5168dc10b46",
+  "release": "v7.1",
+  "author": {
+   "name": "Peter Wang",
+   "email": "peter.wang@mediatek.com"
+  },
+  "author_date": "2026-03-06T13:43:02+08:00",
+  "commit_date": "2026-03-07T11:06:46-05:00",
+  "subject": "scsi: ufs: core: Avoid IRQ thread wakeup during active UIC command",
+  "body": "Only return IRQ_WAKE_THREAD when MCQ and ESI are not enabled and no UIC\ncommand is active. The default UIC command timeout is 500ms, Using threaded\nIRQs during an active UIC command increases the risk of timeout due to\npossible preemption by other system IRQs.\n\nSigned-off-by: Peter Wang <peter.wang@mediatek.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20260306054419.3816557-1-peter.wang@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Peter Wang <peter.wang@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260306054419.3816557-1-peter.wang@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260306054419.3816557-1-peter.wang@mediatek.com",
+  "series_id": "20260306054419.3816557-peter.wang@mediatek.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/6475cfb81fc4.diff",
+  "patch_bytes": 712
+ },
+ {
+  "sha": "096cd6b7adf21791827a045d464242d93a6fd54e",
+  "release": "v7.1",
+  "author": {
+   "name": "Adrian Hunter",
+   "email": "adrian.hunter@intel.com"
+  },
+  "author_date": "2026-03-09T10:58:15+02:00",
+  "commit_date": "2026-03-10T21:33:38-04:00",
+  "subject": "scsi: ufs: ufs-pci: Add support for Intel Nova Lake",
+  "body": "Add PCI ID to support Intel Nova Lake, same as Intel Meteor Lake (MTL).\n\nSigned-off-by: Adrian Hunter <adrian.hunter@intel.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20260309085815.55216-1-adrian.hunter@intel.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Adrian Hunter <adrian.hunter@intel.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260309085815.55216-1-adrian.hunter@intel.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260309085815.55216-1-adrian.hunter@intel.com",
+  "series_id": "20260309085815.55216-adrian.hunter@intel.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufshcd-pci.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "intel"
+   }
+  ],
+  "area": "host",
+  "vendor": "intel",
+  "vendors": [
+   "intel"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/096cd6b7adf2.diff",
+  "patch_bytes": 594
+ },
+ {
+  "sha": "6ab94d0194ddca662da69cf42b98dcf74690ed92",
+  "release": "v7.1",
+  "author": {
+   "name": "Ed Tsai",
+   "email": "ed.tsai@mediatek.com"
+  },
+  "author_date": "2026-03-10T08:52:28+08:00",
+  "commit_date": "2026-03-10T21:34:59-04:00",
+  "subject": "scsi: ufs: core: Add quirks for VCC ramp-up delay",
+  "body": "On some platforms, the VCC regulator has a slow ramp-up time. Add a delay\nafter enabling VCC to ensure voltage has fully stabilized before we enable\nthe clocks.\n\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Ed Tsai <ed.tsai@mediatek.com>\nLink: https://patch.msgid.link/20260310005230.4001904-4-ed.tsai@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "signed_off_by": [
+    "Ed Tsai <ed.tsai@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260310005230.4001904-4-ed.tsai@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260310005230.4001904-4-ed.tsai@mediatek.com",
+  "series_id": "20260310005230.4001904-ed.tsai@mediatek.com",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 12,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/6ab94d0194dd.diff",
+  "patch_bytes": 1874
+ },
+ {
+  "sha": "20ca5460e5f95163b85dda555625a27d1c120ebf",
+  "release": "v7.1",
+  "author": {
+   "name": "Ed Tsai",
+   "email": "ed.tsai@mediatek.com"
+  },
+  "author_date": "2026-03-10T08:52:30+08:00",
+  "commit_date": "2026-03-10T21:35:00-04:00",
+  "subject": "scsi: ufs: host: mediatek: Add VCC on delay for stability",
+  "body": "Introduce a delay after enabling UFS5 VCC for MT6995 to ensure voltage\nstability before refclk activation.\n\nSigned-off-by: Ed Tsai <ed.tsai@mediatek.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20260310005230.4001904-6-ed.tsai@mediatek.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Ed Tsai <ed.tsai@mediatek.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260310005230.4001904-6-ed.tsai@mediatek.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260310005230.4001904-6-ed.tsai@mediatek.com",
+  "series_id": "20260310005230.4001904-ed.tsai@mediatek.com",
+  "series_index": 6,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 11,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.h",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "mediatek"
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "mediatek"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/20ca5460e5f9.diff",
+  "patch_bytes": 1449
+ },
+ {
+  "sha": "134b898ccb68f705dff100f097886e6fe53a9566",
+  "release": "v7.1",
+  "author": {
+   "name": "Abel Vesa",
+   "email": "abel.vesa@oss.qualcomm.com"
+  },
+  "author_date": "2026-03-11T15:04:04+02:00",
+  "commit_date": "2026-03-15T21:45:06-04:00",
+  "subject": "scsi: ufs: qcom: dt-bindings: Document the Eliza UFS controller",
+  "body": "Document the UFS Controller on the Eliza Platform.\n\nThe IP block version here is 6.0.0, exactly the same as on SM8650.\n\nWhile MCQ reg range is also available on the already documented platforms,\nenforce only starting with Eliza.\n\nSigned-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>\nReviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>\nLink: https://patch.msgid.link/20260311-eliza-bindings-ufs-v3-1-498b26864182@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Abel Vesa <abel.vesa@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260311-eliza-bindings-ufs-v3-1-498b26864182@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260311-eliza-bindings-ufs-v3-1-498b26864182@oss.qualcomm.com",
+  "series_id": "20260311-eliza-bindings-ufs-v3-498b26864182@oss.qualcomm.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/qcom,sm8650-ufshc.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 14,
+    "deleted": 0,
+    "area": "bindings",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/134b898ccb68.diff",
+  "patch_bytes": 1047
+ },
+ {
+  "sha": "bdce3a69c578090dd5e3c77bcdaaca10c3a41e34",
+  "release": "v7.1",
+  "author": {
+   "name": "Shawn Lin",
+   "email": "shawn.lin@rock-chips.com"
+  },
+  "author_date": "2026-03-13T10:21:07+08:00",
+  "commit_date": "2026-03-15T21:48:14-04:00",
+  "subject": "scsi: ufs: rockchip,rk3576-ufshc: dt-bindings: Add new mphy reset item",
+  "body": "Add the mphy reset property to the devicetree bindings for the Rockchip\nRK3576 UFS host controller. The mphy reset signal is used to reset the\nphysical adapter. Resetting other components while leaving the mphy unreset\nmay occasionally prevent the UFS controller from successfully linking up\nwith the device.\n\nThis addresses an intermittent hardware bug where the UFS link fails to\nestablish under specific timing conditions with certain chips. While\ndifficult to reproduce initially, this issue was consistently observed in\ndownstream testing and requires explicit mphy reset control for full\nstability.\n\nAlthough this change increases the maxItems for resets and adds a new entry\n(which technically alters the binding ABI), it does not break compatibility\nfor existing Linux systems. The driver uses\ndevm_reset_control_array_get_exclusive() to manage resets, allowing it to\nfunction correctly with both older Device Trees (without the mphy entry)\nand newer ones.\n\nFixes: d90e92023771 (\"scsi: ufs: dt-bindings: Document Rockchip UFS host controller\")\nSigned-off-by: Shawn Lin <shawn.lin@rock-chips.com>\nReviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>\nLink: https://patch.msgid.link/1773368467-109650-1-git-send-email-shawn.lin@rock-chips.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "fixes": [
+    "d90e92023771 (\"scsi: ufs: dt-bindings: Document Rockchip UFS host controller\")"
+   ],
+   "signed_off_by": [
+    "Shawn Lin <shawn.lin@rock-chips.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/1773368467-109650-1-git-send-email-shawn.lin@rock-chips.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "d90e92023771",
+    "subject": "scsi: ufs: dt-bindings: Document Rockchip UFS host controller",
+    "sha": "d90e9202377173f75bf7510d741b4bd1c76e5239",
+    "introduced_in": "v6.15"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "1773368467-109650-1-git-send-email-shawn.lin@rock-chips.com",
+  "series_id": "1773368467-109650-1-git-send-email-shawn.lin@rock-chips.com",
+  "series_index": null,
+  "files": [
+   {
+    "path": "Documentation/devicetree/bindings/ufs/rockchip,rk3576-ufshc.yaml",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 3,
+    "area": "bindings",
+    "vendor": "rockchip"
+   }
+  ],
+  "area": "bindings",
+  "vendor": "rockchip",
+  "vendors": [
+   "rockchip"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/bdce3a69c578.diff",
+  "patch_bytes": 1136
+ },
+ {
+  "sha": "98eff361647ecba893aadce8808729672604a102",
+  "release": "v7.1",
+  "author": {
+   "name": "vamshi gajjela",
+   "email": "vamshigajjela@google.com"
+  },
+  "author_date": "2026-03-11T00:33:08+05:30",
+  "commit_date": "2026-03-19T21:37:09-04:00",
+  "subject": "scsi: ufs: core: Handle MCQ IAG events",
+  "body": "Add support for handling aggregation-based interrupts when operating in MCQ\nmode.\n\nIn legacy interrupt mode, an IE.IAGES is triggered when the counter or\ntimer threshold is reached. To manage this, the handler now resets the\naggregation counter and timer by writing to the MCQIACRy.CTR register.\n\nSince the register layout of MCQIACRy is identical to the existing UTRIACR\nregister, this implementation reuses the previously defined bitfield masks\nto maintain consistency and reduce code duplication.\n\nExtend ufshcd_handle_mcq_cq_events() with a boolean iag parameter.  If set,\nthe handler resets the MCQ IAG counter and timer.\n\nDefine MCQ_IAG_EVENT_STATUS (0x200000) and include it in\nUFSHCD_ENABLE_MCQ_INTRS to ensure the interrupt is unmasked during\ninitialization.\n\nSigned-off-by: Vamshi Gajjela <vamshigajjela@google.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20260310190308.2474956-1-vamshigajjela@google.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Vamshi Gajjela <vamshigajjela@google.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260310190308.2474956-1-vamshigajjela@google.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260310190308.2474956-1-vamshigajjela@google.com",
+  "series_id": "20260310190308.2474956-vamshigajjela@google.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 12,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 13,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshci.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/98eff361647e.diff",
+  "patch_bytes": 3937
+ },
+ {
+  "sha": "8ad1ddc50d15e35c4b38a207a6856eddfa731194",
+  "release": "v7.1",
+  "author": {
+   "name": "Andy Shevchenko",
+   "email": "andriy.shevchenko@linux.intel.com"
+  },
+  "author_date": "2026-03-20T22:56:06+01:00",
+  "commit_date": "2026-03-27T16:26:57-04:00",
+  "subject": "scsi: ufs: rockchip: Drop unused include",
+  "body": "This driver includes the legacy header <linux/gpio.h> but does not use\nany symbols from it. Drop the inclusion.\n\nSigned-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Shawn Lin <shawn.lin@rock-chips.com>\nLink: https://patch.msgid.link/20260320215606.3236516-1-andriy.shevchenko@linux.intel.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Andy Shevchenko <andriy.shevchenko@linux.intel.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Shawn Lin <shawn.lin@rock-chips.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260320215606.3236516-1-andriy.shevchenko@linux.intel.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260320215606.3236516-1-andriy.shevchenko@linux.intel.com",
+  "series_id": "20260320215606.3236516-andriy.shevchenko@linux.intel.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-rockchip.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "rockchip"
+   }
+  ],
+  "area": "host",
+  "vendor": "rockchip",
+  "vendors": [
+   "rockchip"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/8ad1ddc50d15.diff",
+  "patch_bytes": 354
+ },
+ {
+  "sha": "d3eba21c71708746672587f1de2cc33e6a10d61a",
+  "release": "v7.1",
+  "author": {
+   "name": "Can Guo",
+   "email": "can.guo@oss.qualcomm.com"
+  },
+  "author_date": "2026-03-25T08:21:43-07:00",
+  "commit_date": "2026-03-27T17:20:29-04:00",
+  "subject": "scsi: ufs: core: Introduce a new ufshcd vops negotiate_pwr_mode()",
+  "body": "Most vendor specific implemenations of vops pwr_change_notify(PRE_CHANGE)\nare fulfilling two things at once:\n\n - Vendor specific target power mode negotiation\n\n - Vendor specific power mode change preparation\n\nWhen TX Equalization is added into consideration, before power mode change\nto a target power mode, TX Equalization Training (EQTR) needs be done for\nthat target power mode. In addition, UFSHCI spec requires to start TX EQTR\nfrom HS-G1 (the most reliable High Speed Gear).\n\nAdding TX EQTR before pwr_change_notify(PRE_CHANGE) is not applicable\nbecause we don't know the negotiated power mode yet.\n\nAdding TX EQTR post pwr_change_notify(PRE_CHANGE) is inappropriate because\npwr_change_notify(PRE_CHANGE) has finished preparation for a power mode\nchange to negotiated power mode, yet we are changing power mode to HS-G1\nfor TX EQTR.\n\nAdd a new vops negotiate_pwr_mode() so that vendor specific power mode\nnegotiation can be fulfilled in its vendor specific implementations.  Later\non, TX EQTR can be added post vops negotiate_pwr_mode() and before vops\npwr_change_notify(PRE_CHANGE).\n\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Can Guo <can.guo@oss.qualcomm.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20260325152154.1604082-2-can.guo@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260325152154.1604082-2-can.guo@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260325152154.1604082-2-can.guo@oss.qualcomm.com",
+  "series_id": "20260325152154.1604082-can.guo@oss.qualcomm.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 12,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 56,
+    "deleted": 14,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufs-amd-versal2.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 3,
+    "area": "host",
+    "vendor": "amd"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-exynos.c",
+    "status": "M",
+    "in_track": true,
+    "added": 17,
+    "deleted": 17,
+    "area": "host",
+    "vendor": "exynos"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-hisi.c",
+    "status": "M",
+    "in_track": true,
+    "added": 13,
+    "deleted": 10,
+    "area": "host",
+    "vendor": "hisi"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-mediatek.c",
+    "status": "M",
+    "in_track": true,
+    "added": 20,
+    "deleted": 20,
+    "area": "host",
+    "vendor": "mediatek"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 13,
+    "deleted": 11,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-sprd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 3,
+    "area": "host",
+    "vendor": "sprd"
+   },
+   {
+    "path": "drivers/ufs/host/ufshcd-pci.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 4,
+    "area": "host",
+    "vendor": "intel"
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 10,
+    "deleted": 7,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": "mediatek",
+  "vendors": [
+   "amd",
+   "exynos",
+   "hisi",
+   "intel",
+   "mediatek",
+   "qcom",
+   "sprd"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d3eba21c7170.diff",
+  "patch_bytes": 20131
+ },
+ {
+  "sha": "c91c83671642d6140b703e999e2aff2d7ad57c74",
+  "release": "v7.1",
+  "author": {
+   "name": "Can Guo",
+   "email": "can.guo@oss.qualcomm.com"
+  },
+  "author_date": "2026-03-25T08:21:44-07:00",
+  "commit_date": "2026-03-27T17:20:29-04:00",
+  "subject": "scsi: ufs: core: Pass force_pmc to ufshcd_config_pwr_mode() as a parameter",
+  "body": "Currently, callers must manually toggle hba->force_pmc before and after\ncalling ufshcd_config_pwr_mode() to force a Power Mode change. Introduce\nenum ufshcd_pmc_policy and refactor ufshcd_config_pwr_mode() to accept\npmc_policy as a parameter to force a Power Mode change.\n\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Bean Huo <beanhuo@micron.com>\nSigned-off-by: Can Guo <can.guo@oss.qualcomm.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20260325152154.1604082-3-can.guo@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Bean Huo <beanhuo@micron.com>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260325152154.1604082-3-can.guo@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260325152154.1604082-3-can.guo@oss.qualcomm.com",
+  "series_id": "20260325152154.1604082-can.guo@oss.qualcomm.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 22,
+    "deleted": 13,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufshcd-pci.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "intel"
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 15,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": "intel",
+  "vendors": [
+   "intel"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/c91c83671642.diff",
+  "patch_bytes": 7865
+ },
+ {
+  "sha": "6669ab18c2238299a685ada1acea1c7d4f1da1d5",
+  "release": "v7.1",
+  "author": {
+   "name": "Can Guo",
+   "email": "can.guo@oss.qualcomm.com"
+  },
+  "author_date": "2026-03-25T08:21:45-07:00",
+  "commit_date": "2026-03-27T17:20:29-04:00",
+  "subject": "scsi: ufs: core: Add UFS_HS_G6 and UFS_HS_GEAR_MAX to enum ufs_hs_gear_tag",
+  "body": "Add UFS_HS_G6 to enum ufs_hs_gear_tag. In addition, add UFS_HS_GEAR_MAX to\nenum ufs_hs_gear_tag to facilitate iteration over valid High Speed Gears.\n\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Bean Huo <beanhuo@micron.com>\nSigned-off-by: Can Guo <can.guo@oss.qualcomm.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20260325152154.1604082-4-can.guo@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Bean Huo <beanhuo@micron.com>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260325152154.1604082-4-can.guo@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260325152154.1604082-4-can.guo@oss.qualcomm.com",
+  "series_id": "20260325152154.1604082-can.guo@oss.qualcomm.com",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "include/ufs/unipro.h",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/6669ab18c223.diff",
+  "patch_bytes": 427
+ },
+ {
+  "sha": "03e5d38e2f985d8d0b0a60508c0b422f664808e3",
+  "release": "v7.1",
+  "author": {
+   "name": "Can Guo",
+   "email": "can.guo@oss.qualcomm.com"
+  },
+  "author_date": "2026-03-25T08:21:46-07:00",
+  "commit_date": "2026-03-27T17:20:29-04:00",
+  "subject": "scsi: ufs: core: Add support for TX Equalization",
+  "body": "MIPI Unipro3.0 introduced PA_TxEQGnSetting and PA_PreCodeEn attributes for\nTX Equalization and Pre-Coding. It is Host Software's responsibility to\nconfigure these attributes for both host and device before initiating Power\nMode Change to High-Speed Gears.\n\nMIPI Unipro3.0 also introduced TX Equalization Training (EQTR) to identify\noptimal TX Equalization settings for use by both Host's and Device's\nUniPro. TX EQTR shall be initiated from the most reliable High-Speed Gear\n(HS-G1) targeting High-Speed Gears (HS-G4 to HS-G6).\n\nImplement TX Equalization configuration and TX EQTR procedure as defined\nin UFSHCI v5.0 specification. The TX EQTR procedure determines the optimal\nTX Equalization settings by iterating through all possible PreShoot and\nDeEmphasis combinations and selecting the best combinations for both Host\nand Device based on Figure of Merit (FOM) evaluation.\n\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Can Guo <can.guo@oss.qualcomm.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20260325152154.1604082-5-can.guo@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260325152154.1604082-5-can.guo@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260325152154.1604082-5-can.guo@oss.qualcomm.com",
+  "series_id": "20260325152154.1604082-can.guo@oss.qualcomm.com",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/ufs/core/Makefile",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufs-txeq.c",
+    "status": "A",
+    "in_track": true,
+    "added": 1186,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 38,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 44,
+    "deleted": 6,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 135,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/unipro.h",
+    "status": "M",
+    "in_track": true,
+    "added": 112,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/03e5d38e2f98.diff",
+  "patch_bytes": 57671
+ },
+ {
+  "sha": "10c40143f369a601cc54dd39777843e000b730a6",
+  "release": "v7.1",
+  "author": {
+   "name": "Can Guo",
+   "email": "can.guo@oss.qualcomm.com"
+  },
+  "author_date": "2026-03-25T08:21:47-07:00",
+  "commit_date": "2026-03-27T17:20:29-04:00",
+  "subject": "scsi: ufs: core: Add debugfs entries for TX Equalization params",
+  "body": "Add debugfs support for UFS TX Equalization and UFS TX Equalization\nTraining (EQTR) to facilitate runtime inspection of link quality. These\nentries allow developers to monitor and optimize TX Equalization parameters\nand EQTR records during live operation.\n\nThe debugfs entries are organized on a per-gear basis under the HBA's\ndebugfs root. Since TX EQTR is only defined for High Speed Gear 4 (HS-G4)\nand above, EQTR-related entries are explicitly excluded for HS-G1 through\nHS-G3 to avoid exposing unsupported attributes.\n\nThe ufshcd's debugfs folder structure will look like below:\n\n  /sys/kernel/debug/ufshcd/*ufs*/\n  |--tx_eq_hs_gear1/\n  |  |--device_tx_eq_params\n  |  |--host_tx_eq_params\n  |--tx_eq_hs_gear2/\n  |--tx_eq_hs_gear3/\n  |--tx_eq_hs_gear4/\n  |--tx_eq_hs_gear5/\n  |--tx_eq_hs_gear6/\n     |--device_tx_eq_params\n     |--device_tx_eqtr_record\n     |--host_tx_eq_params\n     |--host_tx_eqtr_record\n\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Bean Huo <beanhuo@micron.com>\nSigned-off-by: Can Guo <can.guo@oss.qualcomm.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20260325152154.1604082-6-can.guo@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Bean Huo <beanhuo@micron.com>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260325152154.1604082-6-can.guo@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260325152154.1604082-6-can.guo@oss.qualcomm.com",
+  "series_id": "20260325152154.1604082-can.guo@oss.qualcomm.com",
+  "series_index": 6,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-debugfs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 229,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufs-txeq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 6,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/10c40143f369.diff",
+  "patch_bytes": 9160
+ },
+ {
+  "sha": "dc5dcac5327832bffc1971b1445553823bdebc08",
+  "release": "v7.1",
+  "author": {
+   "name": "Can Guo",
+   "email": "can.guo@oss.qualcomm.com"
+  },
+  "author_date": "2026-03-25T08:21:48-07:00",
+  "commit_date": "2026-03-27T17:20:29-04:00",
+  "subject": "scsi: ufs: core: Add helpers to pause and resume command processing",
+  "body": "In preparation for supporting TX Equalization refreshing, introduce helper\nfunctions to safely pause and resume command processing.\n\nufshcd_pause_command_processing() ensures the host is in a quiescent state\nby stopping the block layer tagset, acquiring the necessary locks\n(scan_mutex and clk_scaling_lock), and waiting for any in-flight commands\nto complete within a specified timeout.\n\nufshcd_resume_command_processing() restores the host to its previous\noperational state by reversing these steps in the correct order.\n\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Can Guo <can.guo@oss.qualcomm.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20260325152154.1604082-7-can.guo@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260325152154.1604082-7-can.guo@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260325152154.1604082-7-can.guo@oss.qualcomm.com",
+  "series_id": "20260325152154.1604082-can.guo@oss.qualcomm.com",
+  "series_index": 7,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 42,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/dc5dcac53278.diff",
+  "patch_bytes": 2189
+ },
+ {
+  "sha": "adbabdcf0db0f929e642f95d7528dce0f6bd3a11",
+  "release": "v7.1",
+  "author": {
+   "name": "Can Guo",
+   "email": "can.guo@oss.qualcomm.com"
+  },
+  "author_date": "2026-03-25T08:21:49-07:00",
+  "commit_date": "2026-03-27T17:20:30-04:00",
+  "subject": "scsi: ufs: core: Add support to retrain TX Equalization via debugfs",
+  "body": "Drastic environmental changes, such as significant temperature shifts, can\nimpact link signal integrity. In such cases, retraining TX Equalization is\nnecessary to compensate for these environmental changes.\n\nAdd a debugfs entry, 'tx_eq_ctrl', to allow userspace to manually trigger\nthe TX Equalization training (EQTR) procedure and apply the identified\noptimal settings on the fly. These entries are created on a per-gear basis\nfor High Speed Gear 4 (HS-G4) and above, as TX EQTR is not supported for\nlower gears.\n\nThe 'tx_eq_ctrl' entry currently accepts the 'retrain' command to initiate\nthe procedure. The interface is designed to be scalable to support\nadditional commands in the future.\n\nReading the 'tx_eq_ctrl' entry provides a usage hint to the user, ensuring\nthe interface is self-documenting.\n\nThe ufshcd's debugfs folder structure will look like below:\n\n  /sys/kernel/debug/ufshcd/*ufs*/\n  |--tx_eq_hs_gear1/\n  |  |--device_tx_eq_params\n  |  |--host_tx_eq_params\n  |--tx_eq_hs_gear2/\n  |--tx_eq_hs_gear3/\n  |--tx_eq_hs_gear4/\n  |--tx_eq_hs_gear5/\n  |--tx_eq_hs_gear6/\n     |--device_tx_eq_params\n     |--device_tx_eqtr_record\n     |--host_tx_eq_params\n     |--host_tx_eqtr_record\n     |--tx_eq_ctrl\n\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Can Guo <can.guo@oss.qualcomm.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20260325152154.1604082-8-can.guo@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260325152154.1604082-8-can.guo@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260325152154.1604082-8-can.guo@oss.qualcomm.com",
+  "series_id": "20260325152154.1604082-can.guo@oss.qualcomm.com",
+  "series_index": 8,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-debugfs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 61,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufs-txeq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 106,
+    "deleted": 4,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd-priv.h",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 5,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/adbabdcf0db0.diff",
+  "patch_bytes": 11483
+ },
+ {
+  "sha": "53c94067efa252e20f813c6eb714dc1cddf06aaa",
+  "release": "v7.1",
+  "author": {
+   "name": "Can Guo",
+   "email": "can.guo@oss.qualcomm.com"
+  },
+  "author_date": "2026-03-25T08:21:50-07:00",
+  "commit_date": "2026-03-27T17:20:30-04:00",
+  "subject": "scsi: ufs: ufs-qcom: Fixup PAM-4 TX L0_L1_L2_L3 adaptation pattern length",
+  "body": "If HS-G6 Power Mode change handshake is successful and outbound data Lanes\nare expected to transmit ADAPT, M-TX Lanes shall be configured as\n\n  if (Adapt Type == REFRESH)\n    TX_HS_ADAPT_LENGTH_L0_L1_L2_L3 = PA_PeerRxHsG6AdaptRefreshL0L1L2L3.\n  else if (Adapt Type == INITIAL)\n    TX_HS_ADAPT_LENGTH_L0_L1_L2_L3 = PA_PeerRxHsG6AdaptInitialL0L1L2L3.\n\nOn some platforms, the ADAPT_L0_L1_L2_L3 duration on Host TX Lanes is only\na half of theoretical ADAPT_L0_L1_L2_L3 duration TADAPT_L0_L1_L2_L3 (in\nPAM-4 UI) calculated from TX_HS_ADAPT_LENGTH_L0_L1_L2_L3.\n\nFor such platforms, the workaround is to double the ADAPT_L0_L1_L2_L3\nduration by uplifting TX_HS_ADAPT_LENGTH_L0_L1_L2_L3. UniPro initializes\nTX_HS_ADAPT_LENGTH_L0_L1_L2_L3 during HS-G6 Power Mode change handshake, it\nwould be too late for SW to update TX_HS_ADAPT_LENGTH_L0_L1_L2_L3 post\nHS-G6 Power Mode change. Update PA_PeerRxHsG6AdaptRefreshL0L1L2L3 and\nPA_PeerRxHsG6AdaptInitialL0L1L2L3 post Link Startup and before HS-G6 Power\nMode change, so that the UniPro would use the updated value during HS-G6\nPower Mode change handshake.\n\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Can Guo <can.guo@oss.qualcomm.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20260325152154.1604082-9-can.guo@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260325152154.1604082-9-can.guo@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260325152154.1604082-9-can.guo@oss.qualcomm.com",
+  "series_id": "20260325152154.1604082-can.guo@oss.qualcomm.com",
+  "series_index": 9,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 178,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/53c94067efa2.diff",
+  "patch_bytes": 6095
+ },
+ {
+  "sha": "385b95893e799885ec54a4ec2e240b1d814205be",
+  "release": "v7.1",
+  "author": {
+   "name": "Can Guo",
+   "email": "can.guo@oss.qualcomm.com"
+  },
+  "author_date": "2026-03-25T08:21:51-07:00",
+  "commit_date": "2026-03-27T17:20:30-04:00",
+  "subject": "scsi: ufs: ufs-qcom: Implement vops tx_eqtr_notify()",
+  "body": "On some platforms, HW does not support triggering TX EQTR from the most\nreliable High-Speed (HS) Gear (HS Gear1), but only allows to trigger TX\nEQTR for the target HS Gear from the same HS Gear. To work around the HW\nlimitation, implement vops tx_eqtr_notify() to change Power Mode to the\ntarget TX EQTR HS Gear prior to TX EQTR procedure and change Power Mode\nback to HS Gear1 (the most reliable gear) post TX EQTR procedure.\n\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Can Guo <can.guo@oss.qualcomm.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20260325152154.1604082-10-can.guo@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260325152154.1604082-10-can.guo@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260325152154.1604082-10-can.guo@oss.qualcomm.com",
+  "series_id": "20260325152154.1604082-can.guo@oss.qualcomm.com",
+  "series_index": 10,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 41,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/385b95893e79.diff",
+  "patch_bytes": 1966
+ },
+ {
+  "sha": "26605db7604deb18cf004cf3ad51e72e5d9b7add",
+  "release": "v7.1",
+  "author": {
+   "name": "Can Guo",
+   "email": "can.guo@oss.qualcomm.com"
+  },
+  "author_date": "2026-03-25T08:21:52-07:00",
+  "commit_date": "2026-03-27T17:20:30-04:00",
+  "subject": "scsi: ufs: ufs-qcom: Implement vops get_rx_fom()",
+  "body": "On some platforms, host's M-PHY RX_FOM Attribute always reads 0, meaning SW\ncannot rely on Figure of Merit (FOM) to identify the optimal TX\nEqualization settings for device's TX Lanes. Implement the vops\nufs_qcom_get_rx_fom() such that SW can utilize the UFS Eye Opening Monitor\n(EOM) to evaluate the TX Equalization settings for device's TX Lanes.\n\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Can Guo <can.guo@oss.qualcomm.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20260325152154.1604082-11-can.guo@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260325152154.1604082-11-can.guo@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260325152154.1604082-11-can.guo@oss.qualcomm.com",
+  "series_id": "20260325152154.1604082-can.guo@oss.qualcomm.com",
+  "series_index": 11,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-txeq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 3,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 312,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.h",
+    "status": "M",
+    "in_track": true,
+    "added": 40,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "include/ufs/ufshcd.h",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/unipro.h",
+    "status": "M",
+    "in_track": true,
+    "added": 25,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/26605db7604d.diff",
+  "patch_bytes": 14800
+ },
+ {
+  "sha": "16cbdc8308776270d76340cd52ac63ac4fbf9968",
+  "release": "v7.1",
+  "author": {
+   "name": "Can Guo",
+   "email": "can.guo@oss.qualcomm.com"
+  },
+  "author_date": "2026-03-25T08:21:53-07:00",
+  "commit_date": "2026-03-27T17:20:30-04:00",
+  "subject": "scsi: ufs: ufs-qcom: Implement vops apply_tx_eqtr_settings()",
+  "body": "On some platforms, when Host Software triggers TX Equalization Training, HW\ndoes not take TX EQTR settings programmed in PA_TxEQTRSetting, instead HW\ntakes TX EQTR settings from PA_TxEQG1Setting. Implement vops\napply_tx_eqtr_setting() to work around it by programming TX EQTR settings\nto PA_TxEQG1Setting during TX EQTR procedure.\n\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Can Guo <can.guo@oss.qualcomm.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20260325152154.1604082-12-can.guo@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260325152154.1604082-12-can.guo@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260325152154.1604082-12-can.guo@oss.qualcomm.com",
+  "series_id": "20260325152154.1604082-can.guo@oss.qualcomm.com",
+  "series_index": 12,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 31,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "qcom"
+   },
+   {
+    "path": "drivers/ufs/host/ufs-qcom.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/16cbdc830877.diff",
+  "patch_bytes": 2536
+ },
+ {
+  "sha": "57b7943fd87f086a3497ecbecc502b7418ed4ab8",
+  "release": "v7.1",
+  "author": {
+   "name": "Can Guo",
+   "email": "can.guo@oss.qualcomm.com"
+  },
+  "author_date": "2026-03-25T08:21:54-07:00",
+  "commit_date": "2026-03-27T17:20:30-04:00",
+  "subject": "scsi: ufs: ufs-qcom: Enable TX Equalization",
+  "body": "Enable TX Equalization for hosts with HW version 0x7 and onwards.\n\nReviewed-by: Bean Huo <beanhuo@micron.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nSigned-off-by: Can Guo <can.guo@oss.qualcomm.com>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20260325152154.1604082-13-can.guo@oss.qualcomm.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "reviewed_by": [
+    "Bean Huo <beanhuo@micron.com>",
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "signed_off_by": [
+    "Can Guo <can.guo@oss.qualcomm.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260325152154.1604082-13-can.guo@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260325152154.1604082-13-can.guo@oss.qualcomm.com",
+  "series_id": "20260325152154.1604082-can.guo@oss.qualcomm.com",
+  "series_index": 13,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 0,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/57b7943fd87f.diff",
+  "patch_bytes": 844
+ },
+ {
+  "sha": "23c29ca113e3838e9c8473c65dbc147bd058d757",
+  "release": "v7.1",
+  "author": {
+   "name": "Colin Ian King",
+   "email": "colin.i.king@gmail.com"
+  },
+  "author_date": "2026-03-31T16:30:49+01:00",
+  "commit_date": "2026-04-02T21:15:21-04:00",
+  "subject": "scsi: ufs: ufs-qcom: Fix spelling mistake \"retore\" -> \"restore\"",
+  "body": "There is a spelling mistake in a dev_err() message. Fix it.\n\nSigned-off-by: Colin Ian King <colin.i.king@gmail.com>\nReviewed-by: Manivannan Sadhasivam <mani@kernel.org>\nLink: https://patch.msgid.link/20260331153049.1344957-1-colin.i.king@gmail.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Colin Ian King <colin.i.king@gmail.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Manivannan Sadhasivam <mani@kernel.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260331153049.1344957-1-colin.i.king@gmail.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260331153049.1344957-1-colin.i.king@gmail.com",
+  "series_id": "20260331153049.1344957-colin.i.king@gmail.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/23c29ca113e3.diff",
+  "patch_bytes": 578
+ },
+ {
+  "sha": "1373df88d53594a32534fd8960c51d1d09be8ecb",
+  "release": "v7.1",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2026-04-01T13:24:59-07:00",
+  "commit_date": "2026-04-02T21:26:44-04:00",
+  "subject": "scsi: ufs: core: Add a comment block above ufshcd_mcq_compl_all_cqes_lock()",
+  "body": "Document the aspects of ufshcd_mcq_compl_all_cqes_lock() that are\nnontrivial in a comment block above this function.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nLink: https://patch.msgid.link/20260401202506.1445324-2-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260401202506.1445324-2-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260401202506.1445324-2-bvanassche@acm.org",
+  "series_id": "20260401202506.1445324-bvanassche@acm.org",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-mcq.c",
+    "status": "M",
+    "in_track": true,
+    "added": 8,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/1373df88d535.diff",
+  "patch_bytes": 774
+ },
+ {
+  "sha": "efa1f6a9d7ce9246cb98c85335bba6a797e17584",
+  "release": "v7.1",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2026-04-01T13:25:00-07:00",
+  "commit_date": "2026-04-02T21:26:44-04:00",
+  "subject": "scsi: ufs: core: Remove an include directive from ufshcd-crypto.h",
+  "body": "Nothing in the ufshcd-crypto.h header file depends on the ufshcd-priv.h\nheader file. Hence, stop including that header file. This include\ndirective was introduced by commit 4bc26113c603 (\"scsi: ufs: Split the\nufshcd.h header file\").\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20260401202506.1445324-3-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260401202506.1445324-3-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260401202506.1445324-3-bvanassche@acm.org",
+  "series_id": "20260401202506.1445324-bvanassche@acm.org",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd-crypto.h",
+    "status": "M",
+    "in_track": true,
+    "added": 0,
+    "deleted": 1,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/efa1f6a9d7ce.diff",
+  "patch_bytes": 354
+ },
+ {
+  "sha": "6daa8dd037459a1d1b105bd1008fa2a32f8708e5",
+  "release": "v7.1",
+  "author": {
+   "name": "Bart Van Assche",
+   "email": "bvanassche@acm.org"
+  },
+  "author_date": "2026-04-01T13:25:01-07:00",
+  "commit_date": "2026-04-02T21:26:44-04:00",
+  "subject": "scsi: ufs: core: Make the header files self-contained",
+  "body": "Add the include directives and forward declarations that are missing\nfrom the UFS core header files. This prevents compilation failures if\ninclude directives are reordered.\n\nSigned-off-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20260401202506.1445324-4-bvanassche@acm.org\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Bart Van Assche <bvanassche@acm.org>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260401202506.1445324-4-bvanassche@acm.org"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260401202506.1445324-4-bvanassche@acm.org",
+  "series_id": "20260401202506.1445324-bvanassche@acm.org",
+  "series_index": 4,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufs-debugfs.h",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "drivers/ufs/core/ufs-fault-injection.h",
+    "status": "M",
+    "in_track": true,
+    "added": 2,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/6daa8dd03745.diff",
+  "patch_bytes": 809
+ },
+ {
+  "sha": "e423f1c7195645e18945fba0bd8f0a32e39286e7",
+  "release": "v7.1",
+  "author": {
+   "name": "Aaron Kling",
+   "email": "webgeek1234@gmail.com"
+  },
+  "author_date": "2026-04-03T13:41:34-05:00",
+  "commit_date": "2026-04-08T22:27:16-04:00",
+  "subject": "scsi: ufs: core: Disable timestamp for Kioxia THGJFJT0E25BAIP",
+  "body": "Kioxia has another product that does not support the qTimestamp\nattribute.\n\nSigned-off-by: Aaron Kling <webgeek1234@gmail.com>\nReviewed-by: Bart Van Assche <bvanassche@acm.org>\nLink: https://patch.msgid.link/20260403-thgjfjt0e25baip-no-timestamp-v1-1-1ddb34225133@gmail.com\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Aaron Kling <webgeek1234@gmail.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "reviewed_by": [
+    "Bart Van Assche <bvanassche@acm.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260403-thgjfjt0e25baip-no-timestamp-v1-1-1ddb34225133@gmail.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260403-thgjfjt0e25baip-no-timestamp-v1-1-1ddb34225133@gmail.com",
+  "series_id": "20260403-thgjfjt0e25baip-no-timestamp-v1-1ddb34225133@gmail.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 3,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/e423f1c71956.diff",
+  "patch_bytes": 620
+ },
+ {
+  "sha": "b06cf63d83d3b3744d3aefdd2f3ced25e99d7ec1",
+  "release": "v7.1",
+  "author": {
+   "name": "Wang Shuaiwei",
+   "email": "wangshuaiwei1@xiaomi.com"
+  },
+  "author_date": "2026-04-14T11:37:18+08:00",
+  "commit_date": "2026-04-21T20:58:06-04:00",
+  "subject": "scsi: ufs: core: Fix bRefClkFreq write failure in HS-LSS mode",
+  "body": "According to the UFS spec, the bRefClkFreq attribute can only be written\nwhen both sub-links are in LS-MODE. However, in HS LSS mode with\nresetmode = HS_MODE, if the UFS device's default bRefClkFreq value\ndiffers from the host controller's dev_ref_clk_freq setting, the write\noperation will fail.\n\nTo fix this issue, introduce ufshcd_get_op_mode() function to detect the\ncurrent link operational mode. Call ufshcd_set_dev_ref_clk() only when\nboth sub-links are in LS-MODE to ensure the attribute can be written\nsuccessfully.\n\nSigned-off-by: Wang Shuaiwei <wangshuaiwei1@xiaomi.com>\nLink: https://patch.msgid.link/20260414033718.1459540-1-wangshuaiwei1@xiaomi.com\nReviewed-by: Peter Wang <peter.wang@mediatek.com>\nSigned-off-by: Martin K. Petersen <martin.petersen@oracle.com>",
+  "trailers": {
+   "signed_off_by": [
+    "Wang Shuaiwei <wangshuaiwei1@xiaomi.com>",
+    "Martin K. Petersen <martin.petersen@oracle.com>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260414033718.1459540-1-wangshuaiwei1@xiaomi.com"
+   ],
+   "reviewed_by": [
+    "Peter Wang <peter.wang@mediatek.com>"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260414033718.1459540-1-wangshuaiwei1@xiaomi.com",
+  "series_id": "20260414033718.1459540-wangshuaiwei1@xiaomi.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/ufs/core/ufshcd.c",
+    "status": "M",
+    "in_track": true,
+    "added": 28,
+    "deleted": 2,
+    "area": "core",
+    "vendor": null
+   },
+   {
+    "path": "include/ufs/unipro.h",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 0,
+    "area": "core",
+    "vendor": null
+   }
+  ],
+  "area": "core",
+  "vendor": null,
+  "vendors": [],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b06cf63d83d3.diff",
+  "patch_bytes": 1903
+ },
+ {
+  "sha": "80305760d7a55b884fb9023c490b75568d1ea0b1",
+  "release": "v7.1",
+  "author": {
+   "name": "Nitin Rawat",
+   "email": "nitin.rawat@oss.qualcomm.com"
+  },
+  "author_date": "2026-04-15T16:18:51+05:30",
+  "commit_date": "2026-05-10T17:15:34+05:30",
+  "subject": "phy: qcom-qmp-ufs: Fix kaanapali PHY PLL lock failure after SM8650 G4 fix",
+  "body": "Commit 81af9e40e2e4 (\"phy: qcom: qmp-ufs: Fix SM8650 PCS table for Gear 4\")\nmoved QPHY_V6_PCS_UFS_PLL_CNTL register configuration from the shared\nsm8650_ufsphy_g5_pcs table to the SM8650-specific sm8650_ufsphy_pcs base\ntable to fix Gear 4 operation on SM8650.\n\nHowever, this change inadvertently broke kaanapali and SM8750 SoCs\nwhich also rely on the shared sm8650_ufsphy_g5_pcs table for Gear 5\nconfiguration but use their own sm8750_ufsphy_pcs base table. After the\nchange, kaanapali PHYs are left without the required PLL_CNTL = 0x33\nsetting, causing the PHY PLL to remain at its hardware reset default\nvalue, preventing PLL lock and resulting in DME_LINKSTARTUP timeouts.\n\nFix this by adding the missing QPHY_V6_PCS_UFS_PLL_CNTL = 0x33 entry\nto the sm8750_ufsphy_pcs table, mirroring what the original commit\nalready did for sm8650_ufsphy_pcs.\n\nCc: stable@vger.kernel.org # v6.19.12\nFixes: 81af9e40e2e4 (\"phy: qcom: qmp-ufs: Fix SM8650 PCS table for Gear 4\")\nSigned-off-by: Nitin Rawat <nitin.rawat@oss.qualcomm.com>\nReviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>\nReviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>\nReviewed-by: Manivannan Sadhasivam <mani@kernel.org>\nLink: https://patch.msgid.link/20260415104851.2763238-1-nitin.rawat@oss.qualcomm.com\nSigned-off-by: Vinod Koul <vkoul@kernel.org>",
+  "trailers": {
+   "cc": [
+    "stable@vger.kernel.org # v6.19.12"
+   ],
+   "fixes": [
+    "81af9e40e2e4 (\"phy: qcom: qmp-ufs: Fix SM8650 PCS table for Gear 4\")"
+   ],
+   "signed_off_by": [
+    "Nitin Rawat <nitin.rawat@oss.qualcomm.com>",
+    "Vinod Koul <vkoul@kernel.org>"
+   ],
+   "reviewed_by": [
+    "Abel Vesa <abel.vesa@oss.qualcomm.com>",
+    "Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>",
+    "Manivannan Sadhasivam <mani@kernel.org>"
+   ],
+   "link": [
+    "https://patch.msgid.link/20260415104851.2763238-1-nitin.rawat@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "81af9e40e2e4",
+    "subject": "phy: qcom: qmp-ufs: Fix SM8650 PCS table for Gear 4",
+    "sha": "81af9e40e2e4e1aa95f09fb34811760be6742c58",
+    "introduced_in": "v7.0"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "20260415104851.2763238-1-nitin.rawat@oss.qualcomm.com",
+  "series_id": "20260415104851.2763238-nitin.rawat@oss.qualcomm.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/phy/qualcomm/phy-qcom-qmp-ufs.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 0,
+    "area": "phy",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "phy",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/80305760d7a5.diff",
+  "patch_bytes": 720
+ },
+ {
+  "sha": "0d5dc5818191b55e4364d04b1b898a14a2ccac38",
+  "release": "v7.1",
+  "author": {
+   "name": "Harshal Dev",
+   "email": "harshal.dev@oss.qualcomm.com"
+  },
+  "author_date": "2026-04-16T17:29:19+05:30",
+  "commit_date": "2026-05-11T09:06:29-05:00",
+  "subject": "soc: qcom: ice: Allow explicit votes on 'iface' clock for ICE",
+  "body": "Since Qualcomm inline-crypto engine (ICE) is now a dedicated driver\nde-coupled from the QCOM UFS driver, it explicitly votes for its required\nclocks during probe. For scenarios where the 'clk_ignore_unused' flag is\nnot passed on the kernel command line, to avoid potential unclocked ICE\nhardware register access during probe the ICE driver should additionally\nvote on the 'iface' clock.\nAlso update the suspend and resume callbacks to handle un-voting and voting\non the 'iface' clock.\n\nFixes: 2afbf43a4aec6 (\"soc: qcom: Make the Qualcomm UFS/SDCC ICE a dedicated driver\")\nReviewed-by: Manivannan Sadhasivam <mani@kernel.org>\nReviewed-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>\nReviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>\nSigned-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>\nLink: https://lore.kernel.org/r/20260416-qcom_ice_power_and_clk_vote-v5-2-5ccf5d7e2846@oss.qualcomm.com\nSigned-off-by: Bjorn Andersson <andersson@kernel.org>",
+  "trailers": {
+   "fixes": [
+    "2afbf43a4aec6 (\"soc: qcom: Make the Qualcomm UFS/SDCC ICE a dedicated driver\")"
+   ],
+   "reviewed_by": [
+    "Manivannan Sadhasivam <mani@kernel.org>",
+    "Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>",
+    "Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>"
+   ],
+   "signed_off_by": [
+    "Harshal Dev <harshal.dev@oss.qualcomm.com>",
+    "Bjorn Andersson <andersson@kernel.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20260416-qcom_ice_power_and_clk_vote-v5-2-5ccf5d7e2846@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "2afbf43a4aec6",
+    "subject": "soc: qcom: Make the Qualcomm UFS/SDCC ICE a dedicated driver",
+    "sha": "2afbf43a4aec6e31dac7835e65d52c867f2be400",
+    "introduced_in": "v6.4"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20260416-qcom_ice_power_and_clk_vote-v5-2-5ccf5d7e2846@oss.qualcomm.com",
+  "series_id": "20260416-qcom_ice_power_and_clk_vote-v5-5ccf5d7e2846@oss.qualcomm.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/soc/qcom/ice.c",
+    "status": "M",
+    "in_track": true,
+    "added": 15,
+    "deleted": 2,
+    "area": "crypto",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "crypto",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/0d5dc5818191.diff",
+  "patch_bytes": 1687
+ },
+ {
+  "sha": "d922113ef91e6e7e8065e9070f349365341ba32e",
+  "release": "v7.1",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@oss.qualcomm.com"
+  },
+  "author_date": "2026-05-18T19:22:17+05:30",
+  "commit_date": "2026-05-18T09:43:25-05:00",
+  "subject": "soc: qcom: ice: Fix race between qcom_ice_probe() and of_qcom_ice_get()",
+  "body": "The current platform driver design causes probe ordering races with\nconsumers (UFS, eMMC) due to ICE's dependency on SCM firmware calls. If ICE\nprobe fails (missing ICE SCM or DT registers), devm_of_qcom_ice_get() loops\nwith -EPROBE_DEFER, leaving consumers non-functional even when ICE should\nbe gracefully disabled. devm_of_qcom_ice_get() doesn't know if the ICE\ndriver probe has failed due to above reasons or it is waiting for the SCM\ndriver.\n\nMoreover, there is no devlink dependency between ICE and consumer drivers\nas 'qcom,ice' is not considered as a DT 'supplier'. So the consumer drivers\nhave no idea of when the ICE driver is going to probe.\n\nTo address these issues, store the error pointer in a global xarray with\nice node phandle as a key during probe in addition to the valid ice pointer\nand synchronize both qcom_ice_probe() and of_qcom_ice_get() using a mutex.\n\nIf the xarray entry is NULL, then it implies that the driver is not\nprobed yet, so return -EPROBE_DEFER. If it has any error pointer, return\nthat error pointer directly. Otherwise, add the devlink as usual and return\nthe valid pointer to the consumer.\n\nXarray is used instead of platform drvdata, since driver core frees the\ndrvdata during probe failure. So it cannot be used to pass the error\npointer to the consumers.\n\nNote that this change only fixes the standalone ICE DT node bindings and\nnot the ones with 'ice' range embedded in the consumer nodes, where there\nis no issue.\n\nFixes: 2afbf43a4aec (\"soc: qcom: Make the Qualcomm UFS/SDCC ICE a dedicated driver\")\nReported-by: Sumit Garg <sumit.garg@oss.qualcomm.com>\nTested-by: Sumit Garg <sumit.garg@oss.qualcomm.com> # OP-TEE as TZ\nAcked-by: Sumit Garg <sumit.garg@oss.qualcomm.com>\nCc: stable@vger.kernel.org # 6.4\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>\nLink: https://lore.kernel.org/r/20260518-qcom-ice-fix-v7-1-2a595382185b@oss.qualcomm.com\nSigned-off-by: Bjorn Andersson <andersson@kernel.org>",
+  "trailers": {
+   "fixes": [
+    "2afbf43a4aec (\"soc: qcom: Make the Qualcomm UFS/SDCC ICE a dedicated driver\")"
+   ],
+   "reported_by": [
+    "Sumit Garg <sumit.garg@oss.qualcomm.com>"
+   ],
+   "tested_by": [
+    "Sumit Garg <sumit.garg@oss.qualcomm.com> # OP-TEE as TZ"
+   ],
+   "acked_by": [
+    "Sumit Garg <sumit.garg@oss.qualcomm.com>"
+   ],
+   "cc": [
+    "stable@vger.kernel.org # 6.4"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>",
+    "Bjorn Andersson <andersson@kernel.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20260518-qcom-ice-fix-v7-1-2a595382185b@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "2afbf43a4aec",
+    "subject": "soc: qcom: Make the Qualcomm UFS/SDCC ICE a dedicated driver",
+    "sha": "2afbf43a4aec6e31dac7835e65d52c867f2be400",
+    "introduced_in": "v6.4"
+   }
+  ],
+  "cc_stable": true,
+  "message_id": "20260518-qcom-ice-fix-v7-1-2a595382185b@oss.qualcomm.com",
+  "series_id": "20260518-qcom-ice-fix-v7-2a595382185b@oss.qualcomm.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/soc/qcom/ice.c",
+    "status": "M",
+    "in_track": true,
+    "added": 31,
+    "deleted": 7,
+    "area": "crypto",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "crypto",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/d922113ef91e.diff",
+  "patch_bytes": 2931
+ },
+ {
+  "sha": "5a4dc805a80e6fe303d6a4748cd451ea15987ffd",
+  "release": "v7.1",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@oss.qualcomm.com"
+  },
+  "author_date": "2026-05-18T19:22:18+05:30",
+  "commit_date": "2026-05-18T09:43:25-05:00",
+  "subject": "soc: qcom: ice: Return -ENODEV if the ICE platform device is not found",
+  "body": "By the time the consumer driver calls devm_of_qcom_ice_get(), all the\nplatform devices for ICE nodes would've been created by\nof_platform_default_populate().\n\nSo for the absence of any platform device, -ENODEV should not returned, not\n-EPROBE_DEFER.\n\nFixes: 2afbf43a4aec (\"soc: qcom: Make the Qualcomm UFS/SDCC ICE a dedicated driver\")\nTested-by: Sumit Garg <sumit.garg@oss.qualcomm.com> # OP-TEE as TZ\nAcked-by: Sumit Garg <sumit.garg@oss.qualcomm.com>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>\nLink: https://lore.kernel.org/r/20260518-qcom-ice-fix-v7-2-2a595382185b@oss.qualcomm.com\nSigned-off-by: Bjorn Andersson <andersson@kernel.org>",
+  "trailers": {
+   "fixes": [
+    "2afbf43a4aec (\"soc: qcom: Make the Qualcomm UFS/SDCC ICE a dedicated driver\")"
+   ],
+   "tested_by": [
+    "Sumit Garg <sumit.garg@oss.qualcomm.com> # OP-TEE as TZ"
+   ],
+   "acked_by": [
+    "Sumit Garg <sumit.garg@oss.qualcomm.com>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>",
+    "Bjorn Andersson <andersson@kernel.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20260518-qcom-ice-fix-v7-2-2a595382185b@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "2afbf43a4aec",
+    "subject": "soc: qcom: Make the Qualcomm UFS/SDCC ICE a dedicated driver",
+    "sha": "2afbf43a4aec6e31dac7835e65d52c867f2be400",
+    "introduced_in": "v6.4"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20260518-qcom-ice-fix-v7-2-2a595382185b@oss.qualcomm.com",
+  "series_id": "20260518-qcom-ice-fix-v7-2a595382185b@oss.qualcomm.com",
+  "series_index": 2,
+  "files": [
+   {
+    "path": "drivers/soc/qcom/ice.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "crypto",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "crypto",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/5a4dc805a80e.diff",
+  "patch_bytes": 480
+ },
+ {
+  "sha": "b9ab7217dd7d567c50311afa94d6d6746cb77e04",
+  "release": "v7.1",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@oss.qualcomm.com"
+  },
+  "author_date": "2026-05-18T19:22:19+05:30",
+  "commit_date": "2026-05-18T09:43:25-05:00",
+  "subject": "soc: qcom: ice: Return proper error codes from devm_of_qcom_ice_get() instead of NULL",
+  "body": "devm_of_qcom_ice_get() currently returns NULL if ICE SCM is not available\nor \"qcom,ice\" property is not found in DT. But this confuses the clients\nsince NULL doesn't convey the reason for failure. So return proper error\ncodes instead of NULL.\n\nReported-by: Sumit Garg <sumit.garg@oss.qualcomm.com>\nReviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>\nTested-by: Sumit Garg <sumit.garg@oss.qualcomm.com> # OP-TEE as TZ\nAcked-by: Sumit Garg <sumit.garg@oss.qualcomm.com>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>\nLink: https://lore.kernel.org/r/20260518-qcom-ice-fix-v7-3-2a595382185b@oss.qualcomm.com\nSigned-off-by: Bjorn Andersson <andersson@kernel.org>",
+  "trailers": {
+   "reported_by": [
+    "Sumit Garg <sumit.garg@oss.qualcomm.com>"
+   ],
+   "reviewed_by": [
+    "Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>"
+   ],
+   "tested_by": [
+    "Sumit Garg <sumit.garg@oss.qualcomm.com> # OP-TEE as TZ"
+   ],
+   "acked_by": [
+    "Sumit Garg <sumit.garg@oss.qualcomm.com>"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>",
+    "Bjorn Andersson <andersson@kernel.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20260518-qcom-ice-fix-v7-3-2a595382185b@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260518-qcom-ice-fix-v7-3-2a595382185b@oss.qualcomm.com",
+  "series_id": "20260518-qcom-ice-fix-v7-2a595382185b@oss.qualcomm.com",
+  "series_index": 3,
+  "files": [
+   {
+    "path": "drivers/soc/qcom/ice.c",
+    "status": "M",
+    "in_track": true,
+    "added": 4,
+    "deleted": 5,
+    "area": "crypto",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "crypto",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/b9ab7217dd7d.diff",
+  "patch_bytes": 1447
+ },
+ {
+  "sha": "4ac19b36bf4108706238cbc4f300b17dba8b881e",
+  "release": "v7.1",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@oss.qualcomm.com"
+  },
+  "author_date": "2026-05-18T19:22:21+05:30",
+  "commit_date": "2026-05-18T09:43:25-05:00",
+  "subject": "scsi: ufs: ufs-qcom: Remove NULL check from devm_of_qcom_ice_get()",
+  "body": "Now since the devm_of_qcom_ice_get() API never returns NULL, remove the\nNULL check and also simplify the error handling.\n\nReviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>\nAcked-by: Martin K. Petersen <martin.petersen@oracle.com> # UFS\nTested-by: Sumit Garg <sumit.garg@oss.qualcomm.com> # OP-TEE as TZ\nAcked-by: Sumit Garg <sumit.garg@oss.qualcomm.com>\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>\nLink: https://lore.kernel.org/r/20260518-qcom-ice-fix-v7-5-2a595382185b@oss.qualcomm.com\nSigned-off-by: Bjorn Andersson <andersson@kernel.org>",
+  "trailers": {
+   "reviewed_by": [
+    "Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>"
+   ],
+   "acked_by": [
+    "Martin K. Petersen <martin.petersen@oracle.com> # UFS",
+    "Sumit Garg <sumit.garg@oss.qualcomm.com>"
+   ],
+   "tested_by": [
+    "Sumit Garg <sumit.garg@oss.qualcomm.com> # OP-TEE as TZ"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>",
+    "Bjorn Andersson <andersson@kernel.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20260518-qcom-ice-fix-v7-5-2a595382185b@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [],
+  "cc_stable": false,
+  "message_id": "20260518-qcom-ice-fix-v7-5-2a595382185b@oss.qualcomm.com",
+  "series_id": "20260518-qcom-ice-fix-v7-2a595382185b@oss.qualcomm.com",
+  "series_index": 5,
+  "files": [
+   {
+    "path": "drivers/ufs/host/ufs-qcom.c",
+    "status": "M",
+    "in_track": true,
+    "added": 5,
+    "deleted": 5,
+    "area": "host",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "host",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/4ac19b36bf41.diff",
+  "patch_bytes": 641
+ },
+ {
+  "sha": "462a85f9f887a4fef36550bb76c7f7d7a0fa296c",
+  "release": "v7.1",
+  "author": {
+   "name": "Manivannan Sadhasivam",
+   "email": "manivannan.sadhasivam@oss.qualcomm.com"
+  },
+  "author_date": "2026-05-20T21:27:04+05:30",
+  "commit_date": "2026-05-21T18:18:44-05:00",
+  "subject": "soc: qcom: ice: Fix the error code when 'qcom,ice' property is not found",
+  "body": "When both 'ice' reg entry and 'qcom,ice' property are not found in DT, then\nit implies that ICE is not supported. So return -EOPNOTSUPP instead of\n-ENODEV to client drivers to specify ICE functionality is not supported.\n\nFixes: b9ab7217dd7d (\"soc: qcom: ice: Return proper error codes from devm_of_qcom_ice_get() instead of NULL\")\nReported-by: Marek Szyprowski <m.szyprowski@samsung.com>\nCloses: https://lore.kernel.org/linux-arm-msm/8bac0358-9da0-4cbb-98ee-333b85ba4908@samsung.com\nSigned-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>\nLink: https://lore.kernel.org/r/20260520155704.130803-1-manivannan.sadhasivam@oss.qualcomm.com\nSigned-off-by: Bjorn Andersson <andersson@kernel.org>",
+  "trailers": {
+   "fixes": [
+    "b9ab7217dd7d (\"soc: qcom: ice: Return proper error codes from devm_of_qcom_ice_get() instead of NULL\")"
+   ],
+   "reported_by": [
+    "Marek Szyprowski <m.szyprowski@samsung.com>"
+   ],
+   "closes": [
+    "https://lore.kernel.org/linux-arm-msm/8bac0358-9da0-4cbb-98ee-333b85ba4908@samsung.com"
+   ],
+   "signed_off_by": [
+    "Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>",
+    "Bjorn Andersson <andersson@kernel.org>"
+   ],
+   "link": [
+    "https://lore.kernel.org/r/20260520155704.130803-1-manivannan.sadhasivam@oss.qualcomm.com"
+   ]
+  },
+  "fixes": [
+   {
+    "abbrev": "b9ab7217dd7d",
+    "subject": "soc: qcom: ice: Return proper error codes from devm_of_qcom_ice_get() instead of NULL",
+    "sha": "b9ab7217dd7d567c50311afa94d6d6746cb77e04",
+    "introduced_in": "v7.1"
+   }
+  ],
+  "cc_stable": false,
+  "message_id": "20260520155704.130803-1-manivannan.sadhasivam@oss.qualcomm.com",
+  "series_id": "20260520155704.130803-manivannan.sadhasivam@oss.qualcomm.com",
+  "series_index": 1,
+  "files": [
+   {
+    "path": "drivers/soc/qcom/ice.c",
+    "status": "M",
+    "in_track": true,
+    "added": 1,
+    "deleted": 1,
+    "area": "crypto",
+    "vendor": "qcom"
+   }
+  ],
+  "area": "crypto",
+  "vendor": "qcom",
+  "vendors": [
+   "qcom"
+  ],
+  "summary_ko": null,
+  "explanation_ko": null,
+  "patch": "patches/462a85f9f887.diff",
+  "patch_bytes": 473
+ }
+]

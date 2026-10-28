@@ -1,0 +1,75 @@
+diff --git a/drivers/ufs/core/ufs-sysfs.c b/drivers/ufs/core/ufs-sysfs.c
+index 4bd7d491e3c5..0086816b27cd 100644
+--- a/drivers/ufs/core/ufs-sysfs.c
++++ b/drivers/ufs/core/ufs-sysfs.c
+@@ -512,6 +512,8 @@ static ssize_t pm_qos_enable_show(struct device *dev,
+ {
+ 	struct ufs_hba *hba = dev_get_drvdata(dev);
+ 
++	guard(mutex)(&hba->pm_qos_mutex);
++
+ 	return sysfs_emit(buf, "%d\n", hba->pm_qos_enabled);
+ }
+ 
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index fdccab0454b2..b2e103aa4e62 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -1045,6 +1045,7 @@ EXPORT_SYMBOL_GPL(ufshcd_is_hba_active);
+  */
+ void ufshcd_pm_qos_init(struct ufs_hba *hba)
+ {
++	guard(mutex)(&hba->pm_qos_mutex);
+ 
+ 	if (hba->pm_qos_enabled)
+ 		return;
+@@ -1061,6 +1062,8 @@ void ufshcd_pm_qos_init(struct ufs_hba *hba)
+  */
+ void ufshcd_pm_qos_exit(struct ufs_hba *hba)
+ {
++	guard(mutex)(&hba->pm_qos_mutex);
++
+ 	if (!hba->pm_qos_enabled)
+ 		return;
+ 
+@@ -1075,6 +1078,8 @@ void ufshcd_pm_qos_exit(struct ufs_hba *hba)
+  */
+ static void ufshcd_pm_qos_update(struct ufs_hba *hba, bool on)
+ {
++	guard(mutex)(&hba->pm_qos_mutex);
++
+ 	if (!hba->pm_qos_enabled)
+ 		return;
+ 
+@@ -10743,6 +10748,10 @@ int ufshcd_init(struct ufs_hba *hba, void __iomem *mmio_base, unsigned int irq)
+ 	mutex_init(&hba->ee_ctrl_mutex);
+ 
+ 	mutex_init(&hba->wb_mutex);
++
++	/* Initialize mutex for PM QoS request synchronization */
++	mutex_init(&hba->pm_qos_mutex);
++
+ 	init_rwsem(&hba->clk_scaling_lock);
+ 
+ 	ufshcd_init_clk_gating(hba);
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index d8e06de0afbb..9425cfd9d00e 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -938,6 +938,7 @@ enum ufshcd_mcq_opr {
+  * @ufs_rtc_update_work: A work for UFS RTC periodic update
+  * @pm_qos_req: PM QoS request handle
+  * @pm_qos_enabled: flag to check if pm qos is enabled
++ * @pm_qos_mutex: synchronizes PM QoS request and status updates
+  * @critical_health_count: count of critical health exceptions
+  * @dev_lvl_exception_count: count of device level exceptions since last reset
+  * @dev_lvl_exception_id: vendor specific information about the
+@@ -1110,6 +1111,8 @@ struct ufs_hba {
+ 	struct delayed_work ufs_rtc_update_work;
+ 	struct pm_qos_request pm_qos_req;
+ 	bool pm_qos_enabled;
++	/* synchronizes PM QoS request and status updates */
++	struct mutex pm_qos_mutex;
+ 
+ 	int critical_health_count;
+ 	atomic_t dev_lvl_exception_count;

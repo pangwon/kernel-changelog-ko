@@ -1,0 +1,63 @@
+diff --git a/Documentation/devicetree/bindings/ufs/renesas,ufs.yaml b/Documentation/devicetree/bindings/ufs/renesas,ufs.yaml
+index f04f9f61fa9f..1949a15e73d2 100644
+--- a/Documentation/devicetree/bindings/ufs/renesas,ufs.yaml
++++ b/Documentation/devicetree/bindings/ufs/renesas,ufs.yaml
+@@ -50,12 +50,12 @@ examples:
+     #include <dt-bindings/power/r8a779f0-sysc.h>
+ 
+     ufs: ufs@e686000 {
+-            compatible = "renesas,r8a779f0-ufs";
+-            reg = <0xe6860000 0x100>;
+-            interrupts = <GIC_SPI 235 IRQ_TYPE_LEVEL_HIGH>;
+-            clocks = <&cpg CPG_MOD 1514>, <&ufs30_clk>;
+-            clock-names = "fck", "ref_clk";
+-            freq-table-hz = <200000000 200000000>, <38400000 38400000>;
+-            power-domains = <&sysc R8A779F0_PD_ALWAYS_ON>;
+-            resets = <&cpg 1514>;
++        compatible = "renesas,r8a779f0-ufs";
++        reg = <0xe6860000 0x100>;
++        interrupts = <GIC_SPI 235 IRQ_TYPE_LEVEL_HIGH>;
++        clocks = <&cpg CPG_MOD 1514>, <&ufs30_clk>;
++        clock-names = "fck", "ref_clk";
++        freq-table-hz = <200000000 200000000>, <38400000 38400000>;
++        power-domains = <&sysc R8A779F0_PD_ALWAYS_ON>;
++        resets = <&cpg 1514>;
+     };
+diff --git a/Documentation/devicetree/bindings/ufs/samsung,exynos-ufs.yaml b/Documentation/devicetree/bindings/ufs/samsung,exynos-ufs.yaml
+index 720879820f66..b4e744ebffd1 100644
+--- a/Documentation/devicetree/bindings/ufs/samsung,exynos-ufs.yaml
++++ b/Documentation/devicetree/bindings/ufs/samsung,exynos-ufs.yaml
+@@ -112,19 +112,19 @@ examples:
+     #include <dt-bindings/clock/exynos7-clk.h>
+ 
+     ufs: ufs@15570000 {
+-       compatible = "samsung,exynos7-ufs";
+-       reg = <0x15570000 0x100>,
+-             <0x15570100 0x100>,
+-             <0x15571000 0x200>,
+-             <0x15572000 0x300>;
+-       reg-names = "hci", "vs_hci", "unipro", "ufsp";
+-       interrupts = <GIC_SPI 200 IRQ_TYPE_LEVEL_HIGH>;
+-       clocks = <&clock_fsys1 ACLK_UFS20_LINK>,
+-                <&clock_fsys1 SCLK_UFSUNIPRO20_USER>;
+-       clock-names = "core_clk", "sclk_unipro_main";
+-       pinctrl-names = "default";
+-       pinctrl-0 = <&ufs_rst_n &ufs_refclk_out>;
+-       phys = <&ufs_phy>;
+-       phy-names = "ufs-phy";
++        compatible = "samsung,exynos7-ufs";
++        reg = <0x15570000 0x100>,
++              <0x15570100 0x100>,
++              <0x15571000 0x200>,
++              <0x15572000 0x300>;
++        reg-names = "hci", "vs_hci", "unipro", "ufsp";
++        interrupts = <GIC_SPI 200 IRQ_TYPE_LEVEL_HIGH>;
++        clocks = <&clock_fsys1 ACLK_UFS20_LINK>,
++                 <&clock_fsys1 SCLK_UFSUNIPRO20_USER>;
++        clock-names = "core_clk", "sclk_unipro_main";
++        pinctrl-names = "default";
++        pinctrl-0 = <&ufs_rst_n &ufs_refclk_out>;
++        phys = <&ufs_phy>;
++        phy-names = "ufs-phy";
+     };
+ ...

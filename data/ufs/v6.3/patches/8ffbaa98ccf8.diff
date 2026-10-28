@@ -1,0 +1,14 @@
+diff --git a/Documentation/devicetree/bindings/ufs/qcom,ufs.yaml b/Documentation/devicetree/bindings/ufs/qcom,ufs.yaml
+index f2d6298d926c..54f5f8dc5c87 100644
+--- a/Documentation/devicetree/bindings/ufs/qcom,ufs.yaml
++++ b/Documentation/devicetree/bindings/ufs/qcom,ufs.yaml
+@@ -71,6 +71,9 @@ properties:
+     minItems: 1
+     maxItems: 2
+ 
++  required-opps:
++    maxItems: 1
++
+   resets:
+     maxItems: 1
+ 
