@@ -43,6 +43,8 @@ cd worker
 python -m kclog fetch                    # linux.git 부분 clone 또는 갱신
 python -m kclog collect                  # 트랙의 since부터 최신 릴리스까지 수집
 python -m kclog collect --release v6.12 --force   # 특정 릴리스 다시 수집
+python -m kclog check                    # clone 없이 새 정식 릴리스 확인
+python -m kclog update                   # 새 릴리스 fetch·수집 + commits 생성 작업 export
 python -m kclog stats                    # 통계
 python -m unittest discover -s tests -t .
 ```
@@ -66,6 +68,30 @@ python -m kclog gen import commits --model claude-opus-5-5   # 결과 검증 후
 - `import`는 결과를 출력 스키마로 검증해 통과한 것만 `data/`에 반영하고 작업 파일을 지웁니다. 실패한 항목은 파일이 남아 있으니 고쳐서 다시 import합니다.
 - 이미 생성된 항목은 export에서 빠집니다 (`--force`로 다시 포함). 결과에는 생성 모델과 `prompt_version`이 기록됩니다.
 - 트리 전반 변경(UFS 파일 비중 50% 미만)과 `policy`에서 `explain = false`인 벤더는 요약만 만듭니다.
+
+## 새 릴리스가 나왔을 때
+
+1. `new-release` workflow가 매주 월요일 upstream 태그를 확인하고, 새 정식 릴리스가 있으면 이슈를 엽니다 (Actions 탭에서 수동 실행도 가능).
+2. 로컬에서 `python -m kclog update`로 수집하고 commits 작업을 export합니다.
+3. Claude Code로 commits → series → release 순서로 생성·import합니다 (위 "한국어 요약 생성").
+4. 커밋해서 push하면 `site` workflow가 테스트하고 사이트를 빌드합니다.
+
+요약이 아직 없는 릴리스도 사이트에 나오며, "요약 준비 중"으로 표시되고 커밋은 원문 제목으로 보입니다.
+
+## GitHub Actions
+
+| workflow | 실행 시점 | 하는 일 |
+|---|---|---|
+| `site` | main push, PR, 수동 | Python 테스트, 사이트 빌드, `site` 아티팩트 업로드 (14일 보관) |
+| `new-release` | 매주 월요일, 수동 | 새 릴리스가 있으면 이슈 생성 |
+| `deploy-pages` | 수동만 | GitHub Pages 배포 |
+
+`site` 아티팩트를 내려받아 압축을 풀고 그 폴더에서 `python -m http.server`를 실행하면 로컬에서 볼 수 있습니다.
+절대 경로를 쓰므로 `index.html`을 파일로 바로 열면 링크가 동작하지 않습니다.
+
+GitHub Pages로 배포하려면 저장소를 public으로 바꾸거나(무료 플랜) Pro 이상을 쓰고,
+Settings > Pages의 Source를 "GitHub Actions"로 둔 뒤 `deploy-pages`를 실행합니다.
+push마다 자동 배포하려면 `deploy-pages.yml`의 `on:`에 `push: branches: [main]`을 추가합니다.
 
 ## 수집 규칙
 

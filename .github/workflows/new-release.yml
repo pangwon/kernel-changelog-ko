@@ -1,0 +1,51 @@
+# 매주 새 정식 릴리스가 나왔는지 확인하고, 있으면 이슈를 연다.
+# 수집과 한국어 요약 생성은 로컬에서 Claude Code로 한다 (python -m kclog update).
+name: new-release
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"  # 매주 월요일 09:00 KST
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - id: check
+        working-directory: worker
+        run: echo "tags=$(python -m kclog check --json)" >> "$GITHUB_OUTPUT"
+      - if: steps.check.outputs.tags != '[]'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAGS: ${{ steps.check.outputs.tags }}
+        run: |
+          for tag in $(echo "$TAGS" | jq -r '.[]'); do
+            title="새 릴리스 $tag 요약 필요"
+            if gh issue list --state all --search "in:title \"$title\"" --json title -q '.[].title' | grep -qx "$title"; then
+              echo "이미 이슈가 있음: $title"
+              continue
+            fi
+            gh issue create --title "$title" --body "$(cat <<EOF
+          upstream에 $tag 가 나왔습니다. 로컬에서 수집하고 Claude Code로 요약을 생성하세요.
+
+          \`\`\`bash
+          cd worker
+          python -m kclog update          # fetch, 수집, commits 작업 export
+          # Claude Code: .cache/gen/ufs/commits 작업 처리
+          python -m kclog gen import commits --model <모델>
+          python -m kclog gen export series --release $tag   # 처리 후 import
+          python -m kclog gen export release --release $tag  # 처리 후 import
+          \`\`\`
+
+          커밋해서 main에 push하면 사이트가 다시 빌드됩니다.
+          EOF
+            )"
+          done

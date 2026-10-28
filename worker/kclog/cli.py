@@ -1,4 +1,4 @@
-"""python -m kclog {fetch,collect,stats}"""
+"""python -m kclog {fetch,collect,check,update,stats,gen}"""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from collections import Counter
 from pathlib import Path
 
 from .collect import Collector, write_json
-from .gitrepo import Repo, version_key
+from .gitrepo import Repo, remote_releases, version_key
 from .track import load_track
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -162,6 +162,42 @@ def cmd_gen(args) -> None:
         print(f"  실패 {job_id}: {err}")
 
 
+def new_releases(track_id: str) -> list[str]:
+    """원격에는 있지만 아직 수집하지 않은 since 이후 정식 릴리스."""
+    track = load_track(ROOT / "tracks" / f"{track_id}.toml")
+    index_path = ROOT / "data" / track.id / "releases.json"
+    have = {r["tag"] for r in json.loads(index_path.read_text("utf-8"))} if index_path.exists() else set()
+    since = version_key(track.since)
+    return [t for t in remote_releases() if version_key(t) >= since and t not in have]
+
+
+def cmd_check(args) -> None:
+    tags = new_releases(args.track)
+    if args.json:
+        print(json.dumps(tags))
+    elif tags:
+        print("새 릴리스: " + " ".join(tags))
+    else:
+        print("새 릴리스 없음")
+
+
+def cmd_update(args) -> None:
+    """새 릴리스를 수집하고 commits 단계 생성 작업을 내보낸다. 생성 자체는 Claude Code가 한다."""
+    tags = new_releases(args.track)
+    if not tags:
+        print("새 릴리스 없음")
+        return
+    print("새 릴리스: " + " ".join(tags))
+    cmd_fetch(args)
+    cmd_collect(argparse.Namespace(track=args.track, release=tags, force=False))
+    cmd_gen(argparse.Namespace(action="export", stage="commits", track=args.track, release=tags,
+                               sha=None, limit=None, force=False, model=None))
+    print("\n다음 단계 (Claude Code에서):")
+    print("  1. .cache/gen/<track>/commits 작업 처리 → python -m kclog gen import commits --model <모델>")
+    print("  2. gen export/import series → gen export/import release (같은 --release)")
+    print("  3. 커밋하고 push하면 사이트가 다시 빌드된다.")
+
+
 def main(argv: list[str] | None = None) -> None:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
@@ -176,6 +212,15 @@ def main(argv: list[str] | None = None) -> None:
     s.add_argument("--release", action="append", help="특정 릴리스만 (여러 번 지정 가능)")
     s.add_argument("--force", action="store_true", help="이미 수집한 릴리스도 다시 수집")
     s.set_defaults(func=cmd_collect)
+
+    s = sub.add_parser("check", help="clone 없이 새 정식 릴리스가 나왔는지 확인")
+    s.add_argument("--track", default="ufs")
+    s.add_argument("--json", action="store_true", help="새 태그 목록을 JSON 배열로 출력")
+    s.set_defaults(func=cmd_check)
+
+    s = sub.add_parser("update", help="새 릴리스 fetch·수집 후 commits 생성 작업 export")
+    s.add_argument("--track", default="ufs")
+    s.set_defaults(func=cmd_update)
 
     s = sub.add_parser("stats", help="수집 결과 통계")
     s.add_argument("--track", default="ufs")

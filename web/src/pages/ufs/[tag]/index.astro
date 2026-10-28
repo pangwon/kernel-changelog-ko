@@ -55,7 +55,13 @@ const top = (["high", "medium", "low"] as Importance[]).map((i) => [i, all.filte
     <span>시리즈 {release.series_count}</span>
     {top.map(([i, n]) => n > 0 && <span>{i} {n}</span>)}
   </div>
-  <p class="headline" set:html={inline(release.highlights_ko?.headline_ko)} />
+  {release.highlights_ko ? (
+    <p class="headline" set:html={inline(release.highlights_ko.headline_ko)} />
+  ) : (
+    <p class="headline" data-pagefind-ignore>
+      <span class="badge md">요약 준비 중</span> 수집은 끝났고 한국어 요약을 생성하고 있습니다. 요약이 없는 커밋은 원문 제목을 보여 줍니다.
+    </p>
+  )}
 
   {release.highlights_ko && (
     <section>

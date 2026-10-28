@@ -27,6 +27,15 @@ def version_key(tag: str) -> tuple[int, int, int]:
     return int(m.group(1)), int(m.group(2)), rc
 
 
+def remote_releases(url: str = UPSTREAM) -> list[str]:
+    """clone 없이 원격의 정식 릴리스 태그(vX.Y)만 오래된 순으로."""
+    proc = subprocess.run(["git", "ls-remote", "--tags", "--refs", url, "v*"],
+                          capture_output=True, check=True)
+    tags = {line.rsplit("refs/tags/", 1)[1]
+            for line in proc.stdout.decode("utf-8", "replace").splitlines() if "refs/tags/" in line}
+    return sorted((t for t in tags if RELEASE_TAG.match(t)), key=version_key)
+
+
 @dataclass
 class RawFile:
     path: str
