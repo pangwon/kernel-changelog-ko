@@ -2,7 +2,7 @@
 import Base from "../../../layouts/Base.astro";
 import CommitRow from "../../../components/CommitRow.astro";
 import {
-  releases, commits, series, vendorOnly, hiddenVendors, short, formatDate,
+  releases, commits, series, vendorOnly, hiddenVendors, short, formatDate, cleanSubject,
   AREA_ORDER, TYPE_LABEL, type Commit, type Importance, type ChangeType,
 } from "../../../lib/data";
 import { inline } from "../../../lib/render";
@@ -17,6 +17,9 @@ const release = releases().find((r) => r.tag === tag)!;
 const all = commits(tag);
 const bySha = new Map(all.map((c) => [c.sha, c]));
 const shortToSha = new Map(all.map((c) => [short(c.sha), c.sha]));
+
+// 이보다 패치가 많은 시리즈는 접어 둔다 (필터가 켜지면 스크립트가 펼친다).
+const SERIES_OPEN_MAX = 4;
 
 const RANK: Record<Importance, number> = { high: 3, medium: 2, low: 1 };
 const rank = (c: Commit) => (c.importance ? RANK[c.importance] : 0);
@@ -70,17 +73,30 @@ const top = (["high", "medium", "low"] as Importance[]).map((i) => [i, all.filte
         <div class="highlight">
           <h3 set:html={inline(h.title_ko)} />
           <p set:html={inline(h.description_ko)} />
-          <div class="sha-links" data-pagefind-ignore>
-            {h.commits.filter((s) => shortToSha.has(s)).map((s) => (
-              <a href={`${base}ufs/${tag}/${s}/`} title={bySha.get(shortToSha.get(s)!)?.subject}>{s}</a>
-            ))}
-          </div>
+          {(() => {
+            const related = h.commits.filter((s) => shortToSha.has(s)).map((s) => bySha.get(shortToSha.get(s)!)!);
+            return related.length > 0 && (
+              <details class="related" data-pagefind-ignore>
+                <summary>관련 커밋 {related.length}개</summary>
+                <ul>
+                  {related.map((c) => (
+                    <li><a href={`${base}ufs/${tag}/${short(c.sha)}/`}>{cleanSubject(c.subject)}</a></li>
+                  ))}
+                </ul>
+              </details>
+            );
+          })()}
         </div>
       ))}
     </section>
   )}
 
   <h2>변경 목록</h2>
+  <nav class="jump" data-pagefind-ignore aria-label="영역 바로가기">
+    {areas.map((a) => (
+      <a href={`#area-${a}`}>{a} <span class="faint">{units.filter((u) => u.area === a).reduce((n, u) => n + u.members.length, 0)}</span></a>
+    ))}
+  </nav>
   <div class="filters" data-pagefind-ignore data-default-hidden={defaultHidden.join(" ")}>
     <div class="filter-row">
       <span class="name">영역</span>
@@ -108,7 +124,7 @@ const top = (["high", "medium", "low"] as Importance[]).map((i) => [i, all.filte
   </div>
 
   {areas.map((area) => (
-    <section class="area-section" data-area-section>
+    <section class="area-section" data-area-section id={`area-${area}`}>
       <h2>{area} <span class="faint" style="font-size: 0.85rem; font-weight: 400;">{units.filter((u) => u.area === area).reduce((n, u) => n + u.members.length, 0)}</span></h2>
       {notes.get(area) && <p class="area-note" set:html={inline(notes.get(area))} />}
       {units.filter((u) => u.area === area).map((u) => (
@@ -121,9 +137,18 @@ const top = (["high", "medium", "low"] as Importance[]).map((i) => [i, all.filte
               <span class="badge plain">패치 {u.members.length}개</span>
             </div>
             <p class="series-summary" set:html={inline(u.s.summary_ko)} />
-            <div class="series-items">
-              {u.members.map((c) => <CommitRow commit={c} tag={tag} />)}
-            </div>
+            {u.members.length > SERIES_OPEN_MAX ? (
+              <details class="series-fold">
+                <summary>패치 {u.members.length}개 펼치기</summary>
+                <div class="series-items">
+                  {u.members.map((c) => <CommitRow commit={c} tag={tag} />)}
+                </div>
+              </details>
+            ) : (
+              <div class="series-items">
+                {u.members.map((c) => <CommitRow commit={c} tag={tag} />)}
+              </div>
+            )}
           </div>
         )
       ))}
@@ -166,6 +191,9 @@ const top = (["high", "medium", "low"] as Importance[]).map((i) => [i, all.filte
       }
       for (const u of document.querySelectorAll<HTMLElement>("[data-unit]"))
         u.hidden = !u.querySelector("[data-row]:not([hidden])");
+      // 필터가 켜져 있으면 접힌 시리즈를 펼쳐 걸러진 결과가 바로 보이게 한다.
+      const active = area.length + type.length + imp.length > 0;
+      for (const d of document.querySelectorAll<HTMLDetailsElement>("details.series-fold")) d.open = active;
       for (const s of document.querySelectorAll<HTMLElement>("[data-area-section]"))
         s.hidden = !s.querySelector("[data-unit]:not([hidden])");
       status.textContent = `${rows.length}개 중 ${shown}개 표시`;

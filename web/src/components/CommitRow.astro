@@ -1,6 +1,6 @@
 ---
 import type { Commit } from "../lib/data";
-import { short, vendorOnly, TYPE_LABEL } from "../lib/data";
+import { short, vendorOnly, cleanSubject, TYPE_LABEL } from "../lib/data";
 import { inline } from "../lib/render";
 
 interface Props { commit: Commit; tag: string; }
@@ -17,11 +17,14 @@ const href = `${base}ufs/${tag}/${short(c.sha)}/`;
   data-vendors={vendorOnly(c).join(" ")}
 >
   <div class="top">
-    {c.importance && <span class={`badge ${c.importance}`}>{c.importance}</span>}
-    {c.change_type && <span class="badge plain">{TYPE_LABEL[c.change_type]}</span>}
-    {c.cc_stable && <span class="badge accent">stable</span>}
-    {c.fixes.length > 0 && <span class="badge plain">Fixes {c.fixes[0].introduced_in ?? ""}</span>}
+    <a class="title" href={href} title={c.subject}>{cleanSubject(c.subject)}</a>
+    <span class="badges">
+      {c.importance && <span class={`badge ${c.importance}`}>{c.importance}</span>}
+      {c.change_type && <span class="badge plain">{TYPE_LABEL[c.change_type]}</span>}
+      {c.cc_stable && <span class="badge accent">stable</span>}
+      {c.fixes.length > 0 && <span class="badge plain">Fixes {c.fixes[0].introduced_in ?? ""}</span>}
+    </span>
   </div>
-  <p class="summary" set:html={inline(c.summary_ko) || c.subject} />
-  <a class="subject" href={href}>{short(c.sha)} {c.subject}</a>
+  {c.summary_ko && <p class="summary" set:html={inline(c.summary_ko)} />}
+  <div class="row-meta">{short(c.sha)} · {c.author.name}</div>
 </div>

@@ -142,6 +142,12 @@ export function trackName(): string {
 
 export const short = (sha: string) => sha.slice(0, 12);
 
+/** 커밋 제목에서 "scsi: ufs: core: " 같은 서브시스템 접두어를 뗀다. 영역·벤더는 배지로 따로 보여 준다. */
+export function cleanSubject(subject: string): string {
+  const rest = subject.replace(/^(?:[\w.,/+-]+\s?:\s+)+/, "");
+  return rest ? rest[0].toUpperCase() + rest.slice(1) : subject;
+}
+
 export const AREA_LABEL: Record<string, string> = {
   core: "core",
   host: "host",
