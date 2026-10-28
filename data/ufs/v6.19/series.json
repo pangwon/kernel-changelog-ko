@@ -11,7 +11,8 @@
   "areas": [
    "bindings"
   ],
-  "summary_ko": null
+  "summary_ko": "`samsung,exynos-ufs.yaml` binding에 `power-domains` 속성을 허용했다. UFS 컨트롤러가 power domain에 속할 수 있기 때문이다.",
+  "title_ko": null
  },
  {
   "id": "20251016023507.1000664-peter.wang@mediatek.com",
@@ -26,7 +27,14 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "`struct cq_entry`를 UFS 4.1 형식으로 갱신했다. DW4는 `overall_status`·`extended_error_code`로 나뉘고, DW5에 `task_tag`·`lun`·`iid` 필드가 생겼다. MCQ 명령이 오류로 끝나면 해당 CQE도 hex dump로 남겨 디버깅을 돕는다.",
+  "title_ko": "UFS 4.1 CQ entry 형식 반영과 오류 시 CQE 덤프",
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:54:09+00:00"
+  }
  },
  {
   "id": "25f134d5a42e8b8365be64d512d1bb5fc2bce6ff.1760383740.git.quic_nguyenb@quicinc.com",
@@ -40,7 +48,8 @@
   "areas": [
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "모든 UFS 장치 제조사가 VCC를 끈 뒤 다시 켜기 전 일정 시간을 요구하므로, `UFS_DEVICE_QUIRK_DELAY_AFTER_LPM` quirk를 없애고 core가 VCC off 뒤 지연을 항상 적용하도록 했다. MediaTek·qcom의 quirk 사용도 제거됐다.",
+  "title_ko": null
  },
  {
   "id": "72fa649406a0bf02271575b7d58f22c968aa5d7e.1760383740.git.quic_nguyenb@quicinc.com",
@@ -54,7 +63,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "VCC를 끈 뒤 하드코딩된 5ms 지연을 `hba->vcc_off_delay_us` 변수로 바꾸고 기본값을 2ms로 줄였다. 모든 UFS 장치 제조사가 최소 1ms의 off 시간만 요구하므로 system resume 지연이 줄어들며, 플랫폼 드라이버가 값을 덮어쓸 수 있다.",
+  "title_ko": null
  },
  {
   "id": "20250924094527.2992256-peter.wang@mediatek.com",
@@ -76,7 +86,14 @@
   "areas": [
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "MediaTek UFS 호스트의 suspend/resume 흐름을 정리했다. scale-up 상태에서는 PM QoS와 클럭을 내렸다 올리고, clock scaling 없이 G5 이상으로 고정된 경우에도 클럭을 조절한다. shutdown 중 suspend는 `-EBUSY`로 막는다. FASTAUTO 전환 전에는 G1~G5 sync length를 최소 0x48로 보정한다. MT6899 이상은 `MMIO_OTSD_CTRL`로 링크 상태를 읽고, MT6991은 multi-RTT와 random 성능 개선 기능을 켠다. 중복 함수 제거를 위해 core의 `ufshcd_pm_qos_update()`와 `ufshcd_us_to_ahit()`를 export했다.",
+  "title_ko": "MediaTek UFS PM·clock scaling 개선과 신규 플랫폼 지원",
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:54:09+00:00"
+  }
  },
  {
   "id": "20251014200118.3390839-bvanassche@acm.org",
@@ -95,7 +112,14 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "UFSHCI 표준 절 참조 주석 추가, `uic_command::cmd_active`의 bool화, 미사용 `UFS_DEV_COMP` 제거, `ufshcd_enable_intr()` 선언의 private 헤더 이동, goto 레이블 제거, `guard(mutex)` 적용 등 동작 변화 없는 정리 6건이다. 같은 송신 묶음의 버그 수정 2건은 v6.18에 먼저 들어갔다.",
+  "title_ko": "UFS core 소규모 정리",
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T03:02:35+00:00"
+  }
  },
  {
   "id": "20251021113003.13650-ajay.neeli@amd.com",
@@ -111,7 +135,14 @@
    "bindings",
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "Synopsys DWC 기반인 AMD Versal Gen 2 SoC의 UFS 호스트 binding과 드라이버 `ufs-amd-versal2.c`를 추가했다. 드라이버는 펌웨어(zynqmp PM)에서 PHY 보정값을 읽고, link startup 전에 DME 간접 접근으로 M-PHY·RMMI·UniPro를 설정한다. 보정되지 않은 부품은 SLOW 모드로 동작한다. PHY 초기화 시점은 같은 릴리스에서 `hce_enable_notify` POST_CHANGE로 고쳐졌다.",
+  "title_ko": "AMD Versal Gen 2 UFS 호스트 지원",
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:54:09+00:00"
+  }
  },
  {
   "id": "20251027113107.75835-krzysztof.kozlowski@linaro.org",
@@ -125,7 +156,8 @@
   "areas": [
    "bindings"
   ],
-  "summary_ko": null
+  "summary_ko": "`qcom,ufs.yaml` binding의 `if:then:` 블록에서 상위 정의와 겹치는 중복 `reg` 제약(maxItems: 2, minItems: 1)을 지웠다.",
+  "title_ko": null
  },
  {
   "id": "20251031122008.1517549-peter.wang@mediatek.com",
@@ -139,7 +171,8 @@
   "areas": [
    "bindings"
   ],
-  "summary_ko": null
+  "summary_ko": "`mediatek,ufs.yaml` binding의 maintainer를 비활성 이메일의 Stanley Chu에서 Peter Wang과 Chaotian Jing으로 바꿨다.",
+  "title_ko": null
  },
  {
   "id": "20251030161012.3391239-neeraj.soni@oss.qualcomm.com",
@@ -153,7 +186,8 @@
   "areas": [
    "crypto"
   ],
-  "summary_ko": null
+  "summary_ko": "Qualcomm ICE에 HWKM(Hardware Key Manager) v1 지원을 추가했다. ICE major/minor 버전으로 HWKM v1과 v2를 구분해 wrapped key 크기와 동작 모드·상태 레지스터 비트필드를 다르게 설정한다.",
+  "title_ko": null
  },
  {
   "id": "20251106-scsi-ufs-ti-j721e-suspend-resume-support-v1-6f395f51219e@bootlin.com",
@@ -167,7 +201,8 @@
   "areas": [
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "TI J721E UFS wrapper 드라이버에 suspend/resume 지원을 추가했다. probe 때 쓴 `TI_UFS_SS_CTRL` 레지스터 값(26MHz 클럭, PCS 리셋 해제)을 저장해 두었다가 resume 시 다시 쓴다.",
+  "title_ko": null
  },
  {
   "id": "20251107230518.4060231-beanhuo@iokpp.de",
@@ -183,7 +218,14 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "eMMC처럼 UFS 장치의 RPMB를 커널 RPMB 서브시스템에 등록해, OP-TEE가 사용자 공간 supplicant 없이 부팅 초기부터 보안 저장소(fTPM, UEFI 변수 등)에 접근할 수 있게 했다. 새 `ufs-rpmb.c`는 RPMB region마다 장치를 등록하고, RPMB 프레임을 RPMB WLUN의 SECURITY PROTOCOL IN/OUT으로 전달한다. 준비 작업으로 string descriptor 형식 매크로를 enum으로 바꾸고, raw string descriptor 복사에 헤더가 섞이던 버그(v5.4부터)를 고쳤다. 같은 릴리스에서 Kconfig 링크 오류가 추가로 수정됐고, UFS 2.2 장치 지원은 v7.0에서 보완됐다.",
+  "title_ko": "UFS용 OP-TEE 기반 RPMB 드라이버",
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:54:09+00:00"
+  }
  },
  {
   "id": "20251031204029.2883185-bvanassche@acm.org",
@@ -217,7 +259,14 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "UFS 장치 관리 명령(query, NOP OUT, RPMB)을 고정 reserved slot과 전용 대기 루프 대신 SCSI core의 reserved request(`scsi_get_internal_cmd()` + `blk_execute_rq()`)로 처리하도록 21개 패치로 재구성했다. 과정은 다음과 같다. 먼저 trace·monitor·send 함수 인자를 tag에서 LRB 또는 SCSI 명령 포인터로 바꿨다. 이어서 `hba->lrb[]`를 직접 순회하던 에러 처리 루프를 `blk_mq_tagset_busy_iter()`로 바꾸고, SCSI host 할당을 앞당겼으며, 1개 reserved tag를 두었다. 마지막으로 `.cmd_size`로 `scsi_cmnd`와 `ufshcd_lrb`를 붙여 `hba->lrb[]`, `lrbp->cmd`, `task_tag`를 제거했다. 그 결과 I/O hot path의 간접 접근과 memset이 줄었고, 장치 명령의 타임아웃과 abort는 블록 계층 경로를 탄다. 큰 구조 변경이라 같은 릴리스에서 회귀 수정이 이어졌다. SDB 모드 tag 조회(`02b5822d2fea`), MCQ 설정과 link startup 순서(`ee229e7c256a`), clock scaling deadlock(`d2875b812b14`), 에러 핸들러 NULL 역참조(`14be351e5cd0`)다.",
+  "title_ko": "장치 관리 명령의 SCSI reserved command 전환과 hot path 최적화",
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:54:09+00:00"
+  }
  },
  {
   "id": "20251111184802.125111-bvanassche@acm.org",
@@ -231,7 +280,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "`ufs_bsg_exec_advanced_rpmb_req()`에서 이미 역참조한 `job` 구조체 멤버의 주소인 `payload`를 NULL 검사하던 불필요한 조건을 지웠다. CodeSonar 정적 분석기가 보고했다.",
+  "title_ko": null
  },
  {
   "id": "20251112-phy-notify-pmstate-v5-39df622d8fcb@linaro.org",
@@ -245,7 +295,8 @@
   "areas": [
    "phy"
   ],
-  "summary_ko": null
+  "summary_ko": "Samsung UFS PHY 드라이버에 `.notify_phystate()` 콜백을 구현하고, Google Tensor gs101에서 hibern8 진입·종료 때 써야 하는 PHY 레지스터 값 테이블을 추가했다.",
+  "title_ko": null
  },
  {
   "id": "20251114193406.3097237-bvanassche@acm.org",
@@ -259,7 +310,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "같은 v6.19의 hot path 최적화(`22089c218037`)가 `ufshcd_tag_to_cmd()`에서 항상 `shared_tags`를 쓰게 바꾸면서, shared tag가 없는 legacy SDB 모드가 깨졌다. SDB 모드에서는 `tag_set.tags[0]`을 쓰도록 고쳤다.",
+  "title_ko": null
  },
  {
   "id": "20251113235252.2015185-bvanassche@acm.org",
@@ -273,7 +325,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "`ufshcd_pending_cmds()`가 `sdev->budget_map`의 sbitmap weight를 직접 세던 것을 `scsi_device_busy()`로 바꿨다. 특정 경우 SCSI 장치 budget map 초기화를 건너뛰기 위한 준비다.",
+  "title_ko": null
  },
  {
   "id": "1763009575-237552-1-git-send-email-shawn.lin@rock-chips.com",
@@ -287,7 +340,8 @@
   "areas": [
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "Rockchip UFS에서 에러 복구 중 장치 리셋만으로는 부족해 `DME_RESET`이 타임아웃(-110)되던 문제를, `hce_enable_notify(PRE_CHANGE)` 단계에서 컨트롤러 리셋을 수행해 고쳤다.",
+  "title_ko": null
  },
  {
   "id": "1763011091-243727-1-git-send-email-shawn.lin@rock-chips.com",
@@ -301,7 +355,8 @@
   "areas": [
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "`CONFIG_GPIOLIB` 없이 빌드할 때 `devm_gpiod_get()` 등이 암시적으로 선언돼 Rockchip UFS 빌드가 실패하던 문제를 `<linux/gpio/consumer.h>` include로 고쳤다.",
+  "title_ko": null
  },
  {
   "id": "20251112063214.1195761-powenkao@google.com",
@@ -315,7 +370,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "W-LUN resume이 실패하면 부모 `scsi_target`이 runtime suspend 상태로 남아, 에러 핸들러의 `ufshcd_recover_pm_error()`가 W-LUN을 active로 되돌리지 못했다. 부모 target을 먼저 resume하고 runtime_error를 명시적으로 지우며, 에러 처리 중 HBA 자체도 active로 유지하도록 고쳤다.",
+  "title_ko": null
  },
  {
   "id": "20251202155138.2607210-beanhuo@iokpp.de",
@@ -329,7 +385,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "`CONFIG_SCSI_UFSHCD=y`, `CONFIG_RPMB=m`일 때 `ufs_rpmb_probe`/`ufs_rpmb_remove` 미정의 참조로 링크가 실패했다. RPMB가 소비자(MMC, UFS)에 의존하던 Kconfig 관계를 뒤집어, `SCSI_UFSHCD`가 `RPMB || !RPMB`에 의존하도록 고쳤다.",
+  "title_ko": null
  },
  {
   "id": "20251204170457.994851-bvanassche@acm.org",
@@ -343,7 +400,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "SCSI 스캔 전(`hba->ufs_device_wlun`이 아직 NULL)에 UFS 에러 핸들러가 실행되면 v6.18에서 추가된 `ufshcd_rpm_get_noresume()` 호출이 NULL을 역참조해 크래시가 났다. WLUN 포인터가 있을 때만 runtime PM 처리를 하도록 고쳤다.",
+  "title_ko": null
  },
  {
   "id": "20251204181548.1006696-bvanassche@acm.org",
@@ -357,7 +415,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "같은 v6.19에서 장치 관리 명령을 SCSI core(`blk_execute_rq()`)로 보내게 바꾸면서, clock scaling 종료 시 tagset이 quiesce된 상태에서 장치 명령(WB 토글)을 보내 deadlock이 생겼다. 명령을 보내기 전에 `blk_mq_unquiesce_tagset()`을 호출하도록 순서를 바꿨다.",
+  "title_ko": null
  },
  {
   "id": "20251208020807.5043-krzysztof.kozlowski@oss.qualcomm.com",
@@ -371,7 +430,8 @@
   "areas": [
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "ufs-qcom의 `__free(kfree)` 변수를 NULL로 먼저 선언하고 나중에 할당하던 코드를, cleanup.h 권장대로 선언과 할당을 한 문장으로 합쳤다.",
+  "title_ko": null
  },
  {
   "id": "20251210063854.1483899-sh8267.baek@samsung.com",
@@ -385,7 +445,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "UFS resume 실패는 event history에 남지만 suspend 실패는 기록되지 않았다. `ufshcd_suspend()`가 실패하면 `UFS_EVT_SUSPEND_ERR`를 기록하도록 했다.",
+  "title_ko": null
  },
  {
   "id": "20251217-fix-minor-grammar-err-v3-9be220cdd56a@posteo.com",
@@ -399,7 +460,8 @@
   "areas": [
    "bindings"
   ],
-  "summary_ko": null
+  "summary_ko": "`ufs-common.yaml` binding 설명의 문법 오류 몇 개를 고쳤다.",
+  "title_ko": null
  },
  {
   "id": "20251218230741.2661049-bvanassche@acm.org",
@@ -413,7 +475,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "같은 v6.19의 'SCSI host를 더 일찍 할당'(`f46b9a595fa9`) 변경이 link startup과 MCQ 활성화·설정 순서를 뒤바꿔 link startup이 실패했다. MCQ 설정을 link startup 이후로 되돌렸다.",
+  "title_ko": null
  },
  {
   "id": "20251219214428.492744-colin.i.king@gmail.com",
@@ -427,7 +490,8 @@
   "areas": [
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "`ufs_mtk_setup_clk_gating()`의 읽기 전용 배열 `scale_us`를 실행 시 스택에 채우지 않도록 `static const`로 바꿨다.",
+  "title_ko": null
  },
  {
   "id": "20251224053950.54213-ajay.neeli@amd.com",
@@ -441,6 +505,7 @@
   "areas": [
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "AMD Versal Gen 2 UFS에서 PHY 초기화를 `hce_enable_notify`의 `PRE_CHANGE`에서 `POST_CHANGE`로 옮겨, 호스트 컨트롤러 enable이 끝난 안정된 상태에서 M-PHY 레지스터를 설정하도록 했다.",
+  "title_ko": null
  }
 ]

@@ -82,7 +82,7 @@ class Collector:
             "areas": dict(Counter(c["area"] for c in commits).most_common()),
             "vendors": dict(Counter(c["vendor"] or "-" for c in commits).most_common()),
             "patch_bytes": sum(c["patch_bytes"] for c in commits),
-            "highlight_ko": None,
+            "highlights_ko": None,
         }
 
     def _commit(self, c: RawCommit, tag: str, stats: dict[str, tuple[int, int]]) -> dict:

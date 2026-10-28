@@ -1,7 +1,7 @@
 id = "ufs"
 name = "UFS (Universal Flash Storage)"
 # 이 태그부터 수집 (vX.Y 정식 릴리스만, rc 제외)
-since = "v6.1"
+since = "v6.18"
 
 [paths]
 # git pathspec 문법. 디렉터리는 '/'로 끝내고, glob은 ':(glob)' 접두어를 붙인다.

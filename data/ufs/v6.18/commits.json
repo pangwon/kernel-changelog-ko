@@ -52,10 +52,23 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "Qualcomm UFS binding을 여러 파일로 나누기 위한 준비로, 모든 Qualcomm UFS 스키마의 공통 속성(clocks, interconnects, dma-coherent 등)을 `qcom,ufs-common.yaml`로 옮겼다.",
+  "explanation_ko": "### 배경\nQualcomm UFS binding은 ICE를 phandle과 I/O 주소 중 어느 쪽으로 다루는지에 따른 조건문 등으로 커졌고, MCQ로 더 커질 예정이다. 장치 그룹별로 binding을 나누기 위해 공통 부분을 정의한다. 코드 이동만 있고 동작 변화는 없다(커밋 메시지). 3개 패치 시리즈의 첫 번째다.\n\n### 변경 내용\n`qcom,ufs-common.yaml`을 만들고 `qcom,ufs.yaml`에서 공통 속성을 옮겼다.\n\n### 영향\n스키마 의미는 같다.",
   "patch": "patches/7f224967aee7.diff",
-  "patch_bytes": 2785
+  "patch_bytes": 2785,
+  "change_type": "docs",
+  "importance": "low",
+  "keywords": [
+   "dt-bindings",
+   "qcom,ufs-common.yaml",
+   "binding split"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "655c8f511926250e0da9e8b1a9b8f1cf2c173b41",
@@ -110,10 +123,24 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`qcom,ufs.yaml`에서 SC7180·SC7280·SM8250~SM8550 등 ICE를 phandle로 참조하고 클럭 순서가 같은 SoC들을 새 binding `qcom,sc7180-ufshc.yaml`로 분리했다.",
+  "explanation_ko": "### 배경\nQualcomm UFS 컨트롤러 binding이 계속 커진다. SC7180 등은 ICE를 I/O 주소 공간이 아닌 phandle로 참조하고, 클럭 순서가 같다(SC7180은 클럭이 하나 적다). 분리하면 리뷰와 유지보수가 쉬워진다(커밋 메시지). 3개 패치 시리즈의 일부다.\n\n### 변경 내용\n`qcom,sc7180-ufshc.yaml`을 새로 만들어 msm8998, qcs8300, sa8775p, sc7180, sc7280, sc8180x, sc8280xp, sm8250, sm8350, sm8450, sm8550을 옮기고 `qcom,ufs.yaml`에서 해당 조건을 지웠다.\n\n### 영향\nbinding 구조만 바뀐다. 이후 Milos, x1e80100 등이 이 파일에 추가됐다.",
   "patch": "patches/655c8f511926.diff",
-  "patch_bytes": 11006
+  "patch_bytes": 11006,
+  "change_type": "docs",
+  "importance": "low",
+  "keywords": [
+   "dt-bindings",
+   "qcom,sc7180-ufshc.yaml",
+   "binding split",
+   "ICE phandle"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "149009f2dc6f781f490a13264eaa565281e4d490",
@@ -171,10 +198,25 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "커진 `qcom,ufs.yaml`에서 SM8650·SM8750 UFS 컨트롤러를 새 binding `qcom,sm8650-ufshc.yaml`로 분리했다. 이 SoC들은 ICE를 phandle로 참조하고 클럭 순서가 같으며, 선택 항목인 MCQ 레지스터 영역(`reg-names: mcq`)을 둔다.",
+  "explanation_ko": "### 배경\nQualcomm UFS 컨트롤러 binding이 계속 커지고 있다. SM8650과 SM8750은 ICE를 IO 주소가 아닌 phandle로 참조하고, 클럭 순서가 같으며, MCQ I/O 주소 공간이 있다. MCQ 영역은 하위 호환과 MCQ 없이도 동작 가능하다는 이유로 선택 항목으로 둔다. 분리하면 리뷰와 유지보수가 쉬워진다(커밋 메시지). 3개 패치 시리즈의 일부다.\n\n### 변경 내용\n`qcom,sm8650-ufshc.yaml`을 새로 만들고(`reg` 1~2개, `reg-names: std, mcq`) `qcom,ufs.yaml`에서 해당 SoC 조건을 지웠다.\n\n### 영향\nbinding 구조만 바뀐다. 이후 Eliza 등이 이 파일에 추가됐다.",
   "patch": "patches/149009f2dc6f.diff",
-  "patch_bytes": 7377
+  "patch_bytes": 7377,
+  "change_type": "docs",
+  "importance": "low",
+  "keywords": [
+   "dt-bindings",
+   "qcom,sm8650-ufshc.yaml",
+   "SM8650",
+   "SM8750",
+   "MCQ"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "6c00c493a344b65fb0a356cb3f328a647085687b",
@@ -217,10 +259,23 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek 드라이버에서 같은 값을 가리키는 `hba->vreg_info.vcc` 대신 `info->vcc`를 쓰도록 정리했다.",
+  "explanation_ko": "### 배경\n`info->vcc`와 `hba->vreg_info.vcc`는 같은 값이므로 짧은 쪽을 쓴다(커밋 메시지). MediaTek 수정 10개 패치 시리즈의 일부다.\n\n### 변경 내용\n조건문 한 줄을 바꿨다.\n\n### 영향\n동작 변화는 없다.",
   "patch": "patches/6c00c493a344.diff",
-  "patch_bytes": 435
+  "patch_bytes": 435,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "cleanup",
+   "VCC"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "aa86602a483ba48f51044fbaefa1ebbf6da194a4",
@@ -263,10 +318,26 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek UFS의 Auto-Hibern8 타이머(AHIT) 설정을 link 이후 단계에서 `fixup_dev_quirks`로 옮겨 장치 제조사별 값(Samsung 3.5ms, Micron 2ms, 그 외 1ms)을 쓰도록 했다. clock gating 지연은 AHIT 값에 맞춰 조정하되 최소 10ms로 둔다.",
+  "explanation_ko": "### 배경\nAHIT 설정을 post-link 단계에서 `fixup_dev_quirks`로 옮겨 벤더 요구에 맞춘다. Samsung은 3.5ms, Micron은 2ms, 그 외는 1ms다. clock gating 타이머도 AHIT scale에 맞춰 조정하며 최대 10ms로 설정한다(커밋 메시지). MediaTek 수정 10개 패치 시리즈의 일부다.\n\n### 변경 내용\n- `ufs_mtk_fixup_dev_quirks()`에서 `wmanufacturerid`에 따라 AHIT를 계산(`ufs_mtk_us_to_ahit()`)해 `hba->ahit`에 설정한다.\n- `ufs_mtk_setup_clk_gating()`: AHIT의 scale과 timer로 ms를 계산하고, `clk_gating.delay_ms = max(ah_ms, 10)`으로 둔다.\n\n### 영향\nMediaTek 기기에서 장치별 권장 idle 시간에 맞춰 hibern8에 들어가 전력과 성능의 균형이 개선된다. `ufs_mtk_us_to_ahit()`는 v6.19에서 core 함수로 대체됐다.",
   "patch": "patches/aa86602a483b.diff",
-  "patch_bytes": 3081
+  "patch_bytes": 3081,
+  "change_type": "hardware",
+  "importance": "medium",
+  "keywords": [
+   "ufs-mediatek",
+   "auto-hibern8",
+   "AHIT",
+   "clock gating",
+   "Samsung",
+   "Micron"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "f91c6c70d103a619c58aa02bddf3c27c6433556a",
@@ -309,10 +380,24 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek clock gating 경로에서 클럭이 기대대로 꺼지지 않으면 `hba->ahit`와 AHIT 레지스터 값을 경고로 출력하도록 했다.",
+  "explanation_ko": "### 배경\n클럭이 기대대로 꺼지지 않을 때 AHIT 설정을 확인할 수 있도록 디버그 정보를 추가한다(커밋 메시지). MediaTek 수정 10개 패치 시리즈의 일부다.\n\n### 변경 내용\n`clk_pwr_off`가 아니면 \"Clock is not turned off, hba->ahit = ..., AHIT = ...\" 경고를 출력한다.\n\n### 영향\n로그만 추가된다.",
   "patch": "patches/f91c6c70d103.diff",
-  "patch_bytes": 672
+  "patch_bytes": 672,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "auto-hibern8",
+   "clock gating",
+   "debug log"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "86a678a25108705657e2f3bb00c42f9e5e5d692b",
@@ -355,10 +440,24 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek UFS에서 장치 스펙 버전이 UFS 4.0 미만이면 clock scaling capability를 끄고 클럭을 낮은 쪽으로 고정했다.",
+  "explanation_ko": "### 배경\nUFS 4.0 미만 장치에는 clock scaling이 필요 없으므로, 호환되는 버전에서만 기능을 켠다(커밋 메시지). MediaTek 수정 10개 패치 시리즈의 일부다.\n\n### 변경 내용\n`ufs_mtk_fix_clock_scaling()`: `wspecversion < 0x0400`이고 clock scaling이 준비돼 있으면 `UFSHCD_CAP_CLK_SCALING`을 지우고 `_ufs_mtk_clk_scale(hba, false)`로 클럭을 낮춘다. 장치 quirk 처리 단계에서 호출한다.\n\n### 영향\nUFS 3.x 이하 장치를 쓰는 MediaTek 기기에서 devfreq 오버헤드가 사라지고 클럭이 낮게 고정된다.",
   "patch": "patches/86a678a25108.diff",
-  "patch_bytes": 1226
+  "patch_bytes": 1226,
+  "change_type": "hardware",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "clock scaling",
+   "UFS 4.0",
+   "devfreq"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "7212d624f8638f8ea8ad1ecbb80622c7987bc7a1",
@@ -401,10 +500,25 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek UFS의 PWM 모드 전환 실패를 고쳤다. 장치 최대 모드가 SLOW이면 원하는 동작 모드를 PWM으로 협상하고, SLOW 요청이면 FASTAUTO 경유를 건너뛰며, FAST/FASTAUTO일 때만 HW 버전에 맞는 adapt를 설정하고 그 외에는 NO_ADAPT로 둔다.",
+  "explanation_ko": "### 배경\nPWM 모드 전환이 실패하는 문제를, power mode와 adaptation 설정을 올바르게 구성해 해결한다. SLOW_MODE 확인을 추가하고, 장치 power mode와 HW 버전에 따라 원하는 동작 모드와 adaptation 설정을 조정한다(커밋 메시지). MediaTek 수정 10개 패치 시리즈의 일부다.\n\n### 변경 내용\n- `ufs_mtk_pmc_via_fastauto()`: 요청 TX/RX가 SLOW_MODE면 false를 반환한다.\n- `ufs_mtk_pre_pwr_change()`: 장치 최대 파라미터가 SLOW_MODE면 `desired_working_mode = UFS_PWM_MODE`로 협상한다. RX가 FAST/FASTAUTO면 HW v3 이상은 `PA_INITIAL_ADAPT`, 그 외는 `PA_NO_ADAPT`를 쓰고, 나머지 모드는 `PA_NO_ADAPT`를 쓴다.\n\n### 영향\n디버그나 저전력 목적으로 PWM gear로 전환할 때 MediaTek 플랫폼에서 PMC가 실패하지 않는다.",
   "patch": "patches/7212d624f863.diff",
-  "patch_bytes": 1569
+  "patch_bytes": 1569,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "ufs-mediatek",
+   "PWM mode",
+   "SLOW_MODE",
+   "adapt",
+   "power mode change"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "979feee0cf43b32d288931649d7c6d9a5524ea55",
@@ -451,10 +565,25 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek UFS가 FASTAUTO power mode로 전환하기 전에 `PA_PWRModeUserData0~5`와 `DME_Local*TimeOutVal`을 기본 타임아웃 값으로 설정하도록 했다(`SKIP_DEF_UNIPRO_TIMEOUT_SETTING` quirk가 없을 때).",
+  "explanation_ko": "### 배경\nFASTAUTO power mode로 넘어가기 전에 power mode userdata를 설정해 여러 파라미터의 기본 타임아웃 값을 지정한다. power mode 변경의 안정성과 성능을 높이기 위해서다(커밋 메시지). MediaTek 수정 10개 패치 시리즈의 일부다.\n\n### 변경 내용\nFASTAUTO 경유 PMC 전에 DL FC0/TC0/AFC0/FC1/TC1/AFC1 타임아웃 기본값을 `PA_PWRMODEUSERDATA0~5`와 `DME_LocalFC0ProtectionTimeOutVal` 등에 쓴다.\n\n### 영향\nMediaTek의 2단계 PMC(FASTAUTO 경유)에서도 core 경로와 같은 UniPro 타임아웃이 적용된다.",
   "patch": "patches/979feee0cf43.diff",
-  "patch_bytes": 1428
+  "patch_bytes": 1428,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "FASTAUTO",
+   "PA_PWRModeUserData",
+   "UniPro timeout",
+   "power mode change"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "f1617ecf18aaf222482f683f44ab4b155976539d",
@@ -497,10 +626,24 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek power mode 변경에서 요청 설정(gear, lane, pwr, rate)이 현재와 같으면 adapt 설정 토글을 건너뛰도록 했다.",
+  "explanation_ko": "### 배경\n요청한 power mode가 이미 적용돼 있으면 adaptation 설정 토글을 건너뛰어 불필요한 동작을 줄인다(커밋 메시지). MediaTek 수정 10개 패치 시리즈의 일부다.\n\n### 변경 내용\n`ufs_mtk_pre_pwr_change()`에서 `dev_req_params`가 `hba->pwr_info`와 모든 필드가 같으면 adapt 설정 전에 반환한다.\n\n### 영향\nclock scaling 등으로 같은 모드 재설정이 반복될 때 DME 접근이 줄어든다.",
   "patch": "patches/f1617ecf18aa.diff",
-  "patch_bytes": 902
+  "patch_bytes": 902,
+  "change_type": "performance",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "power mode change",
+   "adapt",
+   "optimization"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "bacb96ce06c05804fae4bfd38c4058b6d4c423b3",
@@ -543,10 +686,24 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek MT6989에서 UniPro 벤더 속성 `VS_DEBUGOMC`(0xD09E)의 bit 4를 켜 \"1144 functions\"를 활성화했다.",
+  "explanation_ko": "### 배경\nMT6989 플랫폼의 기능과 호환성을 위해 UniPro 속성 0xD09E의 bit 4를 설정해 1144 기능을 켠다(커밋 메시지). MediaTek 수정 10개 패치 시리즈의 일부다.\n\n### 변경 내용\n`ip_ver == IP_VER_MT6989`이면 `VS_DEBUGOMC`를 읽어 0x10을 OR한 뒤 다시 쓴다.\n\n### 영향\nMT6989 기기의 UniPro 동작이 하드웨어 권장 설정을 따른다.",
   "patch": "patches/bacb96ce06c0.diff",
-  "patch_bytes": 857
+  "patch_bytes": 857,
+  "change_type": "hardware",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "MT6989",
+   "UniPro",
+   "VS_DEBUGOMC"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "878ed88c50bfb14d972dd3b86a1c8188c58de4e5",
@@ -589,10 +746,24 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek 장치 리셋 시퀀스에서 호스트(`ufshcd_hba_stop()`)를 장치 리셋 핀을 low로 내린 뒤에 끄도록 순서를 바꿨다.",
+  "explanation_ko": "### 배경\n호스트를 끄기 전에 장치 리셋 핀을 먼저 low로 내려 올바른 순서로 리셋하고 안정성을 높인다(커밋 메시지). MediaTek 수정 10개 패치 시리즈의 일부다.\n\n### 변경 내용\n`ufs_mtk_device_reset()`에서 `ufshcd_hba_stop()` 호출을 리셋 핀 assert 뒤로 옮겼다.\n\n### 영향\nMediaTek 플랫폼의 장치 리셋 안정성이 높아진다.",
   "patch": "patches/878ed88c50bf.diff",
-  "patch_bytes": 609
+  "patch_bytes": 609,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "device reset",
+   "reset sequence",
+   "ufshcd_hba_stop"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "5863638598f5e4f64d2f85b03f376383ca1f2ab7",
@@ -639,10 +810,24 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek UFS의 VCCQx 레귤레이터 처리에서 `vccq`와 `vccq2`가 둘 다 없을 때 잘못된 포인터에 접근하던 문제를 NULL 검사로 막았다.",
+  "explanation_ko": "### 배경\n`vccqx` 포인터에 접근하기 전에 NULL 검사를 추가해, `vccq`와 `vccq2`가 초기화되지 않은 경우의 잘못된 메모리 접근을 막는다(커밋 메시지). MediaTek 수정 10개 패치 시리즈의 일부다.\n\n### 변경 내용\n함수 시작에서 `vreg_info.vccq`와 `vccq2`가 모두 NULL이면 반환한다.\n\n### 영향\nVCCQ 레귤레이터를 DT에 기술하지 않은 MediaTek 보드에서 PM 경로의 잘못된 접근을 막는다.",
   "patch": "patches/5863638598f5.diff",
-  "patch_bytes": 451
+  "patch_bytes": 451,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "VCCQ",
+   "NULL check",
+   "regulator"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "dc60a408a1dc29974bc82239b07b70c5f7fcfd31",
@@ -687,10 +872,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`ufshcd_clk_scaling_start_busy()`가 반환값을 실제로 쓸 때만 `ktime_get()`을 호출하도록 바꿨다. UFS 4 환경에서 `ktime_get()` 하나를 없앨 때마다 IOPS가 2~3% 오른다고 측정됐다.",
+  "explanation_ko": "### 배경\nUFS 4 테스트 환경에서 명령 처리 경로의 `ktime_get()`을 하나 없앨 때마다 IOPS가 2~3% 개선됐다. `ufshcd_clk_scaling_start_busy()`가 값이 쓰일 때만 `ktime_get()`을 호출하게 한다(커밋 메시지).\n\n### 변경 내용\n`curr_t` 선언과 `ktime_get()` 호출을 분리해, busy 시작 시각을 기록하는 분기 안에서만 시간을 읽는다.\n\n### 영향\nclock scaling을 쓰는 플랫폼의 명령 제출 경로가 가벼워진다.",
   "patch": "patches/dc60a408a1dc.diff",
-  "patch_bytes": 578
+  "patch_bytes": 578,
+  "change_type": "performance",
+  "importance": "low",
+  "keywords": [
+   "IOPS",
+   "ktime_get",
+   "clock scaling",
+   "hot path"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "cb7cc0cfb38cf50c902caadee0e0e87fc38490aa",
@@ -739,10 +938,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "명령 제출·완료 hot path의 `ktime_get()`/`local_clock()` 타임스탬프 수집을 성능 모니터 기능(`monitor.enabled`)이 켜져 있을 때만 하도록 바꿔 IOPS를 높였다.",
+  "explanation_ko": "### 배경\nhot path의 `ktime_get()` 호출 하나하나가 IOPS에 측정 가능한 영향을 준다. 그래서 모니터링 기능이 켜졌을 때만 타임스탬프를 수집한다(커밋 메시지).\n\n### 변경 내용\n`ufshcd_send_command()`의 issue 타임스탬프, `ufshcd_compl_one_cqe()`의 완료 타임스탬프, `ufshcd_print_tr()`의 시간 출력을 모두 `hba->monitor.enabled` 조건 아래로 옮겼다.\n\n### 영향\n기본 설정에서 명령당 시간 조회가 줄어 IOPS가 개선된다. 대신 모니터가 꺼져 있으면 오류 시 UPIU issue/complete 시각이 출력되지 않는다.",
   "patch": "patches/cb7cc0cfb38c.diff",
-  "patch_bytes": 2034
+  "patch_bytes": 2034,
+  "change_type": "performance",
+  "importance": "medium",
+  "keywords": [
+   "IOPS",
+   "ktime_get",
+   "hot path",
+   "monitor",
+   "timestamp"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "b5940feda3dc7a12133c6589e463d2b3b6c7fe96",
@@ -786,10 +1000,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "hot path에서 쓰이는 `struct ufshcd_lrb`의 `req_abort_skip` 필드 위치를 옮겨 padding을 줄였다. 64비트에서 크기가 152바이트에서 136바이트로 줄었다.",
+  "explanation_ko": "### 배경\nhot path에서 쓰이는 자료구조의 크기는 IOPS 성능에 영향을 준다. 64비트 시스템에서 `struct ufshcd_lrb`를 16바이트 줄인다(152 → 136바이트)(커밋 메시지).\n\n### 변경 내용\n`bool req_abort_skip`을 다른 작은 필드 옆으로 옮겨 padding을 없앴다.\n\n### 영향\n캐시 효율이 약간 좋아진다. 동작 변화는 없다.",
   "patch": "patches/b5940feda3dc.diff",
-  "patch_bytes": 1342
+  "patch_bytes": 1342,
+  "change_type": "performance",
+  "importance": "low",
+  "keywords": [
+   "ufshcd_lrb",
+   "struct size",
+   "padding",
+   "hot path"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "6d55af0f0740bf3d77943425fdafb77dc0fa6bb9",
@@ -839,10 +1067,26 @@
   "vendors": [
    "exynos"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "Tesla FSD 플랫폼에서 UFS suspend 때 ref_clk을 gate하고 GPIO로 장치를 리셋 상태로 두는 FSD 전용 suspend 훅을 추가했다. PHY를 완전히 끄고 전력 소모를 줄이기 위해서다.",
+  "explanation_ko": "### 배경\nFSD 플랫폼에서 suspend 시 reference clock을 gate하고 reset 신호를 assert해 UFS 장치를 리셋 상태로 두면 전력이 더 절약되고 PHY가 완전히 꺼진다. 다른 SoC에 부작용이 없도록 FSD 전용 suspend 훅으로 넣는다(커밋 메시지).\n\n### 변경 내용\n`fsd_ufs_suspend()`가 `exynos_ufs_gate_clks()`와 `hci_writel(ufs, 0, HCI_GPIO_OUT)`을 수행하며, FSD drv_data의 `.suspend`에 등록했다.\n\n### 영향\nFSD SoC에서 UFS suspend 전력이 줄어든다.",
   "patch": "patches/6d55af0f0740.diff",
-  "patch_bytes": 879
+  "patch_bytes": 879,
+  "change_type": "hardware",
+  "importance": "low",
+  "keywords": [
+   "ufs-exynos",
+   "FSD",
+   "Tesla",
+   "ref_clk gating",
+   "suspend",
+   "device reset"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "b620462bba6655b47d127db70d18123c7af522d4",
@@ -904,10 +1148,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "UFS 표준과 무관한 tracing enum(`ufs_trace_str_t`, `ufs_trace_tsf_t`)을 공개 헤더 `<ufs/ufs.h>`에서 core 내부의 새 파일 `ufs_trace_types.h`로 옮겼다. 호스트 드라이버에서는 더 이상 보이지 않는다.",
+  "explanation_ko": "### 배경\n`<ufs/ufs.h>`는 UFS 표준의 상수와 자료구조를 정의하는 헤더다. 표준에 없는 tracing 관련 enum은 새 헤더로 옮기며, 그 결과 호스트 드라이버에서 tracing enum이 보이지 않게 된다(의도된 효과)(커밋 메시지).\n\n### 변경 내용\n`drivers/ufs/core/ufs_trace_types.h`를 만들고 `ufs_trace.h`에서 include한다.\n\n### 영향\n동작 변화는 없다. out-of-tree 호스트 드라이버가 이 enum을 썼다면 수정이 필요하다.",
   "patch": "patches/b620462bba66.diff",
-  "patch_bytes": 1665
+  "patch_bytes": 1665,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "trace",
+   "header",
+   "ufs_trace_types.h",
+   "cleanup"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "0c4916aadb8df892399eec99f775655c31049195",
@@ -954,10 +1212,25 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "Qualcomm QMP UFS PHY가 레귤레이터에 부하(load)를 알리도록 했다. 레귤레이터 이름 배열을 `regulator_bulk_data`로 바꾸고 `init_load_uA`를 써서, 처음 enable하기 전에 `regulator_set_load()`가 자동 호출된다.",
+  "explanation_ko": "### 배경\n일부 SoC에서는 QMP UFS PHY와 다른 IP 블록이 레귤레이터를 공유한다. 레귤레이터의 동작 모드(Low Power/High Power)는 최대 예상 부하에 따라 정해지므로, 레귤레이터 프레임워크가 UFS PHY의 부하 요구량을 알아야 한다(커밋 메시지). 2개 패치 시리즈의 첫 번째다.\n\n### 변경 내용\n- `qmp_phy_cfg.vreg_list`를 `const struct regulator_bulk_data *`로 바꾸고 기본 목록(`vdda-phy`, `vdda-pll`)도 이 형식으로 정의했다.\n- `qmp_ufs_vreg_init()`을 지우고 `devm_regulator_bulk_get_const()`로 직접 가져온다.\n\n### 영향\nSoC별 테이블에 `init_load_uA`를 넣으면 레귤레이터가 HPM으로 동작해, 공유 레귤레이터가 LPM에 머물러 생기던 PHY 불안정을 막을 수 있다.",
   "patch": "patches/0c4916aadb8d.diff",
-  "patch_bytes": 1835
+  "patch_bytes": 1835,
+  "change_type": "hardware",
+  "importance": "medium",
+  "keywords": [
+   "phy-qcom-qmp-ufs",
+   "regulator",
+   "load voting",
+   "init_load_uA",
+   "regulator_bulk_data"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "df4beac9da5f162770c8563d11cda327d748c20b",
@@ -1003,10 +1276,26 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "Qualcomm QMP UFS PHY가 지원하는 모든 플랫폼(msm8996, sdm845, sc7280, sc8280xp, sa8775p, sm8x50 등)에 `vdda-phy`/`vdda-pll` 레귤레이터 부하값 테이블을 추가해, 공유 레귤레이터에 적절한 load를 vote하도록 했다.",
+  "explanation_ko": "### 배경\n지원하는 모든 플랫폼에 부하값이 들어간 레귤레이터 bulk 데이터 배열을 둬 PHY·PLL 레귤레이터 load voting을 지원한다. QMP UFS PHY와 다른 IP 블록이 레귤레이터를 공유하는 플랫폼에서 안정적인 동작과 올바른 전원 관리를 보장한다(커밋 메시지). 2개 패치 시리즈의 두 번째다.\n\n### 변경 내용\n기본 무부하 목록을 없애고, SoC별 `*_ufsphy_vreg_l[]`(예: msm8996 51400/14600uA, sa8775p 137000/18300uA, sc7280 97500/18400uA)를 정의해 각 `qmp_phy_cfg`에 연결했다.\n\n### 영향\nUFS PHY 동작 중 공유 레귤레이터가 LPM에 머물러 생기던 링크 불안정을 막는다.",
   "patch": "patches/df4beac9da5f.diff",
-  "patch_bytes": 8808
+  "patch_bytes": 8808,
+  "change_type": "hardware",
+  "importance": "medium",
+  "keywords": [
+   "phy-qcom-qmp-ufs",
+   "regulator",
+   "load voting",
+   "init_load_uA",
+   "vdda-phy",
+   "vdda-pll"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "3126b5fd02270380cce833d06f973a3ffb33a69b",
@@ -1058,10 +1347,26 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "UFS 호스트 컨트롤러 v5.0.0의 Shared ICE는 power collapse 중 AES 코어 비활성화를 지원하지 않아 hibern8 exit 뒤 데이터 오류가 날 수 있다. HW 가이드에 따라 power collapse에서 나올 때 `UFS_MEM_ICE_CFG`의 sync reset을 assert·deassert하도록 했다.",
+  "explanation_ko": "### 배경\nUFS Host Controller v5.0에서는 power collapse 중 Shared ICE의 AES 코어를 비활성화하는 것이 지원되지 않아, hibern8 exit 뒤 데이터 오류가 날 수 있다. 하드웨어 프로그래밍 가이드에 따라 power collapse exit 때 ICE에 sync reset을 건다(커밋 메시지).\n\n### 변경 내용\n- `UFS_ICE_SYNC_RST_SEL`(BIT 3), `UFS_ICE_SYNC_RST_SW`(BIT 4)를 정의하고 `UFS_MEM_ICE_CFG`를 0x2600으로 정의했다.\n- 링크가 active가 아닌 상태에서 resume할 때 HW 버전이 정확히 5.0.0이면, 두 비트를 set한 뒤 50~100us 기다리고 clear한다. 지연은 HW 문서 요구가 아니지만 flop 안정화를 위해 넣었다.\n\n### 영향\n해당 버전 컨트롤러에서 inline encryption 사용 중 resume 뒤 데이터 손상 가능성을 없앤다.",
   "patch": "patches/3126b5fd0227.diff",
-  "patch_bytes": 1672
+  "patch_bytes": 1672,
+  "change_type": "hardware",
+  "importance": "medium",
+  "keywords": [
+   "ufs-qcom",
+   "ICE",
+   "sync reset",
+   "power collapse",
+   "hibern8",
+   "data corruption"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "faac32d4ece30609f1a0930ca0ae951cf6dc1786",
@@ -1122,10 +1427,25 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek suspend 중 auto-hibern8를 끄고 hibern8에서 나오는 데 실패하면 `ufshcd_force_error_recovery()`로 에러 핸들러를 깨우고 `-EBUSY`로 suspend를 중단하도록 했다. 이를 위해 core의 `ufshcd_force_error_recovery()`를 export했다.",
+  "explanation_ko": "### 배경\nhibernation exit 실패 시 복구를 개선한다. 에러 핸들러를 트리거하고 suspend 동작을 중단해 hibernation 오류에서 확실히 복구한다(커밋 메시지).\n\n### 변경 내용\n- core의 `ufshcd_force_error_recovery()`를 non-static으로 바꾸고 `EXPORT_SYMBOL_GPL`로 공개했다.\n- `ufs_mtk_auto_hibern8_disable()`이 int를 반환한다. 링크 up 대기에 실패하면 강제 에러 복구를 걸고 `-EBUSY`를 반환하며, suspend PRE_CHANGE가 이 값을 그대로 반환한다.\n\n### 영향\nhibern8에 갇힌 링크로 suspend를 계속하다 장치가 사용 불가가 되는 대신, suspend를 중단하고 에러 핸들러가 링크를 복구한다.",
   "patch": "patches/faac32d4ece3.diff",
-  "patch_bytes": 2306
+  "patch_bytes": 2306,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "ufs-mediatek",
+   "hibern8 exit",
+   "error recovery",
+   "ufshcd_force_error_recovery",
+   "suspend"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "15ef3f5aa822f32524cba1463422a2c9372443f0",
@@ -1165,10 +1485,25 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek UFS resume에서 link recovery까지 실패하면 장치 PM 상태(request, runtime_status, runtime_error)를 로그로 남기고, I/O hang을 막기 위해 오류 대신 0을 반환하도록 했다.",
+  "explanation_ko": "### 배경\nresume 실패 시 복구 과정을 개선한다. resume과 복구가 모두 실패하면 장치 전원 상태를 기록하고, I/O hang을 막기 위해 0을 반환한다(커밋 메시지).\n\n### 변경 내용\n`ufs_mtk_resume()`의 실패 경로가 `ufshcd_link_recovery()` 결과를 그대로 반환하지 않는다. 실패하면 `hba->dev->power.request/runtime_status/runtime_error`를 `dev_err()`로 출력하고 0을 반환한다.\n\n### 영향\nresume 실패 원인(부모 장치·전원·MTCMOS 상태)을 진단할 정보가 남는다. 다만 `dev->power.request` 참조 때문에 `CONFIG_PM=n` 빌드가 깨졌고, v7.0에서 Kconfig 의존성으로 해결됐다.",
   "patch": "patches/15ef3f5aa822.diff",
-  "patch_bytes": 837
+  "patch_bytes": 837,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "resume",
+   "link recovery",
+   "I/O hang",
+   "runtime PM"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "77b96ef70b6ba46e3473e5e3a66095c4bc0e93a4",
@@ -1208,10 +1543,25 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek UFS의 system suspend/resume에서 장치가 이미 runtime suspend 상태라면 LPM과 MTCMOS 설정을 건너뛰도록 해 중복 동작을 없앴다.",
+  "explanation_ko": "### 배경\nruntime PM이 이미 적용된 상태라면 system PM에서 LPM과 MTCMOS 설정을 건너뛰어 불필요한 동작을 줄인다(커밋 메시지).\n\n### 변경 내용\n`ufs_mtk_system_suspend()`/`ufs_mtk_system_resume()`에서 `pm_runtime_suspended(hba->dev)`면 벤더 전원 처리를 건너뛰고 core의 system suspend/resume만 호출하도록 goto 흐름을 정리했다.\n\n### 영향\nruntime suspend된 상태에서 system sleep에 들어가고 나올 때 전원 설정이 중복으로 적용되지 않는다.",
   "patch": "patches/77b96ef70b6b.diff",
-  "patch_bytes": 976
+  "patch_bytes": 976,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "system PM",
+   "runtime PM",
+   "MTCMOS",
+   "LPM"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "b2f8abadabea32c49b0d624232016347082b1aa9",
@@ -1255,10 +1605,24 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek system resume에서 MTCMOS를 먼저 켠 뒤 장치 레귤레이터의 LPM을 해제하도록 순서를 바로잡았다. suspend 때는 LPM 설정 후 MTCMOS를 끈다.",
+  "explanation_ko": "### 배경\nsystem resume에서 MTCMOS를 켠 다음 LPM을 false로 설정해야 한다. suspend 때는 LPM을 true로 둔 뒤 MTCMOS를 끈다(커밋 메시지).\n\n### 변경 내용\n`ufs_mtk_system_resume()`에서 `ufs_mtk_dev_vreg_set_lpm(hba, false)` 호출을 MTCMOS 제어 뒤로 옮겼다.\n\n### 영향\nresume 시 전원 도메인 순서가 맞아 시스템 안정성이 높아진다.",
   "patch": "patches/b2f8abadabea.diff",
-  "patch_bytes": 523
+  "patch_bytes": 523,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "MTCMOS",
+   "LPM",
+   "system resume"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "c73cd5e298c5a86cb5cf7019f787dffe9b784294",
@@ -1307,10 +1671,24 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek UFS가 probe 때 `phys` phandle로 PHY 장치를 찾아 runtime PM을 켜고, suspend/resume을 PHY suspend → UFS suspend → UFS resume → PHY resume 순서로 맞췄다.",
+  "explanation_ko": "### 배경\nPHY 장치를 probe해 runtime PM을 활성화하고, suspend/resume 순서를 PHY suspend → UFS suspend → UFS resume → PHY resume으로 맞춰 전원 관리 효율과 안정성을 높인다(커밋 메시지).\n\n### 변경 내용\n- `ufs_mtk_probe()`: `phys` phandle로 PHY platform device를 찾아 `pm_runtime_set_active/enable/get_sync`를 호출하고 host에 `phy_dev`를 저장한다.\n- system/runtime suspend 경로 끝에서 PHY runtime put, resume 시작에서 PHY runtime get을 수행한다.\n\n### 영향\nMediaTek UFS PHY가 독립적으로 runtime PM에 참여해 suspend 중 PHY 전원이 확실히 꺼진다.",
   "patch": "patches/c73cd5e298c5.diff",
-  "patch_bytes": 3026
+  "patch_bytes": 3026,
+  "change_type": "hardware",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "PHY",
+   "runtime PM",
+   "suspend order"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "f5ca8d0c7a6388abd5d8023cc682e1543728cc73",
@@ -1350,10 +1728,24 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek UFS가 power mode 변경 중에는 auto-hibern8를 끄고(타이머 0, 링크 up 확인) 변경이 끝나면 원래 AHIT 값으로 되돌리도록 했다. 전환 중 의도치 않게 hibern8에 들어가는 것을 막는다.",
+  "explanation_ko": "### 배경\npower mode 전환 중 의도치 않게 auto-hibern8에 들어가는 것을 막기 위해 전환 동안 auto-hibern8를 끄고, 전환 뒤 원래 타이머 값을 복원한다(커밋 메시지).\n\n### 변경 내용\n- `ufs_mtk_auto_hibern8_disable()`을 일반화해, AHIT를 0으로 쓰고 idle과 `VS_LINK_UP`을 기다린다. 실패하면 `ufshcd_force_error_recovery()` 후 `-EBUSY`를 반환한다.\n- `ufs_mtk_pwr_change_notify()`: PRE_CHANGE에서 현재 AHIT를 저장하고 비활성화하며, POST_CHANGE에서 복원한다.\n\n### 영향\nMediaTek 플랫폼에서 PMC 중 hibern8 진입으로 생기던 PMC 실패나 링크 오류가 줄어든다.",
   "patch": "patches/f5ca8d0c7a63.diff",
-  "patch_bytes": 2237
+  "patch_bytes": 2237,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "ufs-mediatek",
+   "auto-hibern8",
+   "power mode change",
+   "AHIT"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "f29ec85ac4fdd72469c0c5898f47301c7c95ead8",
@@ -1397,10 +1789,24 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek 복구 경로에서 idle 상태 대기가 타임아웃되면 link up 대기를 계속하지 않고 바로 `-ETIMEDOUT`을 반환하도록 했다.",
+  "explanation_ko": "### 배경\nidle 대기가 타임아웃되면 링크가 up 상태가 되기를 기다리지 않고 즉시 오류를 반환해 복구 과정을 줄이고 오류 처리를 효율화한다(커밋 메시지).\n\n### 변경 내용\n`ufs_mtk_wait_idle_state()`가 void에서 int로 바뀌어 타임아웃 시 `-ETIMEDOUT`을 반환한다. 호출자인 auto-hibern8 비활성화와 link 상태 처리 경로가 이 오류를 확인해 경고 후 반환한다.\n\n### 영향\nMediaTek 플랫폼의 에러 복구가 불필요한 대기 없이 더 빨리 다음 단계(리셋)로 넘어간다.",
   "patch": "patches/f29ec85ac4fd.diff",
-  "patch_bytes": 1704
+  "patch_bytes": 1704,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "idle wait",
+   "timeout",
+   "error recovery"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "d73836cb8535b3078e4d2a57913f301baec58a33",
@@ -1444,10 +1850,25 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek MT6899 이상에서 PA_Init 성공 뒤 호스트가 장치에 ADAPT를 보내지 않던 문제를, UniPro 속성 `VS_DEBUGOMC`의 bit 8을 켜서 고쳤다.",
+  "explanation_ko": "### 배경\nPA_Init 성공 뒤 호스트가 장치로 adapt를 보내지 않는 문제를 해결한다. IP 버전 MT6899 이상에서 adapt가 올바르게 시작되도록 해 호스트와 장치 간 통신 문제를 없앤다(커밋 메시지).\n\n### 변경 내용\n`ip_ver >= IP_VER_MT6899`이면 `VS_DEBUGOMC`를 읽어 0x100을 OR한 뒤 쓴다.\n\n### 영향\n신형 MediaTek SoC에서 PA_INIT(링크 재훈련) 뒤 HS-G4 이상 링크의 equalization이 올바르게 수행된다.",
   "patch": "patches/d73836cb8535.diff",
-  "patch_bytes": 701
+  "patch_bytes": 701,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "ufs-mediatek",
+   "PA_Init",
+   "ADAPT",
+   "MT6899",
+   "VS_DEBUGOMC"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "91cad911edd1612ed28f5cfb2d4c53a8824951a5",
@@ -1487,10 +1908,24 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek MCQ 인터럽트를 처음 켠 뒤 `is_mcq_intr_enabled` 플래그를 설정하지 않아 IRQ enable이 불균형해지던 문제를 고쳤다.",
+  "explanation_ko": "### 배경\n첫 IRQ 활성화가 성공한 뒤 `is_mcq_intr_enabled`를 설정해 IRQ 상태를 올바르게 추적하고, enable/disable 불일치를 막는다(커밋 메시지).\n\n### 변경 내용\nMCQ 인터럽트 활성화 직후 `host->is_mcq_intr_enabled = true`를 설정한다.\n\n### 영향\nsuspend/resume 중 \"Unbalanced enable for IRQ\" 경고와 IRQ 상태 불일치를 막는다.",
   "patch": "patches/91cad911edd1.diff",
-  "patch_bytes": 349
+  "patch_bytes": 349,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "MCQ",
+   "IRQ",
+   "unbalanced enable"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "2936049277ea3bfd38d12583755556290b9ea494",
@@ -1530,10 +1965,25 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek UFS에서 VCCQ/VCCQ2의 상위 전원(VSx) 기본 설정이 HWLP라 VCC가 꺼지기 전에 LPM으로 들어갈 수 있었다. 장치 레귤레이터의 LPM 진입을 막아, VCC를 끈 뒤에만 LPM에 들어가도록 했다.",
+  "explanation_ko": "### 배경\n장치 전원 제어 시점을 조정해 VCC가 꺼진 뒤에만 저전력 모드(LPM)에 들어가게 한다. VCCQ/VCCQ2가 너무 일찍 LPM에 들어가는 것을 막아 장치 안정성을 확보한다(커밋 메시지).\n\n### 변경 내용\nVSx(VCCQ/VCCQ2의 상위 레이어) 기본 전원 설정이 HWLP이므로, 해당 경로에서 `ufs_mtk_dev_vreg_set_lpm(hba, false)`를 호출해 LPM 진입을 막는다.\n\n### 영향\nMediaTek 기기에서 장치가 동작 중인데 VCCQ가 저전력으로 떨어져 생기던 불안정을 막는다.",
   "patch": "patches/2936049277ea.diff",
-  "patch_bytes": 518
+  "patch_bytes": 518,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "ufs-mediatek",
+   "VCCQ",
+   "LPM",
+   "regulator",
+   "power control"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "2b9887b17ebe942cbef7cffc4e19fa2aa5fed4c8",
@@ -1589,10 +2039,25 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "ufs-qcom의 MCQ 리소스 매핑을 단순화했다. 여러 리소스(`mcq_sqd`, `mcq_sqis`, `mcq_cqd`, `mcq_cqis`, `mcq_vs`)를 각각 매핑하던 것을 DT의 단일 `mcq` 영역 하나만 `hba->mcq_base`로 매핑하고, doorbell·인터럽트 상태 레지스터는 고정 오프셋으로 계산한다. `UFS_MEM_CQIS_VS` 오프셋도 0x8에서 0x4008로 바로잡았다.",
+  "explanation_ko": "### 배경\n기존 MCQ 리소스 설정은 여러 리소스 매핑과 동적 할당을 거쳤다. DT binding은 별도 영역 여러 개가 아니라 단일 `mcq` 메모리 영역을 정의하므로, 그 하나만 매핑하고 SQD·CQD·SQIS·CQIS doorbell 레지스터는 MCQ base 기준의 미리 정의된 오프셋을 쓴다. 벤더 레지스터 `UFS_MEM_CQIS_VS` 오프셋은 하드웨어 프로그래밍 가이드에 맞춰 0x8에서 0x4008로 바꾼다(커밋 메시지).\n\n### 변경 내용\n`ufs_res_info[]` 테이블과 리소스별 루프를 지우고, `mcq` 리소스를 `devm_ioremap_resource()`로 매핑한다. `ufs-qcom.h`에 MCQ 영역 내부 오프셋 상수를 정의하고, `get_hba_mac`·`op_runtime_config`·`get_outstanding_cqs`를 새 오프셋 기반으로 바꿨다.\n\n### 영향\nDT가 단일 `mcq` 영역만 제공하는 Qualcomm 플랫폼에서 MCQ 설정이 단순하고 정확해진다. 이전 방식의 여러 `mcq_*` reg-names에 의존하던 DT는 더 이상 쓰이지 않는다.",
   "patch": "patches/2b9887b17ebe.diff",
-  "patch_bytes": 7276
+  "patch_bytes": 7276,
+  "change_type": "cleanup",
+  "importance": "medium",
+  "keywords": [
+   "ufs-qcom",
+   "MCQ",
+   "resource mapping",
+   "mcq_base",
+   "UFS_MEM_CQIS_VS"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "bc5dbf7739594b05c673ab3905471257be9921e7",
@@ -1645,10 +2110,25 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "ufs-qcom의 MCQ 레지스터 덤프를 새 단일 `mcq` 리소스 매핑에 맞춰 직접 base 주소(`mcq_base`, `mcq_opr` 등)로 읽도록 바꾸고, 더 이상 쓰이지 않는 `enum ufshcd_res`와 `ufshcd_res_info`를 core 헤더에서 제거했다.",
+  "explanation_ko": "### 배경\n새 리소스 매핑에 맞춰 MCQ 레지스터 덤프를 정리한다. `ufs_qcom_dump_regs()`가 리소스 ID 대신 base 주소를 받게 하고, `ufs_qcom_dump_mcq_hci_regs()`는 `hba->mcq_base`와 MCQ operation 정보로 계산한 주소를 쓴다. 여러 리소스 영역 방식이 사라졌으므로 `ufshcd_res_info`와 `enum ufshcd_res`를 지운다(커밋 메시지).\n\n### 변경 내용\n덤프 테이블을 `{base, offset, len, prefix}` 형태로 바꾸고, `include/ufs/ufshcd.h`에서 관련 정의 25줄을 지웠다.\n\n### 영향\n덤프 내용은 같다. `hba->res[]`를 쓰던 out-of-tree 코드는 수정이 필요하다.",
   "patch": "patches/bc5dbf773959.diff",
-  "patch_bytes": 3516
+  "patch_bytes": 3516,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "ufs-qcom",
+   "MCQ",
+   "register dump",
+   "ufshcd_res",
+   "cleanup"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "0bd0e43776b6a0ff5f7aa3783f547849356ac899",
@@ -1694,10 +2174,23 @@
   "vendors": [
    "exynos"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "Exynos `exynos_ufs_config_sync_pattern_mask()`의 `SYNC_LEN_G2` 주석을 실제 값에 맞게 44us에서 40us로 고쳤다.",
+  "explanation_ko": "### 배경\n`SYNC_LEN_G2`의 실제 값은 40us인데 주석에는 44us로 적혀 있었다. 동작 변화는 없다(커밋 메시지).\n\n### 변경 내용\n주석 한 줄을 고쳤다.\n\n### 영향\n없음.",
   "patch": "patches/0bd0e43776b6.diff",
-  "patch_bytes": 479
+  "patch_bytes": 479,
+  "change_type": "docs",
+  "importance": "low",
+  "keywords": [
+   "ufs-exynos",
+   "comment",
+   "sync pattern"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "c1553fc105dff28f79bef90fab207235f5f2d977",
@@ -1743,10 +2236,25 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "ufs-qcom에서 링크가 hibern8에 들어간 뒤 clock gating(`setup_clocks`) 시점에 lane 클럭도 끄고, 클럭을 다시 켤 때 lane 클럭을 먼저 켜도록 했다. 이전에는 runtime/system suspend 때만 꺼졌다.",
+  "explanation_ko": "### 배경\nUFS lane 클럭은 링크가 Hibern8에 들어간 뒤에도 켜져 있다가 runtime/system suspend 때만 꺼졌다. `hibern8_notify()`에서 바로 끌 수도 있지만 clock scaling 등 여러 상황에서 매번 토글하는 것은 바람직하지 않다. Hibern8 진입 직후 gate work에서 호출되는 `setup_clocks()`가 PHY와 컨트롤러 리소스를 관리하는 안정적인 지점이므로 여기서 끈다(커밋 메시지).\n\n### 변경 내용\n`ufs_qcom_setup_clocks()`의 PRE_CHANGE(클럭 off) 경로에서 링크가 hibern8이면 `ufs_qcom_disable_lane_clks()`를 호출하고, 클럭 on 경로에서 hibern8이면 `ufs_qcom_enable_lane_clks()`를 먼저 호출한다.\n\n### 영향\nQualcomm 플랫폼에서 idle 시 소비 전력이 줄어든다.",
   "patch": "patches/c1553fc105df.diff",
-  "patch_bytes": 1010
+  "patch_bytes": 1010,
+  "change_type": "performance",
+  "importance": "low",
+  "keywords": [
+   "ufs-qcom",
+   "lane clocks",
+   "hibern8",
+   "clock gating",
+   "power saving"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "fb1f4568346153d2f80fdb4ffcfa0cf4fb257d3c",
@@ -1805,10 +2313,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "일부 Kioxia UFS 4 장치가 qTimestamp attribute를 지원하지 않아 설정 실패 로그가 찍혔다. 새 quirk `UFS_DEVICE_QUIRK_NO_TIMESTAMP_SUPPORT`를 추가하고 THGJFJT1E45BATP에 적용해 timestamp 설정을 건너뛴다.",
+  "explanation_ko": "### 배경\n일부 Kioxia UFS 4 장치는 qTimestamp attribute를 지원하지 않는다. 이 장치들에 quirk를 설정해 qTimestamp 설정 실패 오류가 커널 로그에 찍히지 않게 한다(커밋 메시지).\n\n### 변경 내용\n- `ufs_quirks.h`에 `UFS_DEVICE_QUIRK_NO_TIMESTAMP_SUPPORT`(1 << 13)를 정의했다.\n- `ufs_fixups[]`에 Toshiba(Kioxia) `THGJFJT1E45BATP`를 추가했다.\n- `ufshcd_set_timestamp_attr()`이 스펙 4.0 미만이거나 quirk가 있으면 반환한다.\n\n### 영향\n해당 장치에서 부팅과 resume 때 timestamp 오류 로그가 사라진다. 이후 v7.1에서 같은 quirk가 다른 Kioxia 모델에도 적용됐다.",
   "patch": "patches/fb1f45683461.diff",
-  "patch_bytes": 1287
+  "patch_bytes": 1287,
+  "change_type": "hardware",
+  "importance": "low",
+  "keywords": [
+   "qTimestamp",
+   "Kioxia",
+   "device quirk",
+   "UFS_DEVICE_QUIRK_NO_TIMESTAMP_SUPPORT"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "253757797973c54ea967f8fd8f40d16e4a78e6d4",
@@ -1867,10 +2389,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MCQ 인터럽트 활성화를 `ufshcd_config_mcq()`에서 `ufshcd_mcq_make_queues_operational()`로 옮겼다. 이 함수를 직접 부르는 호스트 드라이버(MediaTek)가 큐를 동작시킬 때 인터럽트가 빠지던 문제를 고친다.",
+  "explanation_ko": "### 배경\n`ufshcd_make_hba_operational()`처럼, 큐를 동작 상태로 만들 때 인터럽트도 올바르게 설정되도록 MCQ 인터럽트 활성화를 `ufshcd_mcq_make_queues_operational()`로 옮긴다. 이 함수는 인터럽트 활성화가 빠져 있어 완전히 동작하지 않았다. 영향을 받는 것은 이 함수를 호출하는 ufs-mediatek뿐이다(커밋 메시지).\n\n### 변경 내용\n`UFSHCD_ENABLE_MCQ_INTRS` 정의와 활성화 코드(`UFSHCD_QUIRK_MCQ_BROKEN_INTR`이면 CQ 이벤트 제외)를 `ufs-mcq.c`로 옮기고, `ufshcd_enable_intr()`를 non-static으로 바꿨다.\n\n### 영향\nMediaTek MCQ 플랫폼에서 큐 재구성 뒤에도 인터럽트가 켜진다. 선언이 공개 헤더에 들어간 점은 v6.19에서 private 헤더로 옮겨졌다.",
   "patch": "patches/253757797973.diff",
-  "patch_bytes": 2773
+  "patch_bytes": 2773,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "MCQ",
+   "interrupt enable",
+   "ufshcd_mcq_make_queues_operational",
+   "ufs-mediatek"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "79dde5f7dc7c038eec903745dc1550cd4139980e",
@@ -1942,10 +2478,26 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "CPU latency PM QoS API는 자체 동기화가 없는데 UFS는 `pm_qos_enabled` 플래그에만 의존해, PM QoS exit과 devfreq clock scaling이 겹치면 plist use-after-free와 리스트 손상이 났다. 전용 `pm_qos_mutex`로 PM QoS 요청·갱신·sysfs 조회를 직렬화했다.",
+  "explanation_ko": "### 배경\n`cpu_latency_qos_add/remove/update_request` 인터페이스는 설계상 내부 동기화가 없어 호출자가 스레드 안전을 보장해야 한다. 현재 구현은 `pm_qos_enabled` 플래그에 의존하는데, 이는 동시 접근을 막지 못해 data race와 리스트 손상이 생겼다. 예를 들어 스레드 A가 `ufshcd_pm_qos_exit()`로 plist 노드를 지우고 req를 memset하는 사이, 스레드 B가 devfreq 경로에서 아직 true인 플래그를 보고 `cpu_latency_qos_update_request()`를 호출해 해제된 노드에 접근한다(커밋 메시지). Fixes 대상은 v6.9의 `2777e73fc154`이다.\n\n### 변경 내용\n`struct ufs_hba`에 `pm_qos_mutex`를 추가하고, `ufshcd_pm_qos_init/exit/update()`와 sysfs `pm_qos_enable` 읽기·쓰기에 `guard(mutex)`를 적용했다.\n\n### 영향\nclock scaling과 PM QoS 해제가 겹쳐 생기던 커널 크래시(list corruption)가 사라진다. mutex 초기화 위치 문제는 같은 릴리스의 `0ba7a254afd0`에서 바로잡혔다.",
   "patch": "patches/79dde5f7dc7c.diff",
-  "patch_bytes": 2444
+  "patch_bytes": 2444,
+  "change_type": "fix",
+  "importance": "high",
+  "keywords": [
+   "PM QoS",
+   "data race",
+   "use-after-free",
+   "pm_qos_mutex",
+   "devfreq",
+   "clock scaling"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "91945660ac29341710b0914db200f6eacf251513",
@@ -1987,10 +2539,24 @@
   "area": "bindings",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "UFS 공통 binding `ufs-common.yaml`에 선택 속성 `limit-hs-gear`(1~6, 기본 6)와 `limit-gear-rate`(`rate-a`/`rate-b`, 기본 `rate-b`)를 문서화했다.",
+  "explanation_ko": "### 배경\n최대 HS gear와 rate를 제한하는 선택 속성을 공통 binding에 추가한다. 신호 무결성, 클럭 설정, 레이아웃 문제가 있는 고객 보드에서 안정성을 우선할 때 쓴다(커밋 메시지).\n\n### 변경 내용\n`limit-hs-gear`(uint32, 1~6)와 `limit-gear-rate`(string enum)를 정의했다.\n\n### 영향\n모든 UFS 호스트 DT에서 이 속성을 쓸 수 있다. 실제 반영 여부는 호스트 드라이버에 달렸다(qcom은 같은 릴리스에서 지원).",
   "patch": "patches/91945660ac29.diff",
-  "patch_bytes": 872
+  "patch_bytes": 872,
+  "change_type": "docs",
+  "importance": "low",
+  "keywords": [
+   "dt-bindings",
+   "ufs-common.yaml",
+   "limit-hs-gear",
+   "limit-gear-rate"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "d471a075ae019118fa2e1bd251bad7e98d97b49e",
@@ -2033,10 +2599,24 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "ufs-qcom에서 HW v5가 G5가 아닐 때 `hs_rate`를 PA_HS_MODE_B로 다시 쓰던 중복 else 분기를 지웠다. 기본값은 이미 `ufshcd_init_host_params()`가 정하며, DT 등으로 명시한 rate를 덮어쓰지 않게 된다.",
+  "explanation_ko": "### 배경\n`hs_rate`에 PA_HS_MODE_B를 넣는 else 분기는 `ufshcd_init_host_params()`가 이미 같은 값을 설정하므로 중복이다. 다른 값으로 명시된 `hs_rate`를 덮어쓰는 것도 막는다(커밋 메시지).\n\n### 변경 내용\n`if (hw_ver.major == 0x5 && phy_gear == UFS_HS_G5) hs_rate = PA_HS_MODE_A;`만 남겼다.\n\n### 영향\n같은 릴리스의 `limit-gear-rate` DT 속성으로 지정한 rate가 유지된다.",
   "patch": "patches/d471a075ae01.diff",
-  "patch_bytes": 768
+  "patch_bytes": 768,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "ufs-qcom",
+   "hs_rate",
+   "PA_HS_MODE_B",
+   "cleanup"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "1cc577e64d68ba0a720329e37aa955c0de297a77",
@@ -2090,10 +2670,25 @@
   "area": "host",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "UFS platform 공통 코드에 DT 속성 `limit-hs-gear`와 `limit-gear-rate`(`rate-a`/`rate-b`)를 파싱하는 `ufshcd_parse_gear_limits()`를 추가했다. 보드의 신호 무결성 문제가 있을 때 최대 HS gear와 rate를 제한할 수 있다.",
+  "explanation_ko": "### 배경\n고객 보드에 신호 무결성, 클럭 설정, 레이아웃 문제가 있으면 높은 gear에서 안정적으로 동작하지 못할 수 있다. 최고 성능보다 안정성이 중요한 플랫폼에서 초기화 때 HS gear와 rate를 제한할 수 있게 한다(커밋 메시지).\n\n### 변경 내용\n`ufshcd_parse_gear_limits(hba, host_params)`: `limit-hs-gear`가 있으면 `hs_tx_gear`/`hs_rx_gear`를, `limit-gear-rate`가 `rate-a`/`rate-b`면 `hs_rate`를 설정한다. 잘못된 값은 경고한다. `EXPORT_SYMBOL_GPL`로 공개했다.\n\n### 영향\n이 헬퍼를 호출하는 호스트 드라이버(qcom 등)에서 보드별 DT로 gear를 낮출 수 있다.",
   "patch": "patches/1cc577e64d68.diff",
-  "patch_bytes": 2251
+  "patch_bytes": 2251,
+  "change_type": "feature",
+  "importance": "medium",
+  "keywords": [
+   "device tree",
+   "limit-hs-gear",
+   "limit-gear-rate",
+   "ufshcd_parse_gear_limits",
+   "signal integrity"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "88f4d3aa29c8b1944ad506ac92c948258cbc004b",
@@ -2136,10 +2731,25 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "ufs-qcom이 초기화 때 DT의 `limit-hs-gear`/`limit-gear-rate`를 읽어 Tx/Rx 최대 gear와 rate를 제한하고, gear가 바뀌면 `phy_gear`도 맞춰 PHY calibration이 일치하도록 했다.",
+  "explanation_ko": "### 배경\nDT 속성에 따라 UFS 초기화 시 Tx/Rx gear와 rate를 제한한다. PHY calibration이 요구 gear와 rate에 맞도록 `phy_gear`도 갱신한다(커밋 메시지).\n\n### 변경 내용\n`ufs_qcom_parse_gear_limits()`가 core의 `ufshcd_parse_gear_limits()`를 호출하고, `hs_tx_gear`가 바뀌면 `host->phy_gear`를 그 값으로 바꾼다. host params 설정 직후에 호출한다.\n\n### 영향\n신호 무결성이 나쁜 Qualcomm 보드에서 DT만으로 gear를 낮춰 안정성을 확보할 수 있다.",
   "patch": "patches/88f4d3aa29c8.diff",
-  "patch_bytes": 1012
+  "patch_bytes": 1012,
+  "change_type": "feature",
+  "importance": "medium",
+  "keywords": [
+   "ufs-qcom",
+   "limit-hs-gear",
+   "gear limit",
+   "phy_gear",
+   "device tree"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "f966e02ae52192928d544262ee7a68611e333031",
@@ -2186,10 +2796,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "runtime suspend 중 오류로 에러 핸들러가 동작하면 runtime PM resume을 기다리다 deadlock이 났다. 에러 핸들러가 PM 작업 진행 중(`pm_op_in_progress`)이면 resume 없이 바로 link recovery를 하고 반환하도록 고쳤다.",
+  "explanation_ko": "### 배경\nruntime suspend 중 오류가 에러 핸들러를 깨우면 deadlock이 생긴다. `pm_op_in_progress`를 확인해 빠르게 복구하면, 에러 핸들러가 runtime PM resume을 무한정 기다리지 않고 runtime suspend가 계속 진행된다(커밋 메시지).\n\n### 변경 내용\n`ufshcd_err_handler()`에서 `ufshcd_rpm_get_noresume()` 뒤 `pm_op_in_progress`면 `ufshcd_link_recovery()`를 호출하고 `ufshcd_rpm_put()` 후 반환한다.\n\n### 영향\nsuspend/resume 도중 링크 오류가 나도 시스템이 멈추지 않는다. 다만 이 반환 경로가 `host_sem`을 잡은 뒤에 있어 세마포어가 풀리지 않는 문제가 생겼고, 같은 릴리스의 `e23ef4f22db3`에서 위치를 옮겨 고쳤다.",
   "patch": "patches/f966e02ae521.diff",
-  "patch_bytes": 557
+  "patch_bytes": 557,
+  "change_type": "fix",
+  "importance": "high",
+  "keywords": [
+   "runtime suspend",
+   "deadlock",
+   "error handler",
+   "link recovery",
+   "pm_op_in_progress"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "0ba7a254afd037cfc2b656f379c54b43c6e574e8",
@@ -2243,10 +2868,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`hba->pm_qos_mutex`가 `ufshcd_init()` 초기(클럭 설정 중)에 쓰이는데 그 뒤에 초기화되어 `DEBUG_LOCKS_WARN_ON` 경고가 나던 문제를, mutex 초기화를 앞으로 옮겨 고쳤다.",
+  "explanation_ko": "### 배경\n`hba->pm_qos_mutex`는 `ufshcd_init()`의 매우 이른 단계에서 쓰이므로 그 전에 초기화해야 한다. Qualcomm RB5에서 `ufshcd_setup_clocks()` → `ufshcd_pm_qos_update()` 경로로 초기화되지 않은 mutex를 잡아 `DEBUG_LOCKS_WARN_ON(lock->magic != lock)` 경고가 났다(커밋 메시지). Fixes 대상은 같은 v6.18의 `79dde5f7dc7c`이다.\n\n### 변경 내용\n`mutex_init(&hba->pm_qos_mutex)`를 클럭 설정보다 앞으로 옮겼다.\n\n### 영향\n부팅 시 lockdep 경고가 사라지고, 초기화되지 않은 mutex 사용으로 인한 잠재적 오동작을 막는다. 원인과 같은 릴리스에서 고쳐졌다.",
   "patch": "patches/0ba7a254afd0.diff",
-  "patch_bytes": 856
+  "patch_bytes": 856,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "PM QoS",
+   "mutex",
+   "initialization",
+   "lockdep",
+   "regression"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "bb7663dec67b691528f104894429b3859fb16c14",
@@ -2315,10 +2955,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "장치 descriptor를 읽은 뒤 `sysfs_update_group()`을 호출해, 장치가 HID를 지원하면 HID sysfs 속성이 실제로 보이도록 고쳤다. 기존에는 초기 sysfs 생성 시점에 지원 여부를 몰라 숨겨졌다.",
+  "explanation_ko": "### 배경\n장치 descriptor를 읽은 뒤 `sysfs_update_group()`을 호출해, 기능이 지원될 때 HID sysfs 속성이 보이도록 한다(커밋 메시지). Fixes 대상은 v6.17의 `ae7795a8c258`이다.\n\n### 변경 내용\n`ufs_sysfs_hid_group`을 non-static으로 바꾸고, 장치 초기화 후 `sysfs_update_group(&hba->dev->kobj, &ufs_sysfs_hid_group)`을 호출한다.\n\n### 영향\nHID(Host Initiated Defragmentation) 지원 장치에서 `hid/` sysfs 항목이 나타나 사용자 공간 조각 모음 도구를 쓸 수 있다.",
   "patch": "patches/bb7663dec67b.diff",
-  "patch_bytes": 1469
+  "patch_bytes": 1469,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "HID",
+   "defragmentation",
+   "sysfs",
+   "sysfs_update_group",
+   "is_visible"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "558ae4579810fa0fef011944230c65a6f3087f85",
@@ -2362,10 +3017,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "UTP 오류만 단독으로 발생하면 에러 처리에서 fatal로 취급되지 않아 I/O 타임아웃이나 OCS 오류로 끝나고 복구되지 않았다. `UTP_ERROR`(0x1000)를 `INT_FATAL_ERRORS`에 넣어 컨트롤러가 리셋되게 했다.",
+  "explanation_ko": "### 배경\nUTP 오류가 단독으로 발생하면 UFS가 복구되지 않는다. 에러 처리 코드가 UTP 오류를 fatal로 보지 않아 I/O 타임아웃이나 OCS 오류로 이어진다(커밋 메시지, OCS error 9와 interrupt status 0x1000이 찍힌 삼성 로그).\n\n### 변경 내용\n`ufshci.h`에 `UTP_ERROR`(0x1000)를 정의하고 `INT_FATAL_ERRORS`에 추가했다.\n\n### 영향\nUTP 오류가 나면 에러 핸들러가 호스트를 리셋해 복구한다. I/O 오류가 장시간 타임아웃으로 남지 않는다.",
   "patch": "patches/558ae4579810.diff",
-  "patch_bytes": 791
+  "patch_bytes": 791,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "UTP error",
+   "INT_FATAL_ERRORS",
+   "error handling",
+   "host reset",
+   "OCS error"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "6dfc353af575e33c94f5d740f7b0569fa9b784d9",
@@ -2409,10 +3079,23 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`qcom,sm8650-ufshc.yaml` binding에 Qualcomm Kaanapali 플랫폼의 UFS 컨트롤러 호환 문자열 `qcom,kaanapali-ufshc`를 추가했다.",
+  "explanation_ko": "### 배경\nKaanapali 플랫폼의 UFS 컨트롤러를 문서화한다(커밋 메시지).\n\n### 변경 내용\n`select`와 `compatible` enum에 `qcom,kaanapali-ufshc`를 추가했다.\n\n### 영향\nKaanapali DTS를 binding으로 검증할 수 있다.",
   "patch": "patches/6dfc353af575.diff",
-  "patch_bytes": 689
+  "patch_bytes": 689,
+  "change_type": "docs",
+  "importance": "low",
+  "keywords": [
+   "dt-bindings",
+   "Kaanapali",
+   "qcom,sm8650-ufshc.yaml"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "e23ef4f22db30a1e49c8b060e4ebc9dc9ca99c49",
@@ -2469,10 +3152,26 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "같은 v6.18의 runtime suspend 에러 deadlock 수정이 `host_sem`을 잡은 뒤 반환하는 경로를 만들어 세마포어가 풀리지 않았다. PM 진행 여부 확인과 link recovery를 `host_sem` 획득 전으로 옮겨 고쳤다.",
+  "explanation_ko": "### 배경\n`f966e02ae521`(\"Fix runtime suspend error deadlock\")이 추가한 반환 경로 때문에 `host_sem`이 해제되지 않는 문제가 생겼다. `hba->host_sem`을 잡기 전에 `pm_op_in_progress`를 확인해 deadlock을 막고 자원을 올바르게 관리한다(커밋 메시지). Fixes 대상은 같은 v6.18의 `f966e02ae521`이다.\n\n### 변경 내용\n`ufshcd_err_handler()`에서 `ufshcd_rpm_get_noresume()` → `pm_op_in_progress`면 `ufshcd_link_recovery()` 후 반환하는 블록을 `down(&hba->host_sem)` 앞으로 옮기고, PM 작업과 충돌하지 않는 이유를 주석으로 남겼다.\n\n### 영향\nPM 도중 에러가 나서 에러 핸들러가 조기 반환해도 `host_sem`이 잠긴 채 남지 않아, 이후 sysfs와 에러 처리가 멈추지 않는다. 다만 이 블록이 SCSI 스캔 전에도 실행될 수 있어 v6.19의 `14be351e5cd0`에서 NULL 검사가 추가됐다.",
   "patch": "patches/e23ef4f22db3.diff",
-  "patch_bytes": 1310
+  "patch_bytes": 1310,
+  "change_type": "fix",
+  "importance": "high",
+  "keywords": [
+   "error handler",
+   "host_sem",
+   "deadlock",
+   "runtime PM",
+   "link recovery",
+   "regression"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "6fe4c679dde3075cb481beb3945269bb2ef8b19a",
@@ -2526,10 +3225,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`ufshcd_send_cmd()`가 실패하면 `ufshcd_dme_get_attr()`의 `*mib_val`이 쓰레기 값으로 남을 수 있었다. 실패 시 0을 넣어 항상 초기화하도록 고쳤다.",
+  "explanation_ko": "### 배경\n`ufshcd_send_cmd()`가 실패하면 `*mib_val`에 쓰레기 값이 남아, 호출자가 의도하지 않은 속성 값을 쓸 수 있다(커밋 메시지). Fixes 대상은 v3.12의 `12b4fdb4f6bc`이다. 2개 패치 시리즈의 일부다.\n\n### 변경 내용\n`mib_val`이 있으면 성공 시 `argument3`, 실패 시 0을 넣는다.\n\n### 영향\nDME get 실패 시 호출자가 초기화되지 않은 스택 값을 쓰는 일이 없어진다.",
   "patch": "patches/6fe4c679dde3.diff",
-  "patch_bytes": 545
+  "patch_bytes": 545,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "DME",
+   "ufshcd_dme_get_attr",
+   "uninitialized value",
+   "UIC command"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "35bc3c8ee319083333b758355ffd739a96af5c00",
@@ -2573,10 +3286,23 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`ufshcd_dme_get_attr()`가 값을 채우므로 `tx_lanes` 변수의 불필요한 0 초기화를 지웠다.",
+  "explanation_ko": "### 배경\n속성 값은 `ufshcd_dme_get_attr()`에서 초기화되므로 `tx_lanes`를 미리 초기화할 필요가 없다(커밋 메시지). 2개 패치 시리즈의 일부다.\n\n### 변경 내용\n`int tx_lanes = 0`을 `int tx_lanes`로 바꿨다.\n\n### 영향\n동작 변화는 없다.",
   "patch": "patches/35bc3c8ee319.diff",
-  "patch_bytes": 437
+  "patch_bytes": 437,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "cleanup",
+   "tx_lanes",
+   "initialization"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "5127be409c6c3815c4a7d8f6d88043e44f9b9543",
@@ -2622,10 +3348,27 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "UFS 전원 차단(SSU Power Condition=3) 뒤 RST_N을 assert하면 장치 펌웨어가 깨어나 리셋 루틴을 돌며 ICCQ를 크게 끌어간다. 이때 레귤레이터가 바로 LPM으로 내려가 과전류 보호(OCP)가 걸리던 문제를, HW 리셋 뒤 10ms 지연으로 막았다.",
+  "explanation_ko": "### 배경\nUFS 전원 차단 순서는 SSU(Power_Condition=3) → RST_N low → REF_CLK off → VCC off → VCCQ/VCCQ2 off다. SSU 뒤 하드웨어 리셋을 assert하면 장치 펌웨어가 깨어나 몇 ms 동안 리셋 루틴을 실행하며 ICCQ를 크게 소모한다. UFS가 유일한 소비자인 레귤레이터는 off 요청 직후 LPM으로 전환되는데, 레일이 꺼지는 중에 ICCQ가 LPM 전류 한도를 넘으면 OCP fault가 날 수 있다. 호스트가 리셋 완료를 확인할 방법이 없어, 여러 UFS 벤더 장치로 실험해 10ms를 정했다(커밋 메시지).\n\n### 변경 내용\nsuspend 경로에서 링크가 off이고 `device_reset`이 있으면 `usleep_range(10000, 11000)`을 추가했다.\n\n### 영향\nQualcomm 플랫폼의 shutdown이나 깊은 suspend 때 레귤레이터 OCP 오류를 막는다. 해당 경로의 전원 차단이 10ms 늦어진다.",
   "patch": "patches/5127be409c6c.diff",
-  "patch_bytes": 1005
+  "patch_bytes": 1005,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "ufs-qcom",
+   "OCP",
+   "overcurrent",
+   "power down",
+   "SSU",
+   "ICCQ",
+   "regulator LPM"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "c74dc8ab47c1ec3927f63ca83b542c363249b3d8",
@@ -2679,10 +3422,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "같은 v6.18의 HID 속성 표시 수정으로 비동기 스캔 스레드의 `sysfs_update_group()`이 `ufs_sysfs_add_nodes()`보다 먼저 실행되면 \"duplicate filename .../hid\" 경고와 함께 sysfs 생성이 실패했다. `ufs_sysfs_add_nodes()`를 LUN 스캔 시작 전에 호출하도록 고쳤다.",
+  "explanation_ko": "### 배경\n`ufs_sysfs_add_nodes()`가 `ufs_get_device_desc()`와 동시에 실행될 수 있다. 그래서 `ufshcd_async_scan()` 스레드의 `sysfs_update_group(..., &ufs_sysfs_hid_group)`이 먼저 실행되면, `ufs_sysfs_add_nodes()`가 \"cannot create duplicate filename '/devices/platform/3c2d0000.ufs/hid'\" 경고를 내고 실패한다(커밋 메시지, Google Tensor 로그). Fixes 대상은 같은 v6.18의 `bb7663dec67b`이다. 2개 패치 시리즈의 일부다.\n\n### 변경 내용\n`ufshcd_init()`에서 `ufs_sysfs_add_nodes()`를 `async_schedule(ufshcd_async_scan, ...)` 앞으로 옮겼다.\n\n### 영향\n부팅 시 UFS sysfs 노드 전체 생성이 실패하던 race가 사라진다. 원인과 같은 릴리스에서 고쳐졌다.",
   "patch": "patches/c74dc8ab47c1.diff",
-  "patch_bytes": 423
+  "patch_bytes": 423,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "sysfs",
+   "HID",
+   "race condition",
+   "ufs_sysfs_add_nodes",
+   "async scan"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "c0e37ac6a5d4c4bc33b9c4408d22714fe370a1b0",
@@ -2729,10 +3487,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "link startup이 실패해도 호스트 상태·power 정보·event history를 대량으로 출력하지 않도록 줄였다. UFS 모듈이 꽂히지 않은 Rock 4D 같은 보드에서 40줄 넘는 로그가 사라지고, SCSI host 추가 전 `scsi_host_busy()` 호출로 매 부팅마다 나던 SRCU 경고도 없어진다.",
+  "explanation_ko": "### 배경\nRock 4D처럼 UFS 모듈을 꽂았다 뺄 수 있는 시스템에서는 모듈이 없으면 link startup이 항상 실패하고, \"link startup failed\" 뒤로 40줄 넘는 로그가 찍힌다. 또 `995412e23bb2`(blk-mq tag iterator의 SRCU 전환) 이후 `scsi_add_host()` 전에 `scsi_host_busy()`가 불리면 부팅마다 경고가 났다(커밋 메시지).\n\n### 변경 내용\n`ufshcd_link_startup()` 실패 경로에서 `ufshcd_print_host_state()`, `ufshcd_print_pwr_info()`, `ufshcd_print_evt_hist()` 호출을 지웠다.\n\n### 영향\nUFS가 없는 보드의 부팅 로그가 짧아지고 blk-mq SRCU 경고 회귀가 사라진다. 실제 link startup 문제를 디버깅할 때는 상세 덤프가 남지 않는다.",
   "patch": "patches/c0e37ac6a5d4.diff",
-  "patch_bytes": 511
+  "patch_bytes": 511,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "link startup",
+   "logging",
+   "scsi_host_busy",
+   "SRCU warning",
+   "Rock 4D"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "f838d624fd1183e07db86f3138bcd05fd7630a1e",
@@ -2807,10 +3580,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "같은 v6.18에 들어간 \"Make HID attributes visible\"(`bb7663dec67b`)을 되돌렸다. upstream에서는 장치 descriptor를 sysfs 생성보다 먼저 읽으므로 `sysfs_update_group()`이 필요 없고, 오히려 \"duplicate filename .../hid\" 경고를 냈다.",
+  "explanation_ko": "### 배경\n\"Make HID attributes visible\" 패치는 `ufs_get_device_desc()`가 `ufshcd_probe_hba()`에서 호출되는 구 커널(예: 6.12)에만 필요하다. 구 커널에서는 descriptor를 sysfs 속성 추가 뒤에 읽을 수 있기 때문이다. upstream에서는 v6.13의 `69f5eb78d4b0` 이후 `ufshcd_init()`의 `ufshcd_device_params_init()`이 `ufs_sysfs_add_nodes()`보다 먼저 descriptor를 읽으므로 이 호출이 필요 없다(커밋 메시지). 이 패치가 \"sysfs: cannot create duplicate filename '/devices/platform/3c2d0000.ufs/hid'\" 경고를 냈다.\n\n### 변경 내용\n`ufs_sysfs_hid_group`을 다시 static으로 돌리고 `sysfs_update_group()` 호출을 지웠다.\n\n### 영향\nHID 속성은 기존 `is_visible`로 올바르게 표시되며 부팅 경고가 사라진다. 같은 원인을 우회하려던 `c74dc8ab47c1`(sysfs 생성 순서 변경)과 함께 v6.18에 들어갔다.",
   "patch": "patches/f838d624fd11.diff",
-  "patch_bytes": 1469
+  "patch_bytes": 1469,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "HID",
+   "sysfs",
+   "revert",
+   "duplicate filename",
+   "regression"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "bb44826c3bdbf1fa3957008a04908f45e5666463",
@@ -2869,10 +3657,27 @@
   "vendors": [
    "intel"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "Intel UFS 컨트롤러에서 S0ix(링크 HIBERNATE 유지)와 S3(상태 소실)를 모두 지원하도록, suspend `prepare()`에서 목표가 s2idle이 아니면 `spm_lvl`을 최소 5(링크 OFF, 장치 POWEROFF)로 올리고 `complete()`에서 원래 값으로 되돌린다.",
+  "explanation_ko": "### 배경\nUFS가 있는 Intel 플랫폼은 Suspend-to-Idle(S0ix)과 Suspend-to-RAM(S3)을 지원한다. S0ix에서는 링크가 HIBERNATE여야 하지만, S3에서는 상태가 사라지므로 링크가 OFF여야 한다. `spm_lvl` 3(링크 HIBERNATE, 장치 SLEEP)은 S0ix에는 맞지만 S3에는 5로 바꿔야 한다. 이 수정은 Alder Lake 기반 컨트롤러부터 필요하다(커밋 메시지). Fixes 대상은 v5.16의 `7dc9fb47bc9a`이며 stable 대상이다.\n\n### 변경 내용\n- `ufs_intel_suspend_prepare()`: `pm_suspend_target_state != PM_SUSPEND_TO_IDLE`이고 `spm_lvl < 5`면 원래 값을 저장하고 5로 올린다. prepare가 실패하면 되돌린다.\n- `ufs_intel_resume_complete()`: 저장된 값을 복원한다.\n\n### 영향\nIntel ADL 이후 UFS 노트북에서 S3 resume 뒤 UFS가 복구되지 않던 문제가 해결된다.",
   "patch": "patches/bb44826c3bdb.diff",
-  "patch_bytes": 2771
+  "patch_bytes": 2771,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "ufshcd-pci",
+   "Intel",
+   "S0ix",
+   "S3",
+   "spm_lvl",
+   "suspend",
+   "stable"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "d34caa89a132cd69efc48361d4772251546fdb88",
@@ -2938,10 +3743,26 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`DME_LINKSTARTUP`이 처음에 성공해도 한 번 더 보내는 `link_startup_again` 동작을 끄는 quirk `UFSHCD_QUIRK_PERFORM_LINK_STARTUP_ONCE`(1 << 26)를 추가했다. 이 비표준 동작이 Intel Alder Lake 컨트롤러에서 link startup을 불안정하게 만든다.",
+  "explanation_ko": "### 배경\n`ufshcd_link_startup()`은 첫 `DME_LINKSTARTUP`이 성공해도 두 번째를 보내는 기능(link_startup_again)이 있다. 일부 구형 하드웨어에는 도움이 되지만, 표준이 아닌 동작이며 Intel Alder Lake 기반 호스트 컨트롤러에서 link startup을 불안정하게 만든다(커밋 메시지). Fixes 대상은 v5.16의 `7dc9fb47bc9a`이며 stable 대상이다. Intel 수정 4개 패치 시리즈의 일부다.\n\n### 변경 내용\nquirk를 정의하고, `ufshcd_link_startup()`에서 quirk가 있으면 두 번째 link startup을 건너뛴다.\n\n### 영향\nquirk를 켠 플랫폼(Intel ADL, 같은 시리즈에서 설정)에서 link startup이 안정적으로 한 번만 수행된다.",
   "patch": "patches/d34caa89a132.diff",
-  "patch_bytes": 1136
+  "patch_bytes": 1136,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "link startup",
+   "link_startup_again",
+   "quirk",
+   "UFSHCD_QUIRK_PERFORM_LINK_STARTUP_ONCE",
+   "Intel ADL",
+   "stable"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "d968e99488c4b08259a324a89e4ed17bf36561a4",
@@ -3000,10 +3821,25 @@
   "vendors": [
    "intel"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "Intel Alder Lake UFS 컨트롤러에 `UFSHCD_QUIRK_PERFORM_LINK_STARTUP_ONCE`를 설정해, 불필요한 두 번째 `DME_LINKSTARTUP`으로 link startup이 불안정해지는 것을 막았다.",
+  "explanation_ko": "### 배경\nIntel Alder Lake 기반 호스트 컨트롤러에서는 두 번째 `DME_LINKSTARTUP`을 불필요하게 보내면 link startup이 불안정해진다. 새 quirk로 이를 막는다(커밋 메시지). Fixes 대상은 v5.16의 `7dc9fb47bc9a`이며 stable 대상이다. Intel 수정 4개 패치 시리즈의 일부다.\n\n### 변경 내용\nADL 초기화에서 `UFSHCD_QUIRK_BROKEN_AUTO_HIBERN8`에 이 quirk를 더했다.\n\n### 영향\nADL 기반 노트북에서 부팅과 resume 시 UFS link startup 실패가 줄어든다.",
   "patch": "patches/d968e99488c4.diff",
-  "patch_bytes": 568
+  "patch_bytes": 568,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "ufshcd-pci",
+   "Intel ADL",
+   "link startup",
+   "quirk",
+   "stable"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  },
  {
   "sha": "a2b32bc1d9e359a9f90d0de6af16699facb10935",
@@ -3060,9 +3896,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "DME Link Startup 실패 시 MIPI UniPro GenericErrorCode(1)가 그대로 `ufshcd_init()` 반환값이 되어 probe가 성공한 것으로 처리되고, 드라이버 제거 때 oops가 났다. 양수 오류를 `-EIO`로 바꿔 반환하도록 고쳤다.",
+  "explanation_ko": "### 배경\nDME Link Startup 뒤 오류 값은 UniPro GenericErrorCode(0 = SUCCESS, 1 = FAILURE)다. probe 중 실패하면 1이 그대로 probe 함수로 전달되는데, probe는 음수를 반환해야 오류로 인식한다. 그래서 실패했는데도 성공으로 처리되고, 이후 드라이버를 제거하면 잘못된 상태 때문에 oops가 난다. `ufshcd_init()` 호출자 중 양수 오류를 기대하는 곳은 없다(커밋 메시지). Fixes 대상은 v6.13의 `69f5eb78d4b0`이며 stable 대상이다.\n\n### 변경 내용\n`ufshcd_init()`가 `err > 0 ? -EIO : err`을 반환하도록 하고 kerneldoc을 \"< 0 on failure\"로 고쳤다.\n\n### 영향\nlink startup 실패 시 probe가 정상적으로 실패 처리되어 이후 remove에서 oops가 나지 않는다.",
   "patch": "patches/a2b32bc1d9e3.diff",
-  "patch_bytes": 660
+  "patch_bytes": 660,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "probe",
+   "error code",
+   "link startup",
+   "ufshcd_init",
+   "oops",
+   "stable"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:59:50+00:00"
+  }
  }
 ]

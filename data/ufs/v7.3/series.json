@@ -11,7 +11,8 @@
   "areas": [
    "crypto"
   ],
-  "summary_ko": null
+  "summary_ko": "Qualcomm ICE(Inline Crypto Engine) 드라이버가 버전 3과 4만 허용하던 검사를 \"3 이상\"으로 넓혀, 이미 완전히 지원되는 v5와 이후 버전에서도 동작하게 했다.",
+  "title_ko": null
  },
  {
   "id": "20260616113348.1168248-can.guo@oss.qualcomm.com",
@@ -27,7 +28,14 @@
    "bindings",
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "UFS 5.0/HS-G6 시대의 보드별 TX Equalization 값을 Device Tree로 줄 수 있게 한 2개 패치다. `ufs-common.yaml`에 gear별 PreShoot/DeEmphasis와 G6 precode 속성을 정의하고, 플랫폼 드라이버가 이를 검증해 `tx_eq_params`에 저장한다. 적응형 TX EQ(장치 속성 또는 EQTR)가 쓰이면 그 결과가 우선하며, DT 값은 Training이 없거나 꺼진 경우의 대체값이다.",
+  "title_ko": "Device Tree 기반 정적 TX Equalization 설정",
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:33:04+00:00"
+  }
  },
  {
   "id": "20260615055802.105479-ed.tsai@mediatek.com",
@@ -44,7 +52,14 @@
    "core",
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "호스트 capability의 outstanding RTT 수가 부정확한 플랫폼을 위해 고정 필드 `max_num_rtt`를 `get_hba_nortt()` 콜백으로 바꾼 3개 패치다. MediaTek은 MT6995 B0 이전 IP만 2로 제한하고 이후는 레지스터 값을 그대로 쓰게 되어, 새 MediaTek 플랫폼에서 더 많은 RTT를 쓸 수 있다.",
+  "title_ko": "벤더별 RTT 수 결정을 `get_hba_nortt()` 콜백으로 전환",
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:33:04+00:00"
+  }
  },
  {
   "id": "20260616100121.548759-himanshubatra@google.com",
@@ -58,7 +73,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "sysfs `power_info/gear` 출력이 gear 5까지만 지원해 gear 6에서 \"UNKNOWN\"을 보이던 것을, `HS_GEAR6` 문자열을 추가해 고쳤다.",
+  "title_ko": null
  },
  {
   "id": "20260618140941.902000-can.guo@oss.qualcomm.com",
@@ -72,7 +88,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "TX EQTR 경로의 `GFP_KERNEL` 할당이 direct reclaim으로 이어지면, devfreq gear scaling으로 UFS tagset이 멈춘 상태에서 UFS I/O를 기다리다 데드락이 날 수 있었다. `ufshcd_tx_eqtr()` 전체를 `memalloc_noio_save()/restore()`로 감싸 이를 막았다.",
+  "title_ko": null
  },
  {
   "id": "20260625121306.1655467-can.guo@oss.qualcomm.com",
@@ -89,7 +106,14 @@
    "core",
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "TX EQTR이 일부 단계에서 실패해도 상태를 망가뜨리지 않도록 오류 경로를 보강한 3개 패치다. qcom FOM 측정이 실패해도 원래 TX EQ 설정을 복원하고, lane별 RX_FOM 읽기 실패는 해당 lane FOM 0으로 처리해 학습을 계속하며, PRE_CHANGE가 성공했으면 POST_CHANGE notify를 항상 호출해 벤더 임시 상태가 정리되게 했다.",
+  "title_ko": "TX Equalization Training 오류 경로 보강",
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:33:04+00:00"
+  }
  },
  {
   "id": "20260618-topic-ufs-wb-empty-warn-v1-ec744a153e0e@linaro.org",
@@ -103,7 +127,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "WriteBooster 버퍼 여유 공간이 없을 때 resume마다 반복 출력되던 \"dCurWBBuf: 0 WB disabled...\" 메시지를 `dev_warn_once()`로 바꿔 경고 수준으로 한 번만 출력하게 했다.",
+  "title_ko": null
  },
  {
   "id": "20260717153914.26321-liqiang01@kylinos.cn",
@@ -122,7 +147,14 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "장치나 사용자 공간에서 들어오는 값을 믿고 쓰던 6곳을 검증하도록 고친 패치 묶음이다. 문자열 디스크립터 변환·복사의 버퍼 초과 읽기, SDB 완료 경로의 NULL CQE 역참조, 범위를 넘는 lane 수, 짧은 RPMB 프레임과 정렬되지 않은 RPMB 필드 접근, debugfs 입력의 NUL 종료 누락을 바로잡았다.",
+  "title_ko": "장치·사용자 입력 검증 강화",
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:33:04+00:00"
+  }
  },
  {
   "id": "20260717035013.563791-panchuang@vivo.com",
@@ -136,7 +168,8 @@
   "areas": [
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "`devm_request_irq()`가 실패 시 자세한 오류를 직접 출력하게 되었으므로, MediaTek과 qcom 호스트 드라이버의 MCQ IRQ 요청 실패 시 중복 `dev_err()`를 제거했다.",
+  "title_ko": null
  },
  {
   "id": "20260719195833.136543-nitin.rawat@oss.qualcomm.com",
@@ -150,7 +183,8 @@
   "areas": [
    "bindings"
   ],
-  "summary_ko": null
+  "summary_ko": "`qcom,sm8650-ufshc.yaml` binding에 Qualcomm Maili SoC의 UFS 컨트롤러 호환 문자열 `qcom,maili-ufshc`를 추가했다.",
+  "title_ko": null
  },
  {
   "id": "20260720013759.2979593-rdunlap@infradead.org",
@@ -164,7 +198,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "`include/ufs/ufshcd.h`의 kernel-doc 경고를 모두 고쳤다. 구조체 이름 오류, 누락된 멤버 설명, 이미 없어진 멤버 설명을 정리했다.",
+  "title_ko": null
  },
  {
   "id": "20260806161301.1010876-palash.kambar@oss.qualcomm.com",
@@ -178,7 +213,8 @@
   "areas": [
    "phy"
   ],
-  "summary_ko": null
+  "summary_ko": "Qualcomm Hawi SoC의 UFS QMP PHY 지원을 추가했다. v7 PCS와 v8 QSERDES TX/RX 레지스터 헤더, 초기화 테이블, HS G5용 PCS overlay, `qcom,hawi-qmp-ufs-phy` 호환 문자열을 넣었다.",
+  "title_ko": null
  },
  {
   "id": "20260728092434epcms2p56b013ab7a2df90d3df9186322de54340@epcms2p5",
@@ -192,7 +228,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "`ufs_bsg`가 UFS 표준상 부호 없는 16비트인 UPIU query 길이를 `int`로 다루던 것을 `u16`/`u8` 타입으로 바꾸고, 호출처가 하나뿐인 `ufs_bsg_get_query_desc_size()`를 인라인했다. 기능 변화는 의도하지 않았다.",
+  "title_ko": null
  },
  {
   "id": "20260728092741epcms2p8c53432ef3c2f0d6a63dd980ad5ef9f00@epcms2p8",
@@ -206,7 +243,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "UFS 5.0(JEDEC 220H)의 AGGREGATED READ query opcode(0x9)를 지원한다. 응답이 최대 수 KiB가 될 수 있어, 장치 관리용 reserved tag에만 4KiB 응답 영역을 가진 전용 UCD(`utp_devman_cmd_desc`)를 두고 일반 tag는 기존 512바이트 UCD를 쓴다.",
+  "title_ko": null
  },
  {
   "id": "8fe4526ce272811b28e99048b42358dd8f7c48af.1786142946.git.bvanassche@acm.org",
@@ -220,7 +258,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "`ufshcd_wait_for_pending_cmds()`에서 `io_schedule_timeout()` 전에 태스크 상태를 `TASK_UNINTERRUPTIBLE`로 설정하도록 해, 상태가 `TASK_RUNNING`이라 즉시 반환되며 CPU를 소모하던 busy loop를 고쳤다.",
+  "title_ko": null
  },
  {
   "id": "3c975386a5bcb939f8a2a0d47fd621f234321a9e.1786142946.git.bvanassche@acm.org",
@@ -234,7 +273,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "UFS core와 host 디렉터리에 컴파일러 기반 lock context 분석(`CONTEXT_ANALYSIS`)을 켜고, 락 상태를 바꾸는 함수들에 `__acquires`/`__cond_acquires`/`__releases` 주석을 달았다.",
+  "title_ko": null
  },
  {
   "id": "20260825145203.265579-nitin.rawat@oss.qualcomm.com",
@@ -249,7 +289,14 @@
   "areas": [
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "Qualcomm UFS 컨트롤러 동작을 다듬은 2개 패치다. v6.2 이상에서 bootloader가 정한 HS/LS link startup 모드가 UFS 리셋 후에도 유지되도록 spare 레지스터 값을 저장했다가 다시 쓰고, devfreq `downdifferential`을 5에서 65로 넓혀 순차 읽기 중 클럭이 너무 쉽게 내려가던 문제를 줄였다.",
+  "title_ko": "qcom: link startup 모드 복원과 devfreq 하향 기준 완화",
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:33:04+00:00"
+  }
  },
  {
   "id": "20260818112830.453402-sangram.k.y@intel.com",
@@ -264,7 +311,14 @@
   "areas": [
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "Intel UFS 4.0 PCI 컨트롤러(8086:D335)를 제대로 쓰기 위한 2개 패치다. power mode 변경 전에 `PA_INITIAL_ADAPT`를 설정해 HS-G5 링크 학습을 안정화하고, MCQ에 필요한 `mcq_config_resource`와 `op_runtime_config` 콜백을 추가해 SDB로 돌아가던 MCQ가 실제로 켜지게 했다.",
+  "title_ko": "Intel UFS 4.0 PCI 컨트롤러의 HS-G5와 MCQ 활성화",
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:33:04+00:00"
+  }
  },
  {
   "id": "202609021314.8A9C0B8@keescook",
@@ -278,7 +332,8 @@
   "areas": [
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "`kmalloc()` 계열 할당을 `kmalloc_obj()` 계열로 바꾸는 Coccinelle 트리 전반 변환으로, UFS 쪽은 `ufs-txeq.c`와 `ufs-qcom.c`의 `kzalloc(sizeof(*p), GFP_KERNEL)` 두 곳이 `kzalloc_obj(*p)`로 바뀌었다.",
+  "title_ko": null
  },
  {
   "id": "6f78c4bd-a70b-402d-abfd-599091b67674@acm.org",
@@ -292,7 +347,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "에러 처리 중 `blk_mq_quiesce_tagset()`이 내부 명령용 pseudo SCSI device 큐까지 멈춰, NOP OUT 같은 내부 명령이 발행되지 못하고 복구가 영원히 기다리던 데드락을 고쳤다. tagset을 멈춘 뒤 pseudo device 큐만 다시 연다.",
+  "title_ko": null
  },
  {
   "id": "ae0cc2bd764e6dfffce99db3d8b44a55887c508c.1789394185.git.geert+renesas@glider.be",
@@ -306,7 +362,8 @@
   "areas": [
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "v7.2에서 활성 lane만 설정하도록 바뀐 뒤, DT에 `lanes-per-direction`이 없는 R-Car S4가 기본값 2 lane으로 잡혀 link startup에 실패하던 문제를 고쳤다. `renesas,r8a779f0-ufs`이면 속성이 없을 때 1 lane을 기본으로 쓴다.",
+  "title_ko": null
  },
  {
   "id": "20260909091045.1134956-naomi.chu@mediatek.com",
@@ -320,7 +377,8 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "probe 중 clock gating이 가능해진 뒤에도 clock 참조 없이 호스트 레지스터에 접근하던 문제를 고쳤다. `ufshcd_init_clk_gating()` 직후 `ufshcd_hold()`로 참조를 잡고 비동기 스캔이 끝나거나 probe가 실패할 때 놓는다.",
+  "title_ko": null
  },
  {
   "id": "20260920034953.19535-hppiscas@163.com",
@@ -334,7 +392,8 @@
   "areas": [
    "host"
   ],
-  "summary_ko": null
+  "summary_ko": "MediaTek `ufs_mtk_mphy_power_on()`이 `phy_power_on()` 결과를 무시해, 실패해도 VA09가 켜진 채 `mphy_powered_on`이 참으로 남아 이후 power-on이 건너뛰어지던 문제를 고쳤다.",
+  "title_ko": null
  },
  {
   "id": "20260928035816.1294326-stanleyjhu@google.com",
@@ -349,7 +408,14 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "MCQ 에러 복구·호스트 리셋 경로의 CQ 처리를 고친 2개 패치로, 둘 다 stable 대상이다. 컨트롤러가 꺼진 상태에서 CQ tail 포인터를 MMIO로 읽던 문제와 빈 슬롯마다 오류 로그가 나던 문제를 없앴고, 바쁜 요청마다 CQ 전체를 반복해서 훑던 것을 하드웨어 큐마다 한 번만 처리하도록 바꿨다.",
+  "title_ko": "MCQ 에러 복구 중 CQ 처리 정리",
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:33:04+00:00"
+  }
  },
  {
   "id": "20261013132708.1669415-stanleyjhu@google.com",
@@ -363,6 +429,7 @@
   "areas": [
    "core"
   ],
-  "summary_ko": null
+  "summary_ko": "bsg-lib의 96바이트 응답 버퍼에 104바이트 `struct ufs_rpmb_reply`가 들어가면서 Advanced RPMB 응답 EHS가 버퍼 끝을 8바이트 넘어 쓰던 문제를 고쳤다. `bsg_setup_queue()`가 transport별 응답 크기를 받게 하고 ufs_bsg는 `sizeof(struct ufs_rpmb_reply)`를 요청한다.",
+  "title_ko": null
  }
 ]

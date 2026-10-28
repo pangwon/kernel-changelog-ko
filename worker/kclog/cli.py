@@ -40,6 +40,10 @@ def cmd_collect(args) -> None:
     index_path = data_dir / "releases.json"
     index = {r["tag"]: r for r in json.loads(index_path.read_text("utf-8"))} \
         if index_path.exists() else {}
+    # since를 올렸다면 그보다 오래된 릴리스는 목록에서 뺀다 (data 폴더는 직접 지운다).
+    for tag in [t for t in index if version_key(t) < since]:
+        print(f"drop {tag} (older than since={track.since})")
+        del index[tag]
 
     collector = Collector(repo, track, data_dir)
     for prev, tag in targets:
@@ -112,6 +116,52 @@ def cmd_stats(args) -> None:
         print(f"  {n:>4}  {path}")
 
 
+def cmd_gen(args) -> None:
+    from . import gen
+
+    track = load_track(ROOT / "tracks" / f"{args.track}.toml")
+    data_dir = ROOT / "data" / track.id
+    index_path = data_dir / "releases.json"
+    releases = json.loads(index_path.read_text("utf-8"))
+    by_tag = {r["tag"]: r for r in releases}
+    data = {tag: gen.ReleaseData(data_dir, tag) for tag in args.release or by_tag}
+    work_dir = ROOT / ".cache" / "gen" / track.id / args.stage
+    # import는 이미 생성된 항목의 재생성 결과도 받아야 하므로 항상 전체 작업 목록과 대조한다.
+    force = args.force or args.action == "import"
+
+    jobs = []
+    for tag, rd in data.items():
+        if args.stage == "commits":
+            jobs += gen.commit_jobs(rd, track, force, args.sha)
+        elif args.stage == "series":
+            jobs += gen.series_jobs(rd, force)
+        else:
+            jobs += gen.release_jobs(rd, by_tag[tag], force)
+
+    if args.action == "export":
+        if args.limit:
+            jobs = jobs[:args.limit]
+        gen.export_jobs(args.stage, jobs, work_dir)
+        est = sum(len(j.user.encode("utf-8")) for j in jobs) / BYTES_PER_TOKEN
+        print(f"[{args.stage}] {len(jobs)}개 작업, 입력 약 {est / 1000:.0f}k 토큰 (대략치)")
+        print(f"  지침: {work_dir / 'INSTRUCTIONS.md'}")
+        if args.stage == "series":
+            # 단일 커밋 시리즈는 export 중에 커밋 요약이 바로 채워진다.
+            for rd in data.values():
+                rd.save()
+        return
+
+    applied, failures = gen.import_results(args.stage, jobs, work_dir, args.model)
+    for rd in data.values():
+        rd.save()
+    write_json(index_path, releases)
+    gen.remove_work_files(work_dir, applied)
+    pending = len(list(work_dir.glob("*.input.md"))) if work_dir.exists() else 0
+    print(f"[{args.stage}] 반영 {len(applied)}개, 실패 {len(failures)}개, 결과 대기 {pending}개")
+    for job_id, err in failures:
+        print(f"  실패 {job_id}: {err}")
+
+
 def main(argv: list[str] | None = None) -> None:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
@@ -130,6 +180,18 @@ def main(argv: list[str] | None = None) -> None:
     s = sub.add_parser("stats", help="수집 결과 통계")
     s.add_argument("--track", default="ufs")
     s.set_defaults(func=cmd_stats)
+
+    s = sub.add_parser("gen", help="Claude Code와 한국어 요약 작업 파일 주고받기")
+    s.add_argument("action", choices=["export", "import"],
+                   help="export: 작업 파일 생성, import: 결과 검증 후 반영")
+    s.add_argument("stage", choices=["commits", "series", "release"])
+    s.add_argument("--track", default="ufs")
+    s.add_argument("--release", action="append", help="특정 릴리스만 (여러 번 지정 가능)")
+    s.add_argument("--sha", action="append", help="commits 단계에서 이 sha 접두어만")
+    s.add_argument("--limit", type=int, help="export할 최대 작업 수")
+    s.add_argument("--force", action="store_true", help="이미 생성된 항목도 다시 export")
+    s.add_argument("--model", help="import 시 기록할 생성 모델 이름 (예: claude-opus-5-5)")
+    s.set_defaults(func=cmd_gen)
 
     args = p.parse_args(argv)
     args.func(args)

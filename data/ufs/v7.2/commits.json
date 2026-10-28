@@ -41,10 +41,23 @@
   "area": "host",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`SCSI_UFS_QCOM` Kconfig 옵션의 표시 이름을 \"QCOM specific hooks...\"에서 \"Qualcomm specific hooks...\"로 바꿔 회사 이름 표기를 통일했다.",
+  "explanation_ko": "### 배경\n사용자에게 보이는 config 옵션에 QCOM, Qualcomm, Qualcomm Technologies 같은 여러 이름이 섞여 있어, menuconfig 등에서 찾기 쉽도록 \"Qualcomm\"으로 통일한다(커밋 메시지).\n\n### 변경 내용\n`drivers/ufs/host/Kconfig`의 `SCSI_UFS_QCOM` prompt 문자열을 바꿨다.\n\n### 영향\n심볼 이름은 그대로라 기존 설정에는 영향이 없다.",
   "patch": "patches/0bdf7d7ee75d.diff",
-  "patch_bytes": 506
+  "patch_bytes": 506,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "Kconfig",
+   "SCSI_UFS_QCOM",
+   "naming"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "c9ee94c7e2fb65a433b505d7bcf4c2b6ee81b86c",
@@ -91,10 +104,24 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`qcom,sm8650-ufshc.yaml` binding에 Qualcomm Nord SoC의 UFS 컨트롤러 호환 문자열 `qcom,nord-ufshc`를 추가했다. Eliza처럼 표준 영역 외에 MCQ 레지스터 영역이 있어 `reg` 두 개가 모두 필요하다.",
+  "explanation_ko": "### 배경\nNord SoC의 UFS 호스트 컨트롤러를 문서화한다. Eliza처럼 표준 레지스터 범위 외에 MCQ 레지스터 범위가 있어 두 `reg` 항목이 모두 필수다(커밋 메시지). 2개 패치 시리즈의 첫 번째다.\n\n### 변경 내용\n`select`, `compatible` 목록과 Eliza와 같은 `reg` 조건을 적용하는 `allOf` 블록에 `qcom,nord-ufshc`를 추가했다.\n\n### 영향\nNord DTS를 binding으로 검증할 수 있다.",
   "patch": "patches/c9ee94c7e2fb.diff",
-  "patch_bytes": 922
+  "patch_bytes": 922,
+  "change_type": "docs",
+  "importance": "low",
+  "keywords": [
+   "dt-bindings",
+   "Nord",
+   "MCQ",
+   "qcom,sm8650-ufshc.yaml"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "7030e16247dc9fb044371141c513581067c8e574",
@@ -142,10 +169,25 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`qcom,sa8255p-ufshc` binding에 Nord SoC의 차량용 변형 SA8797P 호환 문자열을 추가했다. SA8255P처럼 펌웨어의 SCMI 서버가 UFS 자원을 관리하므로 `qcom,sa8255p-ufshc`를 fallback으로 쓴다.",
+  "explanation_ko": "### 배경\nSA8797P는 Nord SoC의 차량용 변형이다. SA8255P처럼 플랫폼 펌웨어가 SCMI 서버로 PHY, 클럭, 레귤레이터, 리셋 같은 UFS 자원을 SCMI power 프로토콜로 관리하므로, OS가 보는 DT에는 컨트롤러의 MMIO, 인터럽트, IOMMU, power domain만 기술된다(커밋 메시지). 2개 패치 시리즈의 두 번째다.\n\n### 변경 내용\n`compatible`을 `qcom,sa8255p-ufshc` 단독 또는 `qcom,sa8797p-ufshc` + `qcom,sa8255p-ufshc` 조합을 허용하는 `oneOf`로 바꿨다.\n\n### 영향\nSA8797P DTS가 기존 SA8255P 드라이버 경로를 그대로 쓴다.",
   "patch": "patches/7030e16247dc.diff",
-  "patch_bytes": 575
+  "patch_bytes": 575,
+  "change_type": "docs",
+  "importance": "low",
+  "keywords": [
+   "dt-bindings",
+   "SA8797P",
+   "SA8255P",
+   "SCMI",
+   "automotive"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "45c9dee6d6531bf1d0e0dbf577fb59850e34f6d0",
@@ -195,10 +237,23 @@
   "vendors": [
    "exynos"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "Exynos UFS DT binding에 ExynosAutov920 SoC 호환 문자열 `samsung,exynosautov920-ufs`를 추가했다.",
+  "explanation_ko": "### 배경\nExynosAutov920 SoC용 호환 문자열을 추가한다(커밋 메시지). 드라이버 지원 패치와 함께 2개 패치 시리즈를 이룬다.\n\n### 변경 내용\n`samsung,exynos-ufs.yaml`의 compatible 목록에 `samsung,exynosautov920-ufs`를 추가했다.\n\n### 영향\nExynosAutov920 DTS를 binding으로 검증할 수 있다.",
   "patch": "patches/45c9dee6d653.diff",
-  "patch_bytes": 513
+  "patch_bytes": 513,
+  "change_type": "docs",
+  "importance": "low",
+  "keywords": [
+   "dt-bindings",
+   "Exynos",
+   "ExynosAutov920"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "50349bd5d0ab6d6f7e106a6cb1cdbf2bcfb75e08",
@@ -242,10 +297,25 @@
   "vendors": [
    "exynos"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "Exynos UFS 드라이버에 ExynosAutov920 SoC 지원을 추가했다. 전용 `drv_data`와 link 전후·power mode 변경 전 UniPro/M-PHY 설정 훅을 넣고, ExynosAutov9과 다른 sharability(IO 일관성) 마스크를 쓴다.",
+  "explanation_ko": "### 배경\nExynosAutov920용 compatible과 `drv_data`, 관련 훅을 추가한다. ExynosAutov920은 UFS sharability 마스크가 ExynosAutov9과 다르다(커밋 메시지). binding 패치와 함께 2개 패치 시리즈를 이룬다.\n\n### 변경 내용\n- `UFS_EXYNOSAUTOV920_WR/RD_SHARABLE`(BIT 3/2)을 정의하고 `iocc_mask`로 쓴다.\n- `exynosautov920_ufs_pre_link()`: RX/TX lane별 클럭 주기, line reset 주기와 벤더 속성을 DME로 설정하고 `PA_LOCAL_TX_LCC_ENABLE`을 끈다.\n- `exynosautov920_ufs_post_link()`, `exynosautov920_ufs_pre_pwr_change()`: 벤더 속성과 DL·PA 타임아웃 값(`DL_FC0PROTTIMEOUTVAL` 등, `PA_PWRMODEUSERDATA0~2`)과 UniPro power mode 타이머를 설정한다.\n- `exynosautov920_ufs_drvs`(quirk `UFSHCD_QUIRK_SKIP_DEF_UNIPRO_TIMEOUT_SETTING`, 여러 `EXYNOS_UFS_OPT_*`)와 `samsung,exynosautov920-ufs` 매치를 추가했다.\n\n### 영향\nExynosAutov920 기반 차량용 플랫폼에서 메인라인 UFS 드라이버를 쓸 수 있다. 다른 Exynos 변형은 영향이 없다.",
   "patch": "patches/50349bd5d0ab.diff",
-  "patch_bytes": 5652
+  "patch_bytes": 5652,
+  "change_type": "hardware",
+  "importance": "medium",
+  "keywords": [
+   "Exynos",
+   "ExynosAutov920",
+   "ufs-exynos",
+   "UniPro",
+   "IO coherency"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "f2cb7c01f48caffb38e12481949dea4f9beb65dc",
@@ -309,10 +379,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "64비트(quad-word) UFS 속성 읽기·쓰기를 처리하는 범용 함수 `ufshcd_query_attr_qword()`를 추가하고, 따로 구현돼 있던 device level exception ID 읽기와 timestamp 쓰기를 이 함수로 바꿨다. sysfs 속성 출력도 64비트 속성을 지원한다.",
+  "explanation_ko": "### 배경\n여러 전용 함수에 흩어져 있던 64비트 속성 처리를 범용 함수 하나로 모은다(커밋 메시지). TX EQ 설정 저장·조회 패치와 함께 2개 패치 시리즈를 이룬다.\n\n### 변경 내용\n- `ufshcd_query_attr_qword()`: `ufshcd_dev_man_lock()` 아래에서 query를 만들고, 쓰기는 `osf3`에 big-endian 64비트 값을 넣고, 읽기는 응답의 `osf3`에서 값을 꺼낸다. 다른 opcode는 `-EINVAL`.\n- `ufshcd_read_device_lvl_exception_id()`를 지우고 sysfs `device_lvl_exception_id`가 새 함수를 쓴다(UFS 4.1 미만 검사는 sysfs로 옮김).\n- `ufshcd_set_timestamp_attr()`가 새 함수로 timestamp를 쓴다.\n- sysfs 속성 매크로가 `QUERY_ATTR_IDN_TIMESTAMP`, `DEV_LVL_EXCEPTION_ID`를 64비트로 읽어 `0x%016llX`로 출력한다.\n\n### 영향\n기존 기능은 같다. 이전에는 32비트로 읽혀 출력되던 timestamp 같은 64비트 속성의 sysfs 출력이 전체 값으로 바뀐다.",
   "patch": "patches/f2cb7c01f48c.diff",
-  "patch_bytes": 8072
+  "patch_bytes": 8072,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "query attribute",
+   "qword",
+   "64-bit attribute",
+   "ufshcd_query_attr_qword",
+   "sysfs"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "949af038b6d2a41c54502179c5a8ddfb3d57dd17",
@@ -394,10 +479,26 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "UFS v5.0 JEDEC 속성 `qTxEQGnSettings`와 `wTxEQGnSettingsExt`로 최적 TX Equalization 설정을 장치에 저장하고 다시 읽어 쓰는 기능을 추가했다. 저장된 유효한 값이 있으면 이후 power mode 변경 때 TX EQTR을 건너뛸 수 있다.",
+  "explanation_ko": "### 배경\nUFS v5.0 JEDEC의 `qTxEQGnSettings`와 `wTxEQGnSettingsExt` 속성을 써서 최적 TX EQ 설정을 영구 저장하고 읽어 온다. 이전에 저장한 최적값을 재사용해 이후 power mode 변경 때 TX EQTR을 피하는 fast path이며, 유효한 값이 없으면 전체 TX EQTR을 하고 결과를 선택적으로 저장한다. 값의 유효성은 `wTxEQGnSettingsExt`의 Bit[15]로 표시한다(커밋 메시지). 2개 패치 시리즈의 두 번째다.\n\n### 변경 내용\n- 속성 IDN `QUERY_ATTR_IDN_TX_EQ_GN_SETTINGS`(0x47), `_EXT`(0x48)를 추가하고, 비트 배치(host/device lane별 PreShoot·DeEmphasis, precode)에 맞춘 encode/decode 헬퍼를 넣었다.\n- `ufshcd_retrieve_tx_eq_settings()`: `ufshcd_device_params_init()` 끝에서 호출돼, 적응형 TX EQ가 켜져 있고 장치가 지원하면 gear별로 유효 비트를 확인한 뒤 값을 `tx_eq_params`에 채운다.\n- `ufshcd_store_tx_eq_settings()`: `ufshcd_wl_shutdown()`에서 호출돼, TX EQTR로 얻은(`is_trained`) 유효한 설정을 두 속성에 쓴다.\n- 모듈 파라미터 `txeq_setting_sel`(속성 selector 0/1), `retrieve_txeq_setting`, `store_txeq_setting`(둘 다 기본 켜짐)을 추가했다. `struct ufshcd_tx_eq_params`에 `is_trained`를 추가했다.\n\n### 영향\n`use_adaptive_txeq`가 켜진 UFS 5.0 장치에서 셧다운 때 학습 결과가 장치에 저장되고, 다음 부팅 때 읽어 와 TX EQTR 시간을 줄일 수 있다. 적응형 TX EQ를 쓰지 않으면 영향이 없다.",
   "patch": "patches/949af038b6d2.diff",
-  "patch_bytes": 14006
+  "patch_bytes": 14006,
+  "change_type": "feature",
+  "importance": "medium",
+  "keywords": [
+   "TX Equalization",
+   "qTxEQGnSettings",
+   "wTxEQGnSettingsExt",
+   "UFS 5.0",
+   "TX EQTR",
+   "fast path"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "764f409b840ab400253215e765a72b903feb6afd",
@@ -463,10 +564,24 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
+  "summary_ko": "QMP PHY 드라이버들이 QSERDES COM v2 레지스터를 명시적인 `QSERDES_V2_COM_*` 정의로 쓰도록 바꾼 변경으로, UFS 쪽은 MSM8996과 SM6115 serdes 테이블의 레지스터 이름이 바뀌었다.",
   "explanation_ko": null,
   "patch": "patches/764f409b840a.diff",
-  "patch_bytes": 11735
+  "patch_bytes": 11735,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "QMP",
+   "QSERDES COM v2",
+   "register definitions",
+   "phy-qcom-qmp-ufs"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "c7cd4798fafa84581502094d0be282072851c9b7",
@@ -542,10 +657,24 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
+  "summary_ko": "QMP PHY의 QSERDES TXRX v2 레지스터와 헤더 이름에 버전을 명시(`QSERDES_V2_TX_*`, `QSERDES_V2_RX_*`)한 변경으로, UFS 쪽은 MSM8996과 SM6115의 tx/rx 테이블 이름이 바뀌었다.",
   "explanation_ko": null,
   "patch": "patches/c7cd4798fafa.diff",
-  "patch_bytes": 4271
+  "patch_bytes": 4271,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "QMP",
+   "QSERDES TXRX v2",
+   "rename",
+   "phy-qcom-qmp-ufs"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "2a18c57560f454e2e63373ecf00e4a6fb0265600",
@@ -588,10 +717,24 @@
   "vendors": [
    "snps"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "Synopsys TC G210 PCI 드라이버의 `pci_device_id` 배열을 멤버 순서를 알아야 읽을 수 있는 목록 초기화 대신 `PCI_VDEVICE()` 매크로로 바꿨다.",
+  "explanation_ko": "### 배경\n`struct pci_device_id` 멤버 순서를 모르면 목록 초기화를 읽기 어렵다. 관용적인 `PCI_VDEVICE` 매크로를 쓰고 명시적인 0 대입을 생략한다(커밋 메시지).\n\n### 변경 내용\n`tc_dwc_g210_pci_tbl[]`의 두 항목(0xB101, 0xB102)을 `PCI_VDEVICE(SYNOPSYS, ...)`로 바꿨다.\n\n### 영향\nx86과 arm64 빌드에서 컴파일 결과가 같음을 확인했다고 한다.",
   "patch": "patches/2a18c57560f4.diff",
-  "patch_bytes": 600
+  "patch_bytes": 600,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "tc-dwc-g210-pci",
+   "PCI_VDEVICE",
+   "Synopsys",
+   "cleanup"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "8ef4c72dbbfda41b8f83a9b5a275feaf4a30ea21",
@@ -637,10 +780,23 @@
   "vendors": [
    "intel"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`ufshcd-pci`의 `pci_device_id` 배열을 모두 `PCI_VDEVICE()`와 `.driver_data` 지정 초기화로 통일했다.",
+  "explanation_ko": "### 배경\n배열이 여러 방식으로 초기화돼 있었고, 목록 초기화는 구조체 멤버 순서를 외우지 않으면 읽기 어렵다(커밋 메시지).\n\n### 변경 내용\nRed Hat(QEMU), Samsung, Intel 항목을 모두 `PCI_VDEVICE(VENDOR, id), .driver_data = ...` 형태로 바꿨다.\n\n### 영향\nx86과 arm64 빌드에서 컴파일 결과가 같음을 확인했다고 한다.",
   "patch": "patches/8ef4c72dbbfd.diff",
-  "patch_bytes": 2651
+  "patch_bytes": 2651,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "ufshcd-pci",
+   "PCI_VDEVICE",
+   "cleanup"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "e72323f3b09f9c890fa93a74197bbc290d39d981",
@@ -686,10 +842,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "link startup 직후 장치가 보고한 연결 TX/RX lane 수가 `lanes_per_direction`과 다르면 `-ENOLINK`로 초기화를 실패시키는 `ufshcd_validate_link_params()`를 추가했다. 지원되지 않는 lane 구성으로 진행해 power mode 전환이 실패하는 것을 미리 막는다.",
+  "explanation_ko": "### 배경\nlink startup에서 감지되는 연결 lane 수가 DT에 지정한 lane 수보다 적을 수 있는데, 기존 드라이버는 실제 가용 여부와 관계없이 DT의 모든 lane을 설정하려 했다. 이 불일치는 power mode 변경 실패로 이어질 수 있다(커밋 메시지). qcom Auto Hibern8 clock request 패치와 함께 2개 패치 시리즈를 이룬다.\n\n### 변경 내용\n`ufshcd_link_startup()`에서 link startup 후 `POST_CHANGE` notify 전에 `PA_CONNECTEDTXDATALANES`와 `PA_CONNECTEDRXDATALANES`를 읽어 `hba->lanes_per_direction`과 비교하고, 다르면 \"Tx/Rx lane mismatch\" 오류와 함께 `-ENOLINK`를 반환한다.\n\n### 영향\nlane 구성이 맞지 않는 보드는 이후 단계가 아니라 link startup에서 실패한다. 그런데 이 검사는 `lanes_per_direction`을 설정하지 않는 PCI 컨트롤러를 깨뜨려 같은 v7.2의 `06a34d9c1f47`에서 보완됐고, DT에 속성이 없는 R-Car S4도 깨뜨려 v7.3의 `c9ee65113326`에서 quirk가 추가됐다.",
   "patch": "patches/e72323f3b09f.diff",
-  "patch_bytes": 1326
+  "patch_bytes": 1326,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "link startup",
+   "lanes_per_direction",
+   "PA_CONNECTEDTXDATALANES",
+   "ENOLINK",
+   "power mode"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "76417038c4d61fc3d407625c0b9332942f13e142",
@@ -745,10 +916,25 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "Auto Hibern8을 지원하는 qcom 플랫폼에서 link startup 후 `UFS_AH8_CFG`의 클럭 요청 비트들을 켜, 컨트롤러가 Hibern8 진입 시 clk_req를 스스로 내려 GCC가 쓰지 않는 클럭을 끌 수 있게 했다.",
+  "explanation_ko": "### 배경\nAuto Hibern8(AH8)을 지원하는 플랫폼에서 UFS 컨트롤러는 Hibern8 상태에 들어갈 때 Global Clock Controller(GCC)로 가는 clk_req 신호를 스스로 내릴 수 있고, 그러면 GCC가 쓰지 않는 클럭을 gating해 전력 효율이 좋아진다. HPG 권고대로 `UFS_AH8_CFG`의 `UFS_HW_CLK_CTRL_EN`을 설정한다(커밋 메시지). 2개 패치 시리즈의 두 번째다.\n\n### 변경 내용\n- `UFS_HW_CLK_CTRL_EN`을 SYS, ICE core, UniPro core, AUX 클럭 요청 비트(BIT 2~5)의 조합으로 정의했다.\n- `ufs_qcom_link_startup_notify()`의 `POST_CHANGE`에서 auto-hibern8을 지원하면 이 비트들을 `UFS_AH8_CFG`에 켠다.\n\n### 영향\nqcom 플랫폼에서 auto-hibern8 중 UFS 관련 클럭이 하드웨어적으로 꺼져 유휴 전력이 줄어든다.",
   "patch": "patches/76417038c4d6.diff",
-  "patch_bytes": 1523
+  "patch_bytes": 1523,
+  "change_type": "performance",
+  "importance": "medium",
+  "keywords": [
+   "ufs-qcom",
+   "Auto Hibern8",
+   "clock request",
+   "UFS_AH8_CFG",
+   "power saving"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "8933fa6695aaea6559d3469581139a4c1f427369",
@@ -804,10 +990,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "M-PHY 6.0 스펙이 허용하는 것보다 긴 Adapt L0L1L2L3 길이로 TX EQTR을 수행할 수 있는 호스트를 위해 quirk `UFSHCD_QUIRK_EXTENDED_TX_EQTR_ADAPT_LENGTH_L0L1L2L3`을 추가했다. quirk가 있으면 최대값 초과를 오류로 처리하지 않는다.",
+  "explanation_ko": "### 배경\nM-PHY 스펙 6.0이 허용하는 것보다 큰 Adapt L0L1L2L3 길이로 TX Equalization Training을 지원하는 호스트를 위한 quirk를 추가한다(커밋 메시지). qcom 적용 패치와 함께 2개 패치 시리즈를 이룬다.\n\n### 변경 내용\n- `UFSHCD_QUIRK_EXTENDED_TX_EQTR_ADAPT_LENGTH_L0L1L2L3`(`1 << 28`)을 정의했다.\n- `ufshcd_setup_tx_eqtr_adapt_length()`에서 local 또는 peer의 `RX_HS_G*_ADAPT_INITIAL_L0L1L2L3_CAP`이 `ADAPT_L0L1L2L3_LENGTH_MAX`를 넘으면 오류 로그를 남기되, quirk가 있으면 `-EINVAL`을 반환하지 않고 계속한다.\n\n### 영향\nquirk를 켠 호스트에서는 스펙 최대값을 넘는 Adapt 길이로도 TX EQTR이 진행된다. 다른 호스트는 동작이 같다.",
   "patch": "patches/8933fa6695aa.diff",
-  "patch_bytes": 1717
+  "patch_bytes": 1717,
+  "change_type": "feature",
+  "importance": "low",
+  "keywords": [
+   "TX EQTR",
+   "Adapt L0L1L2L3",
+   "quirk",
+   "M-PHY 6.0"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "0f51fd84684316375d5c191a1ec5e18743fb1601",
@@ -854,10 +1054,24 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "Qualcomm UFS 호스트 HW 버전 7.1에서 `UFSHCD_QUIRK_EXTENDED_TX_EQTR_ADAPT_LENGTH_L0L1L2L3` quirk를 켜도록 했다.",
+  "explanation_ko": "### 배경\nHW 메이저 0x7, 마이너 0x1인 UFS 호스트에 확장 TX EQTR Adapt L0L1L2L3 길이 quirk를 적용한다(커밋 메시지). quirk를 추가한 core 패치와 함께 2개 패치 시리즈를 이룬다.\n\n### 변경 내용\n`ufs_qcom_advertise_quirks()`에서 `hw_ver.major == 0x7 && hw_ver.minor == 0x1`이면 해당 quirk를 설정한다.\n\n### 영향\n이 버전의 qcom 호스트에서 TX EQTR 시 core가 정의한 확장 Adapt 길이를 쓴다. 다른 버전은 영향이 없다.",
   "patch": "patches/0f51fd846843.diff",
-  "patch_bytes": 561
+  "patch_bytes": 561,
+  "change_type": "hardware",
+  "importance": "low",
+  "keywords": [
+   "ufs-qcom",
+   "TX EQTR",
+   "quirk",
+   "Adapt length"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "727e78887e62e16be30ec7ecf62017f0a86d53bd",
@@ -901,10 +1115,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "호출처가 하나뿐인 짧은 함수 `ufshcd_get_uic_cmd_result()`와 `ufshcd_get_dme_attr_val()`을 `ufshcd_uic_cmd_compl()` 안에 인라인했다.",
+  "explanation_ko": "### 배경\n두 함수는 구현이 매우 짧고 호출처가 하나뿐이다(커밋 메시지). UIC 명령 관련 3개 패치 시리즈의 첫 번째다.\n\n### 변경 내용\n`ufshcd_uic_cmd_compl()`이 `REG_UIC_COMMAND_ARG_2`의 결과 바이트와 `REG_UIC_COMMAND_ARG_3`의 DME 속성 값을 직접 읽어 `cmd->argument2`, `cmd->argument3`에 저장한다.\n\n### 영향\n동작 변화는 없다.",
   "patch": "patches/727e78887e62.diff",
-  "patch_bytes": 1864
+  "patch_bytes": 1864,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "UIC command",
+   "inline",
+   "cleanup",
+   "ufshcd_uic_cmd_compl"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "9fb4c793223b618da6bee50840746522a7da226e",
@@ -948,10 +1176,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "UFSHCI 표준상 UIC argument 2의 최하위 바이트는 출력값이므로, UIC 명령을 보낼 때 그 바이트가 0이 아니면 `WARN_ON_ONCE()`로 경고하도록 했다.",
+  "explanation_ko": "### 배경\nUFSHCI 표준에 따르면 UIC argument 2의 최하위 바이트는 출력값이고, `ufshcd_uic_cmd_compl()`은 이 바이트가 0이라는 가정 아래 결과를 OR로 저장한다. 그래서 명령 제출 시 결과 바이트가 이미 설정돼 있으면 경고한다(커밋 메시지). UIC 명령 관련 3개 패치 시리즈의 두 번째다.\n\n### 변경 내용\n`ufshcd_dispatch_uic_cmd()`에 `WARN_ON_ONCE(uic_cmd->argument2 & MASK_UIC_COMMAND_RESULT)`를 추가했다.\n\n### 영향\n잘못 초기화된 UIC 명령을 보내는 코드가 경고로 드러난다. 정상 경로의 동작은 같다.",
   "patch": "patches/9fb4c793223b.diff",
-  "patch_bytes": 443
+  "patch_bytes": 443,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "UIC command",
+   "argument2",
+   "WARN_ON_ONCE",
+   "UFSHCI"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "f8380c57dcff5ac3b32393a05ff6a6ff0108bf3e",
@@ -995,10 +1237,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "UIC 명령 전송(`UFS_CMD_SEND`) trace를 남길 때 레지스터를 `readl()`로 다시 읽지 않고 명령 구조체에 있는 값을 쓰도록 `ufshcd_add_uic_command_trace()`를 최적화했다.",
+  "explanation_ko": "### 배경\n명령 제출 시 trace에 레지스터를 읽는 대신 캐시된 값을 쓴다(커밋 메시지). UIC 명령 관련 3개 패치 시리즈의 마지막이다.\n\n### 변경 내용\n`UFS_CMD_SEND`일 때는 `ucmd->command`, `argument1~3`을 trace에 쓰고, 완료 등 다른 경우에만 `REG_UIC_COMMAND`와 `REG_UIC_COMMAND_ARG_1~3`을 읽는다.\n\n### 영향\ntrace가 켜져 있을 때 UIC 명령 전송마다 MMIO 읽기 3번이 줄어든다. trace가 꺼져 있으면 영향이 없다.",
   "patch": "patches/f8380c57dcff.diff",
-  "patch_bytes": 1158
+  "patch_bytes": 1158,
+  "change_type": "performance",
+  "importance": "low",
+  "keywords": [
+   "UIC command",
+   "tracing",
+   "readl",
+   "optimization"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "06a34d9c1f47b923bb554de25406a5251b047379",
@@ -1053,10 +1309,26 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "같은 v7.2에서 추가된 link 파라미터 검증이 `lanes_per_direction`을 설정하지 않는 PCI 컨트롤러(예: Intel, QEMU UFS)에서 항상 lane 수 불일치로 link startup을 실패시키던 회귀를 고쳤다. 값이 0이면 검증을 건너뛴다.",
+  "explanation_ko": "### 배경\n`e72323f3b09f`(\"Configure only active lanes during link\")가 추가한 `ufshcd_validate_link_params()`는 장치가 보고한 연결 lane 수가 `hba->lanes_per_direction`과 다르면 `-ENOLINK`로 link startup을 실패시킨다. 그런데 이 값은 ufshcd-pltfrm만 설정하고(기본 2 또는 DT 속성) ufshcd-pci 컨트롤러는 0으로 남겨 두므로, 장치가 항상 1 이상을 보고하는 이상 검사가 맞을 수 없어 link startup이 항상 실패했다. QEMU UFS 장치로 재현됐다(커밋 메시지).\n\n### 변경 내용\n`ufshcd_validate_link_params()` 시작에서 `lanes_per_direction`이 0이면 0을 반환한다.\n\n### 영향\nIntel 등 PCI UFS 컨트롤러와 QEMU UFS가 v7.2에서 다시 초기화된다. 원인 커밋과 같은 릴리스 안에서 고쳐졌다.",
   "patch": "patches/06a34d9c1f47.diff",
-  "patch_bytes": 781
+  "patch_bytes": 781,
+  "change_type": "fix",
+  "importance": "high",
+  "keywords": [
+   "link startup",
+   "lanes_per_direction",
+   "ufshcd-pci",
+   "regression",
+   "QEMU",
+   "ENOLINK"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "4cf752f6b99ab63506cde5a611d4219e97adbd84",
@@ -1110,10 +1382,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`ufshcd_tag_to_cmd()`가 NULL을 돌려줄 수 있는데 `ufshcd_mcq_sqe_search()`, `ufshcd_set_req_abort_skip()`, `ufshcd_try_to_abort_task()`가 확인 없이 `scsi_cmd_priv()`로 역참조하던 문제를 고쳤다.",
+  "explanation_ko": "### 배경\n`ufshcd_tag_to_cmd()`는 tag에 연결된 명령이 없으면 NULL을 반환할 수 있다. 여러 호출자가 이를 확인하지 않고 `scsi_cmd_priv()`로 lrbp를 구해 NULL 역참조 가능성이 있었다(커밋 메시지).\n\n### 변경 내용\n- `ufshcd_mcq_sqe_search()`: 명령이 없으면 `false`를 반환한다(`UFSHCD_QUIRK_MCQ_BROKEN_RTC` 검사 뒤).\n- `ufshcd_set_req_abort_skip()`: 명령이 없는 tag는 건너뛴다.\n- `ufshcd_try_to_abort_task()`: 명령이 없으면 `-EINVAL`을 반환한다.\n- 세 곳 모두 lrbp 계산을 NULL 확인 뒤로 옮겼다.\n\n### 영향\nabort·에러 처리 중 이미 완료돼 명령이 사라진 tag를 만나도 크래시하지 않는다. Fixes나 stable 태그는 없다.",
   "patch": "patches/4cf752f6b99a.diff",
-  "patch_bytes": 1885
+  "patch_bytes": 1885,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "NULL dereference",
+   "ufshcd_tag_to_cmd",
+   "abort",
+   "scsi_cmd_priv",
+   "MCQ"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "2483ae0a56231a915c706411421c6c002a2bf83e",
@@ -1167,10 +1454,23 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`ufshcd_transfer_rsp_status()`에서 예상하지 못한 UPIU 응답을 받았을 때, 항상 0인 `result` 대신 실제 응답 코드(`ufshcd_get_req_rsp()`)를 출력하도록 고쳤다.",
+  "explanation_ko": "### 배경\n내부 switch의 default 경우가 예상치 못한 응답 코드를 출력하려 했지만, 그 시점에 항상 0인 `result` 변수를 출력해 디버깅에 쓸모가 없었다(커밋 메시지). 원인은 v6.6의 `08108d31129a`다.\n\n### 변경 내용\n오류 메시지 인자를 `ufshcd_get_req_rsp(lrbp->ucd_rsp_ptr)`로 바꿨다.\n\n### 영향\n로그에 실제 UPIU 응답 코드가 찍힌다. 동작은 같다.",
   "patch": "patches/2483ae0a5623.diff",
-  "patch_bytes": 445
+  "patch_bytes": 445,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "UPIU response",
+   "error log",
+   "ufshcd_transfer_rsp_status"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "6bfc4bfd041d7ddeab9791f0592284585e960be4",
@@ -1215,10 +1515,23 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "void를 반환하는 vops 래퍼 `ufshcd_vops_exit()`, `ufshcd_vops_setup_task_mgmt()`, `ufshcd_vops_hibern8_notify()`에서 불필요한 `return`을 지워 다른 래퍼와 형식을 맞췄다.",
+  "explanation_ko": "### 배경\n다른 void vops 래퍼는 `return` 없이 호출하는데 이 세 함수만 `return hba->vops->xxx()` 형태였다(커밋 메시지).\n\n### 변경 내용\n`ufshcd-priv.h`의 세 래퍼에서 `return`을 지웠다.\n\n### 영향\n동작 변화는 없다.",
   "patch": "patches/6bfc4bfd041d.diff",
-  "patch_bytes": 1222
+  "patch_bytes": 1222,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "vops",
+   "cleanup",
+   "ufshcd-priv.h"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "0600eec09ad6cc5ba3ca78aceb6fa8dcbad010bb",
@@ -1263,10 +1576,23 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`ufshcd_variant_hba_init()`의 중복 vops NULL 검사를 지우고, `ufshcd_vops_exit()`만 감싸던 `ufshcd_variant_hba_exit()`를 제거했다.",
+  "explanation_ko": "### 배경\nvops 래퍼들이 이미 내부에서 NULL을 검사하므로 호출 전의 `if (!hba->vops)` 검사는 중복이다(커밋 메시지).\n\n### 변경 내용\n`ufshcd_variant_hba_init()`이 바로 `ufshcd_vops_init()`을 호출하고, `ufshcd_hba_exit()`은 `ufshcd_vops_exit()`을 직접 호출한다.\n\n### 영향\n동작 변화는 없다.",
   "patch": "patches/0600eec09ad6.diff",
-  "patch_bytes": 1058
+  "patch_bytes": 1058,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "vops",
+   "cleanup",
+   "ufshcd_variant_hba_init"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "63977ab3c6a07e5f50c95d0c8fd83d37d56812a8",
@@ -1313,10 +1639,23 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`qcom,sm8650-ufshc.yaml` binding에 Qualcomm Hawi 플랫폼 UFS 컨트롤러 호환 문자열 `qcom,hawi-ufshc`를 추가했다.",
+  "explanation_ko": "### 배경\nHawi 플랫폼의 UFS 컨트롤러를 문서화한다(커밋 메시지).\n\n### 변경 내용\n`select`와 `compatible` 목록에 `qcom,hawi-ufshc`를 추가했다.\n\n### 영향\nHawi DTS를 binding으로 검증할 수 있다. Hawi용 UFS PHY는 이후 v7.3에서 추가된다.",
   "patch": "patches/63977ab3c6a0.diff",
-  "patch_bytes": 731
+  "patch_bytes": 731,
+  "change_type": "docs",
+  "importance": "low",
+  "keywords": [
+   "dt-bindings",
+   "Hawi",
+   "qcom,sm8650-ufshc.yaml"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "01d5e237b33931b970dd190dd6a19c5ef32c105d",
@@ -1380,10 +1719,26 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "wl resume 중 보낸 PM START STOP UNIT이 타임아웃되면 SCSI EH가 링크를 복구한 뒤에도 재시도가 `SHOST_RECOVERY` 상태에 걸려 실패하던 경쟁을 고쳤다. PM 동작 중 타임아웃은 `ufshcd_eh_timed_out()`에서 링크 복구 후 해당 명령을 직접 완료한다.",
+  "explanation_ko": "### 배경\nwell-known LU resume 경로의 START STOP UNIT이 타임아웃되면, `scsi_execute_cmd()`가 반환하기 전에 SCSI EH가 `ufshcd_eh_host_reset_handler()`로 링크를 복구할 수 있다. EH가 명령을 끝내 resume 태스크를 깨우지만 호스트는 아직 `SHOST_RECOVERY` 상태라, 뒤이은 passthrough 재시도가 `SCMD_FAIL_IF_RECOVERING` 경로에서 `BLK_STS_OFFLINE`으로 실패했다. 장치가 이미 ACTIVE로 복구됐는데도 `DID_ERROR`나 `DID_NO_CONNECT`로 끝난 것이다(커밋 메시지). Fixes 대상은 v6.9의 `b8c3a7bac9b6`이다.\n\n### 변경 내용\n- `ufshcd_eh_timed_out()`이 `hba->system_suspending` 대신 `hba->pm_op_in_progress`를 기준으로, PM 동작 중이면 SCSI EH에 넘기지 않고 직접 처리한다.\n- `ufshcd_link_recovery()` 후 명령이 아직 완료되지 않았으면, SDB 모드에서는 `outstanding_reqs` 비트를 지우고, 일반 SCSI 명령은 `DID_REQUEUE`로(MCQ 강제 완료와 같은 의미), reserved 내부 장치 관리 명령은 `ufshcd_release_scsi_cmd()` 없이 `DID_TIME_OUT`으로 `scsi_done()`한다. 반환값은 항상 `SCSI_EH_DONE`이다.\n- 더 이상 필요 없는 `system_suspending` 플래그를 제거했다.\n\n### 영향\nsuspend/resume 중 PM 명령이 타임아웃돼도 링크 복구 후 `scsi_execute_cmd()`가 정상적으로 재시도할 수 있어 resume 실패가 줄어든다. 판단 기준이 시스템 suspend에서 모든 PM 동작(runtime PM 포함)으로 넓어졌다. v6.9 이후 커널에 해당한다.",
   "patch": "patches/01d5e237b339.diff",
-  "patch_bytes": 3118
+  "patch_bytes": 3118,
+  "change_type": "fix",
+  "importance": "high",
+  "keywords": [
+   "START STOP UNIT",
+   "PM",
+   "timeout",
+   "SCSI EH",
+   "SHOST_RECOVERY",
+   "ufshcd_eh_timed_out"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "9d87e0db00e9a2d281d11ae226eaf4d9b47376e2",
@@ -1429,10 +1784,24 @@
   "vendors": [
    "intel"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`ufshcd-pci`에 AMD UFS 컨트롤러 PCI ID 1022:1B29를 추가했다. 별도 vops 없이 기본 동작으로 쓴다.",
+  "explanation_ko": "### 배경\nAMD UFS 컨트롤러용 PCI 장치 ID 0x1022:0x1B29를 추가한다(커밋 메시지).\n\n### 변경 내용\n`ufshcd_pci_tbl[]`에 `PCI_VDEVICE(AMD, 0x1B29)`를 `.driver_data = 0`으로 추가했다.\n\n### 영향\n해당 AMD 플랫폼에서 PCI UFS 컨트롤러가 ufshcd-pci 드라이버로 probe된다. 벤더 전용 vops가 없으므로 표준 UFSHCI 동작에 의존한다.",
   "patch": "patches/9d87e0db00e9.diff",
-  "patch_bytes": 614
+  "patch_bytes": 614,
+  "change_type": "hardware",
+  "importance": "medium",
+  "keywords": [
+   "ufshcd-pci",
+   "AMD",
+   "PCI ID",
+   "1B29"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "995832b2cebe6969d1b42635db698803ee31294d",
@@ -9104,10 +9473,24 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
+  "summary_ko": "`<linux/mod_devicetable.h>`를 더 구체적인 `<linux/device-id/*.h>` 헤더로 바꾸는 트리 전반 변경으로, UFS 쪽은 MediaTek UFS PHY 드라이버에서 해당 include가 빠졌다.",
   "explanation_ko": null,
   "patch": "patches/995832b2cebe.diff",
-  "patch_bytes": 422
+  "patch_bytes": 422,
+  "change_type": "treewide",
+  "importance": "low",
+  "keywords": [
+   "mod_devicetable.h",
+   "device-id",
+   "treewide",
+   "phy-mtk-ufs"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "535fcf4b8a261fbb8cc4f91e4597343c135a90f2",
@@ -9164,10 +9547,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "UFS trace event의 `TP_printk()`가 trace를 읽는 시점에 `hba->dev`를 역참조하던 문제를 고친 패치로, 같은 내용이 SCSI 트리 쪽 커밋(`46aea2c64e11`)으로도 들어왔다. 기록 시점에 장치 이름을 링 버퍼에 복사해 출력한다.",
+  "explanation_ko": "### 배경\n`TP_printk()`는 trace 파일을 읽을 때 실행되므로, 그때 hba 포인터가 이미 해제됐을 수 있다. v6.15의 `583e518e7100` 이후 UFS trace event가 저장된 hba 포인터로 장치 이름을 출력해 크래시 가능성이 있었다(커밋 메시지). 이 커밋은 tracing 쪽에서 들어온 것으로, diff는 같은 v7.2의 `46aea2c64e11`과 동일하다.\n\n### 변경 내용\n각 UFS trace event에 `__string(dev_name, ...)` 필드를 추가해 `TP_fast_assign()`에서 복사하고, `TP_printk()`는 `__get_str(dev_name)`을 출력한다.\n\n### 영향\n`46aea2c64e11`과 같다. 같은 수정이 두 트리를 거쳐 머지됐으며, 결과 코드는 한 번 적용한 것과 같다.",
   "patch": "patches/535fcf4b8a26.diff",
-  "patch_bytes": 6216
+  "patch_bytes": 6216,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "tracing",
+   "TP_printk",
+   "use-after-free",
+   "trace event",
+   "duplicate merge"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "46aea2c64e110ed1878fa5363f86ddc8fd79c9c4",
@@ -9225,10 +9623,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "UFS trace event의 `TP_printk()`가 trace를 읽는 시점에 `hba->dev` 포인터를 역참조해, 그때 이미 해제된 객체를 읽어 크래시할 수 있던 문제를 고쳤다. 기록 시점에 장치 이름을 링 버퍼에 저장하고 출력 때는 그 문자열을 쓴다.",
+  "explanation_ko": "### 배경\nv6.15의 `583e518e7100`이 trace event에 hba 포인터를 넘기도록 바꾸면서, `TP_printk()`에서 저장된 포인터를 통해 `dev_name(__entry->hba->dev)`를 출력하게 됐다. `TP_printk()`는 이벤트를 기록할 때가 아니라 `/sys/kernel/tracing/trace`를 읽을 때 실행되므로, 몇 초에서 몇 달 뒤일 수 있고 그때 hba가 남아 있다는 보장이 없다. 이런 잘못된 역참조를 찾는 trace 검사 코드로 발견됐다(커밋 메시지).\n\n### 변경 내용\n`ufshcd_clk_gating`, `ufshcd_clk_scaling`, `ufshcd_auto_bkops_state`, profiling·일반 템플릿, `ufshcd_command`, `ufshcd_uic_command`, `ufshcd_upiu`, `ufshcd_exception_event`에 `__string(dev_name, ...)` 필드를 추가하고 `TP_fast_assign()`에서 `__assign_str()`로 복사한 뒤, `TP_printk()`에서는 `__get_str(dev_name)`을 출력한다.\n\n### 영향\nUFS 장치가 제거된 뒤 trace를 읽어도 커널이 해제된 메모리를 읽지 않는다. 이벤트마다 장치 이름 문자열만큼 링 버퍼 사용량이 늘어난다. `Cc: stable` 대상이며 v6.15 이후 커널에 해당한다.",
   "patch": "patches/46aea2c64e11.diff",
-  "patch_bytes": 6216
+  "patch_bytes": 6216,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "tracing",
+   "TP_printk",
+   "use-after-free",
+   "trace event",
+   "ufs_trace.h"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "4d5282c06ca198319c2de41b10511ddcb8068f42",
@@ -9287,10 +9700,25 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`qcom,sa8255p-ufshc` DT binding에 빠져 있던 MCQ 레지스터 영역을 추가했다. `reg`를 최대 2개로 늘리고 `reg-names`(`std`, `mcq`)를 정의했다.",
+  "explanation_ko": "### 배경\nSA8255P/SA8797P의 Qualcomm UFS 컨트롤러에는 MCQ I/O 주소 공간이 있다. Linux 드라이버가 지금 쓰지 않더라도 binding에는 정의돼야 하며, DTS가 이 binding을 채택하기 전에 고친다(커밋 메시지). Fixes 대상은 v7.0의 `e2725ed2a7fb`이다.\n\n### 변경 내용\n`reg`를 `minItems: 1, maxItems: 2`로 바꾸고 `reg-names`에 `std`, `mcq`를 정의했다.\n\n### 영향\nSA8255P/SA8797P DTS에 MCQ 영역을 기술할 수 있다. 드라이버 동작은 바뀌지 않는다. `Cc: stable` 대상이다.",
   "patch": "patches/4d5282c06ca1.diff",
-  "patch_bytes": 564
+  "patch_bytes": 564,
+  "change_type": "docs",
+  "importance": "low",
+  "keywords": [
+   "dt-bindings",
+   "SA8255P",
+   "MCQ",
+   "reg-names",
+   "qcom"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "f71b4a30983b846b4075bf544e835121e70e6a43",
@@ -9346,10 +9774,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "active-active suspend 경로가 RTC 업데이트 work 취소를 건너뛰어, 벤더 suspend 콜백이 하드웨어 상태를 바꾸는 중에 RTC work가 컨트롤러에 접근해 SError가 날 수 있던 문제를 고쳤다.",
+  "explanation_ko": "### 배경\n`ufs_rtc_update_work`는 주기적으로 query 명령을 보내 장치 RTC를 갱신한다. v7.0의 `b0bd84c39289`가 일반 suspend 경로에서 이 work 취소를 벤더 `PRE_CHANGE` suspend 콜백 앞으로 옮겼지만, 장치·링크를 모두 active로 두는 active-active 경로는 eeh_work만 flush하고 `vops_suspend`로 바로 점프해 취소를 건너뛰었다. 그 사이 RTC work가 돌면 클럭 gating 중인 컨트롤러에 접근해 SError가 날 수 있다(커밋 메시지).\n\n### 변경 내용\n- active-active 경로에서도 `vops_suspend`로 가기 전에 `cancel_delayed_work_sync(&hba->ufs_rtc_update_work)`를 호출한다.\n- resume에서 RTC work 재예약을 장치·링크 상태 복원 블록 밖으로 옮겨, active-active suspend 뒤에도 RTC 업데이트가 다시 시작되게 했다.\n\n### 영향\nactive-active suspend를 쓰는 플랫폼에서 suspend 중 SError 가능성이 사라진다. v7.0 이후 커널에 해당한다.",
   "patch": "patches/f71b4a30983b.diff",
-  "patch_bytes": 964
+  "patch_bytes": 964,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "RTC",
+   "suspend",
+   "SError",
+   "ufs_rtc_update_work",
+   "active-active"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "8a309036f557d3ff4efb2beea5132ba91172d934",
@@ -9414,10 +9857,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "v6.16에서 UFS 인터럽트 처리를 threaded IRQ 핸들러로 넘긴 변경이 여러 성능 회귀를 일으켜 되돌렸다. MCQ 인터럽트 처리 수정과 SCSI host lock 순서 수정은 유지한다.",
+  "explanation_ko": "### 배경\n`3c7ac40d7322`(\"Delegate the interrupt service routine to a threaded IRQ handler\", v6.16)로 인한 성능 회귀가 여러 차례 보고됐다(커밋 메시지).\n\n### 변경 내용\n- `3c7ac40d7322`와 `6475cfb81fc4`(\"Avoid IRQ thread wakeup during active UIC command\")의 대부분을 되돌렸다. hardirq에서 `IRQ_WAKE_THREAD`를 반환하던 `ufshcd_intr()`를 지우고, 기존 `ufshcd_threaded_intr()`를 다시 `ufshcd_intr()`라는 이름의 일반 IRQ 핸들러로 쓴다.\n- `devm_request_threaded_irq(..., IRQF_ONESHOT | IRQF_SHARED, ...)` 대신 `devm_request_irq(..., IRQF_SHARED, ...)`로 등록한다.\n- `034d319c8899`(MCQ 모드 인터럽트 처리 수정)와 `eabcac808ca3`(SCSI host lock IRQ 순서 수정)는 유지했다.\n\n### 영향\nv6.16부터 threaded IRQ로 처리되던 UFS 완료 인터럽트가 다시 hardirq 컨텍스트에서 처리돼, 보고된 I/O 성능 회귀가 해소된다. Pixel 6에서 테스트됐다. 인터럽트를 스레드로 옮기려던 목적(실시간성 등)은 다시 원래 상태로 돌아간다.",
   "patch": "patches/8a309036f557.diff",
-  "patch_bytes": 2449
+  "patch_bytes": 2449,
+  "change_type": "performance",
+  "importance": "high",
+  "keywords": [
+   "revert",
+   "threaded IRQ",
+   "interrupt handler",
+   "performance regression",
+   "ufshcd_intr"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "0279fd451a9971c0d5b959fc59f3e11b55e1694e",
@@ -9484,10 +9942,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`hba->rpmbs` 리스트 초기화를 `ufs_rpmb_probe()`에서 `ufshcd_alloc_host()`로 옮겨, RPMB probe가 실패했을 때 장치 해제 경로에서 초기화되지 않은 리스트로 NULL 역참조가 나던 문제를 고쳤다.",
+  "explanation_ko": "### 배경\n`ufs_rpmb_probe()`가 리스트를 초기화하기 전에 실패하면 장치 teardown 경로에서 NULL 포인터 역참조가 날 수 있었다(커밋 메시지). 원인은 v6.19의 OP-TEE 기반 RPMB 드라이버(`b06b8c421485`)다.\n\n### 변경 내용\n`ufs_rpmb_probe()`의 `INIT_LIST_HEAD(&hba->rpmbs)`를 지우고, `ufshcd_alloc_host()`에서 초기화한다.\n\n### 영향\nRPMB 초기화 실패 후에도 UFS 제거 경로가 안전하다. v6.19 이후 커널에 해당한다.",
   "patch": "patches/0279fd451a99.diff",
-  "patch_bytes": 902
+  "patch_bytes": 902,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "RPMB",
+   "OP-TEE",
+   "NULL dereference",
+   "list init",
+   "ufshcd_alloc_host"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  },
  {
   "sha": "872f486259ae0bc6b73ca4735a15d013241f73e9",
@@ -9552,9 +10025,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
+  "summary_ko": "SCSI EH가 한 반복 안에서 `eh_noresume`를 두 번 읽어, PM 경로가 그 사이 값을 바꾸면 runtime PM get 없이 put만 실행돼 usage count가 언더플로될 수 있던 문제를 고쳤다. EH는 값을 한 번 스냅샷해 get/put에 같이 쓰고, UFS는 `WRITE_ONCE()`로 값을 쓴다.",
   "explanation_ko": null,
   "patch": "patches/872f486259ae.diff",
-  "patch_bytes": 699
+  "patch_bytes": 699,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "SCSI EH",
+   "runtime PM",
+   "eh_noresume",
+   "usage count underflow",
+   "READ_ONCE"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:36:43+00:00"
+  }
  }
 ]

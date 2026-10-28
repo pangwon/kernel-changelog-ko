@@ -1,397 +1,5 @@
 [
  {
-  "tag": "v6.1",
-  "prev_tag": "v6.0",
-  "date": "2022-12-11T14:15:18-08:00",
-  "commit_count": 36,
-  "series_count": 24,
-  "candidate_count": 19,
-  "areas": {
-   "core": 14,
-   "phy": 14,
-   "host": 6,
-   "bindings": 1,
-   "docs": 1
-  },
-  "vendors": {
-   "qcom": 15,
-   "-": 14,
-   "mediatek": 6,
-   "exynos": 1
-  },
-  "patch_bytes": 76043,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.2",
-  "prev_tag": "v6.1",
-  "date": "2023-02-19T14:24:22-08:00",
-  "commit_count": 44,
-  "series_count": 23,
-  "candidate_count": 20,
-  "areas": {
-   "core": 22,
-   "phy": 18,
-   "host": 3,
-   "bindings": 1
-  },
-  "vendors": {
-   "-": 22,
-   "qcom": 18,
-   "mediatek": 3,
-   "cdns": 1
-  },
-  "patch_bytes": 76326,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.3",
-  "prev_tag": "v6.2",
-  "date": "2023-04-23T12:02:52-07:00",
-  "commit_count": 101,
-  "series_count": 84,
-  "candidate_count": 28,
-  "areas": {
-   "core": 50,
-   "host": 24,
-   "phy": 22,
-   "bindings": 4,
-   "docs": 1
-  },
-  "vendors": {
-   "qcom": 49,
-   "-": 47,
-   "sprd": 2,
-   "exynos": 2,
-   "mediatek": 1
-  },
-  "patch_bytes": 286176,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.4",
-  "prev_tag": "v6.3",
-  "date": "2023-06-25T16:29:58-07:00",
-  "commit_count": 20,
-  "series_count": 15,
-  "candidate_count": 8,
-  "areas": {
-   "core": 13,
-   "host": 4,
-   "phy": 2,
-   "crypto": 1
-  },
-  "vendors": {
-   "-": 13,
-   "qcom": 4,
-   "exynos": 1,
-   "hisi": 1,
-   "intel": 1
-  },
-  "patch_bytes": 37864,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.5",
-  "prev_tag": "v6.4",
-  "date": "2023-08-27T14:49:51-07:00",
-  "commit_count": 43,
-  "series_count": 33,
-  "candidate_count": 12,
-  "areas": {
-   "core": 28,
-   "host": 10,
-   "bindings": 4,
-   "docs": 1
-  },
-  "vendors": {
-   "-": 29,
-   "qcom": 6,
-   "mediatek": 3,
-   "hisi": 1,
-   "snps": 1,
-   "exynos": 1,
-   "intel": 1,
-   "renesas": 1
-  },
-  "patch_bytes": 123962,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.6",
-  "prev_tag": "v6.5",
-  "date": "2023-10-29T16:31:08-10:00",
-  "commit_count": 48,
-  "series_count": 30,
-  "candidate_count": 9,
-  "areas": {
-   "core": 26,
-   "host": 14,
-   "bindings": 4,
-   "phy": 3,
-   "crypto": 1
-  },
-  "vendors": {
-   "-": 26,
-   "qcom": 13,
-   "mediatek": 3,
-   "snps": 2,
-   "ti": 1,
-   "renesas": 1,
-   "cdns": 1,
-   "intel": 1
-  },
-  "patch_bytes": 246180,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.7",
-  "prev_tag": "v6.6",
-  "date": "2024-01-07T12:18:38-08:00",
-  "commit_count": 35,
-  "series_count": 23,
-  "candidate_count": 25,
-  "areas": {
-   "core": 18,
-   "host": 14,
-   "bindings": 2,
-   "phy": 1
-  },
-  "vendors": {
-   "-": 20,
-   "qcom": 11,
-   "exynos": 2,
-   "mediatek": 1,
-   "intel": 1
-  },
-  "patch_bytes": 79583,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.8",
-  "prev_tag": "v6.7",
-  "date": "2024-03-10T13:38:09-07:00",
-  "commit_count": 46,
-  "series_count": 26,
-  "candidate_count": 28,
-  "areas": {
-   "host": 28,
-   "core": 13,
-   "bindings": 3,
-   "phy": 2
-  },
-  "vendors": {
-   "qcom": 29,
-   "-": 15,
-   "mediatek": 1,
-   "exynos": 1
-  },
-  "patch_bytes": 95217,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.9",
-  "prev_tag": "v6.8",
-  "date": "2024-05-12T14:12:29-07:00",
-  "commit_count": 29,
-  "series_count": 21,
-  "candidate_count": 27,
-  "areas": {
-   "core": 11,
-   "host": 10,
-   "phy": 5,
-   "bindings": 3
-  },
-  "vendors": {
-   "qcom": 13,
-   "-": 10,
-   "mediatek": 6
-  },
-  "patch_bytes": 62805,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.10",
-  "prev_tag": "v6.9",
-  "date": "2024-07-14T15:43:32-07:00",
-  "commit_count": 51,
-  "series_count": 22,
-  "candidate_count": 21,
-  "areas": {
-   "host": 22,
-   "core": 21,
-   "phy": 7,
-   "bindings": 1
-  },
-  "vendors": {
-   "-": 20,
-   "exynos": 13,
-   "qcom": 9,
-   "mediatek": 8,
-   "cdns": 1
-  },
-  "patch_bytes": 112104,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.11",
-  "prev_tag": "v6.10",
-  "date": "2024-09-15T16:57:56+02:00",
-  "commit_count": 39,
-  "series_count": 19,
-  "candidate_count": 22,
-  "areas": {
-   "core": 30,
-   "host": 8,
-   "bindings": 1
-  },
-  "vendors": {
-   "-": 28,
-   "qcom": 4,
-   "mediatek": 3,
-   "intel": 2,
-   "exynos": 2
-  },
-  "patch_bytes": 77289,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.12",
-  "prev_tag": "v6.11",
-  "date": "2024-11-17T14:15:08-08:00",
-  "commit_count": 21,
-  "series_count": 18,
-  "candidate_count": 3,
-  "areas": {
-   "core": 15,
-   "host": 4,
-   "phy": 1,
-   "crypto": 1
-  },
-  "vendors": {
-   "-": 17,
-   "qcom": 3,
-   "exynos": 1
-  },
-  "patch_bytes": 52771,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.13",
-  "prev_tag": "v6.12",
-  "date": "2025-01-19T15:51:45-08:00",
-  "commit_count": 63,
-  "series_count": 24,
-  "candidate_count": 19,
-  "areas": {
-   "core": 35,
-   "host": 26,
-   "bindings": 1,
-   "crypto": 1
-  },
-  "vendors": {
-   "-": 35,
-   "exynos": 14,
-   "qcom": 8,
-   "cdns": 3,
-   "renesas": 1,
-   "mediatek": 1,
-   "intel": 1
-  },
-  "patch_bytes": 102491,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.14",
-  "prev_tag": "v6.13",
-  "date": "2025-03-24T07:02:41-07:00",
-  "commit_count": 28,
-  "series_count": 20,
-  "candidate_count": 16,
-  "areas": {
-   "core": 23,
-   "host": 2,
-   "bindings": 2,
-   "phy": 1
-  },
-  "vendors": {
-   "-": 22,
-   "qcom": 3,
-   "exynos": 2,
-   "intel": 1
-  },
-  "patch_bytes": 60191,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.15",
-  "prev_tag": "v6.14",
-  "date": "2025-05-25T16:09:23-07:00",
-  "commit_count": 50,
-  "series_count": 34,
-  "candidate_count": 8,
-  "areas": {
-   "host": 26,
-   "core": 16,
-   "phy": 3,
-   "crypto": 2,
-   "bindings": 2,
-   "docs": 1
-  },
-  "vendors": {
-   "-": 15,
-   "qcom": 13,
-   "exynos": 10,
-   "renesas": 7,
-   "rockchip": 5
-  },
-  "patch_bytes": 196628,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.16",
-  "prev_tag": "v6.15",
-  "date": "2025-07-27T14:26:38-07:00",
-  "commit_count": 26,
-  "series_count": 18,
-  "candidate_count": 14,
-  "areas": {
-   "core": 14,
-   "host": 9,
-   "crypto": 2,
-   "bindings": 1
-  },
-  "vendors": {
-   "-": 14,
-   "qcom": 12
-  },
-  "patch_bytes": 71090,
-  "highlight_ko": null
- },
- {
-  "tag": "v6.17",
-  "prev_tag": "v6.16",
-  "date": "2025-09-28T14:39:22-07:00",
-  "commit_count": 50,
-  "series_count": 20,
-  "candidate_count": 12,
-  "areas": {
-   "host": 24,
-   "core": 17,
-   "phy": 7,
-   "bindings": 2
-  },
-  "vendors": {
-   "-": 17,
-   "qcom": 14,
-   "mediatek": 13,
-   "intel": 5,
-   "exynos": 1
-  },
-  "patch_bytes": 91585,
-  "highlight_ko": null
- },
- {
   "tag": "v6.18",
   "prev_tag": "v6.17",
   "date": "2025-11-30T14:42:10-08:00",
@@ -412,7 +20,91 @@
    "intel": 2
   },
   "patch_bytes": 103273,
-  "highlight_ko": null
+  "highlights_ko": {
+   "headline_ko": "v6.18은 에러 처리와 PM 경로 안정화가 중심이다. PM QoS data race, runtime suspend 에러 deadlock과 그 후속 `host_sem` 누수, UTP 오류 미복구, probe 실패를 성공으로 처리하던 오류를 고쳤다. 그 밖에 DT로 HS gear와 rate를 제한하는 기능이 생겼고, MediaTek 호스트에 power mode·auto-hibern8 수정이 대거 들어갔다.",
+   "highlights": [
+    {
+     "title_ko": "에러 핸들러와 runtime PM deadlock 수정",
+     "description_ko": "runtime suspend 중 오류로 에러 핸들러가 runtime resume을 기다리며 멈추던 deadlock을 고쳤다. PM 진행 중이면 바로 link recovery를 한다. 이 수정이 `host_sem`을 잡은 채 반환하던 문제도 같은 릴리스에서 바로잡았다. 단독 UTP 오류는 이제 fatal로 보아 호스트를 리셋해 복구한다.",
+     "commits": [
+      "f966e02ae521",
+      "e23ef4f22db3",
+      "558ae4579810"
+     ]
+    },
+    {
+     "title_ko": "CPU latency PM QoS data race 수정",
+     "description_ko": "PM QoS 요청 해제와 devfreq clock scaling이 겹치면 plist use-after-free와 리스트 손상이 나던 문제(v6.9부터)를 전용 `pm_qos_mutex`로 막았다. mutex 초기화 시점 오류도 같은 릴리스에서 고쳐졌다.",
+     "commits": [
+      "79dde5f7dc7c",
+      "0ba7a254afd0"
+     ]
+    },
+    {
+     "title_ko": "DT로 HS gear·rate 제한",
+     "description_ko": "공통 binding에 `limit-hs-gear`와 `limit-gear-rate` 속성이 생겼다. platform 공통 헬퍼 `ufshcd_parse_gear_limits()`가 추가됐고, ufs-qcom은 이를 읽어 PHY gear까지 맞춘다. 신호 무결성이 나쁜 보드에서 안정성을 우선할 때 쓴다.",
+     "commits": [
+      "91945660ac29",
+      "1cc577e64d68",
+      "88f4d3aa29c8"
+     ]
+    },
+    {
+     "title_ko": "Intel UFS의 S0ix/S3와 link startup 안정화",
+     "description_ko": "S3 같은 deep suspend에서는 `spm_lvl`을 일시적으로 5로 올린다. 두 번째 `DME_LINKSTARTUP`을 막는 quirk를 ADL에 적용했다. link startup 실패 시 양수 오류값이 그대로 반환돼 probe가 성공으로 처리되던 문제도 고쳤다(stable 대상).",
+     "commits": [
+      "bb44826c3bdb",
+      "d34caa89a132",
+      "d968e99488c4",
+      "a2b32bc1d9e3"
+     ]
+    },
+    {
+     "title_ko": "hot path IOPS 개선",
+     "description_ko": "명령 처리 경로의 `ktime_get()` 호출을 성능 모니터가 켜졌을 때나 값을 실제로 쓸 때만 하도록 줄였다. `ktime_get()` 하나당 IOPS 2~3%가 측정됐다. `struct ufshcd_lrb`도 152바이트에서 136바이트로 줄였다.",
+     "commits": [
+      "cb7cc0cfb38c",
+      "dc60a408a1dc",
+      "b5940feda3dc"
+     ]
+    },
+    {
+     "title_ko": "Qualcomm 전원·MCQ 정리",
+     "description_ko": "Qualcomm 쪽에서는 다음 변경이 들어갔다. 전원 차단 시 HW 리셋 뒤 10ms 지연으로 레귤레이터 OCP를 막는다. 컨트롤러 v5.0.0은 resume 시 Shared ICE를 sync reset한다. hibern8 중에는 lane 클럭을 끈다. MCQ 리소스는 단일 `mcq` 영역으로 매핑한다. QMP UFS PHY는 레귤레이터 load를 vote한다.",
+     "commits": [
+      "5127be409c6c",
+      "3126b5fd0227",
+      "c1553fc105df",
+      "2b9887b17ebe",
+      "df4beac9da5f"
+     ]
+    }
+   ],
+   "area_notes": [
+    {
+     "area": "core",
+     "summary_ko": "다음 변경이 있었다. MCQ 인터럽트 활성화를 `ufshcd_mcq_make_queues_operational()`로 옮겼다. DME get이 실패하면 값을 0으로 초기화한다. link startup 실패 로그를 줄였다. Kioxia UFS 4의 qTimestamp 미지원 quirk가 추가됐고, tracing enum은 내부 헤더로 옮겼다. HID sysfs 가시성 패치는 들어왔다가 sysfs race 수정과 함께 revert됐다."
+    },
+    {
+     "area": "host",
+     "summary_ko": "MediaTek에 20건이 들어갔다. 장치별 AHIT와 power mode 변경 중 auto-hibern8 비활성화, PWM 전환·PA_Init adapt·VCCQ LPM 수정, PHY runtime PM, resume과 hibern8 복구 강화, MT6989/MT6899 UniPro 설정이 포함된다. Exynos FSD는 suspend 때 ref_clk을 gate하고 장치를 리셋 상태로 둔다."
+    },
+    {
+     "area": "bindings",
+     "summary_ko": "Qualcomm binding을 공통, SC7180 계열, SM8650 계열로 나눴고 Kaanapali가 추가됐다. 공통 binding에 gear·rate 제한 속성이 문서화됐다."
+    },
+    {
+     "area": "phy",
+     "summary_ko": "Qualcomm QMP UFS PHY가 `regulator_bulk_data`와 SoC별 `init_load_uA`로 레귤레이터 load를 vote한다."
+    }
+   ]
+  },
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T03:03:02+00:00"
+  }
  },
  {
   "tag": "v6.19",
@@ -438,7 +130,97 @@
    "ti": 1
   },
   "patch_bytes": 187068,
-  "highlight_ko": null
+  "highlights_ko": {
+   "headline_ko": "v6.19의 중심은 UFS core 명령 경로 재구성이다. 장치 관리 명령을 SCSI reserved command로 옮기고 I/O hot path를 최적화했으며, 이 과정에서 생긴 회귀 4건이 같은 릴리스 안에서 수정됐다. 이 밖에 OP-TEE 기반 RPMB 드라이버, AMD Versal Gen 2 호스트, Qualcomm ICE HWKM v1이 추가됐고, VCC off 지연이 모든 장치 공통 2ms로 정리됐다.",
+   "highlights": [
+    {
+     "title_ko": "장치 관리 명령의 SCSI reserved command 전환",
+     "description_ko": "query, NOP OUT, RPMB 같은 장치 관리 명령이 고정 slot과 전용 대기 루프 대신 `scsi_get_internal_cmd()` + `blk_execute_rq()`로 실행된다. 타임아웃과 abort는 블록 계층 경로를 탄다. 21개 패치로 `hba->lrb[]`와 `lrbp->cmd`·`task_tag`를 없애고, `scsi_cmnd`와 LRB를 붙여 hot path의 간접 접근과 memset을 줄였다.",
+     "commits": [
+      "08b12cda6c44",
+      "22089c218037",
+      "1d0af94ffb5d",
+      "e5f9cc2af9a8",
+      "f46b9a595fa9"
+     ]
+    },
+    {
+     "title_ko": "재구성 직후의 회귀 수정",
+     "description_ko": "같은 릴리스 안에서 네 가지 회귀가 수정됐다. SDB 모드에서 `shared_tags`가 없어 명령 완료가 깨진 문제, SCSI host를 앞당겨 할당하면서 MCQ 설정이 link startup보다 앞서 링크가 실패한 문제, clock scaling 중 quiesce 상태에서 장치 명령을 보내 생긴 deadlock, SCSI 스캔 전 에러 핸들러의 NULL 역참조다.",
+     "commits": [
+      "02b5822d2fea",
+      "ee229e7c256a",
+      "d2875b812b14",
+      "14be351e5cd0"
+     ]
+    },
+    {
+     "title_ko": "OP-TEE 기반 UFS RPMB 드라이버",
+     "description_ko": "UFS RPMB를 커널 RPMB 서브시스템에 등록해, OP-TEE가 사용자 공간 supplicant 없이 부팅 초기부터 RPMB 보안 저장소(fTPM, UEFI 변수)를 쓸 수 있다. RPMB 프레임은 RPMB WLUN의 SECURITY PROTOCOL IN/OUT으로 전달된다.",
+     "commits": [
+      "b06b8c421485",
+      "d794b499f948",
+      "d98b4d52bff0"
+     ]
+    },
+    {
+     "title_ko": "VCC off 지연의 공통화",
+     "description_ko": "VCC를 끈 뒤 재인가까지의 지연을 특정 장치 quirk(`UFS_DEVICE_QUIRK_DELAY_AFTER_LPM`)가 아닌 모든 장치에 적용한다. 지연은 하드코딩 5ms 대신 기본 2ms인 `hba->vcc_off_delay_us`로 바꿔 resume 지연을 줄였다.",
+     "commits": [
+      "f8e82ae65eaf",
+      "4760b639b43c"
+     ]
+    },
+    {
+     "title_ko": "새 호스트·PHY·ICE 지원",
+     "description_ko": "Synopsys DWC 기반 AMD Versal Gen 2 UFS 드라이버, TI J721E suspend/resume, Google Tensor gs101 PHY의 hibern8 상태 통지, Qualcomm ICE HWKM v1 wrapped key가 추가됐다.",
+     "commits": [
+      "769b8b2ffded",
+      "02880c083c13",
+      "a1af5d2be169",
+      "d92ebadda5e3"
+     ]
+    },
+    {
+     "title_ko": "PM·에러 복구 안정성",
+     "description_ko": "W-LUN resume이 실패한 뒤 부모 `scsi_target`이 suspend 상태여서 에러 핸들러가 복구하지 못하던 문제를 고쳤다. Rockchip의 DME_RESET 타임아웃, MediaTek의 shutdown/suspend race도 수정됐고, suspend 실패도 event history에 남긴다.",
+     "commits": [
+      "b4bb6daf4ac4",
+      "b0ee72db9132",
+      "014de20bb36b",
+      "c9f36f04a8a2"
+     ]
+    }
+   ],
+   "area_notes": [
+    {
+     "area": "core",
+     "summary_ko": "명령 경로 재구성 외에 다음 변경이 있었다. CQ entry를 UFS 4.1 형식으로 갱신하고 오류 시 CQE를 덤프한다. `scsi_device_busy()`를 사용하고, 정리 6건과 BSG의 불필요한 NULL 검사 제거가 들어갔다."
+    },
+    {
+     "area": "host",
+     "summary_ko": "MediaTek은 PM QoS·clock scaling 흐름, sync length 보정, MT6899 `MMIO_OTSD_CTRL`, MT6991 multi-RTT를 반영했다(8개 패치). AMD Versal Gen 2 드라이버가 추가되고 PHY 초기화 시점이 수정됐다. Rockchip은 컨트롤러 리셋과 GPIOLIB 빌드 문제를, TI J721E는 resume을, qcom은 cleanup.h 스타일을 손봤다."
+    },
+    {
+     "area": "bindings",
+     "summary_ko": "AMD Versal Gen 2 binding이 새로 생겼다. Exynos에 `power-domains`가 허용됐고, qcom의 중복 `reg` 제약 제거, MediaTek maintainer 갱신, 공통 binding 문법 수정이 있었다."
+    },
+    {
+     "area": "phy",
+     "summary_ko": "Samsung gs101 UFS PHY에 `.notify_phystate()`와 hibern8 진입·종료 값이 추가됐다."
+    },
+    {
+     "area": "crypto",
+     "summary_ko": "Qualcomm ICE가 HWKM v1 wrapped key를 지원한다."
+    }
+   ]
+  },
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:54:31+00:00"
+  }
  },
  {
   "tag": "v7.0",
@@ -460,7 +242,84 @@
    "exynos": 1
   },
   "patch_bytes": 38678,
-  "highlight_ko": null
+  "highlights_ko": {
+   "headline_ko": "v7.0은 PM·suspend 경로의 안정성 수정이 중심이다. RPM level 0의 예외 work flush, RTC work와 vendor suspend 간 race로 인한 SError, urgent BKOPS 레벨 고착, hibern8 exit 실패 시 link recovery 위치를 바로잡았다. 이 밖에 Qualcomm SA8255P 펌웨어 관리형(SCMI) 호스트와 Milos PHY 지원, UFS 2.2 RPMB 크기 감지 수정이 들어갔다.",
+   "highlights": [
+    {
+     "title_ko": "suspend 경로의 크래시 수정",
+     "description_ko": "`rpm_lvl=0`(장치·링크 active)으로 suspend할 때 예외 이벤트 work를 flush하지 않아 절전 진입 뒤 호스트에 접근하던 문제(v3.18부터, stable 대상)를 고쳤다. RTC 갱신 work가 vendor suspend의 클럭 차단과 겹쳐 SError 패닉을 내던 race도 work 취소 시점을 앞당겨 해결했다.",
+     "commits": [
+      "f8ef441811ec",
+      "b0bd84c39289"
+     ]
+    },
+    {
+     "title_ko": "runtime PM과 hibern8 복구 동작 수정",
+     "description_ko": "BKOPS 상태 0 예외로 `urgent_bkops_lvl`이 0에 고정되면 system resume 뒤 runtime PM이 절전하지 못했는데, 이를 리셋하도록 고쳤다. v6.17에서 넣은 hibern8 exit 실패 시 link recovery는 suspend 중 enter 실패에도 걸렸으므로, `__ufshcd_wl_resume()`으로 옮겨 resume 중 exit 실패에만 동작하게 했다.",
+     "commits": [
+      "5b313760059c",
+      "62c015373e1c"
+     ]
+    },
+    {
+     "title_ko": "Qualcomm SA8255P 펌웨어 관리형 UFS 호스트",
+     "description_ko": "PHY·클럭·레귤레이터·리셋을 SCMI 펌웨어가 관리하는 SA8255P용 binding과 ufs-qcom 전용 vops가 추가됐다. 리소스 제어는 runtime PM(SCMI power domain)으로 하며, core의 새 `pm_lvl_min`이 지원하지 않는 PM level 설정을 막는다.",
+     "commits": [
+      "e2725ed2a7fb",
+      "26c06d0baeb7",
+      "ad44cf1b2845"
+     ]
+    },
+    {
+     "title_ko": "UFS 2.2 장치의 RPMB 지원 수정",
+     "description_ko": "UFS 2.2 이하 장치는 RPMB region 크기 필드가 없어 v6.19의 OP-TEE RPMB 드라이버가 RPMB를 건너뛰었다. Logical Block Count와 Size로 크기를 계산하도록 했다(stable 대상).",
+     "commits": [
+      "2e6b5cd6a4b3"
+     ]
+    },
+    {
+     "title_ko": "MCQ 안정성 수정",
+     "description_ko": "hw queue가 32개일 때 생기던 shift overflow와, command trace의 hwq NULL 역참조를 수정했다. SDB 모드도 host-wide tagset을 써서 tag 조회 경로가 단순해졌다.",
+     "commits": [
+      "2f38fd99c000",
+      "30df81f2228d",
+      "4d0538dd5d7e"
+     ]
+    },
+    {
+     "title_ko": "Qualcomm QMP UFS PHY: Milos 지원과 SM8650 G4 수정",
+     "description_ko": "Milos SoC PHY(HS-G4, 2 lane)가 추가됐다. SM8650/Eliza에서 Gear 4 link startup이 실패하던 `PLL_CNTL` 설정을 공통 테이블로 옮겼으나, 이 변경이 SM8750·kaanapali에 회귀를 일으켜 v7.1에서 보완됐다.",
+     "commits": [
+      "3554ded4f02a",
+      "81af9e40e2e4"
+     ]
+    }
+   ],
+   "area_notes": [
+    {
+     "area": "core",
+     "summary_ko": "suspend/PM 관련 수정 외에 다음 변경이 있었다. SCSI host 추가 전에는 `scsi_host_busy()`를 호출하지 않는다. HID `fragmented_size`가 sentinel 값이면 `-ENODATA`를 반환한다. 그 밖에 SCSI bus 콜백 전환, UPIU 크기 `static_assert`, `ufshcd_rmwl()` 정리, `ufshcd_rpm_put()` void화, treewide 정리(`queuecommand` 반환 타입, `hex.h`, `kmalloc_obj`)가 들어갔다."
+    },
+    {
+     "area": "host",
+     "summary_ko": "Exynos는 hibern8 진입·종료를 `phy_notify_state()`로 PHY에 알린다. MediaTek은 trace event의 page fault를 고치고 `CONFIG_PM` 의존성을 추가했다. ufs-qcom에는 SA8255P 전용 vops가 들어갔다."
+    },
+    {
+     "area": "bindings",
+     "summary_ko": "SA8255P용 새 binding `qcom,sa8255p-ufshc.yaml`이 추가됐다."
+    },
+    {
+     "area": "phy",
+     "summary_ko": "Qualcomm QMP UFS PHY에 Milos 지원과 SM8650 Gear 4 PCS 테이블 수정이 들어갔다."
+    }
+   ]
+  },
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:42+00:00"
+  }
  },
  {
   "tag": "v7.1",
@@ -484,7 +343,94 @@
    "rockchip": 2
   },
   "patch_bytes": 170209,
-  "highlight_ko": null
+  "highlights_ko": {
+   "headline_ko": "UFS 5.0/HS-G6을 위한 TX Equalization·TX EQTR이 core에 도입되고 Qualcomm에서 활성화됐다. MCQ는 UFSHCI 4.1 CQE tag와 IAG 이벤트를 지원하며, Qualcomm ICE probe race와 SM8750·kaanapali PHY PLL lock 회귀가 수정됐다.",
+   "highlights": [
+    {
+     "title_ko": "TX Equalization·TX EQTR 지원",
+     "description_ko": "새 `ufs-txeq.c`가 UniPro 3.0/UFSHCI 5.0의 TX Equalization을 구현한다. HS-G4 이상으로 전환하기 전에 HS-G1에서 PreShoot·DeEmphasis 조합별 FOM을 측정하고, lane별 최적값을 host와 device에 적용한다. 이 기능은 `use_adaptive_txeq` 모듈 파라미터로 켜며 기본은 꺼져 있다. 이를 위해 power mode 협상이 vops `negotiate_pwr_mode()`로 분리됐고, `pwr_change_notify()`와 `ufshcd_config_pwr_mode()`의 시그니처가 바뀌었다. gear별 debugfs로 설정과 FOM 기록을 볼 수 있고, `tx_eq_ctrl`에 `retrain`을 쓰면 런타임에 재학습한다.",
+     "commits": [
+      "03e5d38e2f98",
+      "d3eba21c7170",
+      "c91c83671642",
+      "10c40143f369",
+      "adbabdcf0db0"
+     ]
+    },
+    {
+     "title_ko": "Qualcomm HW 7.x의 TX EQ 하드웨어 우회와 활성화",
+     "description_ko": "HW 7.0/7.1의 제약을 vops로 우회한다. EQTR을 대상 gear에서 시작하고, 시험 설정을 `PA_TxEQG1Setting`에 쓰고, EOM 스캔으로 소프트웨어 FOM을 계산하고, PAM-4 ADAPT 길이를 2배로 보정한다(보정이 불가능하면 G5로 제한). HW 7 이상에서 `UFSHCD_CAP_TX_EQUALIZATION`을 켠다.",
+     "commits": [
+      "385b95893e79",
+      "16cbdc830877",
+      "26605db7604d",
+      "53c94067efa2",
+      "57b7943fd87f"
+     ]
+    },
+    {
+     "title_ko": "SM8750·kaanapali UFS PHY PLL lock 실패 수정",
+     "description_ko": "v7.0의 SM8650 G4 수정이 `PLL_CNTL` 설정을 SM8650 전용 테이블로 옮기면서, 공용 G5 테이블에 의존하던 SM8750·kaanapali에서 PLL이 lock되지 않아 `DME_LINKSTARTUP`이 타임아웃됐다. `sm8750_ufsphy_pcs`에 값을 추가해 고쳤다(stable 대상).",
+     "commits": [
+      "80305760d7a5"
+     ]
+    },
+    {
+     "title_ko": "Qualcomm ICE probe race와 오류 처리 정리",
+     "description_ko": "ICE probe가 실패해도 UFS/eMMC가 `-EPROBE_DEFER`로 영원히 대기하던 v6.4 이래의 문제를, probe 결과를 xarray에 저장해 고쳤다(stable 대상). `devm_of_qcom_ice_get()`은 NULL 대신 오류 코드를 반환하고, ufs-qcom은 `-EOPNOTSUPP`일 때만 인라인 암호화를 끈다. ICE가 `iface` 클럭도 직접 켜도록 했다.",
+     "commits": [
+      "d922113ef91e",
+      "b9ab7217dd7d",
+      "462a85f9f887",
+      "4ac19b36bf41",
+      "0d5dc5818191"
+     ]
+    },
+    {
+     "title_ko": "MCQ 개선: UFSHCI 4.1 CQE tag와 IAG 이벤트",
+     "description_ko": "UFSHCI 4.1 이상에서는 CQE의 `task_tag`로 tag를 바로 얻는다. 인터럽트 집계(IAG) 이벤트를 받아 CQ별 `MCQIACR`의 카운터와 타이머를 리셋한다.",
+     "commits": [
+      "f707860ebc84",
+      "98eff361647e"
+     ]
+    },
+    {
+     "title_ko": "UniPro DME QoS 이벤트의 사용자 공간 통지",
+     "description_ko": "sysfs `dme_qos_notification`이 UECDME의 TX/RX/PA_INIT QoS 비트를 보고하고 `sysfs_notify`로 깨운다. 링크 품질 모니터링 도구가 polling 없이 품질 저하를 감지할 수 있다.",
+     "commits": [
+      "b5e21a29fe94"
+     ]
+    }
+   ],
+   "area_notes": [
+    {
+     "area": "core",
+     "summary_ko": "TX EQ 외에 다음 변경이 있었다. HS-LSS 모드에서는 `bRefClkFreq`를 LS-MODE일 때만 쓰도록 고쳤다. UIC 명령이 진행 중이면 threaded IRQ를 깨우지 않는다(v7.2에서 threaded IRQ와 함께 revert됨). `UFSHCD_QUIRK_VCC_ON_DELAY`가 추가됐다. UIC·MCQ 타임아웃 디버그 로그, Kioxia THGJFJT0E25BAIP의 timestamp 비활성화, 헤더 정리도 들어갔다."
+    },
+    {
+     "area": "host",
+     "summary_ko": "Intel Nova Lake PCI ID가 추가됐다. MediaTek MT6995 + UFS 5.0 장치 조합에 VCC on 지연 quirk를 켰다. 모든 호스트 드라이버가 새 `negotiate_pwr_mode` vops 구조로 바뀌었고, rockchip은 사용하지 않는 include를 지웠다."
+    },
+    {
+     "area": "bindings",
+     "summary_ko": "Qualcomm Eliza(MCQ reg 필수), Milos, x1e80100(sm8550 fallback, `jedec,ufs-2.0` 제외) 호환 문자열이 추가됐다. RK3576에는 `mphy` reset 항목이 추가됐다."
+    },
+    {
+     "area": "phy",
+     "summary_ko": "SM8750·kaanapali의 PLL lock 실패 회귀를 수정했다."
+    },
+    {
+     "area": "crypto",
+     "summary_ko": "Qualcomm ICE의 probe race 수정, 오류 코드 정리, `iface` 클럭 처리가 들어갔다."
+    }
+   ]
+  },
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:43:54+00:00"
+  }
  },
  {
   "tag": "v7.2",
@@ -508,7 +454,91 @@
    "mediatek": 1
   },
   "patch_bytes": 86381,
-  "highlight_ko": null
+  "highlights_ko": {
+   "headline_ko": "v6.16의 threaded IRQ 처리로 생긴 성능 회귀를 되돌리고, UFS 5.0 TX Equalization 설정 저장·재사용과 link startup lane 검증이 들어왔으며, PM·EH·trace 경로의 안정성 수정이 이어진 릴리스다.",
+   "highlights": [
+    {
+     "title_ko": "threaded IRQ 핸들러 revert로 성능 회귀 해소",
+     "description_ko": "v6.16에서 UFS 인터럽트 처리를 threaded IRQ로 넘긴 변경이 여러 성능 회귀를 일으켜 되돌렸다. 완료 인터럽트가 다시 hardirq에서 처리되며, 그 사이 들어온 MCQ 인터럽트 처리 수정과 host lock 순서 수정은 유지됐다.",
+     "commits": [
+      "8a309036f557"
+     ]
+    },
+    {
+     "title_ko": "UFS 5.0 TX Equalization 설정 저장·재사용",
+     "description_ko": "64비트 속성 접근 함수를 도입하고, 학습한 최적 TX EQ 설정을 `qTxEQGnSettings`/`wTxEQGnSettingsExt`에 저장했다가 부팅 때 다시 읽어 TX EQTR을 건너뛸 수 있게 했다. 스펙보다 긴 Adapt 길이를 허용하는 quirk도 추가돼 Qualcomm HW 7.1에 적용됐다.",
+     "commits": [
+      "f2cb7c01f48c",
+      "949af038b6d2",
+      "8933fa6695aa",
+      "0f51fd846843"
+     ]
+    },
+    {
+     "title_ko": "link startup lane 검증과 그 회귀 수정",
+     "description_ko": "link startup 직후 연결 lane 수가 `lanes_per_direction`과 다르면 초기화를 실패시키는 검증이 추가됐다. 그런데 이 값을 설정하지 않는 PCI 컨트롤러(Intel, QEMU UFS)가 모두 초기화에 실패하는 회귀가 생겨, 같은 릴리스에서 값이 0이면 검증을 건너뛰도록 고쳤다(DT 속성이 없는 R-Car S4 문제는 v7.3에서 수정).",
+     "commits": [
+      "e72323f3b09f",
+      "06a34d9c1f47"
+     ]
+    },
+    {
+     "title_ko": "PM·EH·suspend 경로 안정성 수정",
+     "description_ko": "resume 중 START STOP UNIT 타임아웃이 EH 복구 뒤에도 재시도에서 실패하던 경쟁을 UFS가 직접 처리하도록 고쳤고, EH의 runtime PM get/put 불균형과 active-active suspend 중 RTC work로 인한 SError 가능성도 바로잡았다. RPMB probe 실패 후 리스트 미초기화, NULL 명령 역참조 수정도 포함됐다.",
+     "commits": [
+      "01d5e237b339",
+      "872f486259ae",
+      "f71b4a30983b",
+      "0279fd451a99",
+      "4cf752f6b99a"
+     ]
+    },
+    {
+     "title_ko": "trace event의 해제된 포인터 역참조 제거",
+     "description_ko": "trace를 읽는 시점에 `TP_printk()`가 hba 포인터를 역참조하던 문제를 기록 시점에 장치 이름을 복사하는 방식으로 고쳤다. 같은 패치가 tracing·SCSI 두 트리로 머지됐고 stable 대상이다.",
+     "commits": [
+      "46aea2c64e11",
+      "535fcf4b8a26"
+     ]
+    },
+    {
+     "title_ko": "새 플랫폼: ExynosAutov920, AMD PCI, Qualcomm Nord·SA8797P·Hawi",
+     "description_ko": "ExynosAutov920 드라이버 지원과 binding, AMD UFS PCI ID(1022:1B29)가 추가됐다. Qualcomm Nord, SA8797P, Hawi UFS 컨트롤러 binding이 들어왔고, SA8255P binding에는 빠져 있던 MCQ 영역이 추가됐다. qcom은 Auto Hibern8 중 클럭 요청 해제로 유휴 전력을 줄였다.",
+     "commits": [
+      "50349bd5d0ab",
+      "9d87e0db00e9",
+      "c9ee94c7e2fb",
+      "7030e16247dc",
+      "63977ab3c6a0",
+      "76417038c4d6"
+     ]
+    }
+   ],
+   "area_notes": [
+    {
+     "area": "core",
+     "summary_ko": "threaded IRQ revert, TX EQ 설정 저장·재사용, link lane 검증과 그 회귀 수정이 핵심이다. PM 명령 타임아웃 처리, RTC work 취소, trace 포인터 역참조, NULL 명령 역참조 수정과 UIC 명령·vops 래퍼 정리가 함께 들어왔다."
+    },
+    {
+     "area": "host",
+     "summary_ko": "ExynosAutov920 지원, AMD PCI ID 추가, qcom의 Auto Hibern8 클럭 요청과 TX EQTR quirk 적용이 있었다. PCI ID 테이블 정리와 Kconfig 이름 통일 같은 정리도 포함됐다."
+    },
+    {
+     "area": "phy",
+     "summary_ko": "QMP v2 QSERDES 레지스터 이름에 버전을 명시하는 정리와, MediaTek UFS PHY의 헤더 include 정리(트리 전반 변경)만 있었다."
+    },
+    {
+     "area": "bindings",
+     "summary_ko": "Qualcomm Nord, SA8797P, Hawi UFS 컨트롤러와 ExynosAutov920이 문서화됐고, SA8255P binding에 MCQ 레지스터 영역이 추가됐다."
+    }
+   ]
+  },
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:37:30+00:00"
+  }
  },
  {
   "tag": "v7.3",
@@ -531,6 +561,93 @@
    "intel": 2
   },
   "patch_bytes": 82691,
-  "highlight_ko": null
+  "highlights_ko": {
+   "headline_ko": "UFS 5.0의 AGGREGATED READ와 보드별 정적 TX Equalization 지원이 들어오고, 에러 복구 데드락·probe 중 clock gating·ARPMB 응답 버퍼 초과 같은 안정성 수정이 다수 포함된 릴리스다.",
+   "highlights": [
+    {
+     "title_ko": "UFS 5.0 AGGREGATED READ query 지원",
+     "description_ko": "여러 Descriptor·Attribute·Flag를 한 번에 가져오는 AGGREGATED READ opcode(0x9)를 bsg로 쓸 수 있게 됐다. 응답이 수 KiB까지 커질 수 있어 장치 관리용 reserved tag에만 4KiB 응답 영역의 전용 UCD를 두고, 일반 I/O UCD는 그대로 유지한다.",
+     "commits": [
+      "8f5bbff8749a",
+      "dca46c4ff2cd"
+     ]
+    },
+    {
+     "title_ko": "TX Equalization: DT 정적 설정과 안정화",
+     "description_ko": "보드별 TX EQ 값(gear별 PreShoot/DeEmphasis, G6 precode)을 DT로 줄 수 있게 됐고, 적응형 TX EQ가 없을 때의 대체값으로 쓰인다. TX EQTR 경로의 메모리 reclaim 데드락을 `memalloc_noio_save()`로 막았고, FOM 읽기 실패나 학습 실패 시에도 설정 복원과 벤더 정리가 이뤄지도록 오류 경로를 보강했다.",
+     "commits": [
+      "ce36dbeb2951",
+      "ecb8d6da1356",
+      "760fc6f0e25a",
+      "890b10e76e6c",
+      "4bd0875b7e57",
+      "f13faec1d4c1"
+     ]
+    },
+    {
+     "title_ko": "에러 복구·probe·MCQ 리셋 경로의 데드락과 멈춤 수정",
+     "description_ko": "에러 처리 중 내부 명령 큐까지 멈춰 복구가 영원히 기다리던 데드락(v6.19부터), probe 중 clock 참조 없이 레지스터에 접근해 clock gating으로 멈출 수 있던 문제(v6.13부터), MCQ 호스트 리셋 중 꺼진 컨트롤러의 CQ tail 포인터를 읽던 문제가 고쳐졌다. 대기 루프가 busy loop가 되던 `io_schedule_timeout()` 사용도 바로잡았다.",
+     "commits": [
+      "b52d695d0620",
+      "02a317831963",
+      "375f3a5691dd",
+      "469fa055664b",
+      "720d8b2f2457"
+     ]
+    },
+    {
+     "title_ko": "Advanced RPMB 응답 버퍼 초과 쓰기 수정과 입력 검증 강화",
+     "description_ko": "bsg-lib의 96바이트 응답 버퍼에 104바이트 ARPMB 응답이 쓰이며 8바이트를 넘어 쓰던 문제를 transport별 응답 크기 지정으로 고쳤다(v6.3부터, stable 대상). 문자열 디스크립터, lane 수, RPMB 프레임 길이·정렬, debugfs 입력 등 장치·사용자 입력을 검증하는 6개 패치도 함께 들어왔다.",
+     "commits": [
+      "ec6b083915e8",
+      "d96e83d028d7",
+      "331bda797e6a",
+      "9e6dd452f1af",
+      "a947b8edbdce",
+      "2f434f815ee2"
+     ]
+    },
+    {
+     "title_ko": "플랫폼 지원: Hawi PHY, Intel UFS 4.0, R-Car S4, MediaTek RTT",
+     "description_ko": "Qualcomm Hawi의 QMP UFS PHY(HS-G5)와 Maili binding이 추가됐고, ICE v5 이상도 허용된다. Intel UFS 4.0 PCI 컨트롤러는 HS-G5 링크 학습 안정화와 MCQ 활성화가 들어왔다. v7.2 회귀로 부팅하지 못하던 R-Car S4는 quirk로 복구됐고, MediaTek은 MT6995 B0 이후 호스트가 보고하는 RTT 수를 그대로 쓴다.",
+     "commits": [
+      "2f7b4bc47b1e",
+      "c709c76f4cf1",
+      "ef675ea16845",
+      "c46cc9cee39b",
+      "c9ee65113326",
+      "75f529a7bcd4"
+     ]
+    }
+   ],
+   "area_notes": [
+    {
+     "area": "core",
+     "summary_ko": "AGGREGATED READ 지원, TX EQTR 데드락·오류 경로 수정, 에러 복구·probe·MCQ 리셋 경로의 안정성 수정, 입력 검증 강화가 중심이다. RTT 수 결정이 `get_hba_nortt()` 콜백으로 바뀌었고, sysfs HS_GEAR6 표시와 lock context 분석 활성화 같은 정리도 있었다."
+    },
+    {
+     "area": "host",
+     "summary_ko": "Intel UFS 4.0 PCI의 HS-G5·MCQ 지원, R-Car S4 lane 수 quirk, 정적 TX EQ DT 파싱이 플랫폼 드라이버에 들어왔다. qcom은 link startup 모드 복원과 devfreq 하향 기준 완화, TX EQ 복원 수정을, MediaTek은 RTT 콜백 구현과 mPHY power-on 실패 처리를 받았다."
+    },
+    {
+     "area": "phy",
+     "summary_ko": "Qualcomm Hawi SoC의 UFS QMP PHY 지원(v7 PCS, v8 QSERDES, HS-G5 PCS overlay)이 추가됐다."
+    },
+    {
+     "area": "bindings",
+     "summary_ko": "`ufs-common.yaml`에 정적 TX Equalization 속성이 문서화됐고, qcom binding에 Maili 호환 문자열이 추가됐다."
+    },
+    {
+     "area": "crypto",
+     "summary_ko": "Qualcomm ICE 드라이버가 버전 3 이상을 모두 허용해 ICE v5 이상 SoC에서도 인라인 암호화를 쓸 수 있다."
+    }
+   ]
+  },
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:33:28+00:00"
+  }
  }
 ]

@@ -50,10 +50,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`ufshcd_mcq_enable_esi()`에서 직접 구현한 read-modify-write와 매직 넘버 0x2를 `ufshcd_rmwl()`과 새 매크로 `ESI_ENABLE`(BIT(1))로 바꿨다.",
+  "explanation_ko": "### 배경\n`ufshcd_mcq_enable_esi()`가 `ufshcd_readl()`/`ufshcd_writel()`로 read-modify-write를 직접 구현하고 enable 비트에 하드코딩된 0x2를 쓴다. 헬퍼와 매크로로 가독성을 높인다(커밋 메시지).\n\n### 변경 내용\n`ufshci.h`에 `ESI_ENABLE`을 정의하고 `ufshcd_rmwl(hba, ESI_ENABLE, ESI_ENABLE, REG_UFS_MEM_CFG)`로 바꿨다.\n\n### 영향\n동작 변화는 없다.",
   "patch": "patches/e642331c9420.diff",
-  "patch_bytes": 881
+  "patch_bytes": 881,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "MCQ",
+   "ESI",
+   "ufshcd_rmwl",
+   "ESI_ENABLE"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "bf91b35a46ceef08a1e64c54b0e611fcae531e7a",
@@ -97,10 +111,23 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`ufshcd_rpm_put()`이 아무도 쓰지 않는 `pm_runtime_put()` 반환값을 전달하던 것을, 반환값을 버리고 `void`를 반환하도록 바꿨다.",
+  "explanation_ko": "### 배경\n`ufshcd_rpm_put()`의 반환값은 쓰이지 않는다. `pm_runtime_put()`의 오류는 suspend 확인 work를 큐잉하지 않았다는 뜻일 뿐이며, sysfs `control`에 \"on\"을 쓴 경우처럼 정상적인 상황에서도 생긴다. `pm_runtime_put()` 반환 타입을 나중에 void로 바꾸기 위한 준비다(커밋 메시지).\n\n### 변경 내용\n`ufshcd-priv.h`의 `ufshcd_rpm_put()`을 `static inline void`로 바꿨다.\n\n### 영향\n의도된 동작 변화는 없다.",
   "patch": "patches/bf91b35a46ce.diff",
-  "patch_bytes": 575
+  "patch_bytes": 575,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "runtime PM",
+   "pm_runtime_put",
+   "ufshcd_rpm_put"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "7d42bcea57ae139e2ed754425cc5fc44e260c890",
@@ -180,10 +207,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
+  "summary_ko": "`scsi_register_driver()`/`scsi_unregister_driver()`가 `struct device_driver` 대신 `struct scsi_driver`를 받도록 바뀐 SCSI core 변경에 맞춰, UFS의 WLUN 드라이버 등록 호출을 수정했다.",
   "explanation_ko": null,
   "patch": "patches/7d42bcea57ae.diff",
-  "patch_bytes": 701
+  "patch_bytes": 701,
+  "change_type": "treewide",
+  "importance": "low",
+  "keywords": [
+   "treewide",
+   "scsi_register_driver",
+   "scsi_driver",
+   "SCSI core"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "44859905375ff4d739cca2113408336a90ed227d",
@@ -228,10 +269,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "UFS device WLUN용 SCSI 드라이버가 `gendrv`의 probe/remove/shutdown 대신 SCSI 버스 전용 콜백(`struct scsi_driver`의 `.probe/.remove/.shutdown`)을 쓰도록 바꿨다. bus probe 방식으로 전환하라는 런타임 경고가 사라진다.",
+  "explanation_ko": "### 배경\nSCSI 서브시스템이 probe, remove, shutdown 전용 콜백을 구현했으므로 이를 사용한다. 드라이버를 bus probe 방식으로 변환해야 한다는 런타임 경고를 없앤다(커밋 메시지).\n\n### 변경 내용\n`ufshcd_wl_probe/remove/shutdown()`이 `struct scsi_device *`를 받도록 시그니처를 바꾸고(remove는 void 반환), `ufs_dev_wlun_template`의 최상위 필드에 등록했다.\n\n### 영향\n동작은 같고 부팅 시 경고가 사라진다.",
   "patch": "patches/44859905375f.diff",
-  "patch_bytes": 1669
+  "patch_bytes": 1669,
+  "change_type": "cleanup",
+  "importance": "low",
+  "keywords": [
+   "SCSI bus",
+   "scsi_driver",
+   "WLUN",
+   "probe",
+   "shutdown"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "309b23a1553acdc6b8534682ee1782c9598e0e2e",
@@ -281,10 +337,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "UPIU 구조체 주석을 JEDEC UFS 표준 용어(QUERY REQUEST UPIU, RESPONSE UPIU)로 고치고, `utp_upiu_query`(20바이트)와 `utp_cmd_rsp`(40바이트)의 크기를 검증하는 `static_assert()`를 추가했다.",
+  "explanation_ko": "### 배경\n소스 주석에 JEDEC UFS 표준 용어를 써서 드라이버 코드와 표준을 비교하기 쉽게 하고, 표준에 정의된 자료구조의 크기를 `static_assert()`로 검증한다(커밋 메시지).\n\n### 변경 내용\n- uapi `scsi_bsg_ufs.h`의 `struct utp_upiu_query` kerneldoc을 표준 용어로 다시 썼다.\n- `include/ufs/ufs.h`에 `static_assert(sizeof(struct utp_upiu_query) == 20)`와 `static_assert(sizeof(struct utp_cmd_rsp) == 40)`를 추가했다.\n\n### 영향\n동작 변화는 없다. 구조체 레이아웃이 실수로 바뀌면 컴파일 단계에서 잡힌다.",
   "patch": "patches/309b23a1553a.diff",
-  "patch_bytes": 2299
+  "patch_bytes": 2299,
+  "change_type": "docs",
+  "importance": "low",
+  "keywords": [
+   "UPIU",
+   "static_assert",
+   "documentation",
+   "JEDEC"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "202d5dadd3a0fada6aa756c9fdeb2062aad89f79",
@@ -328,10 +398,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`scsi_host_busy()`는 `scsi_add_host()`에서 초기화되는 tag set을 순회하므로, SCSI host가 추가된 뒤(`scsi_host_added`)에만 호출하도록 했다.",
+  "explanation_ko": "### 배경\n`scsi_host_busy()`는 host tag set을 순회하며, tag set은 `scsi_add_host()`가 부르는 `scsi_mq_setup_tags()`에서 초기화된다. 따라서 host 추가 뒤에만 호출해야 한다. SCSI core의 `a0b7780602b1`(\"scsi: core: Fix a regression triggered by scsi_host_busy()\")을 되돌리기 위한 준비 작업이다(커밋 메시지).\n\n### 변경 내용\n- `ufshcd_is_ufs_dev_busy()`: `hba->scsi_host_added`일 때만 `scsi_host_busy()`를 본다.\n- `ufshcd_print_host_state()`: host 추가 전이면 outstanding reqs를 0으로 출력한다.\n\n### 영향\nprobe 초기(host 추가 전)의 clock gating이나 에러 처리 경로에서 초기화되지 않은 tag set에 접근하지 않는다. SCSI core의 우회 코드를 제거할 수 있게 됐다.",
   "patch": "patches/202d5dadd3a0.diff",
-  "patch_bytes": 1039
+  "patch_bytes": 1039,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "scsi_host_busy",
+   "scsi_host_added",
+   "tag set",
+   "probe"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "3554ded4f02aa8e95af66911aa666b2cd192022d",
@@ -380,10 +464,24 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "Qualcomm Milos SoC의 UFS QMP PHY 초기화 테이블(serdes/tx/rx/pcs)과 설정(2 lane, 최대 HS-G4, 레귤레이터 부하값)을 추가하고 `qcom,milos-qmp-ufs-phy` 호환 문자열을 등록했다.",
+  "explanation_ko": "### 배경\nMilos SoC에 있는 UFS QMP PHY의 init sequence 테이블과 설정을 추가한다(커밋 메시지).\n\n### 변경 내용\n- `milos_ufsphy_serdes/tx/rx/pcs` 테이블을 추가했다. PCS의 HS gear capability는 4다.\n- `milos_ufsphy_cfg`: 2 lane, `qmp_ufs_offsets_v6`, `max_supported_gear = UFS_HS_G4`이며, HS rate B serdes는 SM8550 테이블을 재사용한다. `vdda-phy` 140120uA, `vdda-pll` 18340uA 부하를 쓴다.\n- OF match table에 `qcom,milos-qmp-ufs-phy`를 추가했다.\n\n### 영향\nMilos 기반 기기(Fairphone 등)에서 UFS PHY가 HS-G4까지 동작한다. 호스트 binding은 v7.1에서 추가됐다.",
   "patch": "patches/3554ded4f02a.diff",
-  "patch_bytes": 5456
+  "patch_bytes": 5456,
+  "change_type": "hardware",
+  "importance": "medium",
+  "keywords": [
+   "phy-qcom-qmp-ufs",
+   "Milos",
+   "QMP PHY",
+   "HS-G4"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "07959ef517b853e834eadd0647d3860252af8f99",
@@ -429,10 +527,24 @@
   "vendors": [
    "exynos"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "Exynos UFS 호스트가 hibern8 진입·종료 콜백에서 `phy_notify_state()`로 UFS PHY에 `PHY_UFS_HIBERN8_ENTER/EXIT` 상태를 알리도록 했다. PHY 드라이버가 상태에 맞는 값을 설정할 수 있게 하기 위해서다.",
+  "explanation_ko": "### 배경\nUFS PHY가 hibern8 링크 상태에 맞는 값을 프로그래밍할 수 있도록 상태를 통지한다(커밋 메시지).\n\n### 변경 내용\n- `exynos_ufs_pre_hibern8()`: hibern8 exit 직전, 클럭을 ungate한 뒤 `PHY_UFS_HIBERN8_EXIT`를 통지한다.\n- `exynos_ufs_post_hibern8()`: hibern8 enter 직후, 클럭을 gate한 뒤 `PHY_UFS_HIBERN8_ENTER`를 통지한다.\n\n### 영향\n새 PHY 통지 API를 구현한 Exynos 계열 PHY 드라이버(예: Google Tensor gs101)가 hibern8 상태별 설정을 적용할 수 있다. 통지를 구현하지 않은 PHY에는 영향이 없다.",
   "patch": "patches/07959ef517b8.diff",
-  "patch_bytes": 1431
+  "patch_bytes": 1431,
+  "change_type": "hardware",
+  "importance": "low",
+  "keywords": [
+   "ufs-exynos",
+   "phy_notify_state",
+   "hibern8",
+   "PHY"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "695df7ea6099aadc11fac8d510e4b7c5839508e3",
@@ -477,10 +589,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "JEDEC 스펙상 `dHIDAvailableSize`가 0xFFFFFFFF이면 유효한 단편화 크기 정보가 없다는 뜻이므로, sysfs `fragmented_size`가 이 값을 그대로 보여주지 않고 `-ENODATA`를 반환하도록 했다.",
+  "explanation_ko": "### 배경\nJEDEC UFS 스펙은 `dHIDAvailableSize`의 0xFFFFFFFF를 유효한 단편화 크기 정보가 없음으로 정의한다. 원시 값을 반환하면 사용자 공간이 오해할 수 있다(커밋 메시지).\n\n### 변경 내용\n`fragmented_size_show()`에서 값이 `UFS_HID_AVAILABLE_SIZE_INVALID`(0xFFFFFFFF)이면 `-ENODATA`를 반환한다.\n\n### 영향\nHID(Host Initiated Defragmentation) 지원 장치에서 크기 정보가 없을 때 사용자 공간이 4G 같은 잘못된 값을 읽지 않는다.",
   "patch": "patches/695df7ea6099.diff",
-  "patch_bytes": 682
+  "patch_bytes": 682,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "HID",
+   "defragmentation",
+   "dHIDAvailableSize",
+   "sysfs",
+   "ENODATA"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "24c776355f4097316a763005434ffff716aa21a8",
@@ -1138,10 +1265,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
+  "summary_ko": "`<linux/kernel.h>`에서 `<linux/hex.h>`를 빼는 treewide 정리로, hex 함수를 쓰는 `ufshcd.c`에 `#include <linux/hex.h>`를 직접 추가했다.",
   "explanation_ko": null,
   "patch": "patches/24c776355f40.diff",
-  "patch_bytes": 373
+  "patch_bytes": 373,
+  "change_type": "treewide",
+  "importance": "low",
+  "keywords": [
+   "treewide",
+   "kernel.h",
+   "hex.h",
+   "include cleanup"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "0db3f51839fe703173966f34a4327e3a0c7cc089",
@@ -1701,10 +1842,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
+  "summary_ko": "SCSI 전체에서 `.queuecommand()` 콜백의 반환 타입을 `int`에서 `enum scsi_qc_status`로 바꾼 treewide 변경으로, UFS의 `ufshcd_queuecommand()`와 `ufshcd_queue_reserved_command()`도 함께 바뀌었다. 동작 변화는 없다.",
   "explanation_ko": null,
   "patch": "patches/0db3f51839fe.diff",
-  "patch_bytes": 957
+  "patch_bytes": 957,
+  "change_type": "treewide",
+  "importance": "low",
+  "keywords": [
+   "treewide",
+   "queuecommand",
+   "scsi_qc_status",
+   "clang"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "e2725ed2a7fb5f5f468020a52bd9ffc54caa7c8c",
@@ -1757,10 +1912,25 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "펌웨어(SCMI)가 PHY·클럭·레귤레이터·리셋을 관리하는 Qualcomm SA8255P UFS 호스트용 새 binding `qcom,sa8255p-ufshc.yaml`을 추가했다. DT에는 MMIO, 인터럽트, IOMMU, power-domain만 기술하며 `qcom,ufshc`/`jedec,ufs-2.0` fallback은 쓰지 않는다.",
+  "explanation_ko": "### 배경\nSA8255P는 펌웨어가 SCMI 서버를 구현해 PHY, 클럭, 레귤레이터, 리셋을 SCMI power 프로토콜로 관리한다. 그래서 OS에 보이는 DT는 컨트롤러의 MMIO, 인터럽트, IOMMU, power-domain 인터페이스만 기술한다. 리소스를 직접 관리하는 드라이버와 호환되지 않으므로 일반 `qcom,ufshc`, `jedec,ufs-2.0` 호환 문자열을 빼 둔다(커밋 메시지). SA8255P 지원 3개 패치 시리즈의 첫 번째다.\n\n### 변경 내용\n`compatible: qcom,sa8255p-ufshc`와 `reg`, `interrupts`, `iommus`, `dma-coherent`, `power-domains`(모두 필수)를 정의하고 `ufs-common.yaml`을 참조하는 새 스키마를 추가했다.\n\n### 영향\nSA8255P DTS를 binding으로 검증할 수 있다.",
   "patch": "patches/e2725ed2a7fb.diff",
-  "patch_bytes": 1377
+  "patch_bytes": 1377,
+  "change_type": "docs",
+  "importance": "low",
+  "keywords": [
+   "dt-bindings",
+   "SA8255P",
+   "SCMI",
+   "firmware-managed",
+   "power-domains"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "26c06d0baeb7999e44cf6717fc12d58a359eba99",
@@ -1814,10 +1984,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`struct ufs_hba`에 `pm_lvl_min` 필드를 추가해, sysfs `rpm_lvl`/`spm_lvl`로 플랫폼이 지원하지 않는 낮은 PM level을 설정하지 못하게 했다.",
+  "explanation_ko": "### 배경\n일부 UFS 플랫폼은 PM level 중 일부만 지원하는데, sysfs가 최소값을 검증하지 않아 지원하지 않는 level을 고르면 suspend가 실패할 수 있다(커밋 메시지). SA8255P 펌웨어 관리형 리소스 지원 3개 패치 시리즈의 두 번째다.\n\n### 변경 내용\n`hba->pm_lvl_min`을 추가하고, `ufs_sysfs_pm_lvl_store()`에서 이보다 작은 값을 `-EINVAL`로 거부한다. 플랫폼은 probe 때 이 값을 설정한다.\n\n### 영향\n기본값 0이면 기존과 같다. 필드를 설정한 플랫폼(SA8255P 등)에서는 잘못된 PM level로 인한 suspend 실패를 막는다.",
   "patch": "patches/26c06d0baeb7.diff",
-  "patch_bytes": 1409
+  "patch_bytes": 1409,
+  "change_type": "feature",
+  "importance": "low",
+  "keywords": [
+   "PM level",
+   "pm_lvl_min",
+   "sysfs",
+   "rpm_lvl",
+   "spm_lvl"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "ad44cf1b2845303285fec8bb25a02d0d0f103a82",
@@ -1878,10 +2063,26 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "PHY·클럭·레귤레이터·리셋을 펌웨어(SCMI 서버)가 관리하는 Qualcomm SA8255P용 호환 문자열과 별도 vops를 추가했다. 리소스 제어는 SCMI power domain을 통해 `pm_runtime_get/put_sync()`로만 하며, clock scaling·gating은 아직 지원하지 않는다.",
+  "explanation_ko": "### 배경\nSA8255P에서는 PHY, 클럭, 레귤레이터, 리셋 같은 리소스를 펌웨어가 SCMI 서버로 관리한다. SCMI power 프로토콜로 이를 추상화하고 runtime PM API로 전원 동작을 호출한다. 이 모델에서는 clock scaling과 gating을 아직 지원하지 않으며 점진적으로 추가할 예정이다(커밋 메시지). SA8255P 지원 3개 패치 시리즈의 세 번째다.\n\n### 변경 내용\n- `ufs_hba_qcom_sa8255p_vops`: `init`은 ICE·testbus·quirk·gear 제한만 설정하고 `spm_lvl`/`rpm_lvl`/`pm_lvl_min`을 `UFS_PM_LVL_5`로 고정한다. `hce_enable_notify`는 UniPro 모드 선택, HW clock gating, ICE 활성화만 한다. `suspend`/`resume`은 `pm_runtime_put_sync()`/`pm_runtime_resume_and_get()`과 ICE suspend/resume을 호출한다. `device_reset`은 콜드 부트를 건너뛰고 이후에는 power domain을 껐다 켜서 리셋한다.\n- `struct ufs_qcom_drvdata`에 `vops` 필드를 추가하고, probe가 match data의 vops를 사용한다. `qcom,sa8255p-ufshc`를 등록했다.\n\n### 영향\nSA8255P(차량용) 보드에서 UFS를 쓸 수 있다. 기존 qcom 플랫폼은 그대로다.",
   "patch": "patches/ad44cf1b2845.diff",
-  "patch_bytes": 6804
+  "patch_bytes": 6804,
+  "change_type": "hardware",
+  "importance": "medium",
+  "keywords": [
+   "ufs-qcom",
+   "SA8255P",
+   "SCMI",
+   "firmware-managed",
+   "runtime PM",
+   "power domain"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "4d0538dd5d7e21b4615fbc81424b0fae0b12a9fb",
@@ -1943,10 +2144,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "SDB(single doorbell) 모드에서도 SCSI host tagset을 host-wide로 설정했다. SDB에는 요청 큐가 하나뿐이라 동작 차이는 없고, `ufshcd_tag_to_cmd()`가 항상 `shared_tags`를 쓰도록 hot path를 단순화할 수 있다.",
+  "explanation_ko": "### 배경\nSDB 모드에는 요청 큐가 하나뿐이라 host tagset이 host-wide인지 여부는 상관없다. host-wide로 설정하면 hot path를 단순화할 수 있다(커밋 메시지).\n\n### 변경 내용\n- `ufshcd_driver_template`에 `.host_tagset = true`를 설정하고, `ufshcd_mcq_init()`의 `host->host_tagset = 1`을 지웠다.\n- `ufshcd_tag_to_cmd()`는 분기 없이 `tag_set.shared_tags`를 사용한다.\n\n### 영향\nSDB와 MCQ 모두 같은 tag 조회 경로를 쓰게 되어 명령 처리 경로가 약간 가벼워진다.",
   "patch": "patches/4d0538dd5d7e.diff",
-  "patch_bytes": 1735
+  "patch_bytes": 1735,
+  "change_type": "performance",
+  "importance": "low",
+  "keywords": [
+   "SDB",
+   "host_tagset",
+   "shared_tags",
+   "hot path",
+   "ufshcd_tag_to_cmd"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "f8ef441811ec413717f188f63d99182f30f0f08e",
@@ -2004,10 +2220,26 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "RPM level이 0(장치·링크 모두 active)인 suspend 경로에서 예외 이벤트 처리 work를 flush하지 않아, 시스템이 깊은 절전에 들어간 뒤 호스트 컨트롤러에 접근해 크래시가 날 수 있었다. 이 경로에서도 auto BKOPS를 끄고 `eeh_work`를 flush하도록 고쳤다.",
+  "explanation_ko": "### 배경\nRPM level이 `UFS_PM_LVL_0`이면 장치 power mode와 링크 상태가 모두 active로 유지되는데, UFS core는 이때 예외 이벤트 처리 작업의 flush를 건너뛰었다. 그래서 시스템이 이미 깊은 절전 상태에 들어간 뒤 드라이버가 예외를 처리하려고 호스트 컨트롤러에 접근해 크래시가 날 수 있었다(커밋 메시지). Fixes 대상은 v3.18의 `57d104c153d3`이며 stable 대상이다.\n\n### 변경 내용\n`__ufshcd_wl_suspend()`에서 active/active 조건으로 바로 `vops_suspend`로 가기 전에 `ufshcd_disable_auto_bkops()`와 `flush_work(&hba->eeh_work)`를 호출한다.\n\n### 영향\n`rpm_lvl=0`을 쓰는 시스템(Pixel 등)에서 suspend 중 불법 하드웨어 접근으로 인한 크래시가 사라진다.",
   "patch": "patches/f8ef441811ec.diff",
-  "patch_bytes": 458
+  "patch_bytes": 458,
+  "change_type": "fix",
+  "importance": "high",
+  "keywords": [
+   "suspend",
+   "RPM level 0",
+   "eeh_work",
+   "exception event",
+   "auto BKOPS",
+   "stable"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "9672ed3de7d772ceddd713c769c05e832fc69bae",
@@ -2053,10 +2285,25 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MediaTek `ufs_mtk_clk_scale` trace event가 클럭 이름 문자열의 포인터만 저장해, 모듈 언로드 뒤 trace buffer를 읽으면 page fault가 나던 문제를 `__string()`/`__assign_str()`로 문자열을 ring buffer에 복사해 고쳤다.",
+  "explanation_ko": "### 배경\n`ufs_mtk_clk_scale` trace event는 `__field(const char *, name)`으로 문자열 주소만 저장한다. MediaTek UFS 드라이버는 모듈로 빌드될 수 있어서, 모듈을 내린 뒤 trace buffer에 접근하면 무효한 메모리를 참조해 page fault가 난다(커밋 메시지).\n\n### 변경 내용\n`ufs-mediatek-trace.h`에서 `__string(name, name)`, `__assign_str(name)`, `__get_str(name)`을 쓰도록 바꿨다.\n\n### 영향\n`CONFIG_SCSI_UFS_MEDIATEK`와 ftrace가 켜져 있고 해당 이벤트를 활성화한 경우에만 의미가 있다. 엔트리당 몇 바이트가 늘어난다.",
   "patch": "patches/9672ed3de7d7.diff",
-  "patch_bytes": 746
+  "patch_bytes": 746,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "trace event",
+   "page fault",
+   "__string",
+   "module unload"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "bbb8d98fb4536594cb104fd630ea0f7dce3771d6",
@@ -2130,10 +2377,25 @@
   "vendors": [
    "mediatek"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`CONFIG_PM`이 꺼지면 v6.18 수정에서 추가된 `hba->dev->power.request` 출력 때문에 MediaTek UFS 드라이버 빌드가 실패했다. `SCSI_UFS_MEDIATEK`이 `PM`에 의존하도록 하고 PM 관련 `#ifdef`를 정리했다.",
+  "explanation_ko": "### 배경\nv6.18의 `15ef3f5aa822`가 추가한 출력문이 `CONFIG_PM`이 없을 때 존재하지 않는 `dev_pm_info.request`를 참조해 빌드 오류가 난다. 드라이버가 `CONFIG_PM` 없이 동작할 가능성은 낮으므로 `#ifdef`를 더 넣는 대신 의존성을 추가한다(커밋 메시지).\n\n### 변경 내용\n- Kconfig에 `depends on PM`을 추가했다.\n- `ufs-mediatek.c`의 `CONFIG_PM`/`CONFIG_PM_SLEEP` `#ifdef`를 지우고 `SYSTEM_SLEEP_PM_OPS`, `RUNTIME_PM_OPS`, `pm_ptr()`를 사용한다.\n- `include/ufs/ufshcd.h`의 PM 함수 선언을 감싸던 `#ifdef`를 지웠다.\n\n### 영향\n`CONFIG_PM=n` 설정에서 빌드 오류가 사라진다(해당 설정에서는 이 드라이버를 선택할 수 없다).",
   "patch": "patches/bbb8d98fb453.diff",
-  "patch_bytes": 2686
+  "patch_bytes": 2686,
+  "change_type": "fix",
+  "importance": "low",
+  "keywords": [
+   "ufs-mediatek",
+   "CONFIG_PM",
+   "Kconfig",
+   "build fix",
+   "pm_ptr"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "2e6b5cd6a4b37a95b78cf8c39a979b58c915c8ed",
@@ -2191,10 +2453,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "UFS 2.2 이하 장치는 RPMB region별 크기 필드가 없어 v6.19의 OP-TEE RPMB 드라이버가 RPMB 전체를 조용히 건너뛰었다. 이런 장치에서는 RPMB Unit Descriptor의 Logical Block Count와 Size로 단일 region 크기를 계산하도록 고쳤다.",
+  "explanation_ko": "### 배경\nUFS 2.2 이하 장치는 RPMB region을 하나만 지원하므로 region별 크기를 노출하지 않는다. 이 경우 RPMB Unit Descriptor의 Logical Block Count와 Logical Block Size로 크기를 알 수 있다. 이 fallback이 없으면 RPMB 드라이버가 RPMB 전체를 조용히 건너뛴다(커밋 메시지, JESD220C-2_2 14.1.4.6). Fixes 대상은 v6.19의 `b06b8c421485`이며 stable 대상이다.\n\n### 변경 내용\n`ufshcd_lu_init()`에서 `wspecversion <= 0x0220`이면 `rpmb_region_size[0] = (LOGICAL_BLK_COUNT << LOGICAL_BLK_SIZE) / SZ_128K`로 계산한다.\n\n### 영향\nUFS 2.x 장치에서도 OP-TEE 기반 RPMB(보안 저장소)를 쓸 수 있다.",
   "patch": "patches/2e6b5cd6a4b3.diff",
-  "patch_bytes": 1424
+  "patch_bytes": 1424,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "RPMB",
+   "OP-TEE",
+   "UFS 2.2",
+   "RPMB Unit Descriptor",
+   "stable"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "5b313760059c9df7d60aba7832279bcb81b4aec0",
@@ -2238,10 +2515,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "BKOPS 상태 0인 urgent BKOPS 예외가 오면 `urgent_bkops_lvl`이 0으로 남아, system resume 뒤 runtime PM이 저전력 모드로 들어가지 못하던 문제를 고쳤다. auto BKOPS를 끌 때 레벨을 `BKOPS_STATUS_PERF_IMPACT`로 되돌리고, 상태 0은 urgent 레벨로 기록하지 않는다.",
+  "explanation_ko": "### 배경\n`UFSHCD_CAP_AUTO_BKOPS_SUSPEND`를 지원하는 장치에서 BKOPS 상태 0인 예외가 오면 `ufshcd_bkops_exception_event_handler()`가 `urgent_bkops_lvl`을 `BKOPS_STATUS_NO_OP(0)`으로 설정한다. system suspend 중 auto BKOPS가 꺼진 뒤 resume하고 다시 runtime suspend하면, `ufshcd_bkops_ctrl()`의 `curr_status >= urgent_bkops_lvl` 조건(0 >= 0)이 참이 되어 auto BKOPS가 켜진다. 그 결과 `__ufshcd_wl_suspend()`가 power mode 전환을 건너뛰어 urgent 상황이 아닌데도 절전이 안 된다(커밋 메시지).\n\n### 변경 내용\n- `ufshcd_disable_auto_bkops()`에서 `urgent_bkops_lvl = BKOPS_STATUS_PERF_IMPACT`로 리셋한다.\n- 예외 핸들러는 `curr_status`가 0보다 크고 PERF_IMPACT보다 작을 때만 urgent 레벨을 갱신한다.\n\n### 영향\n삼성 등 해당 장치에서 system resume 뒤 runtime PM이 다시 정상적으로 저전력 상태에 들어간다.",
   "patch": "patches/5b313760059c.diff",
-  "patch_bytes": 969
+  "patch_bytes": 969,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "BKOPS",
+   "urgent_bkops_lvl",
+   "runtime PM",
+   "power saving",
+   "exception event"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "69050f8d6d075dc01af7a5f2f550a8067510366f",
@@ -42353,10 +42645,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
+  "summary_ko": "kmalloc 계열 호출을 타입 안전한 `kmalloc_obj()`/`kzalloc_obj()` 등으로 바꾼 Coccinelle treewide 변경으로, `ufs-hwmon.c`의 할당 한 곳도 `kzalloc_obj()`로 바뀌었다.",
   "explanation_ko": null,
   "patch": "patches/69050f8d6d07.diff",
-  "patch_bytes": 422
+  "patch_bytes": 422,
+  "change_type": "treewide",
+  "importance": "low",
+  "keywords": [
+   "treewide",
+   "kmalloc_obj",
+   "Coccinelle",
+   "ufs-hwmon"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "bf4afc53b77aeaa48b5409da5c8da6bb4eff7f43",
@@ -75753,10 +76059,24 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
+  "summary_ko": "`alloc_obj` 계열 함수의 기본 GFP 인자를 `GFP_KERNEL`로 바꾼 treewide 변경으로, `ufs-hwmon.c`의 `kzalloc_obj(*data, GFP_KERNEL)`이 `kzalloc_obj(*data)`로 바뀌었다.",
   "explanation_ko": null,
   "patch": "patches/bf4afc53b77a.diff",
-  "patch_bytes": 406
+  "patch_bytes": 406,
+  "change_type": "treewide",
+  "importance": "low",
+  "keywords": [
+   "treewide",
+   "kzalloc_obj",
+   "GFP_KERNEL",
+   "ufs-hwmon"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "30df81f2228d65bddf492db3929d9fcaffd38fc5",
@@ -75800,10 +76120,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MCQ 모드에서 `ufshcd_mcq_req_to_hwq()`가 NULL을 반환하면 `ufshcd_add_command_trace()`가 `hwq->id`를 읽다가 커널이 죽던 문제를 NULL 검사로 막았다.",
+  "explanation_ko": "### 배경\n`ufshcd_add_command_trace()`에서 `hwq->id`에 접근할 때 NULL 포인터 역참조로 크래시가 났다. `ufshcd_mcq_req_to_hwq()`가 NULL을 반환할 수 있기 때문이다. 커밋 메시지의 로그는 MediaTek MCQ 인터럽트 → `ufshcd_mcq_poll_cqe_lock()` → `ufshcd_compl_one_cqe()` 경로에서 발생했다.\n\n### 변경 내용\n`hwq`가 NULL이 아닐 때만 `hwq_id`를 설정한다.\n\n### 영향\nUFS command tracing을 켠 MCQ 시스템에서 완료 처리 중 커널 패닉을 막는다.",
   "patch": "patches/30df81f2228d.diff",
-  "patch_bytes": 498
+  "patch_bytes": 498,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "MCQ",
+   "NULL pointer dereference",
+   "trace",
+   "ufshcd_add_command_trace",
+   "hwq"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "62c015373e1cdb1cdca824bd2dbce2dac0819467",
@@ -75857,10 +76192,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "hibern8 exit 실패 시 link recovery를 수행하는 위치를 `ufshcd_uic_pwr_ctrl()`에서 `__ufshcd_wl_resume()`으로 옮겼다. 그동안은 PM 작업 중 hibern8 enter 실패에도 link recovery가 걸렸는데, 이제 resume 중 exit 실패에만 걸린다.",
+  "explanation_ko": "### 배경\nv6.17의 `35dabf4503b9`는 runtime resume 중 h8 exit가 실패하면 에러 핸들러로는 복구할 수 없어 멈추므로 link recovery를 쓰게 했다. 하지만 그 코드를 `ufshcd_uic_pwr_ctrl()`에 넣어 suspend 중 hibern8 enter 실패에도 동작했다. resume에서 exit 실패일 때만 link recovery를 하도록 옮긴다(커밋 메시지).\n\n### 변경 내용\n- `ufshcd_uic_pwr_ctrl()`의 `pm_op_in_progress` 기반 `ufshcd_link_recovery()` 호출을 지웠다.\n- `__ufshcd_wl_resume()`에서 hibern8 exit가 실패하면 `ufshcd_link_recovery()`를 시도하고, 그것도 실패할 때만 `vendor_suspend`로 빠진다.\n\n### 영향\nsuspend 경로에서 불필요한 link recovery(전체 호스트 리셋)가 일어나지 않는다. resume 중 h8 exit 실패도 recovery에 성공하면 resume이 계속된다.",
   "patch": "patches/62c015373e1c.diff",
-  "patch_bytes": 1171
+  "patch_bytes": 1171,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "hibern8",
+   "link recovery",
+   "runtime resume",
+   "__ufshcd_wl_resume",
+   "ufshcd_uic_pwr_ctrl"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "2f38fd99c0004676d835ae96ac4f3b54edc02c82",
@@ -75904,10 +76254,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "MCQ에서 ESI 없이 hw queue가 JESD223F 최대치인 32개일 때 `(1U << 32) - 1` 계산이 shift overflow를 일으키던 문제를 64비트 연산으로 고쳤다.",
+  "explanation_ko": "### 배경\nJESD223F에서 최대 queue 수(MAXQ)는 32다. MCQ가 켜지고 ESI가 꺼진 상태에서 `nr_hw_queues=32`이면 shift overflow가 발생한다(커밋 메시지).\n\n### 변경 내용\n`ufshcd_handle_mcq_cq_events()`에서 vops가 outstanding CQ를 주지 않을 때의 기본 마스크를 `(1ULL << hba->nr_hw_queues) - 1`로 바꿨다.\n\n### 영향\n32개 queue 구성에서 undefined behavior로 일부 CQ가 처리되지 않을 수 있던 문제가 사라진다(UBSAN 경고 포함).",
   "patch": "patches/2f38fd99c000.diff",
-  "patch_bytes": 543
+  "patch_bytes": 543,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "MCQ",
+   "shift overflow",
+   "MAXQ",
+   "nr_hw_queues",
+   "ESI"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "81af9e40e2e4e1aa95f09fb34811760be6742c58",
@@ -75973,10 +76338,26 @@
   "vendors": [
    "qcom"
   ],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "SM8650에서 PHY를 Gear 4로 설정할 때도 `QPHY_V6_PCS_UFS_PLL_CNTL`이 Gear 5와 같은 값(0x33)이어야 하므로, 이 항목을 gear별 테이블에서 SM8650 공통 PCS 테이블로 옮겼다. 같은 init sequence를 쓰는 Eliza MTP에서 UFS 3.x 장치 link startup이 실패하던 문제다.",
+  "explanation_ko": "### 배경\n내부 문서에 따르면 SM8650에서 PHY가 Gear 4일 때 `PLL_CNTL`은 Gear 5와 같은 값이어야 한다. UFS 3.x 장치를 단 보드가 없어 드러나지 않았는데, SM8650과 같은 init sequence를 쓰는 Eliza SoC MTP 보드에서 현재 G4 PCS 테이블로는 link startup이 실패했다(커밋 메시지). Fixes 대상은 v6.10의 `b9251e64a96f`이며 stable 대상이다.\n\n### 변경 내용\n`sm8650_ufsphy_g4_pcs`의 `PLL_CNTL = 0x13`과 `sm8650_ufsphy_g5_pcs`의 `PLL_CNTL = 0x33`을 지우고, `sm8650_ufsphy_pcs`에 `PLL_CNTL = 0x33`을 추가했다.\n\n### 영향\nSM8650·Eliza에서 Gear 4 장치의 링크가 올라온다. 다만 G5 테이블을 공유하면서 기본 PCS 테이블이 다른 SM8750·kaanapali에서는 `PLL_CNTL`이 빠져 PLL lock이 실패하는 회귀가 생겼고, v7.1의 `80305760d7a5`에서 고쳐졌다.",
   "patch": "patches/81af9e40e2e4.diff",
-  "patch_bytes": 1379
+  "patch_bytes": 1379,
+  "change_type": "fix",
+  "importance": "medium",
+  "keywords": [
+   "phy-qcom-qmp-ufs",
+   "SM8650",
+   "Eliza",
+   "PLL_CNTL",
+   "Gear 4",
+   "stable"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  },
  {
   "sha": "b0bd84c39289ef6a6c3827dd52c875659291970a",
@@ -76033,9 +76414,25 @@
   "area": "core",
   "vendor": null,
   "vendors": [],
-  "summary_ko": null,
-  "explanation_ko": null,
+  "summary_ko": "`__ufshcd_wl_suspend()`에서 RTC 갱신 work 취소가 vendor suspend 이후에 있어, 클럭이 꺼지는 중에 `ufshcd_rtc_work()`가 query를 보내 SError 커널 패닉이 날 수 있었다. 취소 시점을 `ufshcd_vops_suspend(PRE_CHANGE)` 앞으로 옮겼다.",
+  "explanation_ko": "### 배경\n`__ufshcd_wl_suspend()`는 RTC work를 `ufshcd_vops_suspend(POST_CHANGE)` 뒤에서 취소했다. 그래서 vendor suspend 중에 `ufshcd_rtc_work()`가 동시에 실행될 수 있었다. `UFSHCD_CAP_CLK_GATING`이 없으면 `!hba->clk_gating.active_reqs`가 항상 참이라 `ufshcd_update_rtc()`가 실행되고, vendor suspend가 클럭을 끄는 중에 레지스터에 접근해 SError가 난다(커밋 메시지, 호출 트레이스 포함). Fixes 대상은 v6.8의 `6bf999e0eb41`이다.\n\n### 변경 내용\n`cancel_delayed_work_sync(&hba->ufs_rtc_update_work)`를 `flush_work(&hba->eeh_work)` 직후, PRE_CHANGE vendor suspend 전으로 옮겼다.\n\n### 영향\nclock gating을 쓰지 않는 플랫폼에서 suspend 중 간헐적 SError 패닉이 사라진다.",
   "patch": "patches/b0bd84c39289.diff",
-  "patch_bytes": 588
+  "patch_bytes": 588,
+  "change_type": "fix",
+  "importance": "high",
+  "keywords": [
+   "RTC",
+   "SError",
+   "suspend",
+   "ufshcd_rtc_work",
+   "race",
+   "kernel panic"
+  ],
+  "gen": {
+   "by": "claude-code",
+   "model": "claude-opus-5-5",
+   "prompt_version": 1,
+   "at": "2026-10-28T02:46:13+00:00"
+  }
  }
 ]

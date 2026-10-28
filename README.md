@@ -29,8 +29,27 @@ python -m unittest discover -s tests -t .
 
 `KCLOG_GIT_DIR` 환경변수로 linux.git 위치를 바꿀 수 있습니다.
 
+## 한국어 요약 생성
+
+요약과 해설은 Claude Code가 만듭니다. 별도 API 키나 과금 없이, 사용 중인 Claude 플랜으로 동작합니다.
+
+```bash
+cd worker
+python -m kclog gen export commits --release v7.4   # 작업 파일 생성
+# Claude Code에 요청: ".cache/gen/ufs/commits 작업을 처리해줘"
+python -m kclog gen import commits --model claude-opus-5-5   # 결과 검증 후 반영
+```
+
+- 단계는 `commits`(커밋 요약·해설) → `series`(다중 커밋 시리즈 요약) → `release`(릴리스 하이라이트) 순서입니다. 앞 단계가 끝나야 다음 단계 작업이 만들어집니다.
+- `export`는 `.cache/gen/<track>/<stage>/`에 단계 지침(`INSTRUCTIONS.md`)과 항목별 입력(`<id>.input.md`)을 씁니다.
+  Claude Code는 지침을 따라 같은 폴더에 `<id>.json`을 씁니다.
+- `import`는 결과를 출력 스키마로 검증해 통과한 것만 `data/`에 반영하고 작업 파일을 지웁니다. 실패한 항목은 파일이 남아 있으니 고쳐서 다시 import합니다.
+- 이미 생성된 항목은 export에서 빠집니다 (`--force`로 다시 포함). 결과에는 생성 모델과 `prompt_version`이 기록됩니다.
+- 트리 전반 변경(UFS 파일 비중 50% 미만)과 `policy`에서 `explain = false`인 벤더는 요약만 만듭니다.
+
 ## 수집 규칙
 
+- 수집 범위는 트랙의 `since`(UFS: v6.18)부터 최신 정식 릴리스까지입니다. `since`를 올리고 다시 collect하면 그보다 오래된 릴리스는 `releases.json`에서 빠집니다 (`data/<track>/<tag>/` 폴더는 직접 지웁니다).
 - 릴리스 vX.Y의 내용은 직전 정식 태그..vX.Y 구간입니다 (rc 제외).
 - `git log --full-history`로 경로에 걸리는 non-merge 커밋을 모두 가져옵니다.
 - 영역(core/host/bindings/phy/crypto/docs)과 벤더(qcom/exynos/mediatek/...)는 별개 축입니다.

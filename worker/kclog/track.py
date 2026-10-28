@@ -73,6 +73,13 @@ class Track:
                 return area_id
         return "other"
 
+    def policy_for(self, vendor: str | None) -> dict:
+        """[policy.default]에 [policy.vendors.<vendor>]를 덮어쓴 값."""
+        merged = dict(self.policy.get("default", {}))
+        if vendor:
+            merged.update(self.policy.get("vendors", {}).get(vendor, {}))
+        return merged
+
     def vendor_of(self, path: str) -> str | None:
         for rule in self.vendor_rules:
             m = rule.regex.match(path)
