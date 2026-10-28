@@ -1,0 +1,17 @@
+{
+  "name": "kernel-changelog-ko-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && pagefind --site dist",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "5.18.2",
+    "marked": "15.0.12"
+  },
+  "devDependencies": {
+    "pagefind": "1.5.2"
+  }
+}

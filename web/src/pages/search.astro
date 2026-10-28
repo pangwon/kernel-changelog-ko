@@ -1,0 +1,53 @@
+---
+import Base from "../layouts/Base.astro";
+const base = import.meta.env.BASE_URL;
+---
+<Base title="검색 · kernel-changelog-ko">
+  <link rel="stylesheet" href={`${base}pagefind/pagefind-ui.css`} />
+  <h1>검색</h1>
+  <p class="muted">한국어 요약·해설과 원문 커밋 메시지를 함께 검색합니다. 함수 이름이나 sha 앞자리로도 찾을 수 있습니다.</p>
+  <div id="search" data-base={base}></div>
+  <noscript>검색은 JavaScript가 필요합니다.</noscript>
+  <style is:global>
+    #search {
+      --pagefind-ui-primary: var(--accent);
+      --pagefind-ui-text: var(--text);
+      --pagefind-ui-background: var(--surface);
+      --pagefind-ui-border: var(--border-strong);
+      --pagefind-ui-tag: var(--surface-alt);
+      --pagefind-ui-font: var(--sans);
+      --pagefind-ui-border-radius: 8px;
+    }
+  </style>
+  <script is:inline define:vars={{ base }}>
+    const s = document.createElement("script");
+    s.src = `${base}pagefind/pagefind-ui.js`;
+    s.onload = () => {
+      // eslint-disable-next-line no-undef
+      new PagefindUI({
+        element: "#search",
+        showSubResults: true,
+        showImages: false,
+        resetStyles: false,
+        translations: {
+          placeholder: "예: TX Equalization, ufshcd_mcq, 03e5d38e",
+          zero_results: "[SEARCH_TERM]에 대한 결과가 없습니다",
+          many_results: "[SEARCH_TERM] 결과 [COUNT]개",
+          one_result: "[SEARCH_TERM] 결과 1개",
+          load_more: "더 보기",
+          filters_label: "필터",
+          clear_search: "지우기",
+        },
+      });
+      const q = new URLSearchParams(location.search).get("q");
+      if (q) {
+        const input = document.querySelector("#search input");
+        if (input) { input.value = q; input.dispatchEvent(new Event("input")); }
+      }
+    };
+    s.onerror = () => {
+      document.querySelector("#search").textContent = "검색 색인이 없습니다. npm run build로 빌드한 사이트에서만 동작합니다.";
+    };
+    document.head.appendChild(s);
+  </script>
+</Base>

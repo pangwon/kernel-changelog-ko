@@ -13,8 +13,28 @@ data/<track>/      수집 결과
   <tag>/series.json    패치 시리즈 묶음
   <tag>/candidates.json  트랙 경로 밖이지만 UFS를 언급하는 커밋 (검토용)
   <tag>/patches/*.diff   트랙 경로로 제한한 원본 diff
+web/               웹사이트 (Astro 정적 생성 + Pagefind 검색)
 .cache/linux.git   torvalds/linux 부분 clone (gitignore)
 ```
+
+## 웹사이트
+
+`data/`를 빌드 시점에 읽어 정적 HTML을 만듭니다. 서버나 API 없이 어떤 정적 호스팅에도 올릴 수 있습니다.
+
+```bash
+cd web
+npm install
+npm run build      # dist/ 생성 + Pagefind 검색 색인
+npm run preview    # http://localhost:4321
+```
+
+- 페이지: 릴리스 목록(`/`), 릴리스(`/ufs/<tag>/`), 커밋(`/ufs/<tag>/<sha12>/`), 검색(`/search/`).
+- 릴리스 페이지는 하이라이트, 영역별 노트, 영역·시리즈별 변경 목록을 보여 줍니다. 영역·유형·중요도 필터와 벤더 숨기기는 브라우저에서 동작합니다.
+- 벤더 숨기기는 그 벤더의 파일만 바꾼 커밋만 숨깁니다. core 등을 함께 바꾼 커밋은 그대로 보입니다.
+  `tracks/<id>.toml`에 `[policy.vendors.<벤더>] visible = false`를 두면 기본으로 숨겨집니다.
+- 커밋 페이지는 한국어(요약·해설), 원문(커밋 메시지), diff 탭으로 나뉩니다.
+- 하위 경로에 배포할 때는 `BASE_PATH=/repo-name/ SITE_URL=https://user.github.io npm run build`처럼 지정합니다.
+- 검색은 빌드한 사이트에서만 동작합니다 (`npm run dev`에는 색인이 없음).
 
 ## 사용법
 

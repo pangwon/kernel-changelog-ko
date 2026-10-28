@@ -1,0 +1,62 @@
+---
+import "../styles/global.css";
+import { releases, trackName } from "../lib/data";
+
+interface Props {
+  title: string;
+  description?: string;
+  current?: string; // 사이드바에서 강조할 릴리스 태그
+  side?: boolean;
+}
+const { title, description, current, side = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const list = releases();
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="inner">
+        <a class="brand" href={base}>kernel-changelog-ko<small>{trackName()}</small></a>
+        <nav>
+          <a href={`${base}ufs/${list[0].tag}/`}>최신 릴리스</a>
+          <a href={`${base}search/`}>검색</a>
+        </nav>
+      </div>
+    </header>
+    <div class="shell">
+      {side ? (
+        <div class="with-side">
+          <aside class="side" data-pagefind-ignore>
+            <div class="label">UFS 릴리스</div>
+            <ul>
+              {list.map((r) => (
+                <li>
+                  <a href={`${base}ufs/${r.tag}/`} aria-current={r.tag === current ? "page" : undefined}>
+                    {r.tag}<span class="count">{r.commit_count}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </aside>
+          <main data-pagefind-body>
+            {current && <meta data-pagefind-filter="릴리스[content]" content={current} />}
+            <slot />
+          </main>
+        </div>
+      ) : (
+        <main><slot /></main>
+      )}
+      <footer class="footer" data-pagefind-ignore>
+        리눅스 커널 메인라인 UFS 변경을 릴리스별로 한국어로 요약합니다. 요약과 해설은 Claude가 생성했으며, 원문 커밋 메시지와 diff를 함께 제공합니다.
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,184 @@
+---
+import Base from "../../../layouts/Base.astro";
+import CommitRow from "../../../components/CommitRow.astro";
+import {
+  releases, commits, series, vendorOnly, hiddenVendors, short, formatDate,
+  AREA_ORDER, TYPE_LABEL, type Commit, type Importance, type ChangeType,
+} from "../../../lib/data";
+import { inline } from "../../../lib/render";
+
+export function getStaticPaths() {
+  return releases().map((r) => ({ params: { tag: r.tag }, props: { tag: r.tag } }));
+}
+
+const { tag } = Astro.props as { tag: string };
+const base = import.meta.env.BASE_URL;
+const release = releases().find((r) => r.tag === tag)!;
+const all = commits(tag);
+const bySha = new Map(all.map((c) => [c.sha, c]));
+const shortToSha = new Map(all.map((c) => [short(c.sha), c.sha]));
+
+const RANK: Record<Importance, number> = { high: 3, medium: 2, low: 1 };
+const rank = (c: Commit) => (c.importance ? RANK[c.importance] : 0);
+
+// 시리즈를 화면 단위로 쓴다. 영역은 소속 커밋의 다수결(동률이면 AREA_ORDER 순).
+const units = series(tag).map((s) => {
+  const members = s.commits.map((sha) => bySha.get(sha)!).filter(Boolean);
+  const votes = new Map<string, number>();
+  for (const c of members) votes.set(c.area, (votes.get(c.area) ?? 0) + 1);
+  const area = [...votes].sort(
+    (a, b) => b[1] - a[1] || AREA_ORDER.indexOf(a[0]) - AREA_ORDER.indexOf(b[0]),
+  )[0][0];
+  return { s, members, area, top: Math.max(...members.map(rank)) };
+});
+units.sort((a, b) => b.top - a.top || b.members.length - a.members.length);
+
+const notes = new Map((release.highlights_ko?.area_notes ?? []).map((n) => [n.area, n.summary_ko]));
+const areas = AREA_ORDER.filter((a) => units.some((u) => u.area === a));
+const presentAreas = AREA_ORDER.filter((a) => all.some((c) => c.area === a));
+const types = (Object.keys(TYPE_LABEL) as ChangeType[]).filter((t) => all.some((c) => c.change_type === t));
+const vendors = [...new Set(all.flatMap(vendorOnly))].sort();
+const defaultHidden = hiddenVendors();
+const top = (["high", "medium", "low"] as Importance[]).map((i) => [i, all.filter((c) => c.importance === i).length] as const);
+---
+<Base
+  title={`Linux ${tag} UFS 변경 요약`}
+  description={release.highlights_ko?.headline_ko}
+  current={tag}
+  side
+>
+  <h1>Linux {tag} · UFS</h1>
+  <div class="meta-line">
+    <span>{formatDate(release.date)} 릴리스</span>
+    <span class="mono">{release.prev_tag}..{tag}</span>
+    <span>커밋 {release.commit_count}</span>
+    <span>시리즈 {release.series_count}</span>
+    {top.map(([i, n]) => n > 0 && <span>{i} {n}</span>)}
+  </div>
+  <p class="headline" set:html={inline(release.highlights_ko?.headline_ko)} />
+
+  {release.highlights_ko && (
+    <section>
+      <h2>하이라이트</h2>
+      {release.highlights_ko.highlights.map((h) => (
+        <div class="highlight">
+          <h3 set:html={inline(h.title_ko)} />
+          <p set:html={inline(h.description_ko)} />
+          <div class="sha-links" data-pagefind-ignore>
+            {h.commits.filter((s) => shortToSha.has(s)).map((s) => (
+              <a href={`${base}ufs/${tag}/${s}/`} title={bySha.get(shortToSha.get(s)!)?.subject}>{s}</a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </section>
+  )}
+
+  <h2>변경 목록</h2>
+  <div class="filters" data-pagefind-ignore data-default-hidden={defaultHidden.join(" ")}>
+    <div class="filter-row">
+      <span class="name">영역</span>
+      {presentAreas.map((a) => <button class="chip" data-filter="area" data-value={a} aria-pressed="false">{a}</button>)}
+    </div>
+    <div class="filter-row">
+      <span class="name">유형</span>
+      {types.map((t) => <button class="chip" data-filter="type" data-value={t} aria-pressed="false">{TYPE_LABEL[t]}</button>)}
+    </div>
+    <div class="filter-row">
+      <span class="name">중요도</span>
+      {(["high", "medium", "low"] as const).map((i) => <button class="chip" data-filter="importance" data-value={i} aria-pressed="false">{i}</button>)}
+    </div>
+    {vendors.length > 0 && (
+      <div class="filter-row">
+        <span class="name">벤더 숨기기</span>
+        {vendors.map((v) => <button class="chip hide" data-filter="vendor" data-value={v} aria-pressed="false">{v}</button>)}
+        <span class="faint" style="font-size: 0.75rem;">해당 벤더 파일만 바꾼 커밋을 숨깁니다</span>
+      </div>
+    )}
+    <div class="filter-row">
+      <span class="filter-status" data-status></span>
+      <button class="chip" data-reset style="margin-left: auto;">필터 초기화</button>
+    </div>
+  </div>
+
+  {areas.map((area) => (
+    <section class="area-section" data-area-section>
+      <h2>{area} <span class="faint" style="font-size: 0.85rem; font-weight: 400;">{units.filter((u) => u.area === area).reduce((n, u) => n + u.members.length, 0)}</span></h2>
+      {notes.get(area) && <p class="area-note" set:html={inline(notes.get(area))} />}
+      {units.filter((u) => u.area === area).map((u) => (
+        u.members.length === 1 ? (
+          <div class="unit" data-unit><CommitRow commit={u.members[0]} tag={tag} /></div>
+        ) : (
+          <div class="unit" data-unit>
+            <div class="series-head">
+              <span set:html={inline(u.s.title_ko ?? u.s.title)} />
+              <span class="badge plain">패치 {u.members.length}개</span>
+            </div>
+            <p class="series-summary" set:html={inline(u.s.summary_ko)} />
+            <div class="series-items">
+              {u.members.map((c) => <CommitRow commit={c} tag={tag} />)}
+            </div>
+          </div>
+        )
+      ))}
+    </section>
+  ))}
+</Base>
+
+<script>
+  const KEY = "kclog.hiddenVendors";
+  const root = document.querySelector<HTMLElement>(".filters");
+  if (root) {
+    const chips = [...root.querySelectorAll<HTMLButtonElement>("button[data-filter]")];
+    const rows = [...document.querySelectorAll<HTMLElement>("[data-row]")];
+    const status = root.querySelector<HTMLElement>("[data-status]")!;
+
+    let hidden: string[];
+    try {
+      const saved = localStorage.getItem(KEY);
+      hidden = saved ? JSON.parse(saved) : (root.dataset.defaultHidden ?? "").split(" ").filter(Boolean);
+    } catch {
+      hidden = (root.dataset.defaultHidden ?? "").split(" ").filter(Boolean);
+    }
+    for (const c of chips) if (c.dataset.filter === "vendor" && hidden.includes(c.dataset.value!)) c.setAttribute("aria-pressed", "true");
+
+    const pressed = (kind: string) =>
+      chips.filter((c) => c.dataset.filter === kind && c.getAttribute("aria-pressed") === "true").map((c) => c.dataset.value!);
+
+    function apply() {
+      const area = pressed("area"), type = pressed("type"), imp = pressed("importance"), hide = pressed("vendor");
+      let shown = 0;
+      for (const r of rows) {
+        const vs = (r.dataset.vendors ?? "").split(" ").filter(Boolean);
+        const ok =
+          (!area.length || area.includes(r.dataset.area!)) &&
+          (!type.length || type.includes(r.dataset.type!)) &&
+          (!imp.length || imp.includes(r.dataset.importance!)) &&
+          !(vs.length && vs.every((v) => hide.includes(v)));
+        r.hidden = !ok;
+        if (ok) shown++;
+      }
+      for (const u of document.querySelectorAll<HTMLElement>("[data-unit]"))
+        u.hidden = !u.querySelector("[data-row]:not([hidden])");
+      for (const s of document.querySelectorAll<HTMLElement>("[data-area-section]"))
+        s.hidden = !s.querySelector("[data-unit]:not([hidden])");
+      status.textContent = `${rows.length}개 중 ${shown}개 표시`;
+    }
+
+    for (const c of chips) {
+      c.addEventListener("click", () => {
+        c.setAttribute("aria-pressed", c.getAttribute("aria-pressed") === "true" ? "false" : "true");
+        if (c.dataset.filter === "vendor") {
+          try { localStorage.setItem(KEY, JSON.stringify(pressed("vendor"))); } catch {}
+        }
+        apply();
+      });
+    }
+    root.querySelector("[data-reset]")?.addEventListener("click", () => {
+      for (const c of chips) c.setAttribute("aria-pressed", "false");
+      try { localStorage.removeItem(KEY); } catch {}
+      apply();
+    });
+    apply();
+  }
+</script>

@@ -1,0 +1,130 @@
+---
+import Base from "../../../layouts/Base.astro";
+import {
+  releases, commits, series, patch, short, formatDate, vendorOnly, TYPE_LABEL, type Commit,
+} from "../../../lib/data";
+import { markdown, inline, diffHtml, gitWeb } from "../../../lib/render";
+
+export function getStaticPaths() {
+  return releases().flatMap((r) =>
+    commits(r.tag).map((c) => ({ params: { tag: r.tag, sha: short(c.sha) }, props: { tag: r.tag, sha: c.sha } })),
+  );
+}
+
+const { tag, sha } = Astro.props as { tag: string; sha: string };
+const base = import.meta.env.BASE_URL;
+const list = commits(tag);
+const c = list.find((x) => x.sha === sha)!;
+const idx = list.indexOf(c);
+
+// 다른 릴리스에 있는 커밋(Fixes 대상 등)도 링크하기 위한 전체 색인
+const where = new Map<string, string>();
+for (const r of releases()) for (const x of commits(r.tag)) where.set(x.sha, r.tag);
+const link = (fullSha: string | null) =>
+  fullSha && where.has(fullSha) ? `${base}ufs/${where.get(fullSha)}/${short(fullSha)}/` : null;
+
+const s = series(tag).find((x) => x.id === c.series_id);
+const siblings: Commit[] = s && s.commits.length > 1
+  ? s.commits.map((h) => list.find((x) => x.sha === h)!).filter(Boolean)
+  : [];
+const prev = list[idx - 1];
+const next = list[idx + 1];
+const lore = c.trailers.link?.[0];
+const own = c.files.filter((f) => f.in_track);
+const other = c.files.length - own.length;
+const vo = vendorOnly(c);
+const diff = patch(tag, c);
+---
+<Base title={`${c.subject} · ${tag}`} description={c.summary_ko ?? c.subject} current={tag} side>
+  <div class="faint" style="font-size: 0.85rem;" data-pagefind-ignore>
+    <a href={`${base}ufs/${tag}/`}>Linux {tag} · UFS</a> / <span class="mono">{short(c.sha)}</span>
+  </div>
+  <h1 class="mono" style="font-size: 1.1rem; font-weight: 600;">{c.subject}</h1>
+  <div class="top" style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.75rem;" data-pagefind-ignore>
+    {c.importance && <span class={`badge ${c.importance}`}>{c.importance}</span>}
+    {c.change_type && <span class="badge plain">{TYPE_LABEL[c.change_type]}</span>}
+    <span class="badge plain">{c.area}</span>
+    {vo.map((v) => <span class="badge plain">{v}</span>)}
+    {c.cc_stable && <span class="badge accent">stable</span>}
+  </div>
+
+  <input class="tab-input" type="radio" name="view" id="tab-ko" checked />
+  <input class="tab-input" type="radio" name="view" id="tab-orig" />
+  <input class="tab-input" type="radio" name="view" id="tab-diff" />
+  <div class="tabs" role="tablist" data-pagefind-ignore>
+    <label for="tab-ko">한국어</label>
+    <label for="tab-orig">원문</label>
+    <label for="tab-diff">diff</label>
+  </div>
+  <div class="panels">
+    <section class="panel ko">
+      <p class="summary-lead" set:html={inline(c.summary_ko) || "요약이 아직 없습니다."} />
+      {c.explanation_ko ? (
+        <div class="explanation" set:html={markdown(c.explanation_ko)} />
+      ) : (
+        <p class="faint" data-pagefind-ignore>트리 전반 변경이라 UFS 관련 부분만 요약했습니다. 자세한 내용은 원문과 diff를 보세요.</p>
+      )}
+      {c.keywords && c.keywords.length > 0 && (
+        <div class="areas-mini" style="margin-top: 1rem;">
+          {c.keywords.map((k) => <span class="badge plain">{k}</span>)}
+        </div>
+      )}
+    </section>
+    <section class="panel orig">
+      <pre class="message">{c.subject}{"\n\n"}{c.body}</pre>
+    </section>
+    <section class="panel diff" data-pagefind-ignore>
+      {other > 0 && (
+        <p class="faint" style="font-size: 0.85rem;">UFS 트랙 밖 파일 {other}개의 변경은 생략했습니다. 전체 diff는 <a href={gitWeb(c.sha)}>git.kernel.org</a>에서 볼 수 있습니다.</p>
+      )}
+      <pre class="diff" set:html={diffHtml(diff)} />
+    </section>
+  </div>
+
+  <h2>정보</h2>
+  <dl class="facts">
+    <dt>작성자</dt><dd>{c.author.name}</dd>
+    <dt>날짜</dt><dd>작성 {formatDate(c.author_date)} · 머지 {formatDate(c.commit_date)}</dd>
+    <dt>커밋</dt><dd class="mono"><a href={gitWeb(c.sha)}>{c.sha}</a></dd>
+    {lore && <><dt>메일링 리스트</dt><dd><a href={lore}>{c.message_id ?? lore}</a></dd></>}
+    {c.fixes.map((f) => (
+      <>
+        <dt>Fixes</dt>
+        <dd>
+          {link(f.sha) ? <a class="mono" href={link(f.sha)!}>{f.abbrev}</a> : <span class="mono">{f.abbrev}</span>}
+          {" "}{f.subject}{f.introduced_in && <span class="faint"> ({f.introduced_in}에서 도입)</span>}
+        </dd>
+      </>
+    ))}
+    {c.cc_stable && <><dt>stable</dt><dd>stable 커널 백포트 대상</dd></>}
+    <dt>파일</dt>
+    <dd>
+      <ul class="files">
+        {own.map((f) => (
+          <li><span>{f.status} {f.path}</span><span class="stat">+{f.added} −{f.deleted}</span></li>
+        ))}
+        {other > 0 && <li class="out">UFS 밖 파일 {other}개</li>}
+      </ul>
+    </dd>
+  </dl>
+
+  {siblings.length > 0 && s && (
+    <>
+      <h2>같은 시리즈 <span class="faint" style="font-size: 0.85rem; font-weight: 400;">{s.title_ko ?? s.title}</span></h2>
+      <ol style="padding-left: 1.4rem; margin: 0;">
+        {siblings.map((x) => (
+          <li>
+            {x.sha === c.sha
+              ? <strong class="mono" style="font-size: 0.85rem;">{x.subject}</strong>
+              : <a class="mono" style="font-size: 0.85rem;" href={`${base}ufs/${tag}/${short(x.sha)}/`}>{x.subject}</a>}
+          </li>
+        ))}
+      </ol>
+    </>
+  )}
+
+  <nav class="pager" data-pagefind-ignore>
+    <span>{prev && <a href={`${base}ufs/${tag}/${short(prev.sha)}/`}>← {prev.subject}</a>}</span>
+    <span style="text-align: right;">{next && <a href={`${base}ufs/${tag}/${short(next.sha)}/`}>{next.subject} →</a>}</span>
+  </nav>
+</Base>
